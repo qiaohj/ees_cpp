@@ -18,12 +18,12 @@ class EnvironmentalCurve {
 private:
     RasterObject* glacial;
     RasterObject* interglacial;
-    int burnInYears;
-    int part_1_years;
-    int part_2_years;
-    int plateau_1_years;
-    int plateau_2_years;
-    int cycleYears;
+    unsigned burnInYears;
+    unsigned part_1_years;
+    unsigned part_2_years;
+    unsigned plateau_1_years;
+    unsigned plateau_2_years;
+    unsigned cycleYears;
     string burn_in_curve;
     string part_1_curve;
     string part_2_curve;
@@ -34,7 +34,7 @@ public:
 	EnvironmentalCurve(Json::Value root);
 	virtual ~EnvironmentalCurve();
     int getBurnInYears();
-	float getValue(int year, double longitude, double latitude);
+	float getValue(unsigned year, double longitude, double latitude);
 };
 
 

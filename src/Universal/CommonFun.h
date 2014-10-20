@@ -10,6 +10,8 @@ using namespace std;
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <float.h>
+
 #include <boost/algorithm/string/join.hpp>
 
 #include "../JsonPaster/include/json/json.h"
@@ -22,6 +24,7 @@ public:
 	static Json::Value readJson(const char* path);
 	static void writeFile(const string s, const char* path);
 	static void writeFile(const vector<string> s, const char* path);
+	template <typename T> static bool AlmostEqualRelative(T a, T b);
 };
 
 

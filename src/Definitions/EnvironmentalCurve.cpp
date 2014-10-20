@@ -27,7 +27,7 @@ EnvironmentalCurve::EnvironmentalCurve(Json::Value root) {
 int EnvironmentalCurve::getBurnInYears(){
     return burnInYears;
 }
-float EnvironmentalCurve::getValue(int year, double longitude, double latitude){
+float EnvironmentalCurve::getValue(unsigned year, double longitude, double latitude){
     float curve_value = 0;
     Parser prs;
     if (year<=burnInYears){

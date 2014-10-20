@@ -15,8 +15,8 @@ private:
     const char* rasterName;
 	GDALDataset* poDataset;
 	GDALRasterBand* poBand;
-	int xSize;
-	int ySize;
+	unsigned xSize;
+	unsigned ySize;
 	float noData;
 	float* valueArray;
 	double* adfGeoTransform;
@@ -25,13 +25,13 @@ public:
 	~RasterObject();
 	string getRasterName();
 	GDALDataset* getGDALDataset();
-	int getXSize();
-	int getYSize();
+	unsigned getXSize();
+	unsigned getYSize();
 	double* getGeoTransform();
-	float readByXY(int x, int y);
+	float readByXY(unsigned x, unsigned y);
 	float getNoData();
-	void XY2LL(int x, int y, double* longitude, double* latitude);
-	void LL2XY(double longitude, double latitude, int* x, int* y);
+	void XY2LL(unsigned x, unsigned y, double* longitude, double* latitude);
+	void LL2XY(double longitude, double latitude, unsigned* x, unsigned* y);
 	float readByLL(double longitude, double latitude);
 	void printRasterInfo();
 

@@ -1,24 +1,33 @@
+
 /*
  * Scenario.h
  *
  *  Created on: Oct 15, 2014
  *      Author: qiaohj
  */
-using namespace std;
-#include "SlaveSpeciesObject.h"
+#include <string>
+
+
 #include "EnvironmentalCurve.h"
+#include "SpeciesObject.h"
 #include "../Universal/CommonFun.h"
 #include "../JsonPaster/include/json/json.h"
-#include <string>
+
+using namespace std;
 class Scenario {
 private:
-	vector<SlaveSpeciesObject*> species;
+	vector<SpeciesObject*> species;
 	vector<EnvironmentalCurve*> environments;
-	int totalYears;
-	RasterObject* mask;
-
+	unsigned currentYears;
+	unsigned totalYears;
+	Distribution* mask;
+	unsigned minSpeciesDispersalSpeed;
 public:
 	Scenario(Json::Value root, string baseFolder);
+	void run();
+	unsigned getCurrentYears();
 	virtual ~Scenario();
-	float* getEnvironmentValue(int year, double longitude, double latitude);
+	float* getEnvironmentValue(double longitude, double latitude);
 };
+
+

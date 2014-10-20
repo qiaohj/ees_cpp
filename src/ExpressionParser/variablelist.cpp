@@ -117,7 +117,7 @@ int Variablelist::get_id(const char* name)
     char varU[NAME_LEN_MAX+1];
     toupper(nameU, name);
 
-    for (unsigned int i = 0; i < var.size(); i++)
+    for (unsigned i = 0; i < var.size(); i++)
     {
         toupper(varU, var[i].name);
         if (strcmp(nameU, varU) == 0)

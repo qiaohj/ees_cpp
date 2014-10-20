@@ -27,26 +27,10 @@ int main(int argc, const char* argv[]) {
 	/*
 	 * Scenario Json Test
 	 * */
-    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/Scenarios/Scenario.json";
+    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
 	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data");
-	vector<string> result;
-	using namespace boost::numeric::ublas;
-	mapped_matrix<double> m (1944000, 5000, 1944000 * 5000);
-
-	for (unsigned i=0;i<=500000;i+=5000){
-	    printf("%d\n", i);
-	    float* results = scenario->getEnvironmentValue(i, 100, 59);
-	    char line[30];
-	    sprintf(line, "%.6f, %.6f", results[0], results[1]);
-	    result.push_back(line);
-
-
-	    delete[] results;
-	}
-
-
-	CommonFun::writeFile(result, "/home/qiaohj/workspace/NicheBreadth/data/temp/environments.csv");
+	scenario->run();
 	delete scenario;
 	printf("done!");
 	return EXIT_SUCCESS;

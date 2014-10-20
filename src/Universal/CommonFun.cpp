@@ -56,3 +56,6 @@ void CommonFun::writeFile(const vector<string> s, const char* path){
     string joined = boost::algorithm::join(s, "\n");
     writeFile(joined, path);
 }
+template <typename T> bool CommonFun::AlmostEqualRelative(T a, T b){
+    return fabs(a - b) < FLT_EPSILON;
+}
