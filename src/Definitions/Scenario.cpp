@@ -11,7 +11,7 @@
 Scenario::Scenario(Json::Value root, string baseFolder) {
     currentYears = 0;
     totalYears = root.get("total_years", 500000).asInt();
-    mask = new Distribution(new RasterObject(root.get("mask", "").asCString()));
+    mask = new SparseMap(new RasterObject(root.get("mask", "").asCString()), true);
     minSpeciesDispersalSpeed = totalYears;
     Json::Value species_json_array = root["species"];
     species.reserve(species_json_array.size());
@@ -19,7 +19,7 @@ Scenario::Scenario(Json::Value root, string baseFolder) {
         string species_json_path = baseFolder + string("/niche_definations/")
                 + species_json_array[index].asString() + string(".json");
         Json::Value species_json = CommonFun::readJson(species_json_path.c_str());
-        SpeciesObject* species_item = new SpeciesObject(species_json, this);
+        SpeciesObject* species_item = new SpeciesObject(species_json);
         minSpeciesDispersalSpeed = (species_item->getDispersalSpeed()<minSpeciesDispersalSpeed)?
                 species_item->getDispersalSpeed():minSpeciesDispersalSpeed;
         species.push_back(species_item);
@@ -48,7 +48,8 @@ void Scenario::run(){
         printf("Current year:%d, number of species:%zu\n", year, species.size());
         vector<SpeciesObject*> new_species;
         for (unsigned i=0; i<species.size(); ++i){
-            vector<SpeciesObject*> new_species_item = species[i]->run(year);
+
+            vector<SpeciesObject*> new_species_item = species[i]->run(year, NULL);
             for (vector<SpeciesObject*>::iterator it = new_species_item.begin() ; it != new_species_item.end(); ++it){
                 if (*it!=NULL) new_species.push_back(*it);
             }

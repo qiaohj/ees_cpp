@@ -4,12 +4,16 @@
  *  Created on: Oct 14, 2014
  *      Author: qiaohj
  */
-using namespace std;
+
+#ifndef RasterObject_H
+#define RasterObject_H
 
 #include <string>
 #include <gdal.h>
 #include <gdal_priv.h>
 
+
+using namespace std;
 class RasterObject{
 private:
     const char* rasterName;
@@ -37,4 +41,4 @@ public:
 
 };
 
-
+#endif /* RasterObject_H */

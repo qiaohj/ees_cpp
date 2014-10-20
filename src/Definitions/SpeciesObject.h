@@ -4,14 +4,18 @@
  *  Created on: Oct 15, 2014
  *      Author: qiaohj
  */
+
+#ifndef SpeciesObject_H
+#define SpeciesObject_H
+
 #include <string>
-#include <boost/unordered_set.hpp>
+#include <boost/unordered_map.hpp>
 #include "../JsonPaster/include/json/json.h"
-#include "Distribution.h"
+#include "SparseMap.h"
 
 using namespace std;
-class Scenario;
-typedef boost::unordered_map<unsigned, Distribution> map;
+
+typedef boost::unordered_map <unsigned, SparseMap> hashmap;
 
 class SpeciesObject {
 private:
@@ -24,13 +28,14 @@ private:
     int dispersalMethod;
     int numberOfPath;
     vector<float*> seeds;
-    Scenario* scenario;
-    map distributions;
+    hashmap distributions;
 
 public:
-    SpeciesObject(Json::Value root, Scenario* p_scenario);
+    SpeciesObject(Json::Value root);
+    virtual ~SpeciesObject();
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
-    vector<SpeciesObject*> run(unsigned year);
-    virtual ~SpeciesObject();
+    vector<SpeciesObject*> run(const unsigned current_year, const float* environmental_values);
 };
+
+#endif /* SpeciesObject_H */

@@ -5,7 +5,9 @@
  *      Author: qiaohj
  */
 
-using namespace std;
+#ifndef EnvironmentalCurve_H
+#define EnvironmentalCurve_H
+
 #include <string>
 #include <algorithm>
 #include <boost/algorithm/string/replace.hpp>
@@ -14,6 +16,7 @@ using namespace std;
 #include "../RasterIO/RasterObject.h"
 #include "../Universal/Templete.cpp"
 
+using namespace std;
 class EnvironmentalCurve {
 private:
     RasterObject* glacial;
@@ -37,4 +40,4 @@ public:
 	float getValue(unsigned year, double longitude, double latitude);
 };
 
-
+#endif /* EnvironmentalCurve_H */

@@ -4,18 +4,21 @@
  *  Created on: Oct 15, 2014
  *      Author: qiaohj
  */
-using namespace std;
+
+#ifndef CommonFun_H
+#define CommonFun_H
+
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
 #include <float.h>
-
 #include <boost/algorithm/string/join.hpp>
 
 #include "../JsonPaster/include/json/json.h"
 
+using namespace std;
 class CommonFun {
 public:
 	static string readFile(const char* path);
@@ -27,4 +30,4 @@ public:
 	template <typename T> static bool AlmostEqualRelative(T a, T b);
 };
 
-
+#endif /* CommonFun_H */

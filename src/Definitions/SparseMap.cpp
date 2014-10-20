@@ -1,14 +1,16 @@
 /*
- * Distribution.cpp
+ * SparseMap.cpp
  *
  *  Created on: Oct 16, 2014
  *      Author: qiaohj
  */
 
-#include "Distribution.h"
+#include "SparseMap.h"
 
+SparseMap::SparseMap(){
 
-Distribution::Distribution(RasterObject* raster, bool is_binary) {
+}
+SparseMap::SparseMap(RasterObject* raster, bool is_binary = false) {
     xSize = raster->getXSize();
     ySize = raster->getYSize();
     boost::numeric::ublas::compressed_matrix<int> t (xSize, ySize, xSize * ySize);
@@ -19,7 +21,7 @@ Distribution::Distribution(RasterObject* raster, bool is_binary) {
     }
     value = t;
 }
-Distribution::Distribution(Distribution* potential, Distribution* dispersal){
+SparseMap::SparseMap(SparseMap* potential, SparseMap* dispersal){
     xSize = potential->getXSize();
     ySize = potential->getYSize();
     boost::numeric::ublas::compressed_matrix<int> t (xSize, ySize, xSize * ySize);
@@ -30,15 +32,15 @@ Distribution::Distribution(Distribution* potential, Distribution* dispersal){
     }
     value = t;
 }
-int Distribution::readByXY(unsigned x, unsigned y){
+int SparseMap::readByXY(unsigned x, unsigned y){
     return value(x, y);
 }
-unsigned Distribution::getXSize(){
+unsigned SparseMap::getXSize(){
     return xSize;
 }
-unsigned Distribution::getYSize(){
+unsigned SparseMap::getYSize(){
     return ySize;
 }
-Distribution::~Distribution() {
+SparseMap::~SparseMap() {
 }
 

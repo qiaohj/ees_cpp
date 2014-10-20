@@ -33,7 +33,7 @@ float EnvironmentalCurve::getValue(unsigned year, double longitude, double latit
     if (year<=burnInYears){
         curve_value = prs.parse(burn_in_curve.c_str());
     }else{
-        int x_pos = ((year-burnInYears) % cycleYears);
+        unsigned x_pos = ((year-burnInYears) % cycleYears);
         string curve_func = "";
         float x_value = 0;
 

@@ -8,15 +8,14 @@
 #include "SpeciesObject.h"
 
 
-SpeciesObject::SpeciesObject(Json::Value root, Scenario* p_scenario){
-    scenario = p_scenario;
+SpeciesObject::SpeciesObject(Json::Value root){
     nextRunYear = 0;
     id = root.get("id", "").asString();
     dispersalAbility = root.get("dispersal_ability", 1).asInt();
     dispersalSpeed = root.get("dispersal_speed", 1000).asInt();
     dispersalMethod = root.get("dispersal_method", 1).asInt();
     numberOfPath = root.get("number_of_path", -1).asInt();
-    speciationYears = root.get("speciation_years").asInt();
+    speciationYears = root.get("speciation_years", 10000).asInt();
 
     Json::Value niche_breadth_array = root["niche_breadth"];
 //    nicheBreadth.reserve(niche_breadth_array.size());
@@ -40,7 +39,7 @@ SpeciesObject::SpeciesObject(Json::Value root, Scenario* p_scenario){
         seeds.push_back(initial_seed);
     }
 
-    distribution[nextRunYear] = new
+//    distribution[nextRunYear] = new
 }
 
 SpeciesObject::~SpeciesObject() {
@@ -54,10 +53,10 @@ SpeciesObject::~SpeciesObject() {
     vector<float*>().swap(nicheBreadth);
     vector<float*>().swap(seeds);
 }
-vector<SpeciesObject*> SpeciesObject::run(){
+vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year, const float* environmental_values){
     vector<SpeciesObject*> new_species;
-    if (scenario->getCurrentYears()>=nextRunYear){
-        Distribution prev_distribution = distribution[nextRunYear]
+    if (current_year>=nextRunYear){
+        SparseMap prev_distribution = distributions[nextRunYear];
         nextRunYear += dispersalSpeed;
     }
     new_species.push_back(this);
