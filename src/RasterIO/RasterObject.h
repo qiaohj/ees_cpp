@@ -11,7 +11,7 @@
 #include <string>
 #include <gdal.h>
 #include <gdal_priv.h>
-
+#include "../Universal/CommonFun.h"
 
 using namespace std;
 class RasterObject{

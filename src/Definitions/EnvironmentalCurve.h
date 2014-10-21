@@ -14,7 +14,9 @@
 #include "../ExpressionParser/parser.h"
 #include "../JsonPaster/include/json/json.h"
 #include "../RasterIO/RasterObject.h"
-#include "../Universal/Templete.cpp"
+#include "../RasterIO/SparseMap.h"
+#include "../Universal/CommonFun.h"
+#include "../Universal/const.h"
 
 using namespace std;
 class EnvironmentalCurve {
@@ -32,12 +34,17 @@ private:
     string part_2_curve;
     string plateau_1_curve;
     string plateau_2_curve;
+    float noData;
 
 public:
 	EnvironmentalCurve(Json::Value root);
 	virtual ~EnvironmentalCurve();
     int getBurnInYears();
-	float getValue(unsigned year, double longitude, double latitude);
+    SparseMap* getValues(unsigned year);
+	float readByLL(float curve_value, unsigned year, double longitude, double latitude);
+	float readByXY(float curve_value, unsigned year, unsigned x, unsigned y);
+	float getCurveValue(unsigned year);
+
 };
 
 #endif /* EnvironmentalCurve_H */

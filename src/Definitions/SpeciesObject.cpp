@@ -8,7 +8,7 @@
 #include "SpeciesObject.h"
 
 
-SpeciesObject::SpeciesObject(Json::Value root){
+SpeciesObject::SpeciesObject(Json::Value root, unsigned x_size, unsigned y_size, double* geoTrans){
     nextRunYear = 0;
     id = root.get("id", "").asString();
     dispersalAbility = root.get("dispersal_ability", 1).asInt();
@@ -38,8 +38,8 @@ SpeciesObject::SpeciesObject(Json::Value root){
         }
         seeds.push_back(initial_seed);
     }
-
-//    distribution[nextRunYear] = new
+//    CommonFun::
+//    distributions[0] = new
 }
 
 SpeciesObject::~SpeciesObject() {
@@ -53,10 +53,13 @@ SpeciesObject::~SpeciesObject() {
     vector<float*>().swap(nicheBreadth);
     vector<float*>().swap(seeds);
 }
-vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year, const float* environmental_values){
+vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year, const SparseMap* environmental_values){
     vector<SpeciesObject*> new_species;
     if (current_year>=nextRunYear){
-        SparseMap prev_distribution = distributions[nextRunYear];
+        SparseMap* prev_distribution = distributions[nextRunYear];
+        for (unsigned i=0; i<nicheBreadth.size(); ++i){
+
+        }
         nextRunYear += dispersalSpeed;
     }
     new_species.push_back(this);

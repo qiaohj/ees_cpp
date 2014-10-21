@@ -12,6 +12,7 @@
 EnvironmentalCurve::EnvironmentalCurve(Json::Value root) {
     glacial = new RasterObject(root.get("glacial_path", "").asCString());
     interglacial = new RasterObject(root.get("interglacial_path", "").asCString());
+    noData = glacial->getNoData();
     part_1_years = root.get("part_1_years", 10000).asInt();
     part_2_years = root.get("part_2_years", 10000).asInt();
     plateau_1_years = root.get("plateau_1_years", 10000).asInt();
@@ -27,7 +28,23 @@ EnvironmentalCurve::EnvironmentalCurve(Json::Value root) {
 int EnvironmentalCurve::getBurnInYears(){
     return burnInYears;
 }
-float EnvironmentalCurve::getValue(unsigned year, double longitude, double latitude){
+SparseMap* EnvironmentalCurve::getValues(unsigned year){
+    float curve_value = getCurveValue(year);
+    mapvalue* value = new mapvalue(glacial->getXSize(), glacial->getYSize(), glacial->getXSize() * glacial->getYSize());
+    for (unsigned x=0; x<glacial->getXSize(); ++x){
+        for (unsigned y=0; y<glacial->getYSize(); ++y){
+            float v = readByXY(curve_value, year, x, y);
+            if (!CommonFun::AlmostEqualRelative(v, noData)){
+                if (CommonFun::AlmostEqualRelative(v, (float)0)){
+                    v = matrix_zero;
+                }
+                (*value)(x, y) = (int) v;
+            }
+        }
+    }
+    return new SparseMap(value);
+}
+float EnvironmentalCurve::getCurveValue(unsigned year){
     float curve_value = 0;
     Parser prs;
     if (year<=burnInYears){
@@ -50,15 +67,27 @@ float EnvironmentalCurve::getValue(unsigned year, double longitude, double latit
             x_value = ((float)(x_pos - part_1_years - plateau_1_years - part_2_years)) / ((float)plateau_2_years);
             curve_func = plateau_2_curve;
         }
-        boost::replace_all(curve_func, "x", to_str(x_value));
+        boost::replace_all(curve_func, "x", CommonFun::to_str(x_value));
 //        printf("Function is %s\n", curve_func.c_str());
         curve_value = prs.parse(curve_func.c_str());
 
     }
+    return curve_value;
+}
+float EnvironmentalCurve::readByXY(float curve_value, unsigned year, unsigned x, unsigned y){
+    float interglacial_value = interglacial->readByXY(x, y);
+    float glacial_value =  glacial->readByXY(x, y);
+    float value = (interglacial_value - glacial_value) * curve_value + glacial_value;
+    return value;
+}
+float EnvironmentalCurve::readByLL(float curve_value, unsigned year, double longitude, double latitude){
+    if (CommonFun::AlmostEqualRelative(curve_value, (float)-1)){
+        curve_value = getCurveValue(year);
+    }
     float interglacial_value = interglacial->readByLL(longitude, latitude);
     float glacial_value =  glacial->readByLL(longitude, latitude);
     float value = (interglacial_value - glacial_value) * curve_value + glacial_value;
-    return (float) value;
+    return value;
 }
 EnvironmentalCurve::~EnvironmentalCurve() {
     delete glacial;

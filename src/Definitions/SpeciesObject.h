@@ -9,13 +9,11 @@
 #define SpeciesObject_H
 
 #include <string>
-#include <boost/unordered_map.hpp>
 #include "../JsonPaster/include/json/json.h"
-#include "SparseMap.h"
+#include "../RasterIO/SparseMap.h"
+#include "../Universal/CommonType.h"
 
 using namespace std;
-
-typedef boost::unordered_map <unsigned, SparseMap> hashmap;
 
 class SpeciesObject {
 private:
@@ -31,11 +29,11 @@ private:
     hashmap distributions;
 
 public:
-    SpeciesObject(Json::Value root);
+    SpeciesObject(Json::Value root, unsigned x_size, unsigned y_size, double* geoTrans);
     virtual ~SpeciesObject();
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
-    vector<SpeciesObject*> run(const unsigned current_year, const float* environmental_values);
+    vector<SpeciesObject*> run(const unsigned current_year, const SparseMap* environmental_values);
 };
 
 #endif /* SpeciesObject_H */

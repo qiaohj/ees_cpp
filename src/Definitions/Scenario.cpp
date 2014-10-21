@@ -9,9 +9,12 @@
 
 
 Scenario::Scenario(Json::Value root, string baseFolder) {
-    currentYears = 0;
     totalYears = root.get("total_years", 500000).asInt();
-    mask = new SparseMap(new RasterObject(root.get("mask", "").asCString()), true);
+    RasterObject* mask_raster = new RasterObject(root.get("mask", "").asCString());
+    geoTrans = mask_raster->getGeoTransform();
+    mask = new SparseMap(mask_raster, true);
+    unsigned x_size = mask_raster->getXSize();
+    unsigned y_size = mask_raster->getYSize();
     minSpeciesDispersalSpeed = totalYears;
     Json::Value species_json_array = root["species"];
     species.reserve(species_json_array.size());
@@ -19,7 +22,7 @@ Scenario::Scenario(Json::Value root, string baseFolder) {
         string species_json_path = baseFolder + string("/niche_definations/")
                 + species_json_array[index].asString() + string(".json");
         Json::Value species_json = CommonFun::readJson(species_json_path.c_str());
-        SpeciesObject* species_item = new SpeciesObject(species_json);
+        SpeciesObject* species_item = new SpeciesObject(species_json, x_size, y_size, geoTrans);
         minSpeciesDispersalSpeed = (species_item->getDispersalSpeed()<minSpeciesDispersalSpeed)?
                 species_item->getDispersalSpeed():minSpeciesDispersalSpeed;
         species.push_back(species_item);
@@ -34,22 +37,27 @@ Scenario::Scenario(Json::Value root, string baseFolder) {
 		EnvironmentalCurve* environment_item = new EnvironmentalCurve(environment_json);
 		environments.push_back(environment_item);
 	}
+	delete mask_raster;
 }
 
-float* Scenario::getEnvironmentValue(double longitude, double latitude){
+float* Scenario::getEnvironmentValue(unsigned year, double longitude, double latitude){
     float* result = new float[environments.size()];
     for (unsigned i=0; i<environments.size(); ++i){
-        result[i] = environments[i]->getValue(currentYears, longitude, latitude);
+        result[i] = environments[i]->readByLL(-1, year, longitude, latitude);
     }
     return result;
 }
 void Scenario::run(){
-    for (unsigned year = currentYears; year<=totalYears; year+=minSpeciesDispersalSpeed){
+    for (unsigned year = 0; year<=totalYears; year+=minSpeciesDispersalSpeed){
         printf("Current year:%d, number of species:%zu\n", year, species.size());
         vector<SpeciesObject*> new_species;
+        if (environment_maps.find(year)==environment_maps.end()){
+            environment_maps[year] = getEnvironmenMap(year);
+        }
+        SparseMap* current_environments = environment_maps[year];
         for (unsigned i=0; i<species.size(); ++i){
 
-            vector<SpeciesObject*> new_species_item = species[i]->run(year, NULL);
+            vector<SpeciesObject*> new_species_item = species[i]->run(year, current_environments);
             for (vector<SpeciesObject*>::iterator it = new_species_item.begin() ; it != new_species_item.end(); ++it){
                 if (*it!=NULL) new_species.push_back(*it);
             }
@@ -57,8 +65,12 @@ void Scenario::run(){
         species = new_species;
     }
 }
-unsigned Scenario::getCurrentYears(){
-    return currentYears;
+SparseMap* Scenario::getEnvironmenMap(unsigned year){
+    SparseMap* result[environments.size()];
+    for (unsigned i=0; i<environments.size(); ++i){
+        result[i] = environments[i]->getValues(year);
+    }
+    return *result;
 }
 Scenario::~Scenario() {
     delete mask;

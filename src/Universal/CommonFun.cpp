@@ -56,6 +56,12 @@ void CommonFun::writeFile(const vector<string> s, const char* path){
     string joined = boost::algorithm::join(s, "\n");
     writeFile(joined, path);
 }
-template <typename T> bool CommonFun::AlmostEqualRelative(T a, T b){
-    return fabs(a - b) < FLT_EPSILON;
+void CommonFun::XY2LL(double* adfGeoTransform, unsigned x, unsigned y, double* longitude, double* latitude){
+    *longitude = adfGeoTransform[0] + adfGeoTransform[1] * (x + .5f) + adfGeoTransform[2] * (y + .5f);
+    *latitude = adfGeoTransform[3] + adfGeoTransform[4] * (x + .5f) + adfGeoTransform[5] * (y + .5f);
+}
+
+void CommonFun::LL2XY(double* adfGeoTransform, double longitude, double latitude, unsigned* x, unsigned* y){
+    *x = (unsigned)((longitude - adfGeoTransform[0]) / adfGeoTransform[1]);
+    *y = (unsigned)((latitude - adfGeoTransform[3]) / adfGeoTransform[5]);
 }
