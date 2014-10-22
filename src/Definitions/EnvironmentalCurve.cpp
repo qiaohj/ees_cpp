@@ -36,7 +36,7 @@ SparseMap* EnvironmentalCurve::getValues(unsigned year){
             float v = readByXY(curve_value, year, x, y);
             if (!CommonFun::AlmostEqualRelative(v, noData)){
                 if (CommonFun::AlmostEqualRelative(v, (float)0)){
-                    v = matrix_zero;
+                    v = MATRIX_ZERO;
                 }
                 (*value)(x, y) = (int) v;
             }

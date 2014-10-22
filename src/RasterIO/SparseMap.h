@@ -10,9 +10,11 @@
 
 
 #include <string>
-#include "../RasterIO/RasterObject.h"
 #include <boost/numeric/ublas/matrix_sparse.hpp>
 #include <boost/numeric/ublas/io.hpp>
+#include "RasterObject.h"
+#include "CellObject.h"
+#include "../Universal/const.h"
 
 using namespace std;
 
@@ -24,17 +26,17 @@ private:
     unsigned xSize;
     unsigned ySize;
 public:
-    SparseMap();
     SparseMap(unsigned x_size, unsigned y_size);
     SparseMap(mapvalue* p_value);
     SparseMap(RasterObject* raster, bool is_binary);
-    SparseMap(SparseMap* potential, SparseMap* dispersal);
     virtual ~SparseMap();
 
     int readByXY(unsigned x, unsigned y);
     unsigned getXSize();
     unsigned getYSize();
     void setValue(unsigned x, unsigned y, int value);
+    vector<CellObject*> getValues();
+    int* toArray();
 };
 
 #endif /* SparseMap_H */

@@ -22,18 +22,18 @@ class Scenario {
 private:
 	vector<SpeciesObject*> species;
 	vector<EnvironmentalCurve*> environments;
-	unsigned currentYears;
 	unsigned totalYears;
 	unsigned minSpeciesDispersalSpeed;
 	SparseMap* mask;
-	hashmap environment_maps;
+	hashmap_multiply environment_maps;
+	string baseFolder;
 	double* geoTrans;
 public:
-	Scenario(Json::Value root, string baseFolder);
+	Scenario(Json::Value root, string p_base_folder);
 	void run();
 	virtual ~Scenario();
 	float* getEnvironmentValue(unsigned year, double longitude, double latitude);
-	SparseMap* getEnvironmenMap(unsigned year);
+	vector<SparseMap*> getEnvironmenMap(unsigned year);
 };
 
 #endif /* Scenario_H */

@@ -34,8 +34,6 @@ public:
 	double* getGeoTransform();
 	float readByXY(unsigned x, unsigned y);
 	float getNoData();
-	void XY2LL(unsigned x, unsigned y, double* longitude, double* latitude);
-	void LL2XY(double longitude, double latitude, unsigned* x, unsigned* y);
 	float readByLL(double longitude, double latitude);
 	void printRasterInfo();
 

@@ -5,6 +5,7 @@
 
 #include "../RasterIO/SparseMap.h"
 
-typedef boost::unordered_map <unsigned, SparseMap*> hashmap;
+typedef boost::unordered_map <unsigned, vector<SparseMap*> > hashmap_multiply;
+typedef boost::unordered_map <unsigned, SparseMap*> hashmap_single;
 
 #endif /* CommonFun_H */
