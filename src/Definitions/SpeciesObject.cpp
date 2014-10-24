@@ -58,7 +58,7 @@ SpeciesObject::~SpeciesObject() {
     vector<float*>().swap(seeds);
 }
 vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year,
-        const vector<SparseMap*> environmental_values, string p_base_folder, double* geoTrans) {
+        const vector<SparseMap*> environmental_values, string p_target, double* geoTrans) {
     vector<SpeciesObject*> new_species;
     if (current_year >= nextRunYear) {
         SparseMap* prev_distribution = distributions[nextRunYear];
@@ -86,30 +86,33 @@ vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year,
         }
 
         nextRunYear += dispersalSpeed;
-        writeDistribution(nextRunYear, new_distribution, p_base_folder + "/" + id, geoTrans);
+        writeDistribution(nextRunYear, new_distribution, p_target + "/" + id + "/dispersal", geoTrans);
         distributions[nextRunYear] = new_distribution;
     }
     new_species.push_back(this);
     return new_species;
 }
 void SpeciesObject::writeDistribution(unsigned year, SparseMap* distribution,
-        string base_folder, double* geoTrans) {
-    CommonFun::createFolder(base_folder.c_str());
-    char tiffName[base_folder.length() + 12];
-    sprintf(tiffName, "%s/%s.tif", base_folder.c_str(),
+        string p_target, double* geoTrans) {
+    CommonFun::createFolder(p_target.c_str());
+    char tiffName[p_target.length() + 12];
+    sprintf(tiffName, "%s/%s.tif", p_target.c_str(),
             CommonFun::fixedLength(year, 7).c_str());
     RasterController::writeGeoTIFF(tiffName, distribution->getXSize(),
             distribution->getYSize(), geoTrans, distribution->toArray(),
             (double) NODATA, GDT_Int32);
 
 }
-bool SpeciesObject::isSuitable(CellObject* cell, const vector<SparseMap*> environmental_values){
-    for (unsigned i=0; i<nicheBreadth.size(); ++i){
-        int env_value = environmental_values[i]->readByXY(cell->getX(), cell->getY());
-        if (env_value==NODATA){
+bool SpeciesObject::isSuitable(CellObject* cell,
+        const vector<SparseMap*> environmental_values) {
+    for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
+        int env_value = environmental_values[i]->readByXY(cell->getX(),
+                cell->getY());
+        if (env_value == MATRIX_ZERO) {
             env_value = 0;
         }
-        if ((env_value>nicheBreadth[i][1])||(env_value<nicheBreadth[i][0])){
+        if ((env_value > nicheBreadth[i][1])
+                || (env_value < nicheBreadth[i][0])) {
             return false;
         }
     }
@@ -149,4 +152,6 @@ unsigned SpeciesObject::getDispersalAbility() {
 unsigned SpeciesObject::getDispersalSpeed() {
     return dispersalSpeed;
 }
-
+string SpeciesObject::getID(){
+    return id;
+}

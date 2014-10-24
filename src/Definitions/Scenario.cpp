@@ -7,8 +7,9 @@
 
 #include "Scenario.h"
 
-Scenario::Scenario(Json::Value root, string p_base_folder) {
+Scenario::Scenario(Json::Value root, string p_base_folder, string p_target) {
     baseFolder = p_base_folder;
+    target = p_target;
     totalYears = root.get("total_years", 500000).asInt();
     RasterObject* mask_raster = new RasterObject(
             root.get("mask", "").asCString());
@@ -59,6 +60,9 @@ float* Scenario::getEnvironmentValue(unsigned year, double longitude,
     return result;
 }
 void Scenario::run() {
+
+    vector<string> env_output;
+    unsigned x = 99999, y = 99999;
     for (unsigned year = 0; year <= totalYears; year +=
             minSpeciesDispersalSpeed) {
         printf("Current year:%d, number of species:%zu\n", year,
@@ -67,11 +71,21 @@ void Scenario::run() {
         if (environment_maps.find(year) == environment_maps.end()) {
             environment_maps[year] = getEnvironmenMap(year);
         }
+        //save the env data
+        if (x==99999){
+            CellObject* map = environment_maps[year][0]->getValues()[0];
+            x = map->getX();
+            y = map->getY();
+        }
+        char line[20];
+        sprintf(line, "%u,%u,%u,%d", year, x, y, environment_maps[year][0]->readByXY(x, y));
+        env_output.push_back(line);
         vector<SparseMap*> current_environments = environment_maps[year];
         for (unsigned i = 0; i < species.size(); ++i) {
-
+            string species_folder = target + "/" + species[i]->getID();
+            CommonFun::createFolder(species_folder.c_str());
             vector<SpeciesObject*> new_species_item = species[i]->run(year,
-                    current_environments, baseFolder, geoTrans);
+                    current_environments, target, geoTrans);
             for (vector<SpeciesObject*>::iterator it = new_species_item.begin();
                     it != new_species_item.end(); ++it) {
                 if (*it != NULL)
@@ -80,6 +94,9 @@ void Scenario::run() {
         }
         species = new_species;
     }
+    char filepath [target.length() + 15];
+    sprintf(filepath, "%s/env_curve.csv", target.c_str());
+    CommonFun::writeFile(env_output, filepath);
 }
 vector<SparseMap*> Scenario::getEnvironmenMap(unsigned year) {
     vector<SparseMap*> result;

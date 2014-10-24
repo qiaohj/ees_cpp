@@ -27,9 +27,10 @@ private:
 	SparseMap* mask;
 	hashmap_multiply environment_maps;
 	string baseFolder;
+	string target;
 	double* geoTrans;
 public:
-	Scenario(Json::Value root, string p_base_folder);
+	Scenario(Json::Value root, string p_base_folder, string p_target);
 	void run();
 	virtual ~Scenario();
 	float* getEnvironmentValue(unsigned year, double longitude, double latitude);

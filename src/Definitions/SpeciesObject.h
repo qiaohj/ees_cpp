@@ -32,7 +32,7 @@ private:
             const vector<SparseMap*> environmental_values);
     SparseMap* getDispersalMap_2(SparseMap* prec_distribution);
     void writeDistribution(unsigned year, SparseMap* distribution,
-            string base_folder, double* geoTrans);
+            string p_target, double* geoTrans);
 public:
     SpeciesObject(Json::Value root, unsigned x_size, unsigned y_size,
             double* geoTrans);
@@ -40,8 +40,9 @@ public:
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
     vector<SpeciesObject*> run(const unsigned current_year,
-            const vector<SparseMap*> environmental_values, string p_base_folder,
+            const vector<SparseMap*> environmental_values, string p_target,
             double* geoTrans);
+    string getID();
 };
 
 #endif /* SpeciesObject_H */

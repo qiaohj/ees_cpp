@@ -47,7 +47,7 @@ string CommonFun::removeSuffix(const string& path, const string& extension) {
 void CommonFun::writeFile(const string s, const char* path) {
     std::ofstream outfile(path);
     if (!outfile.is_open()) {
-        std::cerr << "Couldn't open 'output.txt'" << std::endl;
+        std::cerr << "Couldn't open " << path << std::endl;
     }
     outfile << s << std::endl;
     outfile.close();

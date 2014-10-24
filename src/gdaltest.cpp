@@ -15,6 +15,7 @@ using namespace std;
 #include "JsonPaster/include/json/json.h"
 #include <algorithm> // sort
 #include <string>
+#include <math.h>
 
 
 #include "ExpressionParser/parser.h"
@@ -59,6 +60,24 @@ void cutEnvironmentLayers(char* layerName, char* newName){
     }
     RasterController::writeGeoTIFF(newName,
                 mask->getXSize(), mask->getYSize(), mask->getGeoTransform(), array, (double)NODATA, GDT_Float32);
+    delete[] array;
+}
+void integerEnvironmentLayers(char* layerName, char* newName){
+    RasterObject* env_layer = new RasterObject(layerName);
+    int* array = new int [env_layer->getXSize() * env_layer->getYSize()];
+    for (unsigned x=0; x<env_layer->getXSize(); ++x){
+        for (unsigned y=0;y<env_layer->getYSize();++y){
+            float v = env_layer->readByXY(x, y);
+            if (CommonFun::AlmostEqualRelative(v, env_layer->getNoData())){
+                array[y * env_layer->getXSize() + x] = NODATA;
+            }else{
+                array[y * env_layer->getXSize() + x] = round(v * 1000);
+            }
+        }
+    }
+    RasterController::writeGeoTIFF(newName,
+            env_layer->getXSize(), env_layer->getYSize(), env_layer->getGeoTransform(), array, (double)NODATA, GDT_Int32);
+    delete[] array;
 }
 int main(int argc, const char* argv[]) {
     //binary_mask();
@@ -71,12 +90,21 @@ int main(int argc, const char* argv[]) {
 //    cutEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.origin.tif",
 //                "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.tif");
 
+//    integerEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio1.float.tif",
+//            "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio1.tif");
+//    integerEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio12.float.tif",
+//                "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio12.tif");
+//    integerEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio1.float.tif",
+//                "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio1.tif");
+//    integerEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.float.tif",
+//                "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.tif");
+
 	/*
 	 * Scenario Json Test
 	 * */
     char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
-	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data");
+	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
 	scenario->run();
 	delete scenario;
 	printf("done!");
