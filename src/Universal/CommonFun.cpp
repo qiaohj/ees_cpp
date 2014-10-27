@@ -91,3 +91,5 @@ string CommonFun::fixedLength(int value, int digits = 3) {
     std::reverse(result.begin(), result.end());
     return result;
 }
+
+

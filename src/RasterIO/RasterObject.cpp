@@ -45,15 +45,15 @@ double* RasterObject::getGeoTransform(){
 float RasterObject::getNoData(){
 	return noData;
 }
-float RasterObject::readByXY(unsigned x, unsigned y){
-	if (x<0||x>=xSize||y<0||y>=ySize){
+float RasterObject::readByXY(unsigned p_x, unsigned p_y){
+	if (p_x<0||p_x>=xSize||p_y<0||p_y>=ySize){
 		return noData;
 	}
-	return *(valueArray + (y * xSize + x));
+	return *(valueArray + (p_y * xSize + p_x));
 }
-float RasterObject::readByLL(double longitude, double latitude){
+float RasterObject::readByLL(double p_longitude, double p_latitude){
     unsigned x, y;
-	CommonFun::LL2XY(adfGeoTransform, longitude, latitude, &x, &y);
+	CommonFun::LL2XY(adfGeoTransform, p_longitude, p_latitude, &x, &y);
 	return readByXY(x, y);
 }
 void RasterObject::printRasterInfo(){

@@ -3,7 +3,7 @@
 
 #include <boost/unordered_map.hpp>
 
-#include "../RasterIO/SparseMap.h"
+#include "../Definitions/SparseMap.h"
 
 typedef boost::unordered_map <unsigned, vector<SparseMap*> > hashmap_multiply;
 typedef boost::unordered_map <unsigned, SparseMap*> hashmap_single;

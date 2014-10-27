@@ -36,7 +36,8 @@ void binary_mask(){
             }
         }
     }
-    RasterController::writeGeoTIFF("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/mask.tif",
+    char a []= "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/mask.tif";
+    RasterController::writeGeoTIFF(a,
             mask->getXSize(), mask->getYSize(), mask->getGeoTransform(), array, (double)NODATA, GDT_Int32);
     delete [] array;
     delete mask;

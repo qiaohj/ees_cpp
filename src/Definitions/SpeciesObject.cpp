@@ -7,17 +7,17 @@
 
 #include "SpeciesObject.h"
 
-SpeciesObject::SpeciesObject(Json::Value root, unsigned x_size, unsigned y_size,
+SpeciesObject::SpeciesObject(Json::Value p_root, unsigned x_size, unsigned y_size,
         double* geoTrans) {
     nextRunYear = 0;
-    id = root.get("id", "").asString();
-    dispersalAbility = root.get("dispersal_ability", 1).asInt();
-    dispersalSpeed = root.get("dispersal_speed", 1000).asInt();
-    dispersalMethod = root.get("dispersal_method", 1).asInt();
-    numberOfPath = root.get("number_of_path", -1).asInt();
-    speciationYears = root.get("speciation_years", 10000).asInt();
+    id = p_root.get("id", "").asInt();
+    dispersalAbility = p_root.get("dispersal_ability", 1).asInt();
+    dispersalSpeed = p_root.get("dispersal_speed", 1000).asInt();
+    dispersalMethod = p_root.get("dispersal_method", 1).asInt();
+    numberOfPath = p_root.get("number_of_path", -1).asInt();
+    speciationYears = p_root.get("speciation_years", 10000).asInt();
 
-    Json::Value niche_breadth_array = root["niche_breadth"];
+    Json::Value niche_breadth_array = p_root["niche_breadth"];
 //    nicheBreadth.reserve(niche_breadth_array.size());
     for (unsigned index = 0; index < niche_breadth_array.size(); ++index) {
         Json::Value niche_breadth_json = niche_breadth_array[index];
@@ -28,7 +28,7 @@ SpeciesObject::SpeciesObject(Json::Value root, unsigned x_size, unsigned y_size,
         nicheBreadth.push_back(niche_breadth);
     }
 
-    Json::Value initial_seeds_array = root["initial_seeds"];
+    Json::Value initial_seeds_array = p_root["initial_seeds"];
 //    seeds.reserve(initial_seeds_array.size());
     distributions[0] = new SparseMap(x_size, y_size);
     for (unsigned index = 0; index < initial_seeds_array.size(); ++index) {
@@ -56,11 +56,19 @@ SpeciesObject::~SpeciesObject() {
     }
     vector<float*>().swap(nicheBreadth);
     vector<float*>().swap(seeds);
+
+    //clean distribution
+    for (hashmap_single::iterator it = distributions.begin(); it != distributions.end();) {
+        delete it->second;
+        it = distributions.erase(it);
+    }
+    distributions.clear();
+
 }
-vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year,
-        const vector<SparseMap*> environmental_values, string p_target, double* geoTrans) {
+vector<SpeciesObject*> SpeciesObject::run(const unsigned p_current_year,
+        const vector<SparseMap*> p_environmental_values, string p_target, double* p_geo_trans) {
     vector<SpeciesObject*> new_species;
-    if (current_year >= nextRunYear) {
+    if (p_current_year >= nextRunYear) {
         SparseMap* prev_distribution = distributions[nextRunYear];
         SparseMap* dispersal_map = NULL;
         switch (dispersalMethod) {
@@ -79,35 +87,41 @@ vector<SpeciesObject*> SpeciesObject::run(const unsigned current_year,
         vector<CellObject*> cells = dispersal_map->getValues();
         SparseMap* new_distribution = new SparseMap(dispersal_map->getXSize(),
                 dispersal_map->getYSize());
+
         for (unsigned i = 0; i < cells.size(); ++i) {
-            if (isSuitable(cells[i], environmental_values)){
+            if (isSuitable(cells[i], p_environmental_values)){
                 new_distribution->setValue(cells[i]->getX(), cells[i]->getY(), 1);
+
             }
         }
-
         nextRunYear += dispersalSpeed;
-        writeDistribution(nextRunYear, new_distribution, p_target + "/" + id + "/dispersal", geoTrans);
+        char folder [p_target.length() + 16];
+        sprintf(folder, "%s/%s/dispersal", p_target.c_str(), CommonFun::fixedLength(id, 5).c_str());
+        writeDistribution(nextRunYear, new_distribution, string(folder), p_geo_trans);
         distributions[nextRunYear] = new_distribution;
+        CellObject::clearCellObject(cells);
+        delete dispersal_map;
     }
     new_species.push_back(this);
     return new_species;
 }
-void SpeciesObject::writeDistribution(unsigned year, SparseMap* distribution,
-        string p_target, double* geoTrans) {
+void SpeciesObject::writeDistribution(unsigned p_year, SparseMap* p_distribution,
+        string p_target, double* p_geo_trans) {
     CommonFun::createFolder(p_target.c_str());
     char tiffName[p_target.length() + 12];
     sprintf(tiffName, "%s/%s.tif", p_target.c_str(),
-            CommonFun::fixedLength(year, 7).c_str());
-    RasterController::writeGeoTIFF(tiffName, distribution->getXSize(),
-            distribution->getYSize(), geoTrans, distribution->toArray(),
+            CommonFun::fixedLength(p_year, 7).c_str());
+    int* values = p_distribution->toArray();
+    RasterController::writeGeoTIFF(tiffName, p_distribution->getXSize(),
+            p_distribution->getYSize(), p_geo_trans, values,
             (double) NODATA, GDT_Int32);
-
+    delete[] values;
 }
-bool SpeciesObject::isSuitable(CellObject* cell,
-        const vector<SparseMap*> environmental_values) {
+bool SpeciesObject::isSuitable(CellObject* p_cell,
+        const vector<SparseMap*> p_environmental_values) {
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
-        int env_value = environmental_values[i]->readByXY(cell->getX(),
-                cell->getY());
+        int env_value = p_environmental_values[i]->readByXY(p_cell->getX(),
+                p_cell->getY());
         if (env_value == MATRIX_ZERO) {
             env_value = 0;
         }
@@ -119,10 +133,10 @@ bool SpeciesObject::isSuitable(CellObject* cell,
     return true;
 }
 //get all the cells whose E-distances are not longer than dispersal ability.
-SparseMap* SpeciesObject::getDispersalMap_2(SparseMap* prec_distribution) {
-    vector<CellObject*> cells = prec_distribution->getValues();
-    SparseMap* new_dispersal = new SparseMap(prec_distribution->getXSize(),
-            prec_distribution->getYSize());
+SparseMap* SpeciesObject::getDispersalMap_2(SparseMap* p_prec_distribution) {
+    vector<CellObject*> cells = p_prec_distribution->getValues();
+    SparseMap* new_dispersal = new SparseMap(p_prec_distribution->getXSize(),
+            p_prec_distribution->getYSize());
     for (unsigned i = 0; i < cells.size(); ++i) {
         for (unsigned x = (cells[i]->getX() - dispersalAbility);
                 x <= (cells[i]->getX() + dispersalAbility); ++x) {
@@ -144,6 +158,7 @@ SparseMap* SpeciesObject::getDispersalMap_2(SparseMap* prec_distribution) {
             }
         }
     }
+    CellObject::clearCellObject(cells);
     return new_dispersal;
 }
 unsigned SpeciesObject::getDispersalAbility() {
@@ -152,6 +167,6 @@ unsigned SpeciesObject::getDispersalAbility() {
 unsigned SpeciesObject::getDispersalSpeed() {
     return dispersalSpeed;
 }
-string SpeciesObject::getID(){
+unsigned SpeciesObject::getID(){
     return id;
 }

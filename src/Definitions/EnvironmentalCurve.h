@@ -14,7 +14,7 @@
 #include "../ExpressionParser/parser.h"
 #include "../JsonPaster/include/json/json.h"
 #include "../RasterIO/RasterObject.h"
-#include "../RasterIO/SparseMap.h"
+#include "../Definitions/SparseMap.h"
 #include "../Universal/CommonFun.h"
 #include "../Universal/const.h"
 
@@ -37,13 +37,13 @@ private:
     float noData;
 
 public:
-	EnvironmentalCurve(Json::Value root);
+	EnvironmentalCurve(Json::Value p_root);
 	virtual ~EnvironmentalCurve();
     int getBurnInYears();
-    SparseMap* getValues(unsigned year);
-	float readByLL(float curve_value, unsigned year, double longitude, double latitude);
-	float readByXY(float curve_value, unsigned year, unsigned x, unsigned y);
-	float getCurveValue(unsigned year);
+    SparseMap* getValues(unsigned p_year);
+	float readByLL(float p_curve_value, unsigned p_year, double p_longitude, double p_latitude);
+	float readByXY(float p_curve_value, unsigned p_year, unsigned p_x, unsigned p_y);
+	float getCurveValue(unsigned p_year);
 
 };
 

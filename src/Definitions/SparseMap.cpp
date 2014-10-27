@@ -12,30 +12,30 @@ SparseMap::SparseMap(mapvalue* p_value) {
     xSize = value->size1();
     ySize = value->size2();
 }
-SparseMap::SparseMap(unsigned x_size, unsigned y_size) {
-    xSize = x_size;
-    ySize = y_size;
-    value = new mapvalue(x_size, y_size, x_size * y_size);
+SparseMap::SparseMap(unsigned p_x_size, unsigned p_y_size) {
+    xSize = p_x_size;
+    ySize = p_y_size;
+    value = new mapvalue(p_x_size, p_y_size, p_x_size * p_y_size);
 }
-SparseMap::SparseMap(RasterObject* raster, bool is_binary = false) {
-    xSize = raster->getXSize();
-    ySize = raster->getYSize();
+SparseMap::SparseMap(RasterObject* p_raster, bool p_is_binary = false) {
+    xSize = p_raster->getXSize();
+    ySize = p_raster->getYSize();
     value = new mapvalue(xSize, ySize, xSize * ySize);
     for (unsigned x = 0; x < xSize; ++x) {
         for (unsigned y = 0; y < ySize; ++y) {
-            float v = raster->readByXY(x, y);
-            if (!CommonFun::AlmostEqualRelative(v, raster->getNoData())) {
-                (*value)(x, y) = (is_binary) ? 1 : (int) v;
+            float v = p_raster->readByXY(x, y);
+            if (!CommonFun::AlmostEqualRelative(v, p_raster->getNoData())) {
+                (*value)(x, y) = (p_is_binary) ? 1 : (int) v;
             }
 
         }
     }
 }
-void SparseMap::setValue(unsigned x, unsigned y, int p_value) {
-    (*value)(x, y) = p_value;
+void SparseMap::setValue(unsigned p_x, unsigned p_y, int p_value) {
+    (*value)(p_x, p_y) = p_value;
 }
-int SparseMap::readByXY(unsigned x, unsigned y) {
-    return (*value)(x, y);
+int SparseMap::readByXY(unsigned p_x, unsigned p_y) {
+    return (*value)(p_x, p_y);
 }
 unsigned SparseMap::getXSize() {
     return xSize;
@@ -64,8 +64,11 @@ int* SparseMap::toArray(){
     for (unsigned i=0; i<cell_list.size(); ++i){
         array[cell_list[i]->getY() * xSize + cell_list[i]->getX()] = cell_list[i]->getValue();
     }
+    CellObject::clearCellObject(cell_list);
     return array;
 }
 SparseMap::~SparseMap() {
+    value->clear();
+    delete value;
 }
 

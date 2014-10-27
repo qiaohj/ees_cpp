@@ -12,7 +12,7 @@
 #include <string>
 #include "EnvironmentalCurve.h"
 #include "SpeciesObject.h"
-#include "../RasterIO/SparseMap.h"
+#include "../Definitions/SparseMap.h"
 #include "../Universal/CommonFun.h"
 #include "../JsonPaster/include/json/json.h"
 
@@ -29,12 +29,14 @@ private:
 	string baseFolder;
 	string target;
 	double* geoTrans;
+	void cleanSpecies();
+	void cleanEnvironments();
 public:
-	Scenario(Json::Value root, string p_base_folder, string p_target);
+	Scenario(Json::Value p_root, string p_base_folder, string p_target);
 	void run();
 	virtual ~Scenario();
-	float* getEnvironmentValue(unsigned year, double longitude, double latitude);
-	vector<SparseMap*> getEnvironmenMap(unsigned year);
+	float* getEnvironmentValue(unsigned p_year, double p_longitude, double p_latitude);
+	vector<SparseMap*> getEnvironmenMap(unsigned p_year);
 };
 
 #endif /* Scenario_H */

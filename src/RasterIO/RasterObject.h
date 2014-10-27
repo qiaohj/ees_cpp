@@ -32,9 +32,9 @@ public:
 	unsigned getXSize();
 	unsigned getYSize();
 	double* getGeoTransform();
-	float readByXY(unsigned x, unsigned y);
+	float readByXY(unsigned p_x, unsigned p_y);
 	float getNoData();
-	float readByLL(double longitude, double latitude);
+	float readByLL(double p_longitude, double p_latitude);
 	void printRasterInfo();
 
 };
