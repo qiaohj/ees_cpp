@@ -1,0 +1,121 @@
+/*
+ * Scenario.cpp
+ *
+ *  Created on: Oct 25, 2014
+ *      Author: qiaohj
+ */
+
+#include "Scenario.h"
+
+Scenario::Scenario(Json::Value p_root, string p_base_folder, string p_target) {
+    baseFolder = p_base_folder;
+    target = p_target;
+    totalYears = p_root.get("total_years", 500000).asInt();
+    RasterObject* mask_raster = new RasterObject(
+            p_root.get("mask", "").asCString());
+    geoTrans = new double[6];
+    memcpy(geoTrans, mask_raster->getGeoTransform(), 6 * sizeof(*geoTrans));
+
+    mask = new SparseMap(mask_raster, true);
+    x_size = mask_raster->getXSize();
+    y_size = mask_raster->getYSize();
+    minSpeciesDispersalSpeed = totalYears;
+    Json::Value species_json_array = p_root["species"];
+
+    for (unsigned index = 0; index < species_json_array.size(); ++index) {
+        string species_json_path = baseFolder + string("/niche_definations/")
+                + species_json_array[index].asString() + string(".json");
+        Json::Value species_json = CommonFun::readJson(
+                species_json_path.c_str());
+        SpeciesObject* species = new SpeciesObject(species_json);
+        vector<float*> seeds = species->getSeeds();
+        for (unsigned i = 0; i<seeds.size(); ++i){
+            unsigned x, y;
+            CommonFun::LL2XY(geoTrans, seeds[i][0], seeds[i][1], &x, &y);
+            CellObject* cell = new CellObject(0, x, y, species);
+            cells[y * x_size + x] = cell;
+        }
+
+        minSpeciesDispersalSpeed =
+                (species->getDispersalSpeed() < minSpeciesDispersalSpeed) ?
+                        species->getDispersalSpeed() :
+                        minSpeciesDispersalSpeed;
+    }
+
+    Json::Value environment_json_array = p_root["environments"];
+    environments.reserve(environment_json_array.size());
+    for (unsigned index = 0; index < environment_json_array.size(); ++index) {
+        string environment_json_path = baseFolder
+                + string("/environment_curves/")
+                + environment_json_array[index].asString() + string(".json");
+        Json::Value environment_json = CommonFun::readJson(
+                environment_json_path.c_str());
+        EnvironmentalCurve* environment_item = new EnvironmentalCurve(
+                environment_json);
+        environments.push_back(environment_item);
+    }
+    delete mask_raster;
+}
+void Scenario::run(){
+    vector<string> env_output;
+    unsigned x = 99999, y = 99999;
+    for (unsigned year = 0; year <= totalYears; year +=
+            minSpeciesDispersalSpeed) {
+        printf("Current year:%d\n", year);
+        if (environment_maps.find(year) == environment_maps.end()) {
+            environment_maps[year] = getEnvironmenMap(year);
+        }
+        //save the env data
+        if (x == 99999) {
+            int value;
+            environment_maps[year][0]->getFirstValues(&x, &y, &value);
+        }
+        char line[20];
+        sprintf(line, "%u,%u,%u,%d", year, x, y,
+                environment_maps[year][0]->readByXY(x, y));
+        vector<SparseMap*> current_environments = environment_maps[year];
+
+        env_output.push_back(line);
+        boost::unordered_map<unsigned, CellObject*> new_cells;
+        for (auto cell_it : cells){
+            boost::unordered_map<unsigned, CellObject*> new_subcells = cell_it.second->run(year, current_environments, x_size, y_size);
+            for (auto it : new_subcells){
+                if (new_cells.find(it.first)==new_cells.end()){
+                    new_cells[it.first] = it.second;
+                }else{
+                    new_cells[it.first]->merge(it.second);
+                }
+            }
+        }
+        //need to remove cells
+
+        cells = new_cells;
+
+        //generate the distribution map for every species
+        boost::unordered_map<unsigned, SparseMap*> distribution_maps;
+        for (auto cell_it : cells){
+            for (auto io_it : cell_it.second->getIndividualOrganisms()){
+                if (distribution_maps.find(io_it.second->getSpeciesID())==distribution_maps.end()){
+                    distribution_maps[io_it.second->getSpeciesID()] = new SparseMap(x_size, y_size);
+                }
+                distribution_maps[io_it.second->getSpeciesID()]->setValue(cell_it.second->getX(), cell_it.second->getY(), 1);
+            }
+        }
+        for (auto it : distribution_maps) {
+
+//            RasterController::writeGeoTIFF(tiffName, p_distribution->getXSize(),
+//                    p_distribution->getYSize(), p_geo_trans, values,
+//                    (double) NODATA, GDT_Int32);
+        }
+    }
+}
+Scenario::~Scenario() {
+    // TODO Auto-generated destructor stub
+}
+vector<SparseMap*> Scenario::getEnvironmenMap(unsigned p_year) {
+    vector<SparseMap*> result;
+    for (unsigned i = 0; i < environments.size(); ++i) {
+        result.push_back(environments[i]->getValues(p_year));
+    }
+    return result;
+}
