@@ -16,6 +16,7 @@
 #include "SparseMap.h"
 #include "EnvironmentalCurve.h"
 #include "CellObject.h"
+#include "../Universal/log.hpp"
 
 class Scenario {
 private:
@@ -31,6 +32,7 @@ private:
     unsigned xSize, ySize;
     void cleanSpecies();
     void cleanEnvironments();
+    void createSpeciesFolder(unsigned p_species_id);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder, std::string p_target);
     virtual ~Scenario();

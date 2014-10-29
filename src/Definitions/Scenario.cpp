@@ -7,9 +7,11 @@
 
 #include "Scenario.h"
 
-Scenario::Scenario(Json::Value p_root, std::string p_base_folder, std::string p_target) {
+Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
+        std::string p_target) {
     baseFolder = p_base_folder;
     target = p_target;
+    CommonFun::createFolder(target.c_str());
     totalYears = p_root.get("total_years", 500000).asInt();
     RasterObject* mask_raster = new RasterObject(
             p_root.get("mask", "").asCString());
@@ -23,15 +25,18 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder, std::string p_
     Json::Value species_json_array = p_root["species"];
 
     for (unsigned index = 0; index < species_json_array.size(); ++index) {
-        std::string species_json_path = baseFolder + std::string("/niche_definations/")
+        std::string species_json_path = baseFolder
+                + std::string("/niche_definations/")
                 + species_json_array[index].asString() + std::string(".json");
         Json::Value species_json = CommonFun::readJson(
                 species_json_path.c_str());
         SpeciesObject* species = new SpeciesObject(species_json);
+        createSpeciesFolder(species->getID());
         std::vector<GeoLocation*> seeds = species->getSeeds();
         for (unsigned i = 0; i < seeds.size(); ++i) {
             unsigned x, y;
-            CommonFun::LL2XY(geoTrans, seeds[i]->getLongitude(), seeds[i]->getLatitude(), &x, &y);
+            CommonFun::LL2XY(geoTrans, seeds[i]->getLongitude(),
+                    seeds[i]->getLatitude(), &x, &y);
             IndividualOrganism* individualOrganism = new IndividualOrganism(0,
                     species, NULL);
             if (cells.find(y * xSize + x) == cells.end()) {
@@ -51,7 +56,8 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder, std::string p_
     for (unsigned index = 0; index < environment_json_array.size(); ++index) {
         std::string environment_json_path = baseFolder
                 + std::string("/environment_curves/")
-                + environment_json_array[index].asString() + std::string(".json");
+                + environment_json_array[index].asString()
+                + std::string(".json");
         Json::Value environment_json = CommonFun::readJson(
                 environment_json_path.c_str());
         EnvironmentalCurve* environment_item = new EnvironmentalCurve(
@@ -59,6 +65,16 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder, std::string p_
         environments.push_back(environment_item);
     }
     delete mask_raster;
+}
+void Scenario::createSpeciesFolder(unsigned p_species_id) {
+    char speciesFolder[target.length() + 6];
+    sprintf(speciesFolder, "%s/%s", target.c_str(),
+            CommonFun::fixedLength(p_species_id, 5).c_str());
+    CommonFun::createFolder(speciesFolder);
+
+    char dispersalFolder[target.length() + 6 + 10];
+    sprintf(dispersalFolder, "%s/dispersal", speciesFolder);
+    CommonFun::createFolder(dispersalFolder);
 }
 void Scenario::run() {
     std::vector<std::string> env_output;
@@ -104,9 +120,13 @@ void Scenario::run() {
         }
 
         //remove the unsuitable organisms
+        LOG(INFO)<<"begin to remove unsuitable organisms";
         for (auto cell_it : cells) {
             cell_it.second->removeUnsuitable(current_environments);
         }
+        LOG(INFO)<<"end to remove unsuitable organisms";
+
+        LOG(INFO)<<"begin to generate distribution maps";
         //generate the distribution map for every species
         boost::unordered_map<unsigned, SparseMap*> distribution_maps;
         for (auto cell_it : cells) {
@@ -117,7 +137,7 @@ void Scenario::run() {
                             xSize, ySize);
                     distribution_maps[io_it->getSpeciesID()]->setValue(
                             cell_it.second->getX(), cell_it.second->getY(), 1);
-                }else{
+                } else {
                     distribution_maps[io_it->getSpeciesID()]->setValue(
                             cell_it.second->getX(), cell_it.second->getY(),
                             distribution_maps[io_it->getSpeciesID()]->readByXY(
@@ -127,18 +147,20 @@ void Scenario::run() {
 
             }
         }
+        LOG(INFO)<<"end to generate distribution maps";
         for (auto it : distribution_maps) {
-            char tiffName [target.length() + 24];
-            sprintf(tiffName, "%s/%s/dispersal/%s", target.c_str(), CommonFun::fixedLength(it.first, 5).c_str(), CommonFun::fixedLength(year, 7).c_str());
-            RasterController::writeGeoTIFF(tiffName, xSize,
-                    ySize, geoTrans, it.second->toArray(),
-                    (double) NODATA, GDT_Int32);
+            char tiffName[target.length() + 28];
+            sprintf(tiffName, "%s/%s/dispersal/%s.tif", target.c_str(),
+                    CommonFun::fixedLength(it.first, 5).c_str(),
+                    CommonFun::fixedLength(year, 7).c_str());
+            RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
+                    it.second->toArray(), (double) NODATA, GDT_Int32);
         }
-        char filepath[target.length() + 15];
-        sprintf(filepath, "%s/env_curve.csv", target.c_str());
-        CommonFun::writeFile(env_output, filepath);
-        env_output.clear();
     }
+    char filepath[target.length() + 15];
+    sprintf(filepath, "%s/env_curve.csv", target.c_str());
+    CommonFun::writeFile(env_output, filepath);
+    env_output.clear();
 }
 Scenario::~Scenario() {
     // TODO Auto-generated destructor stub

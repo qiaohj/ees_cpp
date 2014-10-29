@@ -11,6 +11,7 @@
 #include <boost/unordered_map.hpp>
 #include "IndividualOrganism.h"
 #include "CoodLocation.h"
+#include "../Universal/log.hpp"
 
 class CellObject {
 private:

@@ -107,8 +107,9 @@ void CellObject::merge(CellObject* p_cell) {
         addIndividualOrganism(new_individualOrganisms[i]);
     }
 }
-void CellObject::removeUnsuitable(std::vector<SparseMap*> p_current_environments) {
-    for (unsigned i = individualOrganisms.size() - 1; i >= 0; --i) {
+void CellObject::removeUnsuitable(
+        std::vector<SparseMap*> p_current_environments) {
+    for (int i = individualOrganisms.size() - 1; i >= 0; --i) {
         if (!individualOrganisms[i]->isSuitable(x, y, p_current_environments)) {
             individualOrganisms.erase(individualOrganisms.begin() + i);
         }

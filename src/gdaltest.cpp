@@ -105,11 +105,11 @@ int main(int argc, const char* argv[]) {
 	 * Scenario Json Test
 	 * */
 
-//    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
-//	Json::Value root_Scenario = CommonFun::readJson(path);
-//	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
-//	scenario->run();
-//	delete scenario;
+    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
+	Json::Value root_Scenario = CommonFun::readJson(path);
+	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
+	scenario->run();
+	delete scenario;
     for( short i = 0 ; i < 3 ; i++ )
     {
         LOG(INFO) << "i value " << i;
