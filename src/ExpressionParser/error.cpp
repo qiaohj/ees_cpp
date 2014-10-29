@@ -25,9 +25,6 @@
 //#include "constants.h"
 #include "error.h"
 
-using namespace std;
-
-
 /**
  * Create an error with given message id and fill in given string in message
  * @PARAM rpw   row where the error occured (0 to neglect)

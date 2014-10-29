@@ -21,25 +21,25 @@
 #include <boost/filesystem.hpp>
 
 #include "../JsonPaster/include/json/json.h"
+#include "const.h"
 
-using namespace std;
 class CommonFun {
 public:
-    static string readFile(const char* path);
-    static string removeSuffix(const string& path, const string& extension);
+    static std::string readFile(const char* path);
+    static std::string removeSuffix(const std::string& path, const std::string& extension);
     static Json::Value readJson(const char* path);
-    static void writeFile(const string s, const char* path);
+    static void writeFile(const std::string s, const char* path);
     static void createFolder(const char* path);
-    static void writeFile(const vector<string> s, const char* path);
+    static void writeFile(const std::vector<std::string> s, const char* path);
     static void LL2XY(const double* adfGeoTransform, const double longitude,
             const double latitude, unsigned* x, unsigned* y);
     static void XY2LL(const double* adfGeoTransform, const unsigned x,
             const unsigned y, double* longitude, double* latitude);
-    static string fixedLength(int value, int digits);
+    static std::string fixedLength(int value, int digits);
     template<typename T> static double EuclideanDistance(T x1, T y1, T x2,
             T y2);
     template<typename T> static bool AlmostEqualRelative(T a, T b);
-    template<typename T> static string to_str(const T& t);
+    template<typename T> static std::string to_str(const T& t);
 };
 template<typename T> double CommonFun::EuclideanDistance(T x1, T y1, T x2,
         T y2) {
@@ -54,8 +54,8 @@ template<typename T> double CommonFun::EuclideanDistance(T x1, T y1, T x2,
 template<typename T> bool CommonFun::AlmostEqualRelative(T a, T b) {
     return fabs(a - b) < FLT_EPSILON;
 }
-template<typename T> string CommonFun::to_str(const T& t) {
-    ostringstream os;
+template<typename T> std::string CommonFun::to_str(const T& t) {
+    std::ostringstream os;
     os << t;
     return os.str();
 }

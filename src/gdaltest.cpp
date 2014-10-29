@@ -5,8 +5,6 @@
  *  Created on: Oct 14, 2014
  *      Author: qiaohj
  */
-using namespace std;
-
 
 #include <gdal_priv.h>
 #include <stdio.h>
@@ -20,7 +18,7 @@ using namespace std;
 
 #include "ExpressionParser/parser.h"
 #include "Definitions/Scenario.h"
-
+#include "Universal/log.hpp"
 
 
 //void binary_mask(){
@@ -80,6 +78,9 @@ using namespace std;
 //            env_layer->getXSize(), env_layer->getYSize(), env_layer->getGeoTransform(), array, (double)NODATA, GDT_Int32);
 //    delete[] array;
 //}
+
+_INITIALIZE_EASYLOGGINGPP
+
 int main(int argc, const char* argv[]) {
     //binary_mask();
 //    cutEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio1.origin.tif",
@@ -103,11 +104,16 @@ int main(int argc, const char* argv[]) {
 	/*
 	 * Scenario Json Test
 	 * */
+
 //    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 //	Json::Value root_Scenario = CommonFun::readJson(path);
 //	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
 //	scenario->run();
 //	delete scenario;
+    for( short i = 0 ; i < 3 ; i++ )
+    {
+        LOG(INFO) << "i value " << i;
+    }
 	printf("done!");
 	return EXIT_SUCCESS;
 }

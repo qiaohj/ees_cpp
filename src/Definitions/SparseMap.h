@@ -13,10 +13,7 @@
 #include <boost/numeric/ublas/matrix_sparse.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "../RasterIO/RasterObject.h"
-#include "CellObject.h"
 #include "../Universal/const.h"
-
-using namespace std;
 
 typedef boost::numeric::ublas::compressed_matrix<int> mapvalue;
 
@@ -36,7 +33,6 @@ public:
     unsigned getYSize();
     void setValue(unsigned p_x, unsigned p_y, int p_value);
     void getFirstValues(unsigned* x, unsigned* y, int* v);
-    vector<CellObject*> getValues();
     int* toArray();
 };
 

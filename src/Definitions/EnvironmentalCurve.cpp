@@ -51,7 +51,7 @@ float EnvironmentalCurve::getCurveValue(unsigned p_year){
         curve_value = prs.parse(burn_in_curve.c_str());
     }else{
         unsigned x_pos = ((p_year-burnInYears) % cycleYears);
-        string curve_func = "";
+        std::string curve_func = "";
         float x_value = 0;
 
         if (x_pos<=part_1_years){

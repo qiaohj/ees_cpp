@@ -7,21 +7,20 @@
 
 #include "CellObject.h"
 
-CellObject::CellObject(unsigned p_year, unsigned p_x, unsigned p_y, SpeciesObject* p_species) {
+CellObject::CellObject(unsigned p_x, unsigned p_y) {
     x = p_x;
     y = p_y;
-    IndividualOrganism* individualOrganism = new IndividualOrganism(p_year, 1, p_species);
-    individualOrganisms[individualOrganism->getSpeciesID()] = individualOrganism;
 }
 boost::unordered_map<unsigned, CellObject*> CellObject::run(unsigned p_year,
-        vector<SparseMap*> p_current_environments, unsigned p_xsize,
+        std::vector<SparseMap*> p_current_environments, unsigned p_xsize,
         unsigned p_ysize) {
+    //create a new group to save the new cells occupied by the new organisms move from this cell
     boost::unordered_map<unsigned, CellObject*> new_cells;
     for (unsigned i = 0; i < individualOrganisms.size(); ++i) {
         IndividualOrganism* individualOrganism = individualOrganisms[i];
         //if current year no smaller than individual organism's next run year, then move this organism.
         if (p_year >= individualOrganism->getNextRunYear()) {
-            vector<unsigned*> next_cells;
+            std::vector<CoodLocation*> next_cells;
             switch (individualOrganism->getDispersalMethod()) {
             //only the new individual organisms can move
             case 1:
@@ -29,39 +28,41 @@ boost::unordered_map<unsigned, CellObject*> CellObject::run(unsigned p_year,
                 break;
                 //all the individual organisms can move
             case 2:
-                next_cells = getDispersalMap_2(individualOrganism, p_xsize, p_ysize, p_current_environments);
+                next_cells = getDispersalMap_2(individualOrganism, p_xsize,
+                        p_ysize, p_current_environments);
                 break;
             default:
                 ;
             }
-            for (unsigned i=0; i<next_cells.size(); ++i){
-                if (new_cells.find(next_cells[i][1] * p_xsize + next_cells[i][0])==new_cells.end()){
-                    CellObject* new_cell = new CellObject(p_year, next_cells[i][0], next_cells[i][1], individualOrganism->getSpecies());
-                    new_cells[next_cells[i][1] * p_xsize + next_cells[i][0]] = new_cell;
-                }else{
-                    IndividualOrganism* new_individualOrganism = new IndividualOrganism(p_year, 1, individualOrganism->getSpecies());
-                    new_individualOrganism->addNextRunYear();
-                    new_cells[next_cells[i][1] * p_xsize + next_cells[i][0]]->addIndividualOrganism(new_individualOrganism);
+            for (auto it : next_cells) {
+                unsigned index = it->getY() * p_xsize + it->getX();
+                //create a new organism
+                IndividualOrganism* new_individualOrganism =
+                        new IndividualOrganism(p_year,
+                                individualOrganism->getSpecies(),
+                                individualOrganism);
+                index = it->getY() * p_xsize + it->getX();
+                if (new_cells.find(index) == new_cells.end()) {
+                    CellObject* new_cell = new CellObject(it->getX(), it->getY());
+                    new_cells[index] = new_cell;
                 }
-
+                new_cells[index]->addIndividualOrganism(
+                        new_individualOrganism);
             }
+            individualOrganism->addNextRunYear();
         }
     }
     return new_cells;
 }
-void CellObject::addIndividualOrganism(IndividualOrganism* individualOrganism){
-    if (individualOrganisms.find(individualOrganism->getSpeciesID())==individualOrganisms.end()){
-        individualOrganisms[individualOrganism->getSpeciesID()] = individualOrganism;
-    }else{
-        individualOrganisms[individualOrganism->getSpeciesID()]->addCount();
-        individualOrganisms[individualOrganism->getSpeciesID()]->setNextRunYear(individualOrganism->getNextRunYear());
-    }
+void CellObject::addIndividualOrganism(IndividualOrganism* individualOrganism) {
+    individualOrganisms.push_back(individualOrganism);
 }
 
-vector<unsigned*> CellObject::getDispersalMap_2(
+std::vector<CoodLocation*> CellObject::getDispersalMap_2(
         IndividualOrganism* individualOrganism, unsigned p_xsize,
-        unsigned p_ysize, vector<SparseMap*> p_current_environments) {
-    vector<unsigned*> new_cells;
+        unsigned p_ysize, std::vector<SparseMap*> p_current_environments) {
+    std::vector<CoodLocation*> new_cells;
+
     //unfinished part
 
     //get all the cells whose E-distances are not longer than dispersal ability.
@@ -81,12 +82,13 @@ vector<unsigned*> CellObject::getDispersalMap_2(
 
                 double distance = CommonFun::EuclideanDistance((int) i_x,
                         (int) i_y, (int) (x), (int) (y));
-                //                printf("Distance:%f\n", distance);
+                //printf("Distance:%f\n", distance);
                 if ((distance < individualOrganism->getDispersalAbility())
                         || (CommonFun::AlmostEqualRelative(distance,
-                                individualOrganism->getDispersalAbility()))) {
-                    if (individualOrganism->isSuitable(i_x, i_y, p_current_environments)){
-                        unsigned v[2] = { i_x, i_y };
+                                (double) individualOrganism->getDispersalAbility()))) {
+                    if (individualOrganism->isSuitable(i_x, i_y,
+                            p_current_environments)) {
+                        CoodLocation* v = new CoodLocation( i_x, i_y );
                         new_cells.push_back(v);
                     }
                 }
@@ -95,19 +97,27 @@ vector<unsigned*> CellObject::getDispersalMap_2(
     }
     return new_cells;
 }
-boost::unordered_map<unsigned, IndividualOrganism*> CellObject::getIndividualOrganisms(){
+std::vector<IndividualOrganism*> CellObject::getIndividualOrganisms() {
     return individualOrganisms;
 }
-void CellObject::merge(CellObject* p_cell){
-    boost::unordered_map<unsigned, IndividualOrganism*> new_individualOrganisms = p_cell->getIndividualOrganisms();
-    for (auto it : new_individualOrganisms){
-        addIndividualOrganism(it.second);
+void CellObject::merge(CellObject* p_cell) {
+    std::vector<IndividualOrganism*> new_individualOrganisms =
+            p_cell->getIndividualOrganisms();
+    for (unsigned i = 0; i < new_individualOrganisms.size(); ++i) {
+        addIndividualOrganism(new_individualOrganisms[i]);
     }
 }
-CellObject::unsigned getX(){
+void CellObject::removeUnsuitable(std::vector<SparseMap*> p_current_environments) {
+    for (unsigned i = individualOrganisms.size() - 1; i >= 0; --i) {
+        if (!individualOrganisms[i]->isSuitable(x, y, p_current_environments)) {
+            individualOrganisms.erase(individualOrganisms.begin() + i);
+        }
+    }
+}
+unsigned CellObject::getX() {
     return x;
 }
-CellObject::unsigned getY(){
+unsigned CellObject::getY() {
     return y;
 }
 CellObject::~CellObject() {

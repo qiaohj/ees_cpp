@@ -16,23 +16,20 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
     speciationYears = p_root.get("speciation_years", 10000).asInt();
 
     Json::Value niche_breadth_array = p_root["niche_breadth"];
-//    nicheBreadth.reserve(niche_breadth_array.size());
     for (unsigned index = 0; index < niche_breadth_array.size(); ++index) {
         Json::Value niche_breadth_json = niche_breadth_array[index];
-        float* niche_breadth = new float[2];
-        for (unsigned i = 0; i < niche_breadth_json.size(); ++i) {
-            niche_breadth[i] = niche_breadth_json[i].asFloat();
-        }
+        NicheBreadth* niche_breadth = new NicheBreadth(
+                niche_breadth_json[0].asFloat(),
+                niche_breadth_json[1].asFloat());
         nicheBreadth.push_back(niche_breadth);
     }
 
     Json::Value initial_seeds_array = p_root["initial_seeds"];
     for (unsigned index = 0; index < initial_seeds_array.size(); ++index) {
         Json::Value initial_seeds_json = initial_seeds_array[index];
-        float* initial_seed = new float[2];
-        for (unsigned i = 0; i < initial_seeds_json.size(); ++i) {
-            initial_seed[i] = initial_seeds_json[i].asFloat();
-        }
+        GeoLocation* initial_seed = new GeoLocation(
+                initial_seeds_json[0].asDouble(),
+                initial_seeds_json[1].asDouble());
         seeds.push_back(initial_seed);
     }
 
@@ -48,18 +45,18 @@ unsigned SpeciesObject::getDispersalAbility() {
 unsigned SpeciesObject::getDispersalSpeed() {
     return dispersalSpeed;
 }
-vector<float*> SpeciesObject::getSeeds(){
+std::vector<GeoLocation*> SpeciesObject::getSeeds() {
     return seeds;
 }
-unsigned SpeciesObject::getID(){
+unsigned SpeciesObject::getID() {
     return id;
 }
-int SpeciesObject::getDispersalMethod(){
-    return dispersalMethod();
+int SpeciesObject::getDispersalMethod() {
+    return dispersalMethod;
 }
-int SpeciesObject::getNumOfPath(){
+int SpeciesObject::getNumOfPath() {
     return numberOfPath;
 }
-vector<float*> SpeciesObject::getNicheBreadth(){
+std::vector<NicheBreadth*> SpeciesObject::getNicheBreadth() {
     return nicheBreadth;
 }

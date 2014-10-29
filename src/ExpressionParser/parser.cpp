@@ -29,11 +29,6 @@
 // declarations
 #include "parser.h"
 
-
-using namespace std;
-
-
-
 /*
  * constructor.
  * Initializes all data with zeros and empty strings

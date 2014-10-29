@@ -7,14 +7,14 @@
 
 #include "CommonFun.h"
 
-string CommonFun::readFile(const char* path) {
-    FILE* file = fopen(path, "rb");
+std::string CommonFun::readFile(const char* path) {
+    std::FILE* file = fopen(path, "rb");
     if (!file)
-        return string("");
-    fseek(file, 0, SEEK_END);
+        return std::string("");
+    std::fseek(file, 0, SEEK_END);
     long size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    string text;
+    std::fseek(file, 0, SEEK_SET);
+    std::string text;
     char* buffer = new char[size + 1];
     buffer[size] = 0;
     if (fread(buffer, 1, size, file) == (unsigned long) size)
@@ -28,7 +28,7 @@ Json::Value CommonFun::readJson(const char* path) {
     Json::Features features;
     Json::Reader reader(features);
     Json::Value root;
-    string input = readFile(path);
+    std::string input = readFile(path);
     bool parsingSuccessful = reader.parse(input, root);
     if (parsingSuccessful) {
         return root;
@@ -36,15 +36,15 @@ Json::Value CommonFun::readJson(const char* path) {
         return root;
     }
 }
-string CommonFun::removeSuffix(const string& path, const string& extension) {
+std::string CommonFun::removeSuffix(const std::string& path, const std::string& extension) {
     if (extension.length() >= path.length())
-        return string("");
-    string suffix = path.substr(path.length() - extension.length());
+        return std::string("");
+    std::string suffix = path.substr(path.length() - extension.length());
     if (suffix != extension)
-        return string("");
+        return std::string("");
     return path.substr(0, path.length() - extension.length());
 }
-void CommonFun::writeFile(const string s, const char* path) {
+void CommonFun::writeFile(const std::string s, const char* path) {
     std::ofstream outfile(path);
     if (!outfile.is_open()) {
         std::cerr << "Couldn't open " << path << std::endl;
@@ -52,8 +52,8 @@ void CommonFun::writeFile(const string s, const char* path) {
     outfile << s << std::endl;
     outfile.close();
 }
-void CommonFun::writeFile(const vector<string> s, const char* path) {
-    string joined = boost::algorithm::join(s, "\n");
+void CommonFun::writeFile(const std::vector<std::string> s, const char* path) {
+    std::string joined = boost::algorithm::join(s, "\n");
     writeFile(joined, path);
 }
 void CommonFun::XY2LL(const double* adfGeoTransform, const unsigned x,
@@ -75,12 +75,12 @@ void CommonFun::createFolder(const char* path) {
     }
 }
 
-string CommonFun::fixedLength(int value, int digits = 3) {
+std::string CommonFun::fixedLength(int value, int digits = 3) {
     unsigned int uvalue = value;
     if (value < 0) {
         uvalue = -uvalue;
     }
-    string result;
+    std::string result;
     while (digits-- > 0) {
         result += ('0' + uvalue % 10);
         uvalue /= 10;

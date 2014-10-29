@@ -9,17 +9,18 @@
 #define DEFINITIONS_INDIVIDUALORGANISM_H_
 
 #include "SpeciesObject.h"
+#include "SparseMap.h"
 
 class IndividualOrganism {
 private:
     SpeciesObject* species;
     unsigned year;
-    unsigned count;
     unsigned nextRunYear;
+    IndividualOrganism* parent;
 
 public:
-    IndividualOrganism(unsigned p_year, unsigned p_count,
-            SpeciesObject* p_species);
+    IndividualOrganism(unsigned p_year,
+            SpeciesObject* p_species, IndividualOrganism* p_parent);
     virtual ~IndividualOrganism();
     unsigned getNextRunYear();
     void addNextRunYear();
@@ -28,10 +29,11 @@ public:
     int getNumOfPath();
     unsigned getDispersalAbility();
     bool isSuitable(unsigned p_x, unsigned p_y,
-            vector<SparseMap*> p_current_environments);
+            std::vector<SparseMap*> p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
-    void addCount();
+    void setParent(IndividualOrganism* p_parent);
+    IndividualOrganism* getParent();
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

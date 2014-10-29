@@ -12,32 +12,31 @@
 #include "../Universal/CommonFun.h"
 #include "../JsonPaster/include/json/json.h"
 #include "../Universal/CommonType.h"
+#include "../RasterIO/RasterController.h"
 #include "SparseMap.h"
 #include "EnvironmentalCurve.h"
 #include "CellObject.h"
 
-using namespace std;
-
 class Scenario {
 private:
     boost::unordered_map<unsigned, CellObject*> cells;
-    vector<EnvironmentalCurve*> environments;
+    std::vector<EnvironmentalCurve*> environments;
     unsigned totalYears;
     unsigned minSpeciesDispersalSpeed;
     SparseMap* mask;
     hashmap_multiply environment_maps;
-    string baseFolder;
-    string target;
+    std::string baseFolder;
+    std::string target;
     double* geoTrans;
-    unsigned x_size, y_size;
+    unsigned xSize, ySize;
     void cleanSpecies();
     void cleanEnvironments();
 public:
-    Scenario(Json::Value p_root, string p_base_folder, string p_target);
+    Scenario(Json::Value p_root, std::string p_base_folder, std::string p_target);
     virtual ~Scenario();
     void run();
     float* getEnvironmentValue(unsigned p_year, double p_longitude, double p_latitude);
-    vector<SparseMap*> getEnvironmenMap(unsigned p_year);
+    std::vector<SparseMap*> getEnvironmenMap(unsigned p_year);
 };
 
 #endif /* DEFINITIONS_SCENARIO_H_ */

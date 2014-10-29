@@ -13,7 +13,6 @@
 #include <gdal_priv.h>
 #include "../Universal/CommonFun.h"
 
-using namespace std;
 class RasterObject{
 private:
     const char* rasterName;
@@ -27,7 +26,7 @@ private:
 public:
 	RasterObject(char const* rasterName);
 	~RasterObject();
-	string getRasterName();
+	std::string getRasterName();
 	GDALDataset* getGDALDataset();
 	unsigned getXSize();
 	unsigned getYSize();

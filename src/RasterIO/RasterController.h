@@ -13,7 +13,6 @@
 #include <gdal_priv.h>
 
 
-using namespace std;
 class RasterController {
 private:
 public:

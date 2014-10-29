@@ -7,14 +7,23 @@
 
 #include "IndividualOrganism.h"
 
-IndividualOrganism::IndividualOrganism(unsigned p_year, unsigned p_count,
-        SpeciesObject* p_species) {
+IndividualOrganism::IndividualOrganism(unsigned p_year,
+        SpeciesObject* p_species, IndividualOrganism* p_parent) {
     species = p_species;
     year = p_year;
-    count = p_count;
-    nextRunYear = 0;
+    if (p_parent==NULL){
+        nextRunYear = 0;
+    }else{
+        nextRunYear = p_parent->getNextRunYear() + p_species->getDispersalSpeed();
+    }
+    parent = p_parent;
 }
-
+void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
+    parent = p_parent;
+}
+IndividualOrganism* IndividualOrganism::getParent() {
+    return parent;
+}
 IndividualOrganism::~IndividualOrganism() {
     // TODO Auto-generated destructor stub
 }
@@ -24,7 +33,7 @@ unsigned IndividualOrganism::getNextRunYear() {
 void IndividualOrganism::addNextRunYear() {
     nextRunYear += species->getDispersalSpeed();
 }
-void IndividualOrganism::setNextRunYear(unsigned p_next_run_year){
+void IndividualOrganism::setNextRunYear(unsigned p_next_run_year) {
     nextRunYear = p_next_run_year;
 }
 int IndividualOrganism::getDispersalMethod() {
@@ -37,15 +46,15 @@ unsigned IndividualOrganism::getDispersalAbility() {
     return species->getDispersalAbility();
 }
 bool IndividualOrganism::isSuitable(unsigned p_x, unsigned p_y,
-        vector<SparseMap*> p_current_environments) {
-    vector<float*> nicheBreadth = species->getNicheBreadth();
+        std::vector<SparseMap*> p_current_environments) {
+    std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
         int env_value = p_current_environments[i]->readByXY(p_x, p_y);
         if (env_value == MATRIX_ZERO) {
             env_value = 0;
         }
-        if ((env_value > nicheBreadth[i][1])
-                || (env_value < nicheBreadth[i][0])) {
+        if ((env_value > nicheBreadth[i]->getMax())
+                || (env_value < nicheBreadth[i]->getMin())) {
             return false;
         }
     }
@@ -56,7 +65,4 @@ SpeciesObject* IndividualOrganism::getSpecies() {
 }
 unsigned IndividualOrganism::getSpeciesID() {
     return species->getID();
-}
-void IndividualOrganism::addCount() {
-    count++;
 }

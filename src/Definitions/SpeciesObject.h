@@ -11,18 +11,20 @@
 #include <string>
 #include <vector>
 #include "../JsonPaster/include/json/json.h"
+#include "SparseMap.h"
+#include "NicheBreadth.h"
+#include "GeoLocation.h"
 
-using namespace std;
 class SpeciesObject {
 private:
     unsigned id;
-    vector<float*> nicheBreadth;
+    std::vector<NicheBreadth*> nicheBreadth;
     unsigned dispersalAbility;
     unsigned dispersalSpeed;
     unsigned speciationYears;
     int dispersalMethod;
     int numberOfPath;
-    vector<float*> seeds;
+    std::vector<GeoLocation*> seeds;
 
 public:
     SpeciesObject(Json::Value p_root);
@@ -30,10 +32,10 @@ public:
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
     int getDispersalMethod();
-    vector<float*> getSeeds();
+    std::vector<GeoLocation*> getSeeds();
     unsigned getID();
     int getNumOfPath();
-    vector<float*> getNicheBreadth();
+    std::vector<NicheBreadth*> getNicheBreadth();
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

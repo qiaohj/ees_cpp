@@ -54,30 +54,20 @@ void SparseMap::getFirstValues(unsigned* x, unsigned* y, int* v){
         }
     }
 }
-//vector<CellObject*> SparseMap::getValues() {
-//    vector<CellObject*> cell_list;
-//    typedef boost::numeric::ublas::compressed_matrix<int>::iterator1 it1_t;
-//    typedef boost::numeric::ublas::compressed_matrix<int>::iterator2 it2_t;
-//    for (it1_t it1 = value->begin1(); it1 != value->end1(); it1++) {
-//        for (it2_t it2 = it1.begin(); it2 != it1.end(); it2++) {
-//            cell_list.push_back(
-//                    new CellObject(it2.index1(), it2.index2(), *it2));
-//        }
-//    }
-//    return cell_list;
-//}
-//int* SparseMap::toArray(){
-//    int* array = new int[xSize * ySize];
-//    for (unsigned i=0; i< (xSize * ySize); ++i){
-//        array[i] = (int)NODATA;
-//    }
-//    vector<CellObject*> cell_list = getValues();
-//    for (unsigned i=0; i<cell_list.size(); ++i){
-//        array[cell_list[i]->getY() * xSize + cell_list[i]->getX()] = cell_list[i]->getValue();
-//    }
-//    CellObject::clearCellObject(cell_list);
-//    return array;
-//}
+int* SparseMap::toArray(){
+    int* array = new int[xSize * ySize];
+    for (unsigned i=0; i< (xSize * ySize); ++i){
+        array[i] = (int)NODATA;
+    }
+    typedef boost::numeric::ublas::compressed_matrix<int>::iterator1 it1_t;
+    typedef boost::numeric::ublas::compressed_matrix<int>::iterator2 it2_t;
+    for (it1_t it1 = value->begin1(); it1 != value->end1(); it1++) {
+        for (it2_t it2 = it1.begin(); it2 != it1.end(); it2++) {
+            array[it2.index2() * xSize + it2.index1()] = *it2;
+        }
+    }
+    return array;
+}
 SparseMap::~SparseMap() {
     value->clear();
     delete value;

@@ -65,8 +65,6 @@
 #include "functions.h"
 #include "variablelist.h"
 
-using namespace std;
-
 class Parser
 {
     // public functions

@@ -30,10 +30,6 @@
 #include <cstdarg>
 #include <cstring>
 
-using namespace std;
-
-
-
 class Error {
     public:
         Error(const int row, const int col, const int id, ...);

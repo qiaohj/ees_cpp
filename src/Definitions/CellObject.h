@@ -10,29 +10,30 @@
 
 #include <boost/unordered_map.hpp>
 #include "IndividualOrganism.h"
+#include "CoodLocation.h"
 
 class CellObject {
 private:
     unsigned x;
     unsigned y;
-    boost::unordered_map<unsigned, IndividualOrganism*> individualOrganisms;
+    std::vector<IndividualOrganism*> individualOrganisms;
 
 
-    vector<unsigned*> getDispersalMap_2(IndividualOrganism* individualOrganism,
+    std::vector<CoodLocation*> getDispersalMap_2(IndividualOrganism* individualOrganism,
             unsigned p_xsize, unsigned p_ysize,
-            vector<SparseMap*> p_current_environments);
+            std::vector<SparseMap*> p_current_environments);
 public:
-    CellObject(unsigned p_year, unsigned p_x, unsigned p_y,
-            SpeciesObject* p_species);
+    CellObject(unsigned p_x, unsigned p_y);
     virtual ~CellObject();
     boost::unordered_map<unsigned, CellObject*> run(unsigned p_year,
-            vector<SparseMap*> p_current_environments, unsigned p_xsize,
+            std::vector<SparseMap*> p_current_environments, unsigned p_xsize,
             unsigned p_ysize);
     void addIndividualOrganism(IndividualOrganism* individualOrganism);
     void merge(CellObject* p_cell);
-    boost::unordered_map<unsigned, IndividualOrganism*> getIndividualOrganisms();
+    std::vector<IndividualOrganism*> getIndividualOrganisms();
     unsigned getX();
     unsigned getY();
+    void removeUnsuitable(std::vector<SparseMap*> p_current_environments);
 };
 
 #endif /* DEFINITIONS_CELLOBJECT_H_ */

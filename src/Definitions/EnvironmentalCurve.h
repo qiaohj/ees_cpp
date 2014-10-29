@@ -18,7 +18,6 @@
 #include "../Universal/CommonFun.h"
 #include "../Universal/const.h"
 
-using namespace std;
 class EnvironmentalCurve {
 private:
     RasterObject* glacial;
@@ -29,11 +28,11 @@ private:
     unsigned plateau_1_years;
     unsigned plateau_2_years;
     unsigned cycleYears;
-    string burn_in_curve;
-    string part_1_curve;
-    string part_2_curve;
-    string plateau_1_curve;
-    string plateau_2_curve;
+    std::string burn_in_curve;
+    std::string part_1_curve;
+    std::string part_2_curve;
+    std::string plateau_1_curve;
+    std::string plateau_2_curve;
     float noData;
 
 public:

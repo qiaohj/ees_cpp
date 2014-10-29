@@ -27,7 +27,7 @@ RasterObject::~RasterObject(){
     delete[] adfGeoTransform;
     delete[] valueArray;
 }
-string RasterObject::getRasterName(){
+std::string RasterObject::getRasterName(){
 	return rasterName;
 }
 GDALDataset* RasterObject::getGDALDataset(){

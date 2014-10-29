@@ -11,6 +11,6 @@
 
 const float MATRIX_ZERO = -9998;
 const float NODATA = -9999;
-
+const bool DEBUG = true;
 
 #endif /* UNIVERSAL_CONST_H_ */
