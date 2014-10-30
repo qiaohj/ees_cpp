@@ -36,6 +36,7 @@ public:
     unsigned getID();
     int getNumOfPath();
     std::vector<NicheBreadth*> getNicheBreadth();
+    unsigned getSpeciationYears();
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

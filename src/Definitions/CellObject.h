@@ -13,6 +13,7 @@
 #include "CoodLocation.h"
 #include "../Universal/log.hpp"
 
+
 class CellObject {
 private:
     unsigned x;
@@ -34,7 +35,8 @@ public:
     std::vector<IndividualOrganism*> getIndividualOrganisms();
     unsigned getX();
     unsigned getY();
-    void removeUnsuitable(std::vector<SparseMap*> p_current_environments);
+    void removeUnsuitable(std::vector<SparseMap*> p_current_environments, unsigned p_year);
+    void clear();
 };
 
 #endif /* DEFINITIONS_CELLOBJECT_H_ */

@@ -17,6 +17,7 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
         nextRunYear = p_parent->getNextRunYear() + p_species->getDispersalSpeed();
     }
     parent = p_parent;
+    active = true;
 }
 void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
     parent = p_parent;
@@ -25,7 +26,6 @@ IndividualOrganism* IndividualOrganism::getParent() {
     return parent;
 }
 IndividualOrganism::~IndividualOrganism() {
-    // TODO Auto-generated destructor stub
 }
 unsigned IndividualOrganism::getNextRunYear() {
     return nextRunYear;
@@ -45,11 +45,17 @@ int IndividualOrganism::getNumOfPath() {
 unsigned IndividualOrganism::getDispersalAbility() {
     return species->getDispersalAbility();
 }
+unsigned IndividualOrganism::getSpeciationYears(){
+    return species->getSpeciationYears();
+}
 bool IndividualOrganism::isSuitable(unsigned p_x, unsigned p_y,
         std::vector<SparseMap*> p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
         int env_value = p_current_environments[i]->readByXY(p_x, p_y);
+        if (env_value==0){
+            return false;
+        }
         if (env_value == MATRIX_ZERO) {
             env_value = 0;
         }
@@ -65,4 +71,13 @@ SpeciesObject* IndividualOrganism::getSpecies() {
 }
 unsigned IndividualOrganism::getSpeciesID() {
     return species->getID();
+}
+void IndividualOrganism::setActive(bool p_active){
+    active = p_active;
+}
+bool IndividualOrganism::isActive(){
+    return active;
+}
+unsigned IndividualOrganism::getYear(){
+    return year;
 }

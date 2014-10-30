@@ -40,7 +40,28 @@ public:
             T y2);
     template<typename T> static bool AlmostEqualRelative(T a, T b);
     template<typename T> static std::string to_str(const T& t);
+    template<typename T> static void clearVector(T v);
+    template<typename T> static void clearUnordered_map(T v);
 };
+template<typename T> void CommonFun::clearUnordered_map(T v) {
+    std::vector<unsigned> erased_key;
+    for (auto it : v) {
+        erased_key.push_back(it.first);
+    }
+    for (auto key : erased_key){
+        delete v[key];
+        v.erase(key);
+    }
+    v.clear();
+    erased_key.clear();
+}
+template<typename T> void CommonFun::clearVector(T v) {
+    for (typename T::iterator it = v.begin();
+            it != v.end(); ++it) {
+        delete *it;
+    }
+    T().swap(v);
+}
 template<typename T> double CommonFun::EuclideanDistance(T x1, T y1, T x2,
         T y2) {
     T x = x1 - x2;

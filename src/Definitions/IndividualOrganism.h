@@ -10,6 +10,7 @@
 
 #include "SpeciesObject.h"
 #include "SparseMap.h"
+#include "../Universal/log.hpp"
 
 class IndividualOrganism {
 private:
@@ -17,6 +18,7 @@ private:
     unsigned year;
     unsigned nextRunYear;
     IndividualOrganism* parent;
+    bool active;
 
 public:
     IndividualOrganism(unsigned p_year,
@@ -28,12 +30,16 @@ public:
     int getDispersalMethod();
     int getNumOfPath();
     unsigned getDispersalAbility();
+    unsigned getSpeciationYears();
     bool isSuitable(unsigned p_x, unsigned p_y,
             std::vector<SparseMap*> p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
     void setParent(IndividualOrganism* p_parent);
     IndividualOrganism* getParent();
+    void setActive(bool p_active);
+    bool isActive();
+    unsigned getYear();
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

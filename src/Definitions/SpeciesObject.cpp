@@ -36,7 +36,8 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
 }
 
 SpeciesObject::~SpeciesObject() {
-    // TODO Auto-generated destructor stub
+    CommonFun::clearVector(nicheBreadth);
+    CommonFun::clearVector(seeds);
 }
 
 unsigned SpeciesObject::getDispersalAbility() {
@@ -59,4 +60,7 @@ int SpeciesObject::getNumOfPath() {
 }
 std::vector<NicheBreadth*> SpeciesObject::getNicheBreadth() {
     return nicheBreadth;
+}
+unsigned SpeciesObject::getSpeciationYears(){
+    return speciationYears;
 }

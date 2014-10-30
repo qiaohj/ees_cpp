@@ -110,10 +110,7 @@ int main(int argc, const char* argv[]) {
 	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
 	scenario->run();
 	delete scenario;
-    for( short i = 0 ; i < 3 ; i++ )
-    {
-        LOG(INFO) << "i value " << i;
-    }
+
 	printf("done!");
 	return EXIT_SUCCESS;
 }

@@ -31,6 +31,7 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
         Json::Value species_json = CommonFun::readJson(
                 species_json_path.c_str());
         SpeciesObject* species = new SpeciesObject(species_json);
+        this->species.push_back(species);
         createSpeciesFolder(species->getID());
         std::vector<GeoLocation*> seeds = species->getSeeds();
         for (unsigned i = 0; i < seeds.size(); ++i) {
@@ -66,6 +67,7 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
     }
     delete mask_raster;
 }
+
 void Scenario::createSpeciesFolder(unsigned p_species_id) {
     char speciesFolder[target.length() + 6];
     sprintf(speciesFolder, "%s/%s", target.c_str(),
@@ -82,20 +84,40 @@ void Scenario::run() {
     for (unsigned year = 0; year <= totalYears; year +=
             minSpeciesDispersalSpeed) {
         printf("Current year:%d\n", year);
+        //LOG(INFO)<<"begin to loading environment information";
         if (environment_maps.find(year) == environment_maps.end()) {
             environment_maps[year] = getEnvironmenMap(year);
         }
+        //LOG(INFO)<<"end to loading environment information";
         //save the env data
         if (x == 99999) {
             int value;
             environment_maps[year][0]->getFirstValues(&x, &y, &value);
         }
-        char line[20];
-        sprintf(line, "%u,%u,%u,%d", year, x, y,
-                environment_maps[year][0]->readByXY(x, y));
+        char line[30];
+        int v = environment_maps[year][0]->readByXY(x, y);
+        //LOG(INFO)<<"sample value is "<<v;
+        sprintf(line, "%u,%u,%u,%d", year, x, y, v);
+
         std::vector<SparseMap*> current_environments = environment_maps[year];
 
         env_output.push_back(line);
+
+        LOG(INFO)<<"start to simulate cell by cell. No. of cells. " << cells.size();
+
+        unsigned activedOrg = 0;
+        unsigned totalOrg = 0;
+        for (auto cell_it : cells) {
+            totalOrg += cell_it.second->getIndividualOrganisms().size();
+            for (unsigned i = 0; i < cell_it.second->getIndividualOrganisms().size(); ++i){
+                IndividualOrganism* individualOrganism = cell_it.second->getIndividualOrganisms()[i];
+                if (individualOrganism->isActive()) {
+                    activedOrg++;
+                }
+            }
+        }
+        LOG(INFO)<<"No. Organism "<<activedOrg<<" / " << totalOrg;
+
         boost::unordered_map<unsigned, CellObject*> new_cells;
         for (auto cell_it : cells) {
             boost::unordered_map<unsigned, CellObject*> new_subcells =
@@ -108,7 +130,7 @@ void Scenario::run() {
                     new_cells[it.first]->merge(it.second);
                 }
             }
-
+            new_subcells.clear();
         }
 
         for (auto cell_it : new_cells) {
@@ -118,15 +140,28 @@ void Scenario::run() {
                 cells[cell_it.first]->merge(cell_it.second);
             }
         }
+        new_cells.clear();
+        //LOG(INFO)<<"end to simulate cell by cell";
 
         //remove the unsuitable organisms
-        LOG(INFO)<<"begin to remove unsuitable organisms";
+        //LOG(INFO)<<"begin to remove unsuitable organisms";
+        std::vector<unsigned> erased_key;
         for (auto cell_it : cells) {
-            cell_it.second->removeUnsuitable(current_environments);
+            cell_it.second->removeUnsuitable(current_environments, year);
+            if (cell_it.second->getIndividualOrganisms().size()==0){
+                erased_key.push_back(cell_it.first);
+            }
         }
-        LOG(INFO)<<"end to remove unsuitable organisms";
 
-        LOG(INFO)<<"begin to generate distribution maps";
+        for (auto key : erased_key){
+            delete cells[key];
+            cells.erase(key);
+        }
+        erased_key.clear();
+
+        //LOG(INFO)<<"end to remove unsuitable organisms";
+
+        //LOG(INFO)<<"begin to generate distribution maps";
         //generate the distribution map for every species
         boost::unordered_map<unsigned, SparseMap*> distribution_maps;
         for (auto cell_it : cells) {
@@ -147,23 +182,29 @@ void Scenario::run() {
 
             }
         }
-        LOG(INFO)<<"end to generate distribution maps";
+        //LOG(INFO)<<"end to generate distribution maps";
         for (auto it : distribution_maps) {
+            //save distribution
             char tiffName[target.length() + 28];
             sprintf(tiffName, "%s/%s/dispersal/%s.tif", target.c_str(),
                     CommonFun::fixedLength(it.first, 5).c_str(),
                     CommonFun::fixedLength(year, 7).c_str());
+            int* array = it.second->toArray();
             RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
-                    it.second->toArray(), (double) NODATA, GDT_Int32);
+                    array, (double) NODATA, GDT_Int32);
+            delete[] array;
+
+            //get the groups
+
         }
+        CommonFun::clearUnordered_map(distribution_maps);
+
+
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
     CommonFun::writeFile(env_output, filepath);
     env_output.clear();
-}
-Scenario::~Scenario() {
-    // TODO Auto-generated destructor stub
 }
 std::vector<SparseMap*> Scenario::getEnvironmenMap(unsigned p_year) {
     std::vector<SparseMap*> result;
@@ -172,3 +213,27 @@ std::vector<SparseMap*> Scenario::getEnvironmenMap(unsigned p_year) {
     }
     return result;
 }
+void Scenario::cleanSpecies() {
+    CommonFun::clearVector(species);
+}
+void Scenario::cleanCells() {
+    CommonFun::clearUnordered_map(cells);
+}
+void Scenario::cleanEnvironments() {
+    CommonFun::clearVector(environments);
+    for (hashmap_multiply::iterator it = environment_maps.begin();
+            it != environment_maps.end();) {
+        CommonFun::clearVector(it->second);
+        it = environment_maps.erase(it);
+    }
+    environment_maps.clear();
+}
+
+Scenario::~Scenario() {
+    delete[] geoTrans;
+    delete mask;
+    cleanEnvironments();
+    cleanCells();
+    cleanSpecies();
+}
+

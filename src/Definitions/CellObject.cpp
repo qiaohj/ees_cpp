@@ -18,6 +18,9 @@ boost::unordered_map<unsigned, CellObject*> CellObject::run(unsigned p_year,
     boost::unordered_map<unsigned, CellObject*> new_cells;
     for (unsigned i = 0; i < individualOrganisms.size(); ++i) {
         IndividualOrganism* individualOrganism = individualOrganisms[i];
+        if (!individualOrganism->isActive()) {
+            continue;
+        }
         //if current year no smaller than individual organism's next run year, then move this organism.
         if (p_year >= individualOrganism->getNextRunYear()) {
             std::vector<CoodLocation*> next_cells;
@@ -43,18 +46,27 @@ boost::unordered_map<unsigned, CellObject*> CellObject::run(unsigned p_year,
                                 individualOrganism);
                 index = it->getY() * p_xsize + it->getX();
                 if (new_cells.find(index) == new_cells.end()) {
-                    CellObject* new_cell = new CellObject(it->getX(), it->getY());
+                    CellObject* new_cell = new CellObject(it->getX(),
+                            it->getY());
                     new_cells[index] = new_cell;
                 }
-                new_cells[index]->addIndividualOrganism(
-                        new_individualOrganism);
+                new_cells[index]->addIndividualOrganism(new_individualOrganism);
             }
             individualOrganism->addNextRunYear();
+            CommonFun::clearVector(next_cells);
         }
     }
     return new_cells;
 }
 void CellObject::addIndividualOrganism(IndividualOrganism* individualOrganism) {
+    //if this cell was occupied by an organism with the same species, unactive the original organism;
+    for (auto it : individualOrganisms) {
+        if (it->isActive()) {
+            if (it->getSpeciesID() == individualOrganism->getSpeciesID()) {
+                it->setActive(false);
+            }
+        }
+    }
     individualOrganisms.push_back(individualOrganism);
 }
 
@@ -88,7 +100,7 @@ std::vector<CoodLocation*> CellObject::getDispersalMap_2(
                                 (double) individualOrganism->getDispersalAbility()))) {
                     if (individualOrganism->isSuitable(i_x, i_y,
                             p_current_environments)) {
-                        CoodLocation* v = new CoodLocation( i_x, i_y );
+                        CoodLocation* v = new CoodLocation(i_x, i_y);
                         new_cells.push_back(v);
                     }
                 }
@@ -106,12 +118,24 @@ void CellObject::merge(CellObject* p_cell) {
     for (unsigned i = 0; i < new_individualOrganisms.size(); ++i) {
         addIndividualOrganism(new_individualOrganisms[i]);
     }
+    p_cell->clear();
+    delete p_cell;
 }
 void CellObject::removeUnsuitable(
-        std::vector<SparseMap*> p_current_environments) {
+        std::vector<SparseMap*> p_current_environments, unsigned p_year) {
     for (int i = individualOrganisms.size() - 1; i >= 0; --i) {
         if (!individualOrganisms[i]->isSuitable(x, y, p_current_environments)) {
+            delete individualOrganisms[i];
             individualOrganisms.erase(individualOrganisms.begin() + i);
+
+        }else{
+            if ((!individualOrganisms[i]->isActive())
+                    && (individualOrganisms[i]->getYear()
+                            < (p_year - individualOrganisms[i]->getSpeciationYears()))) {
+                //LOG(INFO)<<"remove inactive organism";
+                delete individualOrganisms[i];
+                individualOrganisms.erase(individualOrganisms.begin() + i);
+            }
         }
     }
 }
@@ -121,7 +145,11 @@ unsigned CellObject::getX() {
 unsigned CellObject::getY() {
     return y;
 }
+void CellObject::clear() {
+    individualOrganisms.clear();
+    std::vector<IndividualOrganism*>().swap(individualOrganisms);
+}
 CellObject::~CellObject() {
-    // TODO Auto-generated destructor stub
+    CommonFun::clearVector(individualOrganisms);
 }
 

@@ -22,6 +22,7 @@ class Scenario {
 private:
     boost::unordered_map<unsigned, CellObject*> cells;
     std::vector<EnvironmentalCurve*> environments;
+    std::vector<SpeciesObject*> species;
     unsigned totalYears;
     unsigned minSpeciesDispersalSpeed;
     SparseMap* mask;
@@ -30,8 +31,9 @@ private:
     std::string target;
     double* geoTrans;
     unsigned xSize, ySize;
-    void cleanSpecies();
+    void cleanCells();
     void cleanEnvironments();
+    void cleanSpecies();
     void createSpeciesFolder(unsigned p_species_id);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder, std::string p_target);
