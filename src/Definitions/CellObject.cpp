@@ -128,11 +128,10 @@ void CellObject::removeUnsuitable(
             delete individualOrganisms[i];
             individualOrganisms.erase(individualOrganisms.begin() + i);
 
-        }else{
-            if ((!individualOrganisms[i]->isActive())
+        } else {
+            if ((p_year>=individualOrganisms[i]->getSpeciationYears())&&(!individualOrganisms[i]->isActive())
                     && (individualOrganisms[i]->getYear()
                             < (p_year - individualOrganisms[i]->getSpeciationYears()))) {
-                //LOG(INFO)<<"remove inactive organism";
                 delete individualOrganisms[i];
                 individualOrganisms.erase(individualOrganisms.begin() + i);
             }

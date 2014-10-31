@@ -116,6 +116,7 @@ void Scenario::run() {
                 }
             }
         }
+
         LOG(INFO)<<"No. Organism "<<activedOrg<<" / " << totalOrg;
 
         boost::unordered_map<unsigned, CellObject*> new_cells;
