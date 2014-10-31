@@ -8,7 +8,7 @@
 #include "IndividualOrganism.h"
 
 IndividualOrganism::IndividualOrganism(unsigned p_year,
-        SpeciesObject* p_species, IndividualOrganism* p_parent) {
+        SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned p_x, unsigned p_y) {
     species = p_species;
     year = p_year;
     if (p_parent==NULL){
@@ -17,7 +17,8 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
         nextRunYear = p_parent->getNextRunYear() + p_species->getDispersalSpeed();
     }
     parent = p_parent;
-    active = true;
+    x = p_x;
+    y = p_y;
 }
 void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
     parent = p_parent;
@@ -26,6 +27,7 @@ IndividualOrganism* IndividualOrganism::getParent() {
     return parent;
 }
 IndividualOrganism::~IndividualOrganism() {
+
 }
 unsigned IndividualOrganism::getNextRunYear() {
     return nextRunYear;
@@ -48,11 +50,10 @@ unsigned IndividualOrganism::getDispersalAbility() {
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();
 }
-bool IndividualOrganism::isSuitable(unsigned p_x, unsigned p_y,
-        std::vector<SparseMap*> p_current_environments) {
+bool IndividualOrganism::isSuitable(std::vector<SparseMap*> p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
-        int env_value = p_current_environments[i]->readByXY(p_x, p_y);
+        int env_value = p_current_environments[i]->readByXY(x, y);
         if (env_value==0){
             return false;
         }
@@ -72,12 +73,12 @@ SpeciesObject* IndividualOrganism::getSpecies() {
 unsigned IndividualOrganism::getSpeciesID() {
     return species->getID();
 }
-void IndividualOrganism::setActive(bool p_active){
-    active = p_active;
-}
-bool IndividualOrganism::isActive(){
-    return active;
-}
 unsigned IndividualOrganism::getYear(){
     return year;
+}
+unsigned IndividualOrganism::getX(){
+    return x;
+}
+unsigned IndividualOrganism::getY(){
+    return y;
 }

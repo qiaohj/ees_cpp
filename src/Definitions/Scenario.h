@@ -15,12 +15,13 @@
 #include "../RasterIO/RasterController.h"
 #include "SparseMap.h"
 #include "EnvironmentalCurve.h"
-#include "CellObject.h"
+#include "SpeciesObject.h"
+#include "IndividualOrganism.h"
+#include "CoodLocation.h"
 #include "../Universal/log.hpp"
 
 class Scenario {
 private:
-    boost::unordered_map<unsigned, CellObject*> cells;
     std::vector<EnvironmentalCurve*> environments;
     std::vector<SpeciesObject*> species;
     unsigned totalYears;
@@ -31,10 +32,14 @@ private:
     std::string target;
     double* geoTrans;
     unsigned xSize, ySize;
-    void cleanCells();
+    void cleanActivedIndividualOrganisms();
     void cleanEnvironments();
     void cleanSpecies();
     void createSpeciesFolder(unsigned p_species_id);
+    boost::unordered_map<unsigned, IndividualOrganism*> actived_individualOrganisms;
+    std::vector<IndividualOrganism*> all_individualOrganisms;
+    std::vector<CoodLocation*> getDispersalMap_2(
+            IndividualOrganism* individualOrganism, std::vector<SparseMap*> p_current_environments);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder, std::string p_target);
     virtual ~Scenario();

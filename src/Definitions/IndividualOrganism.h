@@ -14,15 +14,16 @@
 
 class IndividualOrganism {
 private:
+    unsigned x;
+    unsigned y;
     SpeciesObject* species;
     unsigned year;
     unsigned nextRunYear;
     IndividualOrganism* parent;
-    bool active;
 
 public:
-    IndividualOrganism(unsigned p_year,
-            SpeciesObject* p_species, IndividualOrganism* p_parent);
+    IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
+            IndividualOrganism* p_parent, unsigned p_x, unsigned p_y);
     virtual ~IndividualOrganism();
     unsigned getNextRunYear();
     void addNextRunYear();
@@ -31,15 +32,14 @@ public:
     int getNumOfPath();
     unsigned getDispersalAbility();
     unsigned getSpeciationYears();
-    bool isSuitable(unsigned p_x, unsigned p_y,
-            std::vector<SparseMap*> p_current_environments);
+    bool isSuitable(std::vector<SparseMap*> p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
     void setParent(IndividualOrganism* p_parent);
     IndividualOrganism* getParent();
-    void setActive(bool p_active);
-    bool isActive();
     unsigned getYear();
+    unsigned getX();
+    unsigned getY();
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

@@ -49,7 +49,9 @@ template<typename T> void CommonFun::clearUnordered_map(T v) {
         erased_key.push_back(it.first);
     }
     for (auto key : erased_key){
-        delete v[key];
+        if (v[key]!=NULL){
+            delete v[key];
+        }
         v.erase(key);
     }
     v.clear();
