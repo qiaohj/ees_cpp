@@ -20,6 +20,7 @@ private:
     unsigned year;
     unsigned nextRunYear;
     IndividualOrganism* parent;
+    std::vector<IndividualOrganism*> children;
 
 public:
     IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
@@ -40,6 +41,9 @@ public:
     unsigned getYear();
     unsigned getX();
     unsigned getY();
+    std::vector<IndividualOrganism*> getChildren();
+    void addChild(IndividualOrganism* individualOrganism);
+    void remove();
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

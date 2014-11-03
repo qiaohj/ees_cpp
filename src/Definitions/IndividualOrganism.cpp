@@ -19,6 +19,9 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
     parent = p_parent;
     x = p_x;
     y = p_y;
+    if (parent!=NULL){
+        parent->addChild(this);
+    }
 }
 void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
     parent = p_parent;
@@ -81,4 +84,15 @@ unsigned IndividualOrganism::getX(){
 }
 unsigned IndividualOrganism::getY(){
     return y;
+}
+std::vector<IndividualOrganism*> IndividualOrganism::getChildren(){
+    return children;
+}
+void IndividualOrganism::addChild(IndividualOrganism* individualOrganism){
+    children.push_back(individualOrganism);
+}
+void IndividualOrganism::remove(){
+    for (auto child : children){
+        child->setParent(NULL);
+    }
 }

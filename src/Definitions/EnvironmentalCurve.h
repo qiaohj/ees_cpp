@@ -38,12 +38,11 @@ private:
 public:
 	EnvironmentalCurve(Json::Value p_root);
 	virtual ~EnvironmentalCurve();
-    int getBurnInYears();
+    unsigned getBurnInYears();
     SparseMap* getValues(unsigned p_year);
 	float readByLL(float p_curve_value, unsigned p_year, double p_longitude, double p_latitude);
 	float readByXY(float p_curve_value, unsigned p_year, unsigned p_x, unsigned p_y);
 	float getCurveValue(unsigned p_year);
-
 };
 
 #endif /* EnvironmentalCurve_H */

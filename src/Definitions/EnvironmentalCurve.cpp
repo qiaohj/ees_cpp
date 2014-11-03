@@ -25,7 +25,7 @@ EnvironmentalCurve::EnvironmentalCurve(Json::Value p_root) {
     burnInYears = p_root.get("burn_in_years", 50000).asInt();
     cycleYears = part_1_years + part_2_years + plateau_1_years + plateau_2_years;
 }
-int EnvironmentalCurve::getBurnInYears(){
+unsigned EnvironmentalCurve::getBurnInYears(){
     return burnInYears;
 }
 SparseMap* EnvironmentalCurve::getValues(unsigned p_year){
