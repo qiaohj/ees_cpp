@@ -18,17 +18,13 @@ private:
     unsigned y;
     SpeciesObject* species;
     unsigned year;
-    unsigned nextRunYear;
     IndividualOrganism* parent;
-    std::vector<IndividualOrganism*> children;
 
 public:
     IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
             IndividualOrganism* p_parent, unsigned p_x, unsigned p_y);
     virtual ~IndividualOrganism();
     unsigned getNextRunYear();
-    void addNextRunYear();
-    void setNextRunYear(unsigned p_next_run_year);
     int getDispersalMethod();
     int getNumOfPath();
     unsigned getDispersalAbility();
@@ -41,9 +37,6 @@ public:
     unsigned getYear();
     unsigned getX();
     unsigned getY();
-    std::vector<IndividualOrganism*> getChildren();
-    void addChild(IndividualOrganism* individualOrganism);
-    void remove();
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

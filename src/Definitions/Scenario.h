@@ -19,8 +19,7 @@
 #include "IndividualOrganism.h"
 #include "CoodLocation.h"
 #include "../Universal/log.hpp"
-#include "sys/types.h";
-#include "sys/sysinfo.h"
+//#include "../Universal/MemoryUsage.hpp"
 
 class Scenario {
 private:
@@ -40,7 +39,7 @@ private:
     void createSpeciesFolder(unsigned p_species_id);
     unsigned burnInYear;
     boost::unordered_map<unsigned, boost::unordered_map<unsigned, IndividualOrganism*>* > actived_individualOrganisms;
-    boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > all_individualOrganisms;
+    boost::unordered_map<unsigned, std::vector<IndividualOrganism*>* > all_individualOrganisms;
     std::vector<CoodLocation*> getDispersalMap_2(
             IndividualOrganism* individualOrganism, std::vector<SparseMap*> p_current_environments);
 public:

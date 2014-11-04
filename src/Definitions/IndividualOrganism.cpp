@@ -11,17 +11,9 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
         SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned p_x, unsigned p_y) {
     species = p_species;
     year = p_year;
-    if (p_parent==NULL){
-        nextRunYear = 0;
-    }else{
-        nextRunYear = p_parent->getNextRunYear() + p_species->getDispersalSpeed();
-    }
     parent = p_parent;
     x = p_x;
     y = p_y;
-    if (parent!=NULL){
-        parent->addChild(this);
-    }
 }
 void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
     parent = p_parent;
@@ -33,13 +25,7 @@ IndividualOrganism::~IndividualOrganism() {
 
 }
 unsigned IndividualOrganism::getNextRunYear() {
-    return nextRunYear;
-}
-void IndividualOrganism::addNextRunYear() {
-    nextRunYear += species->getDispersalSpeed();
-}
-void IndividualOrganism::setNextRunYear(unsigned p_next_run_year) {
-    nextRunYear = p_next_run_year;
+    return year + species->getDispersalSpeed();
 }
 int IndividualOrganism::getDispersalMethod() {
     return species->getDispersalMethod();
@@ -84,15 +70,4 @@ unsigned IndividualOrganism::getX(){
 }
 unsigned IndividualOrganism::getY(){
     return y;
-}
-std::vector<IndividualOrganism*> IndividualOrganism::getChildren(){
-    return children;
-}
-void IndividualOrganism::addChild(IndividualOrganism* individualOrganism){
-    children.push_back(individualOrganism);
-}
-void IndividualOrganism::remove(){
-    for (auto child : children){
-        child->setParent(NULL);
-    }
 }

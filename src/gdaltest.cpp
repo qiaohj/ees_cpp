@@ -1,4 +1,3 @@
-
 /*
  * gdaltest.cpp
  *
@@ -10,16 +9,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "JsonPaster/include/json/json.h"
+//#include "JsonPaster/include/json/json.h"
 #include <algorithm> // sort
 #include <string>
 #include <math.h>
 
+#include <unistd.h>
+#include <boost/thread/thread.hpp>
 
 #include "ExpressionParser/parser.h"
 #include "Definitions/Scenario.h"
 #include "Universal/log.hpp"
-
+#include "Universal/CommonFun.h"
+#include "Definitions/IndividualOrganism.h"
 
 //void binary_mask(){
 //    RasterObject* mask = new RasterObject("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/mask.tif");
@@ -101,19 +103,38 @@ int main(int argc, const char* argv[]) {
 //    integerEnvironmentLayers("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.float.tif",
 //                "/home/qiaohj/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio12.tif");
 
-	/*
-	 * Scenario Json Test
-	 * */
-
+    /*
+     * Scenario Json Test
+     * */
+    printf("%lu\n", sizeof(IndividualOrganism));
+    printf("%lu\n", sizeof(IndividualOrganism*));
+    printf("%lu\n", sizeof(long unsigned));
+    printf("%lu\n", sizeof(unsigned));
     char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
 	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
 	scenario->run();
+	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
+	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 
-	printf("done!");
-	return EXIT_SUCCESS;
+//    LOG(INFO)<<"Memory usage 1:"<<CommonFun::getCurrentRSS();
+//    boost::this_thread::sleep( boost::posix_time::seconds(1) );
+//    boost::unordered_map<unsigned, std::vector<IndividualOrganism*>* > all;
+//    for (int j=0; j< 10000; j++){
+//        std::vector<IndividualOrganism*>* x = new std::vector<IndividualOrganism*>();
+//        for (int i=0; i< 10000; i++){
+//            IndividualOrganism* o = new IndividualOrganism(0, NULL, NULL, 0, 0);
+//            x->push_back(o);
+//        }
+//        all[j] = x;
+//        LOG(INFO)<<"Memory usage 2:"<<CommonFun::getCurrentRSS();
+//        CommonFun::clearVector(all[j]);
+//        LOG(INFO)<<"Memory usage 3:"<<CommonFun::getCurrentRSS();
+//        all.erase(j);
+//        LOG(INFO)<<"Memory usage 4:"<<CommonFun::getCurrentRSS();
+//    }
+    printf("done!");
+    return EXIT_SUCCESS;
 }
-
-
 

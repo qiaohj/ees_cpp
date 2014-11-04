@@ -34,7 +34,7 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
         this->species.push_back(species);
         createSpeciesFolder(species->getID());
         std::vector<GeoLocation*> seeds = species->getSeeds();
-        std::vector<IndividualOrganism*> t_o;
+        std::vector<IndividualOrganism*>* t_o = new std::vector<IndividualOrganism*>();
         for (unsigned i = 0; i < seeds.size(); ++i) {
 
             unsigned x, y;
@@ -45,7 +45,7 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
             boost::unordered_map<unsigned, IndividualOrganism*>* t = new boost::unordered_map<unsigned, IndividualOrganism*>();
             t->insert(std::make_pair(y * xSize + x, individualOrganism));
             actived_individualOrganisms[species->getID()] = t;
-            t_o.push_back(individualOrganism);
+            t_o->push_back(individualOrganism);
 
         }
         all_individualOrganisms[0] = t_o;
@@ -86,9 +86,10 @@ void Scenario::run() {
     unsigned x = 99999, y = 99999;
     for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
             minSpeciesDispersalSpeed) {
-        printf("Current year:%d\n", year);
 
-        std::vector<IndividualOrganism*> individual_organisms_in_this_year;
+        printf("Current year:%d, Memory usage:%lu\n", year, CommonFun::getCurrentRSS());
+
+        std::vector<IndividualOrganism*>* individual_organisms_in_this_year = new std::vector<IndividualOrganism*>();
         if (environment_maps.find(year) == environment_maps.end()) {
             environment_maps[year] = getEnvironmenMap(year);
         }
@@ -104,7 +105,7 @@ void Scenario::run() {
         std::vector<SparseMap*> current_environments = environment_maps[year];
 
         env_output.push_back(line);
-        LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
+        LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms/years is " << all_individualOrganisms.size();
         for (auto s_it : actived_individualOrganisms) {
             LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
             std::vector<IndividualOrganism*> new_individual_organisms;
@@ -135,12 +136,10 @@ void Scenario::run() {
                                 individualOrganism, it->getX(), it->getY());
 
                         new_individual_organisms.push_back(new_individualOrganism);
-                        individual_organisms_in_this_year.push_back(new_individualOrganism);
+                        individual_organisms_in_this_year->push_back(new_individualOrganism);
 
                     }
-
-                    individualOrganism->addNextRunYear();
-                    CommonFun::clearVector(next_cells);
+                    CommonFun::clearVector(&next_cells);
                 } else {
                     LOG(INFO) << "Didn't run, for current year is "<<year<< " and organism run year is " << individualOrganism->getNextRunYear();
                 }
@@ -209,7 +208,7 @@ void Scenario::run() {
             //get the groups
 
         }
-        CommonFun::clearUnordered_map(distribution_maps);
+        CommonFun::clearUnordered_map(&distribution_maps);
         LOG(INFO)<<"end to generate distribution maps";
         all_individualOrganisms[year] = individual_organisms_in_this_year;
         //remove the useless organism
@@ -231,19 +230,24 @@ void Scenario::run() {
                 removed_year = year - sp_it->getDispersalSpeed();
             }
             if (is_remove_previous_speciation){
-                removed_year = year - sp_it->getDispersalSpeed() - speciation_year;
+                removed_year = (year - sp_it->getDispersalSpeed()) - speciation_year;
+            }
+            if (removed_year>50000){
+                printf("Burn in year:%u, %u - %u - %u = %u\n", burnInYear, year, sp_it->getDispersalSpeed(), speciation_year, removed_year);
             }
             if (removed_year>=0){
-                LOG(INFO)<<"Remove the organisms in year " <<removed_year;
-                for (auto og_it : all_individualOrganisms[removed_year]){
-                    if (og_it->getSpeciesID()==sp_it->getID()){
-                        og_it->remove();
-                    }
-                }
+                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". Before removing, Memory usage:"<<CommonFun::getCurrentRSS();
                 CommonFun::clearVector(all_individualOrganisms[removed_year]);
+                delete all_individualOrganisms[removed_year];
                 all_individualOrganisms.erase(removed_year);
+                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". After  removing, Memory usage:"<<CommonFun::getCurrentRSS();
             }
         }
+        unsigned c = 0;
+        for (auto y_it : all_individualOrganisms){
+            c += y_it.second->size();
+        }
+        LOG(INFO)<<"Total organisms are " <<c;
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
@@ -258,17 +262,22 @@ std::vector<SparseMap*> Scenario::getEnvironmenMap(unsigned p_year) {
     return result;
 }
 void Scenario::cleanSpecies() {
-    CommonFun::clearVector(species);
+    CommonFun::clearVector(&species);
 }
 void Scenario::cleanActivedIndividualOrganisms() {
 //    CommonFun::clearUnordered_map(all_individualOrganisms);
-    CommonFun::clearUnordered_map(actived_individualOrganisms);
+
+    for (auto it : all_individualOrganisms){
+        CommonFun::clearVector(it.second);
+    }
+    CommonFun::clearUnordered_map(&all_individualOrganisms);
+    CommonFun::clearUnordered_map(&actived_individualOrganisms);
 }
 void Scenario::cleanEnvironments() {
-    CommonFun::clearVector(environments);
+    CommonFun::clearVector(&environments);
     for (hashmap_multiply::iterator it = environment_maps.begin();
             it != environment_maps.end();) {
-        CommonFun::clearVector(it->second);
+        CommonFun::clearVector(&it->second);
         it = environment_maps.erase(it);
     }
     environment_maps.clear();

@@ -36,8 +36,8 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
 }
 
 SpeciesObject::~SpeciesObject() {
-    CommonFun::clearVector(nicheBreadth);
-    CommonFun::clearVector(seeds);
+    CommonFun::clearVector(&nicheBreadth);
+    CommonFun::clearVector(&seeds);
 }
 
 unsigned SpeciesObject::getDispersalAbility() {
