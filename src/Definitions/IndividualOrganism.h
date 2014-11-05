@@ -14,15 +14,15 @@
 
 class IndividualOrganism {
 private:
-    unsigned x;
-    unsigned y;
+    unsigned short x;
+    unsigned short y;
     SpeciesObject* species;
     unsigned year;
     IndividualOrganism* parent;
 
 public:
     IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
-            IndividualOrganism* p_parent, unsigned p_x, unsigned p_y);
+            IndividualOrganism* p_parent, unsigned short p_x, unsigned short p_y);
     virtual ~IndividualOrganism();
     unsigned getNextRunYear();
     int getDispersalMethod();
@@ -35,8 +35,9 @@ public:
     void setParent(IndividualOrganism* p_parent);
     IndividualOrganism* getParent();
     unsigned getYear();
-    unsigned getX();
-    unsigned getY();
+    unsigned short getX();
+    unsigned short getY();
+    void setYear(unsigned p_year);
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

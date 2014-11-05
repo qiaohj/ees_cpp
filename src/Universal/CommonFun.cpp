@@ -121,3 +121,13 @@ size_t CommonFun::getCurrentRSS() {
     return (size_t) rss * (size_t) sysconf( _SC_PAGESIZE);
 
 }
+size_t CommonFun::writeMemoryUsage(unsigned line, bool is, size_t last){
+    if (is){
+        size_t current = getCurrentRSS();
+        if (current - last!=0){
+            LOG(INFO)<<"Memory usage " << fixedLength(line, 3)<< ": " << (current - last);
+        }
+        return current;
+    }
+    return 0;
+}

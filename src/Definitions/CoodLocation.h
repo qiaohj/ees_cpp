@@ -10,12 +10,12 @@
 
 class CoodLocation {
 private:
-    unsigned x, y;
+    unsigned short x, y;
 public:
-    CoodLocation(unsigned p_x, unsigned p_y);
+    CoodLocation(unsigned short p_x, unsigned short p_y);
     virtual ~CoodLocation();
-    unsigned getX();
-    unsigned getY();
+    unsigned short getX();
+    unsigned short getY();
 };
 
 #endif /* DEFINITIONS_COODLOCATION_H_ */

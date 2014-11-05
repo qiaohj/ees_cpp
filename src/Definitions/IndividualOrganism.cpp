@@ -8,7 +8,7 @@
 #include "IndividualOrganism.h"
 
 IndividualOrganism::IndividualOrganism(unsigned p_year,
-        SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned p_x, unsigned p_y) {
+        SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned short p_x, unsigned short p_y) {
     species = p_species;
     year = p_year;
     parent = p_parent;
@@ -65,9 +65,12 @@ unsigned IndividualOrganism::getSpeciesID() {
 unsigned IndividualOrganism::getYear(){
     return year;
 }
-unsigned IndividualOrganism::getX(){
+unsigned short IndividualOrganism::getX(){
     return x;
 }
-unsigned IndividualOrganism::getY(){
+unsigned short IndividualOrganism::getY(){
     return y;
+}
+void IndividualOrganism::setYear(unsigned p_year){
+    year = p_year;
 }

@@ -24,6 +24,7 @@
 
 #include "../JsonPaster/include/json/json.h"
 #include "const.h"
+#include "log.hpp"
 
 class CommonFun {
 public:
@@ -41,6 +42,7 @@ public:
     static std::string fixedLength(int value, int digits);
     static size_t getPeakRSS();
     static size_t getCurrentRSS();
+    static size_t writeMemoryUsage(unsigned line, bool is, size_t last);
     template<typename T> static double EuclideanDistance(T x1, T y1, T x2,
             T y2);
     template<typename T> static bool AlmostEqualRelative(T a, T b);

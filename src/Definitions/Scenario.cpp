@@ -84,35 +84,52 @@ void Scenario::createSpeciesFolder(unsigned p_species_id) {
 void Scenario::run() {
     std::vector<std::string> env_output;
     unsigned x = 99999, y = 99999;
+    bool is_write_memory_usage = false;
+    size_t last_memory_usage = 0;
     for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
             minSpeciesDispersalSpeed) {
+        if (year>=50000){
+            is_write_memory_usage = true;
+        }
+        LOG(INFO)<<"Current year:"<<year<<" Memory usage:"<<CommonFun::getCurrentRSS();
 
-        printf("Current year:%d, Memory usage:%lu\n", year, CommonFun::getCurrentRSS());
-
+        std::vector<IndividualOrganism*>* individual_organisms_in_current_year = new std::vector<IndividualOrganism*>();
+        last_memory_usage = CommonFun::writeMemoryUsage(1, is_write_memory_usage, last_memory_usage);
         if (environment_maps.find(year) == environment_maps.end()) {
             environment_maps[year] = getEnvironmenMap(year);
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(2, is_write_memory_usage, last_memory_usage);
+
         //save the env data
         if (x == 99999) {
             int value;
             environment_maps[year][0]->getFirstValues(&x, &y, &value);
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(3, is_write_memory_usage, last_memory_usage);
         char line[30];
         int v = environment_maps[year][0]->readByXY(x, y);
         sprintf(line, "%u,%u,%u,%d", year, x, y, v);
+        last_memory_usage = CommonFun::writeMemoryUsage(4, is_write_memory_usage, last_memory_usage);
+        env_output.push_back(line);
 
         std::vector<SparseMap*> current_environments = environment_maps[year];
+        last_memory_usage = CommonFun::writeMemoryUsage(5, is_write_memory_usage, last_memory_usage);
 
-        env_output.push_back(line);
-        LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms/years is " << all_individualOrganisms.size();
+
+//        LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms/years is " << all_individualOrganisms.size();
         for (auto s_it : actived_individualOrganisms) {
-            LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+//            LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
             std::vector<IndividualOrganism*> new_individual_organisms;
+            last_memory_usage = CommonFun::writeMemoryUsage(123, is_write_memory_usage, last_memory_usage);
             for (auto o_it : *s_it.second) {
+                last_memory_usage = CommonFun::writeMemoryUsage(125, is_write_memory_usage, last_memory_usage);
                 IndividualOrganism* individualOrganism = o_it.second;
                 //if current year no smaller than individual organism's next run year, then move this organism.
+//                LOG(INFO)<<"Organism index is "<< individualOrganism->getX()<<","<<individualOrganism->getY()<<". Current year is "<<year<<". Next year is "<<individualOrganism->getNextRunYear();
                 if (year >= individualOrganism->getNextRunYear()) {
+                    last_memory_usage = CommonFun::writeMemoryUsage(130, is_write_memory_usage, last_memory_usage);
                     std::vector<CoodLocation*> next_cells;
+                    last_memory_usage = CommonFun::writeMemoryUsage(132, is_write_memory_usage, last_memory_usage);
                     switch (individualOrganism->getDispersalMethod()) {
                         //only the new individual organisms can move
                         case 1:
@@ -126,6 +143,7 @@ void Scenario::run() {
                         default:
                         ;
                     }
+                    last_memory_usage = CommonFun::writeMemoryUsage(146, is_write_memory_usage, last_memory_usage);
                     for (auto it : next_cells) {
 
                         //create a new organism
@@ -133,33 +151,53 @@ void Scenario::run() {
                         new IndividualOrganism(year,
                                 individualOrganism->getSpecies(),
                                 individualOrganism, it->getX(), it->getY());
-
+//                        LOG(INFO)<<"Put "<<new_individualOrganism->getX()<<", "<<new_individualOrganism->getY()<<" into the new organism group.";
                         new_individual_organisms.push_back(new_individualOrganism);
-
                     }
-                    CommonFun::clearVector(&next_cells);
+                    last_memory_usage = CommonFun::writeMemoryUsage(157, is_write_memory_usage, last_memory_usage);
+                    for (std::vector<CoodLocation*>::iterator it =
+                            next_cells.begin(); it != next_cells.end(); ++it) {
+                        delete *it;
+                    }
+                    next_cells.clear();
+                    std::vector<CoodLocation*>().swap(next_cells);
+                    last_memory_usage = CommonFun::writeMemoryUsage(159, is_write_memory_usage, last_memory_usage);
                 } else {
-                    LOG(INFO) << "Didn't run, for current year is "<<year<< " and organism run year is " << individualOrganism->getNextRunYear();
+//                    LOG(INFO) << "Didn't run, for current year is "<<year<< " and organism run year is " << individualOrganism->getNextRunYear();
                 }
+                last_memory_usage = CommonFun::writeMemoryUsage(163, is_write_memory_usage, last_memory_usage);
             }
-            std::vector<IndividualOrganism*>* individual_organisms_in_this_year = new std::vector<IndividualOrganism*>();
+            last_memory_usage = CommonFun::writeMemoryUsage(165, is_write_memory_usage, last_memory_usage);
             for (auto it : new_individual_organisms) {
                 unsigned index = it->getY() * xSize + it->getX();
-                if ((*s_it->second).find(index)==(*s_it->second).end()){
+                bool is_add = false;
+                if ((*s_it.second).find(index)==(*s_it.second).end()){
+                    is_add = true;
+                }else if((*s_it.second)[index]->getYear()!=year){
+                    is_add = true;
+                }
+//                is_add = true;
+                if (is_add){
                     (*s_it.second)[index] = it;
-                    individual_organisms_in_this_year->push_back(it);
+                    individual_organisms_in_current_year->push_back(it);
+                }else{
+//                    LOG(INFO)<<"Delete overwritten organism";
+                    delete it;
+                    it = NULL;
                 }
             }
+            last_memory_usage = CommonFun::writeMemoryUsage(183, is_write_memory_usage, last_memory_usage);
             new_individual_organisms.clear();
-            LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+            last_memory_usage = CommonFun::writeMemoryUsage(185, is_write_memory_usage, last_memory_usage);
+//            LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
         }
-
-        LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
+        last_memory_usage = CommonFun::writeMemoryUsage(188, is_write_memory_usage, last_memory_usage);
+//        LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
         //LOG(INFO)<<"end to simulate cell by cell";
 
         //remove the unsuitable organisms
         for (auto s_it : actived_individualOrganisms) {
-            LOG(INFO)<<"start to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+//            LOG(INFO)<<"start to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
             std::vector<unsigned> erased_key;
             for (auto it : *s_it.second) {
                 if (!it.second->isSuitable(current_environments)) {
@@ -170,12 +208,12 @@ void Scenario::run() {
                 (*s_it.second).erase(key);
             }
             erased_key.clear();
-            LOG(INFO)<<"end to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+//            LOG(INFO)<<"end to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(207, is_write_memory_usage, last_memory_usage);
+//        LOG(INFO)<<"end to remove unsuitable organisms";
 
-        LOG(INFO)<<"end to remove unsuitable organisms";
-
-        LOG(INFO)<<"begin to generate distribution maps";
+//        LOG(INFO)<<"begin to generate distribution maps";
         //generate the distribution map for every species
         boost::unordered_map<unsigned, SparseMap*> distribution_maps;
         for (auto s_it : actived_individualOrganisms) {
@@ -196,6 +234,7 @@ void Scenario::run() {
 
             }
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(231, is_write_memory_usage, last_memory_usage);
         for (auto it : distribution_maps) {
             //save distribution
             char tiffName[target.length() + 28];
@@ -210,9 +249,11 @@ void Scenario::run() {
             //get the groups
 
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(246, is_write_memory_usage, last_memory_usage);
         CommonFun::clearUnordered_map(&distribution_maps);
-        LOG(INFO)<<"end to generate distribution maps";
-        all_individualOrganisms[year] = individual_organisms_in_this_year;
+        last_memory_usage = CommonFun::writeMemoryUsage(248, is_write_memory_usage, last_memory_usage);
+//        LOG(INFO)<<"end to generate distribution maps";
+        all_individualOrganisms[year] = individual_organisms_in_current_year;
         //remove the useless organism
         for (auto sp_it : species){
             if (year<sp_it->getDispersalSpeed()){
@@ -234,22 +275,21 @@ void Scenario::run() {
             if (is_remove_previous_speciation){
                 removed_year = (year - sp_it->getDispersalSpeed()) - speciation_year;
             }
-            if (removed_year>50000){
-                printf("Burn in year:%u, %u - %u - %u = %u\n", burnInYear, year, sp_it->getDispersalSpeed(), speciation_year, removed_year);
-            }
             if (removed_year>=0){
-                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". Before removing, Memory usage:"<<CommonFun::getCurrentRSS();
+//                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". Before removing, Memory usage:"<<CommonFun::getCurrentRSS();
                 CommonFun::clearVector(all_individualOrganisms[removed_year]);
                 delete all_individualOrganisms[removed_year];
                 all_individualOrganisms.erase(removed_year);
-                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". After  removing, Memory usage:"<<CommonFun::getCurrentRSS();
+//                LOG(INFO)<<"Remove the organisms in year " <<removed_year<<". After  removing, Memory usage:"<<CommonFun::getCurrentRSS();
             }
         }
+        last_memory_usage = CommonFun::writeMemoryUsage(280, is_write_memory_usage, last_memory_usage);
         unsigned c = 0;
         for (auto y_it : all_individualOrganisms){
             c += y_it.second->size();
         }
-        LOG(INFO)<<"Total organisms are " <<c;
+        last_memory_usage = CommonFun::writeMemoryUsage(285, is_write_memory_usage, last_memory_usage);
+//        LOG(INFO)<<"Total organisms are " <<c;
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());

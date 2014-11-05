@@ -19,7 +19,6 @@
 #include "IndividualOrganism.h"
 #include "CoodLocation.h"
 #include "../Universal/log.hpp"
-//#include "../Universal/MemoryUsage.hpp"
 
 class Scenario {
 private:
