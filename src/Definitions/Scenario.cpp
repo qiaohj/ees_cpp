@@ -89,7 +89,6 @@ void Scenario::run() {
 
         printf("Current year:%d, Memory usage:%lu\n", year, CommonFun::getCurrentRSS());
 
-        std::vector<IndividualOrganism*>* individual_organisms_in_this_year = new std::vector<IndividualOrganism*>();
         if (environment_maps.find(year) == environment_maps.end()) {
             environment_maps[year] = getEnvironmenMap(year);
         }
@@ -136,7 +135,6 @@ void Scenario::run() {
                                 individualOrganism, it->getX(), it->getY());
 
                         new_individual_organisms.push_back(new_individualOrganism);
-                        individual_organisms_in_this_year->push_back(new_individualOrganism);
 
                     }
                     CommonFun::clearVector(&next_cells);
@@ -144,9 +142,13 @@ void Scenario::run() {
                     LOG(INFO) << "Didn't run, for current year is "<<year<< " and organism run year is " << individualOrganism->getNextRunYear();
                 }
             }
+            std::vector<IndividualOrganism*>* individual_organisms_in_this_year = new std::vector<IndividualOrganism*>();
             for (auto it : new_individual_organisms) {
                 unsigned index = it->getY() * xSize + it->getX();
-                (*s_it.second)[index] = it;
+                if ((*s_it->second).find(index)==(*s_it->second).end()){
+                    (*s_it.second)[index] = it;
+                    individual_organisms_in_this_year->push_back(it);
+                }
             }
             new_individual_organisms.clear();
             LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
