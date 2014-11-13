@@ -21,10 +21,12 @@
 
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/thread/thread.hpp>
 
 #include "../JsonPaster/include/json/json.h"
 #include "const.h"
 #include "log.hpp"
+
 
 class CommonFun {
 public:

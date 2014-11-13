@@ -14,6 +14,23 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
     parent = p_parent;
     x = p_x;
     y = p_y;
+    groupId = 0;
+    tempSpeciesID = 0;
+}
+void IndividualOrganism::setGroupId(unsigned short p_group_id){
+    groupId = p_group_id;
+}
+unsigned short IndividualOrganism::getGroupId(){
+    return groupId;
+}
+void IndividualOrganism::setTempSpeciesId(unsigned short p_species_id){
+    tempSpeciesID = p_species_id;
+}
+unsigned IndividualOrganism::getTempSpeciesId(){
+    return tempSpeciesID;
+}
+void IndividualOrganism::setSpecies(SpeciesObject* p_species){
+    species = p_species;
 }
 void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
     parent = p_parent;

@@ -16,6 +16,8 @@ class IndividualOrganism {
 private:
     unsigned short x;
     unsigned short y;
+    unsigned short groupId;
+    unsigned short tempSpeciesID;
     SpeciesObject* species;
     unsigned year;
     IndividualOrganism* parent;
@@ -38,6 +40,11 @@ public:
     unsigned short getX();
     unsigned short getY();
     void setYear(unsigned p_year);
+    void setGroupId(unsigned short p_group_id);
+    unsigned short getGroupId();
+    void setTempSpeciesId(unsigned short p_species_id);
+    unsigned getTempSpeciesId();
+    void setSpecies(SpeciesObject* p_species);
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

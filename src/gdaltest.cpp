@@ -8,6 +8,9 @@
 #include <gdal_priv.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <execinfo.h>
+#include <signal.h>
+#include <unistd.h>
 
 //#include "JsonPaster/include/json/json.h"
 #include <algorithm> // sort
@@ -22,6 +25,18 @@
 #include "Universal/log.hpp"
 #include "Universal/CommonFun.h"
 #include "Definitions/IndividualOrganism.h"
+void handler(int sig) {
+  void *array[10];
+  size_t size;
+
+  // get void*'s for all entries on the stack
+  size = backtrace(array, 10);
+
+  // print out all the frames to stderr
+  fprintf(stderr, "Error: signal %d:\n", sig);
+  backtrace_symbols_fd(array, size, STDERR_FILENO);
+  exit(1);
+}
 
 //void binary_mask(){
 //    RasterObject* mask = new RasterObject("/home/qiaohj/workspace/NicheBreadth/data/environment_layers/mask.tif");
@@ -106,10 +121,11 @@ int main(int argc, const char* argv[]) {
     /*
      * Scenario Json Test
      * */
-    printf("%lu\n", sizeof(IndividualOrganism));
-    printf("%lu\n", sizeof(IndividualOrganism*));
-    printf("%lu\n", sizeof(long unsigned));
-    printf("%lu\n", sizeof(unsigned));
+//    printf("%lu\n", sizeof(IndividualOrganism));
+//    printf("%lu\n", sizeof(IndividualOrganism*));
+//    printf("%lu\n", sizeof(long unsigned));
+//    printf("%lu\n", sizeof(unsigned));
+    signal(SIGSEGV, handler);
     char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
 	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
@@ -133,6 +149,25 @@ int main(int argc, const char* argv[]) {
 //        LOG(INFO)<<"Memory usage 3:"<<CommonFun::getCurrentRSS();
 //        all.erase(j);
 //        LOG(INFO)<<"Memory usage 4:"<<CommonFun::getCurrentRSS();
+//    }
+//    while (true) {
+//        boost::this_thread::sleep( boost::posix_time::seconds(1) );
+//        CommonFun::writeMemoryUsage(137, true, 0);
+//        std::vector<CoodLocation*> next_cells;
+//        for (unsigned i = 0; i < 6; i++) {
+//            CoodLocation* c = new CoodLocation(1, 1);
+//            next_cells.push_back(c);
+//        }
+//        boost::this_thread::sleep( boost::posix_time::seconds(1) );
+//        CommonFun::writeMemoryUsage(144, true, 0);
+//        for (std::vector<CoodLocation*>::iterator it = next_cells.begin();
+//                it != next_cells.end(); ++it) {
+//            delete *it;
+//        }
+//        next_cells.clear();
+//        boost::this_thread::sleep( boost::posix_time::seconds(1) );
+//        std::vector<CoodLocation*>().swap(next_cells);
+//        CommonFun::writeMemoryUsage(151, true, 0);
 //    }
     printf("done!");
     return EXIT_SUCCESS;

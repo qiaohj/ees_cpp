@@ -14,7 +14,7 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
     dispersalMethod = p_root.get("dispersal_method", 1).asInt();
     numberOfPath = p_root.get("number_of_path", -1).asInt();
     speciationYears = p_root.get("speciation_years", 10000).asInt();
-
+    parent = NULL;
     Json::Value niche_breadth_array = p_root["niche_breadth"];
     for (unsigned index = 0; index < niche_breadth_array.size(); ++index) {
         Json::Value niche_breadth_json = niche_breadth_array[index];
@@ -34,7 +34,17 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
     }
 
 }
+SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent){
+    parent = p_parent;
+    id = p_id;
+    dispersalAbility = parent->getDispersalAbility();
+    dispersalSpeed = parent->getDispersalSpeed();
+    dispersalMethod = parent->getDispersalMethod();
+    numberOfPath = parent->getNumOfPath();
+    speciationYears = parent->getSpeciationYears();
+    nicheBreadth = parent->getNicheBreadth();
 
+}
 SpeciesObject::~SpeciesObject() {
     CommonFun::clearVector(&nicheBreadth);
     CommonFun::clearVector(&seeds);
@@ -63,4 +73,7 @@ std::vector<NicheBreadth*> SpeciesObject::getNicheBreadth() {
 }
 unsigned SpeciesObject::getSpeciationYears(){
     return speciationYears;
+}
+SpeciesObject* SpeciesObject::getParent(){
+    return parent;
 }

@@ -25,9 +25,10 @@ private:
     int dispersalMethod;
     int numberOfPath;
     std::vector<GeoLocation*> seeds;
-
+    SpeciesObject* parent;
 public:
     SpeciesObject(Json::Value p_root);
+    SpeciesObject(unsigned p_id, SpeciesObject* p_parent);
     virtual ~SpeciesObject();
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
@@ -37,6 +38,7 @@ public:
     int getNumOfPath();
     std::vector<NicheBreadth*> getNicheBreadth();
     unsigned getSpeciationYears();
+    SpeciesObject* getParent();
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

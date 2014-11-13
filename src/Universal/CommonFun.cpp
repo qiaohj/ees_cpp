@@ -123,8 +123,9 @@ size_t CommonFun::getCurrentRSS() {
 }
 size_t CommonFun::writeMemoryUsage(unsigned line, bool is, size_t last){
     if (is){
+        boost::this_thread::sleep( boost::posix_time::milliseconds(1) );
         size_t current = getCurrentRSS();
-        if (current - last!=0){
+        if ((current - last)!=0){
             LOG(INFO)<<"Memory usage " << fixedLength(line, 3)<< ": " << (current - last);
         }
         return current;
