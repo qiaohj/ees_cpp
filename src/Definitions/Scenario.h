@@ -9,6 +9,7 @@
 #define DEFINITIONS_SCENARIO_H_
 #include <string>
 #include <boost/unordered_map.hpp>
+#include <boost/unordered_set.hpp>
 #include "../Universal/CommonFun.h"
 #include "../JsonPaster/include/json/json.h"
 #include "../Universal/CommonType.h"
@@ -37,8 +38,6 @@ private:
     void cleanSpecies();
     void createSpeciesFolder(SpeciesObject* p_species);
     unsigned burnInYear;
-    boost::unordered_map<SpeciesObject*,
-            boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
     boost::unordered_map<unsigned, boost::unordered_map<SpeciesObject*,
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > > all_individualOrganisms;
     std::vector<CoodLocation*> getDispersalMap_2(
@@ -53,7 +52,7 @@ private:
     unsigned getDividedYear(IndividualOrganism* o_1, IndividualOrganism* o_2);
     void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
-    char* getSpeciesFolder(SpeciesObject* p_species);
+    std::string getSpeciesFolder(SpeciesObject* p_species);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder,
             std::string p_target);

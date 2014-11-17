@@ -21,6 +21,7 @@ private:
     SpeciesObject* species;
     unsigned year;
     IndividualOrganism* parent;
+    std::vector<IndividualOrganism*> children;
 
 public:
     IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
@@ -45,6 +46,9 @@ public:
     void setTempSpeciesId(unsigned short p_species_id);
     unsigned getTempSpeciesId();
     void setSpecies(SpeciesObject* p_species);
+    void addChild(IndividualOrganism* child);
+    void clearChildren();
+    void removeChild(IndividualOrganism* child);
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

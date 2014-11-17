@@ -16,6 +16,9 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
     y = p_y;
     groupId = 0;
     tempSpeciesID = 0;
+    if (parent!=NULL){
+        parent->addChild(this);
+    }
 }
 void IndividualOrganism::setGroupId(unsigned short p_group_id){
     groupId = p_group_id;
@@ -38,6 +41,21 @@ void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
 IndividualOrganism* IndividualOrganism::getParent() {
     return parent;
 }
+void IndividualOrganism::removeChild(IndividualOrganism* child) {
+    std::vector<IndividualOrganism*>::iterator iter = children.begin();
+    while (iter != children.end()) {
+        if (*iter == child) {
+            iter = children.erase(iter);
+        } else {
+            ++iter;
+        }
+    }
+}
+void IndividualOrganism::clearChildren(){
+    for (auto child : children){
+        child->setParent(NULL);
+    }
+}
 IndividualOrganism::~IndividualOrganism() {
 
 }
@@ -55,6 +73,9 @@ unsigned IndividualOrganism::getDispersalAbility() {
 }
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();
+}
+void IndividualOrganism::addChild(IndividualOrganism* child){
+    children.push_back(child);
 }
 bool IndividualOrganism::isSuitable(std::vector<SparseMap*> p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();

@@ -24,11 +24,19 @@ private:
     unsigned speciationYears;
     int dispersalMethod;
     int numberOfPath;
+    unsigned appearedYear;
+    unsigned disappearedYear;
     std::vector<GeoLocation*> seeds;
     SpeciesObject* parent;
+    std::vector<SpeciesObject*> children;
+    unsigned number_of_clade_extinction;
+    unsigned number_of_speciation;
+    unsigned number_of_species_extinction;
+    //0: unknown, 1: extincted, 2: unextincted 3: parent_extincted
+    unsigned clade_extinction_status;
 public:
     SpeciesObject(Json::Value p_root);
-    SpeciesObject(unsigned p_id, SpeciesObject* p_parent);
+    SpeciesObject(unsigned p_id, SpeciesObject* p_parent, unsigned p_year);
     virtual ~SpeciesObject();
     unsigned getDispersalAbility();
     unsigned getDispersalSpeed();
@@ -39,6 +47,21 @@ public:
     std::vector<NicheBreadth*> getNicheBreadth();
     unsigned getSpeciationYears();
     SpeciesObject* getParent();
+    void setDisappearedYear(unsigned p_disappeared_year);
+    unsigned getDisappearedYear();
+    unsigned getAppearedYear();
+    std::vector<SpeciesObject*> getChildren();
+    void addChild(SpeciesObject* child);
+    std::string getNewickTree(bool isroot, bool iscolor);
+    void markNode(unsigned total_years);
+    void setCladeExtinctionStatus(unsigned status);
+    void markParentClade();
+    bool isAllLeafExtinction(unsigned total_years);
+    unsigned getNumberOfCladeExtinction();
+    unsigned getNumberOfSpeciation();
+    unsigned getNumberOfSpeciesExtinction();
+    std::vector<std::string> getHTMLTree();
+    std::string getSpeciationExtinction(bool isroot, unsigned total_years);
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

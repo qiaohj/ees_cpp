@@ -70,6 +70,7 @@ template<typename T> void CommonFun::clearUnordered_map(T* v) {
 template<typename T> void CommonFun::clearVector(T* v) {
     for (typename T::iterator it = v->begin(); it != v->end(); ++it) {
         delete *it;
+        *it = NULL;
     }
     v->clear();
     T().swap(*v);

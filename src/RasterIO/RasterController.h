@@ -48,6 +48,7 @@ template<typename T> void RasterController::writeRaster(char* p_driver_name, cha
     band->RasterIO(GF_Write, 0, 0, p_xsize, p_ysize, p_array, p_xsize, p_ysize, p_datatype,
             0, 0);
     dataset->FlushCache();
+    GDALClose( (GDALDatasetH) dataset );;
 }
 
 

@@ -134,6 +134,18 @@ int main(int argc, const char* argv[]) {
 	delete scenario;
 	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 
+//    boost::unordered_map<int, int> temp;
+//    LOG(INFO)<<temp.size();
+//    temp[1] = 1;
+//    LOG(INFO)<<temp.size();
+//    temp[2] = 2;
+//    LOG(INFO)<<temp.size();
+//    temp[3] = temp.size();
+//    LOG(INFO)<<temp.size();
+//
+//    LOG(INFO)<<temp[1];
+//    LOG(INFO)<<temp[2];
+//    LOG(INFO)<<temp[3];
 //    LOG(INFO)<<"Memory usage 1:"<<CommonFun::getCurrentRSS();
 //    boost::this_thread::sleep( boost::posix_time::seconds(1) );
 //    boost::unordered_map<unsigned, std::vector<IndividualOrganism*>* > all;
