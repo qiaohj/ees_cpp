@@ -73,14 +73,14 @@ std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
     if (p_species->getParent() == NULL) {
         char speciesFolder[target.length() + 6];
         sprintf(speciesFolder, "%s/%s", target.c_str(),
-                CommonFun::fixedLength(p_species->getID(), 5).c_str());
+                CommonFun::fixedLength(p_species->getID(), 2).c_str());
         CommonFun::createFolder(speciesFolder);
         return std::string(speciesFolder);
     } else {
         std::string parentFolder = getSpeciesFolder(p_species->getParent());
         char speciesFolder[parentFolder.length() + 6];
         sprintf(speciesFolder, "%s/%s", parentFolder.c_str(),
-                CommonFun::fixedLength(p_species->getID(), 5).c_str());
+                CommonFun::fixedLength(p_species->getID(), 2).c_str());
         CommonFun::createFolder(speciesFolder);
         return std::string(speciesFolder);
     }
@@ -95,6 +95,9 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
     char groupsmapFolder[speciesFolder.length() + 6 + 10];
     sprintf(groupsmapFolder, "%s/groupsmap", speciesFolder.c_str());
     CommonFun::createFolder(groupsmapFolder);
+    char groupslogFolder[speciesFolder.length() + 6 + 10];
+    sprintf(groupslogFolder, "%s/group_log", speciesFolder.c_str());
+    CommonFun::createFolder(groupslogFolder);
 }
 void Scenario::run() {
     std::vector<std::string> env_output;
@@ -117,10 +120,10 @@ void Scenario::run() {
         sprintf(line, "%u,%u,%u,%d", year, x, y, v);
         env_output.push_back(line);
         boost::unordered_map<SpeciesObject*,
-                    boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
-        for (auto sp_it : all_individualOrganisms[year - minSpeciesDispersalSpeed]){
-            for (auto c_it : sp_it.second){
-                if (c_it.second.size()>0){
+        boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
+        for (auto sp_it : all_individualOrganisms[year - minSpeciesDispersalSpeed]) {
+            for (auto c_it : sp_it.second) {
+                if (c_it.second.size()>0) {
                     actived_individualOrganisms[sp_it.first][c_it.first] = c_it.second.front();
                 }
             }
@@ -177,9 +180,6 @@ void Scenario::run() {
 //            LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
         }
 
-
-
-
 //        LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
         //LOG(INFO)<<"end to simulate cell by cell";
 
@@ -191,7 +191,7 @@ void Scenario::run() {
 //            LOG(INFO)<<"start to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
             std::vector<unsigned> erased_key;
             for (auto it : s_it.second) {
-                if (it.second.size()>0){
+                if (it.second.size()>0) {
                     if (!it.second.front()->isSuitable(current_environments)) {
                         erased_key.push_back(it.first);
                     }
@@ -213,12 +213,12 @@ void Scenario::run() {
             }
         }
 
-
         LOG(INFO)<<"end to remove unsuitable organisms.";
 
         //mark the group id for every organisms in this year, seperated by species id;
         LOG(INFO)<<"Begin to mark the group id, and detect the speciation.";
         for (auto sp_it : individual_organisms_in_current_year) {
+            printf("Species ID:%u\n", sp_it.first->getID());
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
             SpeciesObject* species = sp_it.first;
             unsigned short current_group_id = 1;
@@ -231,12 +231,21 @@ void Scenario::run() {
                 }
                 //detect the speciation
                 unsigned short temp_species_id = 1;
+                std::vector<std::string> group_output;
                 for (unsigned short group_id_1=1; group_id_1<current_group_id-1; group_id_1++) {
                     unsigned short temp_species_id_1 = getTempSpeciesID(group_id_1, organisms);
                     for (unsigned short group_id_2=group_id_1+1; group_id_2<current_group_id; group_id_2++) {
+                        if (year==93500){
+                            LOG(INFO)<<"catch you!";
+                        }
                         unsigned short temp_species_id_2 = getTempSpeciesID(group_id_2, organisms);
+                        printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, temp_species_id_1, temp_species_id_2, 0, "info");
                         //if both groups were marked, and they have the same id, skip it.
                         if ((temp_species_id_1!=0)&&(temp_species_id_2!=0)&&(temp_species_id_1==temp_species_id_2)) {
+                            char line[100];
+                            sprintf(line, "%u,%u,%u,%u,%u,%u,%s", year, group_id_1, group_id_2, temp_species_id_1, temp_species_id_2, 0, "skip");
+                            printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, temp_species_id_1, temp_species_id_2, 0, "skip");
+                            group_output.push_back(line);
                             continue;
                         }
 
@@ -244,11 +253,21 @@ void Scenario::run() {
                         if (min_divided_year>=species->getSpeciationYears()) {
                             //if a speciation happened, marked them with two ids if they were not marked.
                             if (temp_species_id_1==0) {
+                                char line[100];
+                                sprintf(line, "%u,%u,%u,%u,%u,%u,%s", year, group_id_1, group_id_2, temp_species_id, 0, min_divided_year, "new species, mark group 1");
+                                printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, temp_species_id, 0, min_divided_year, "new species, mark group 1");
+                                group_output.push_back(line);
                                 markedSpeciesID(group_id_1, temp_species_id, organisms);
+                                temp_species_id_1 = temp_species_id;
                                 temp_species_id++;
                             }
                             if (temp_species_id_2==0) {
+                                char line[100];
+                                sprintf(line, "%u,%u,%u,%u,%u,%u,%s", year, group_id_1, group_id_2, temp_species_id, 0, min_divided_year, "new species, mark group 2");
+                                printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, temp_species_id, 0, min_divided_year, "new species, mark group 2");
+                                group_output.push_back(line);
                                 markedSpeciesID(group_id_2, temp_species_id, organisms);
+                                temp_species_id_2 = temp_species_id;
                                 temp_species_id++;
                             }
                         } else {
@@ -256,12 +275,27 @@ void Scenario::run() {
                             unsigned short t_id = (temp_species_id_1==0)?temp_species_id_2:temp_species_id_1;
                             t_id = (t_id==0)?temp_species_id:t_id;
                             markedSpeciesID(group_id_1, t_id, organisms);
-                            markedSpeciesID(group_id_2, t_id, organisms);
+                            temp_species_id_1 = t_id;
+                            char line1[100];
+                            sprintf(line1, "%u,%u,%u,%u,%u,%u,%s", year, group_id_1, group_id_2, t_id, 0, min_divided_year, "same species, mark group 1");
+                            printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, t_id, 0, min_divided_year, "same species, mark group 1");
+                            group_output.push_back(line);
 
+                            markedSpeciesID(group_id_2, t_id, organisms);
+                            temp_species_id_2 = t_id;
+                            char line2[100];
+                            sprintf(line2, "%u,%u,%u,%u,%u,%u,%s", year, group_id_1, group_id_2, t_id, 0, min_divided_year, "same species, mark group 2");
+                            printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, t_id, 0, min_divided_year, "same species, mark group 2");
+                            group_output.push_back(line);
                         }
                     }
                 }
-
+                if (group_output.size()>0) {
+                    char filepath[target.length() + 50];
+                    sprintf(filepath, "%s/group_log/%u_group.txt", getSpeciesFolder(sp_it.first).c_str(), year);
+                    CommonFun::writeFile(group_output, filepath);
+                    group_output.clear();
+                }
             } else {
                 for (auto y_it : sp_it.second) {
                     for (auto o_it : y_it.second) {
@@ -286,7 +320,7 @@ void Scenario::run() {
                 }
             }
             unsigned short i = 1;
-            for (auto it : temp_species_ids){
+            for (auto it : temp_species_ids) {
                 species_ids[it] = i++;
             }
 
@@ -319,19 +353,19 @@ void Scenario::run() {
             if (group_maps.find(sp_it.first)==group_maps.end()) {
                 group_maps[sp_it.first] = new SparseMap(xSize, ySize);
             }
-            if (sp_it.second.size()>0){
+            if (sp_it.second.size()>0) {
                 for (auto o_id : sp_it.second) {
                     if (o_id.second.size()>0) {
                         group_maps[sp_it.first]->setValue(o_id.second[0]->getX(), o_id.second[0]->getY(), o_id.second[0]->getGroupId());
                     }
                 }
-            }else{
+            } else {
                 sp_it.first->setDisappearedYear(year);
                 group_maps[sp_it.first] = NULL;
             }
         }
         for (auto it : group_maps) {
-            if (it.second!=NULL){
+            if (it.second!=NULL) {
                 //save distribution
                 std::string speciesFolder = getSpeciesFolder(it.first);
                 char tiffName[speciesFolder.length() + 28];
@@ -341,7 +375,7 @@ void Scenario::run() {
                 RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
                         array, (double) NODATA, GDT_Int32);
                 delete[] array;
-            }else{
+            } else {
                 individual_organisms_in_current_year.erase(it.first);
             }
 
@@ -388,7 +422,7 @@ void Scenario::run() {
                 boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > temp_o = all_individualOrganisms[removed_year];
                 for (auto it1 : temp_o) {
                     for (auto it2 : it1.second) {
-                        for (auto o_it : it2.second){
+                        for (auto o_it : it2.second) {
                             o_it->clearChildren();
                         }
                         CommonFun::clearVector(&it2.second);
@@ -418,26 +452,27 @@ void Scenario::run() {
     //generate the speciation information
     //get root species object
     std::vector<SpeciesObject*> roots;
-    for (auto sp_it: species){
-        if (sp_it->getDisappearedYear()==0){
+    for (auto sp_it : species) {
+        if (sp_it->getDisappearedYear() == 0) {
             sp_it->setDisappearedYear(totalYears);
         }
     }
-    for (auto sp_it: species){
-        if (sp_it->getAppearedYear()==0){
+    for (auto sp_it : species) {
+        if (sp_it->getAppearedYear() == 0) {
             sp_it->markNode(totalYears);
             roots.push_back(sp_it);
         }
     }
 
-    for (auto sp_it : roots){
+    for (auto sp_it : roots) {
         std::string folder = getSpeciesFolder(sp_it);
         std::string newick = folder + "/tree.new";
         CommonFun::writeFile(sp_it->getNewickTree(true, false), newick.c_str());
         std::string html = folder + "/Phylogram.html";
         CommonFun::writeFile(sp_it->getHTMLTree(), html.c_str());
         std::string stat = folder + "/stat.csv";
-        CommonFun::writeFile(sp_it->getSpeciationExtinction(true, totalYears), stat.c_str());
+        CommonFun::writeFile(sp_it->getSpeciationExtinction(true, totalYears),
+                stat.c_str());
 
     }
 
@@ -446,7 +481,9 @@ unsigned short Scenario::getTempSpeciesID(unsigned short group_id,
         boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms) {
     for (auto c_it : organisms) {
         for (auto o_it : c_it.second) {
-            return o_it->getTempSpeciesId();
+            if (o_it->getGroupId()==group_id){
+                return o_it->getTempSpeciesId();
+            }
         }
     }
     return 0;
@@ -454,6 +491,7 @@ unsigned short Scenario::getTempSpeciesID(unsigned short group_id,
 void Scenario::markedSpeciesID(unsigned short group_id,
         unsigned short temp_species_id,
         boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms) {
+    LOG(INFO)<<"mark group number "<<group_id<<" with species id "<<temp_species_id;
     for (auto c_it : organisms) {
         for (auto o_it : c_it.second) {
             if (o_it->getGroupId() == group_id) {
