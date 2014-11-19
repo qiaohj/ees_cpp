@@ -17,6 +17,7 @@
 
 class SpeciesObject {
 private:
+    bool newSpecies;
     unsigned id;
     std::vector<NicheBreadth*> nicheBreadth;
     unsigned dispersalAbility;
@@ -62,6 +63,8 @@ public:
     unsigned getNumberOfSpeciesExtinction();
     std::vector<std::string> getHTMLTree();
     std::string getSpeciationExtinction(bool isroot, unsigned total_years);
+    bool isNewSpecies();
+    void setNewSpecies(bool p);
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

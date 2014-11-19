@@ -23,6 +23,7 @@
 
 class Scenario {
 private:
+    unsigned tifLimit;
     std::vector<EnvironmentalCurve*> environments;
     std::vector<SpeciesObject*> species;
     unsigned totalYears;
@@ -55,7 +56,7 @@ private:
     std::string getSpeciesFolder(SpeciesObject* p_species);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder,
-            std::string p_target);
+            std::string p_target, unsigned p_tif_limit);
     virtual ~Scenario();
     void run();
     float* getEnvironmentValue(unsigned p_year, double p_longitude,

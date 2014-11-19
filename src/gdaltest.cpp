@@ -128,7 +128,7 @@ int main(int argc, const char* argv[]) {
     signal(SIGSEGV, handler);
     char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
-	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp");
+	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp", 1000);
 	scenario->run();
 	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;

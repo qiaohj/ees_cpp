@@ -8,6 +8,7 @@
 #include "SpeciesObject.h"
 
 SpeciesObject::SpeciesObject(Json::Value p_root) {
+    newSpecies = true;
     id = p_root.get("id", "").asInt();
     dispersalAbility = p_root.get("dispersal_ability", 1).asInt();
     dispersalSpeed = p_root.get("dispersal_speed", 1000).asInt();
@@ -43,6 +44,7 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
 
 SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent,
         unsigned p_year) {
+    newSpecies = true;
     parent = p_parent;
     id = p_id;
     dispersalAbility = parent->getDispersalAbility();
@@ -299,4 +301,10 @@ unsigned SpeciesObject::getSpeciationYears() {
 }
 SpeciesObject* SpeciesObject::getParent() {
     return parent;
+}
+bool SpeciesObject::isNewSpecies(){
+    return newSpecies;
+}
+void SpeciesObject::setNewSpecies(bool p){
+    newSpecies = p;
 }
