@@ -227,11 +227,16 @@ void Scenario::run() {
             unsigned short current_group_id = 1;
             if (year>=(burnInYear + species->getSpeciationYears())) {
                 IndividualOrganism* unmarked_organism = getUnmarkedOrganism(organisms);
+                LOG(INFO)<<"Mark 230";
                 while (unmarked_organism!=NULL) {
+                    LOG(INFO)<<"Mark 232";
                     markJointOrganism(current_group_id, unmarked_organism, organisms);
+                    LOG(INFO)<<"Mark 234";
                     current_group_id++;
                     unmarked_organism = getUnmarkedOrganism(organisms);
+                    LOG(INFO)<<"Mark 237";
                 }
+                LOG(INFO)<<"Mark 239";
                 //detect the speciation
                 unsigned short temp_species_id = 1;
                 std::vector<std::string> group_output;
@@ -239,6 +244,8 @@ void Scenario::run() {
                     unsigned short temp_species_id_1 = getTempSpeciesID(group_id_1, organisms);
                     for (unsigned short group_id_2=group_id_1+1; group_id_2<current_group_id; group_id_2++) {
                         unsigned short temp_species_id_2 = getTempSpeciesID(group_id_2, organisms);
+                        LOG(INFO)<<"Mark 242";
+                        return;
                         //printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, temp_species_id_1, temp_species_id_2, 0, "info");
                         //if both groups were marked, and they have the same id, skip it.
                         if ((temp_species_id_1!=0)&&(temp_species_id_2!=0)&&(temp_species_id_1==temp_species_id_2)) {
@@ -248,8 +255,9 @@ void Scenario::run() {
                             group_output.push_back(line);
                             continue;
                         }
-
-                        unsigned min_divided_year = getMinDividedYear(group_id_1, group_id_2, organisms);
+                        LOG(INFO)<<"Mark 252";
+                        unsigned min_divided_year = getMinDividedYear(sp_it.first->getSpeciationYears(), group_id_1, group_id_2, organisms);
+                        LOG(INFO)<<"Mark 254";
                         if (min_divided_year>=species->getSpeciationYears()) {
                             //if a speciation happened, marked them with two ids if they were not marked.
                             if (temp_species_id_1==0) {
@@ -288,20 +296,25 @@ void Scenario::run() {
                             //printf("%u,%u,%u,%u,%u,%u,%s\n", year, group_id_1, group_id_2, t_id, 0, min_divided_year, "same species, mark group 2");
 //                            group_output.push_back(line2);
                         }
+                        LOG(INFO)<<"Mark 293";
                     }
                 }
+                LOG(INFO)<<"Mark 298";
                 if (group_output.size()>0) {
                     char filepath[target.length() + 50];
                     sprintf(filepath, "%s/group_log/%u_group.txt", getSpeciesFolder(sp_it.first).c_str(), year);
                     CommonFun::writeFile(group_output, filepath);
                     group_output.clear();
                 }
+                LOG(INFO)<<"Mark 305";
             } else {
+                LOG(INFO)<<"Mark 307";
                 for (auto y_it : sp_it.second) {
                     for (auto o_it : y_it.second) {
                         o_it->setGroupId(current_group_id);
                     }
                 }
+                LOG(INFO)<<"Mark 313";
             }
         }
         LOG(INFO)<<"end to mark the group id, and detect the speciation.";
@@ -506,7 +519,7 @@ void Scenario::markedSpeciesID(unsigned short group_id,
         }
     }
 }
-unsigned Scenario::getMinDividedYear(unsigned short group_id_1,
+unsigned Scenario::getMinDividedYear(unsigned speciation_year, unsigned short group_id_1,
         unsigned short group_id_2,
         boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms) {
     unsigned nearest_divided_year = 0;
@@ -529,6 +542,9 @@ unsigned Scenario::getMinDividedYear(unsigned short group_id_1,
             nearest_divided_year =
                     (divided_year > nearest_divided_year) ?
                             divided_year : nearest_divided_year;
+            if ((current_year-nearest_divided_year)<speciation_year){
+                return current_year - nearest_divided_year;
+            }
         }
         //printf("%u/%u\n", i++, group_1.size() * group_2.size());
     }
@@ -552,6 +568,7 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
         boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms) {
     unsigned short x = p_unmarked_organism->getX();
     unsigned short y = p_unmarked_organism->getY();
+
     for (unsigned i_x = (x - p_unmarked_organism->getDispersalAbility());
             i_x <= (x + p_unmarked_organism->getDispersalAbility()); ++i_x) {
         i_x = (((int) i_x) < 0) ? 0 : i_x;
@@ -563,11 +580,13 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
             i_y = (((int) i_y) < 0) ? 0 : i_y;
             if ((unsigned) i_y >= ySize)
                 break;
+            if (organisms.find(i_y * xSize + i_x)==organisms.end()){
+                continue;
+            }
 
             double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
                     (int) (x), (int) (y));
-            //                printf("%u, %u vs %u, %u, Distance:%f\n", i_x, i_y, x, y,
-            //                        distance);
+
             if ((distance < p_unmarked_organism->getDispersalAbility())
                     || (CommonFun::AlmostEqualRelative(distance,
                             (double) p_unmarked_organism->getDispersalAbility()))) {
@@ -575,8 +594,11 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
                     if (it->getGroupId() == 0) {
                         it->setGroupId(p_group_id);
                         if ((x != i_x) || (y != i_y)) {
+                            LOG(INFO)<<"MARK "<<it->getX() << ", " << it->getY();
                             markJointOrganism(p_group_id, it, organisms);
                         }
+                    }else{
+                        LOG(INFO)<<"SKIP "<<it->getX() << ", " << it->getY();
                     }
                 }
 
