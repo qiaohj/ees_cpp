@@ -45,15 +45,17 @@ private:
             IndividualOrganism* individualOrganism,
             std::vector<SparseMap*> p_current_environments);
     IndividualOrganism* getUnmarkedOrganism(
-            boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
+            boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     void markJointOrganism(unsigned short p_group_id,
             IndividualOrganism* p_unmarked_organism,
-            boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
-    unsigned getMinDividedYear(unsigned speciation_year, unsigned short group_id_1, unsigned short group_id_2, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
+            boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
+    unsigned getMinDividedYear(unsigned speciation_year, unsigned short group_id_1,
+            unsigned short group_id_2, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     unsigned getDividedYear(IndividualOrganism* o_1, IndividualOrganism* o_2);
-    void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
-    unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms);
+    void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
+    unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     std::string getSpeciesFolder(SpeciesObject* p_species);
+    void generateSpeciationInfo();
 public:
     Scenario(Json::Value p_root, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit);
