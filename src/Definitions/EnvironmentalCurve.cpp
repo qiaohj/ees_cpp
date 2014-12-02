@@ -67,7 +67,14 @@ float EnvironmentalCurve::getCurveValue(unsigned p_year){
             x_value = ((float)(x_pos - part_1_years - plateau_1_years - part_2_years)) / ((float)plateau_2_years);
             curve_func = plateau_2_curve;
         }
-        boost::replace_all(curve_func, "x", CommonFun::to_str(x_value));
+        if (p_year==282500){
+            LOG(INFO)<<"Exception get: curve is "<<curve_func<<", x value is "<<x_value;
+        }
+//        try{
+            boost::replace_all(curve_func, "x", CommonFun::to_str(x_value));
+//        }catch (int e){
+//            LOG(INFO)<<"Exception get: curve is "<<curve_func<<", x value is "<<x_value <<". exception number is " <<e;
+//        }
 //        printf("Function is %s\n", curve_func.c_str());
         curve_value = prs.parse(curve_func.c_str());
 

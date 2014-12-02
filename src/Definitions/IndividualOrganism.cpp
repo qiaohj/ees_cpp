@@ -77,10 +77,10 @@ unsigned IndividualOrganism::getSpeciationYears(){
 void IndividualOrganism::addChild(IndividualOrganism* child){
     children.push_back(child);
 }
-bool IndividualOrganism::isSuitable(std::vector<SparseMap*> p_current_environments) {
+bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
-        int env_value = p_current_environments[i]->readByXY(x, y);
+        int env_value = (*p_current_environments)[i]->readByXY(x, y);
         if (env_value==0){
             return false;
         }

@@ -65,6 +65,7 @@ public:
     std::string getSpeciationExtinction(bool isroot, unsigned total_years);
     bool isNewSpecies();
     void setNewSpecies(bool p);
+    std::string getIDWithParentID();
 };
 
 #endif /* DEFINITIONS_SPECIESOBJECT_H_ */

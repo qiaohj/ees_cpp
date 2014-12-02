@@ -41,7 +41,18 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
     }
 
 }
-
+std::string SpeciesObject::getIDWithParentID(){
+    if (parent==NULL){
+        char t_char[5];
+        sprintf(t_char, "%u", id);
+        return std::string(t_char);
+    }else{
+        std::string parent_id = parent->getIDWithParentID();
+        char t_char[parent_id.length() + 5];
+        sprintf(t_char, "%s-%u", parent_id.c_str(), id);
+        return std::string(t_char);
+    }
+}
 SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent,
         unsigned p_year) {
     newSpecies = true;

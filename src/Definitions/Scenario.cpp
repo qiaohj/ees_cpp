@@ -63,8 +63,7 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
                 + std::string(".json");
         Json::Value environment_json = CommonFun::readJson(
                 environment_json_path.c_str());
-        EnvironmentalCurve* environment_item = new EnvironmentalCurve(
-                environment_json);
+        EnvironmentalCurve* environment_item = new EnvironmentalCurve(environment_json);
         environments.push_back(environment_item);
         burnInYear = environment_item->getBurnInYears();
     }
@@ -105,6 +104,25 @@ void Scenario::run() {
     unsigned x = 99999, y = 99999;
     unsigned tif_number = 0;
     std::vector<std::string> stat_output;
+//    for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
+//                minSpeciesDispersalSpeed) {
+//        printf("year:%u\n", year);
+//        std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
+//        if (x == 99999) {
+//            int value;
+//            current_environments[0]->getFirstValues(&x, &y, &value);
+//        }
+//        char line[30];
+//        int v = current_environments[0]->readByXY(x, y);
+//        sprintf(line, "%u,%u,%u,%d", year, x, y, v);
+//        env_output.push_back(line);
+//        CommonFun::clearVector(&current_environments);
+//    }
+//    char filepath2[target.length() + 15];
+//    sprintf(filepath2, "%s/env_curve.csv", target.c_str());
+//    CommonFun::writeFile(env_output, filepath2);
+//    env_output.clear();
+//    return;
 //    bool is_write_memory_usage = false;
     for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
             minSpeciesDispersalSpeed) {
@@ -122,8 +140,9 @@ void Scenario::run() {
         int v = current_environments[0]->readByXY(x, y);
         sprintf(line, "%u,%u,%u,%d", year, x, y, v);
         env_output.push_back(line);
-        boost::unordered_map<SpeciesObject*,
-        boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
+
+
+        boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
         for (auto sp_it : all_individualOrganisms[year - minSpeciesDispersalSpeed]) {
             for (auto c_it : sp_it.second) {
                 if (c_it.second.size()>0) {
@@ -148,8 +167,7 @@ void Scenario::run() {
                         break;
                         //all the individual organisms can move
                         case 2:
-                        next_cells = getDispersalMap_2(individualOrganism,
-                                current_environments);
+                        next_cells = getDispersalMap_2(individualOrganism);
                         break;
                         default:
                         ;
@@ -194,7 +212,7 @@ void Scenario::run() {
             std::vector<unsigned> erased_key;
             for (auto it : s_it.second) {
                 if (it.second.size()>0) {
-                    if (!it.second.front()->isSuitable(current_environments)) {
+                    if (!it.second.front()->isSuitable(&current_environments)) {
                         erased_key.push_back(it.first);
                     }
                 }
@@ -445,14 +463,23 @@ void Scenario::run() {
 //
 //        }
 //        LOG(INFO)<<"Total organisms are " <<c;
+        LOG(INFO)<<"Generate speciation information.";
+        generateSpeciationInfo(year);
         CommonFun::clearVector(&current_environments);
-
+        LOG(INFO)<<"Save stat information.";
         sprintf(line, "%u,%lu,%lu", year, CommonFun::getCurrentRSS(), actived_individualOrganisms.size());
         stat_output.push_back(line);
         char filepath[target.length() + 16];
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
         CommonFun::writeFile(stat_output, filepath);
-        generateSpeciationInfo();
+        if (year==294500){
+            //print actived_individualOrganisms information
+            LOG(INFO)<<"Begin OUTPUT Species information";
+            for (auto sp_it : actived_individualOrganisms){
+                LOG(INFO)<<sp_it.first->getIDWithParentID()<<" @ " <<sp_it.second.size();
+            }
+            LOG(INFO)<<"END OUTPUT Species information";
+        }
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
@@ -464,16 +491,16 @@ void Scenario::run() {
 
 
 }
-void Scenario::generateSpeciationInfo() {
+void Scenario::generateSpeciationInfo(unsigned year) {
     std::vector<SpeciesObject*> roots;
     for (auto sp_it : species) {
         if (sp_it->getDisappearedYear() == 0) {
-            sp_it->setDisappearedYear(totalYears);
+            sp_it->setDisappearedYear(year);
         }
     }
     for (auto sp_it : species) {
         if (sp_it->getAppearedYear() == 0) {
-            sp_it->markNode(totalYears);
+            sp_it->markNode(year);
             roots.push_back(sp_it);
         }
     }
@@ -484,8 +511,9 @@ void Scenario::generateSpeciationInfo() {
         CommonFun::writeFile(sp_it->getNewickTree(true, false), newick.c_str());
         std::string html = folder + "/Phylogram.html";
         CommonFun::writeFile(sp_it->getHTMLTree(), html.c_str());
-        std::string stat = folder + "/stat.csv";
-        CommonFun::writeFile(sp_it->getSpeciationExtinction(true, totalYears),
+        std::string stat = folder + "/" + CommonFun::fixedLength(year, 7) + "_stat.csv";
+
+        CommonFun::writeFile(sp_it->getSpeciationExtinction(true, year),
                 stat.c_str());
 
     }
@@ -676,8 +704,7 @@ void Scenario::cleanEnvironments() {
 //    environment_maps.clear();
 }
 std::vector<CoodLocation*> Scenario::getDispersalMap_2(
-        IndividualOrganism* individualOrganism,
-        std::vector<SparseMap*> p_current_environments) {
+        IndividualOrganism* individualOrganism) {
     std::vector<CoodLocation*> new_cells;
 
     //unfinished part

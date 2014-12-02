@@ -42,8 +42,7 @@ private:
     boost::unordered_map<unsigned, boost::unordered_map<SpeciesObject*,
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > > all_individualOrganisms;
     std::vector<CoodLocation*> getDispersalMap_2(
-            IndividualOrganism* individualOrganism,
-            std::vector<SparseMap*> p_current_environments);
+            IndividualOrganism* individualOrganism);
     IndividualOrganism* getUnmarkedOrganism(
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     void markJointOrganism(unsigned short p_group_id,
@@ -55,7 +54,7 @@ private:
     void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     std::string getSpeciesFolder(SpeciesObject* p_species);
-    void generateSpeciationInfo();
+    void generateSpeciationInfo(unsigned year);
 public:
     Scenario(Json::Value p_root, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit);
