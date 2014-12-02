@@ -126,9 +126,9 @@ int main(int argc, const char* argv[]) {
 //    printf("%lu\n", sizeof(long unsigned));
 //    printf("%lu\n", sizeof(unsigned));
     signal(SIGSEGV, handler);
-    char path[] = "/home/qiaohj/workspace/NicheBreadth/data/scenarios/scenario.json";
+    char path[] = "/home/huijieqiao/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);
-	Scenario* scenario = new Scenario(root_Scenario, "/home/qiaohj/workspace/NicheBreadth/data", "/home/qiaohj/temp", 1000);
+	Scenario* scenario = new Scenario(root_Scenario, "/home/huijieqiao/workspace/NicheBreadth/data", "/home/huijieqiao/temp", 1000);
 	scenario->run();
 	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
