@@ -144,7 +144,7 @@ void Scenario::run() {
             int value;
             current_environments[0]->getFirstValues(&x, &y, &value);
         }
-        char line[30];
+        char line[50];
         int v = current_environments[0]->readByXY(x, y);
         sprintf(line, "%u,%u,%u,%d", year, x, y, v);
         env_output.push_back(line);
@@ -440,15 +440,15 @@ void Scenario::run() {
         generateSpeciationInfo(year);
         CommonFun::clearVector(&current_environments);
         LOG(INFO)<<"Save stat information.";
-        unsigned o_size = 0;
-        unsigned c_size = 0;
+        unsigned long o_size = 0;
+        unsigned long c_size = 0;
         for (auto sp_it : (*actived_individualOrganisms)){
             for (auto c_it : sp_it.second){
                 o_size += c_it.second.size();
             }
             c_size += sp_it.second.size();
         }
-        sprintf(line, "%u,%lu,%u,%u", year, CommonFun::getCurrentRSS(), c_size, o_size);
+        sprintf(line, "%u,%lu,%lu,%lu", year, CommonFun::getCurrentRSS(), c_size, o_size);
         stat_output.push_back(line);
         char filepath[target.length() + 16];
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
