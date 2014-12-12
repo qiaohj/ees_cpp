@@ -55,6 +55,7 @@ private:
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     std::string getSpeciesFolder(SpeciesObject* p_species);
     void generateSpeciationInfo(unsigned year);
+    void clearActiveOrganism();
 public:
     Scenario(Json::Value p_root, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit);

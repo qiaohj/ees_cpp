@@ -419,17 +419,9 @@ void Scenario::run() {
         }
         group_maps.clear();
         erased_key.clear();
-        for (auto sp_it : (*actived_individualOrganisms)) {
-            for (auto c_it : sp_it.second) {
-                for (std::vector<IndividualOrganism*>::iterator it =
-                        c_it.second.begin(); it != c_it.second.end(); ++it) {
-                    delete *it;
-                }
-                c_it.second.clear();
-                std::vector<IndividualOrganism*>().swap(c_it.second);
-            }
-        }
-        actived_individualOrganisms->clear();
+
+        clearActiveOrganism();
+
         blank_table_2 = actived_individualOrganisms;
         actived_individualOrganisms = individual_organisms_in_current_year;
         individual_organisms_in_current_year = blank_table_2;
@@ -449,10 +441,14 @@ void Scenario::run() {
         CommonFun::clearVector(&current_environments);
         LOG(INFO)<<"Save stat information.";
         unsigned o_size = 0;
+        unsigned c_size = 0;
         for (auto sp_it : (*actived_individualOrganisms)){
-            o_size += sp_it.second.size();
+            for (auto c_it : sp_it.second){
+                o_size += c_it.second.size();
+            }
+            c_size += sp_it.second.size();
         }
-        sprintf(line, "%u,%lu,%u", year, CommonFun::getCurrentRSS(), o_size);
+        sprintf(line, "%u,%lu,%u,%u", year, CommonFun::getCurrentRSS(), c_size, o_size);
         stat_output.push_back(line);
         char filepath[target.length() + 16];
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
@@ -462,11 +458,25 @@ void Scenario::run() {
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
     CommonFun::writeFile(env_output, filepath);
     env_output.clear();
-
+    clearActiveOrganism();
     //generate the speciation information
     //get root species object
 
 
+}
+void Scenario::clearActiveOrganism() {
+    for (auto sp_it : (*actived_individualOrganisms)) {
+        for (auto c_it : sp_it.second) {
+            for (std::vector<IndividualOrganism*>::iterator it =
+                    c_it.second.begin(); it != c_it.second.end(); ++it) {
+//                LOG(INFO)<<"Delete organism year:"<<(*it)->getYear()<<" X:"<<(*it)->getX()<<" Y:"<<(*it)->getY();
+                delete *it;
+            }
+            c_it.second.clear();
+            std::vector<IndividualOrganism*>().swap(c_it.second);
+        }
+    }
+    actived_individualOrganisms->clear();
 }
 void Scenario::generateSpeciationInfo(unsigned year) {
     std::vector<SpeciesObject*> roots;
