@@ -8,6 +8,7 @@
 #ifndef DEFINITIONS_INDIVIDUALORGANISM_H_
 #define DEFINITIONS_INDIVIDUALORGANISM_H_
 
+#include <boost/unordered_map.hpp>
 #include "SpeciesObject.h"
 #include "SparseMap.h"
 #include "../Universal/log.hpp"
@@ -20,14 +21,13 @@ private:
     unsigned short tempSpeciesID;
     SpeciesObject* species;
     unsigned year;
-    IndividualOrganism* parent;
-    std::vector<IndividualOrganism*> children;
+    boost::unordered::unordered_map<unsigned, unsigned> parentIds;
+//    std::vector<IndividualOrganism*> children;
 
 public:
     IndividualOrganism(unsigned p_year, SpeciesObject* p_species,
-            IndividualOrganism* p_parent, unsigned short p_x, unsigned short p_y);
+            boost::unordered::unordered_map<unsigned, unsigned> p_parent_ids, unsigned short p_x, unsigned short p_y);
     virtual ~IndividualOrganism();
-    unsigned getNextRunYear();
     int getDispersalMethod();
     int getNumOfPath();
     unsigned getDispersalAbility();
@@ -35,8 +35,10 @@ public:
     bool isSuitable(std::vector<SparseMap*>* p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
-    void setParent(IndividualOrganism* p_parent);
-    IndividualOrganism* getParent();
+    void addParentId(unsigned year, unsigned group_id);
+    boost::unordered::unordered_map<unsigned, unsigned> getParentIds();
+//    void setParent(IndividualOrganism* p_parent);
+//    IndividualOrganism* getParent();
     unsigned getYear();
     unsigned short getX();
     unsigned short getY();
@@ -46,9 +48,10 @@ public:
     void setTempSpeciesId(unsigned short p_species_id);
     unsigned getTempSpeciesId();
     void setSpecies(SpeciesObject* p_species);
-    void addChild(IndividualOrganism* child);
-    void clearChildren();
-    void removeChild(IndividualOrganism* child);
+    void removeParentYear(unsigned parent_year);
+//    void addChild(IndividualOrganism* child);
+//    void clearChildren();
+//    void removeChild(IndividualOrganism* child);
 };
 
 #endif /* DEFINITIONS_INDIVIDUALORGANISM_H_ */

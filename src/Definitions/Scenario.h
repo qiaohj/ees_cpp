@@ -39,8 +39,8 @@ private:
     void cleanSpecies();
     void createSpeciesFolder(SpeciesObject* p_species);
     unsigned burnInYear;
-    boost::unordered_map<unsigned, boost::unordered_map<SpeciesObject*,
-            boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > > all_individualOrganisms;
+    boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*>> > init_io;
+    boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*>> >* actived_individualOrganisms;
     std::vector<CoodLocation*> getDispersalMap_2(
             IndividualOrganism* individualOrganism);
     IndividualOrganism* getUnmarkedOrganism(

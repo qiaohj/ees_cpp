@@ -8,17 +8,15 @@
 #include "IndividualOrganism.h"
 
 IndividualOrganism::IndividualOrganism(unsigned p_year,
-        SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned short p_x, unsigned short p_y) {
+        SpeciesObject* p_species, boost::unordered::unordered_map<unsigned, unsigned> p_parent_ids,
+        unsigned short p_x, unsigned short p_y) {
     species = p_species;
     year = p_year;
-    parent = p_parent;
+    parentIds = p_parent_ids;
     x = p_x;
     y = p_y;
     groupId = 0;
     tempSpeciesID = 0;
-    if (parent!=NULL){
-        parent->addChild(this);
-    }
 }
 void IndividualOrganism::setGroupId(unsigned short p_group_id){
     groupId = p_group_id;
@@ -35,32 +33,32 @@ unsigned IndividualOrganism::getTempSpeciesId(){
 void IndividualOrganism::setSpecies(SpeciesObject* p_species){
     species = p_species;
 }
-void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
-    parent = p_parent;
+void IndividualOrganism::removeParentYear(unsigned parent_year){
+    parentIds.erase(parent_year);
 }
-IndividualOrganism* IndividualOrganism::getParent() {
-    return parent;
-}
-void IndividualOrganism::removeChild(IndividualOrganism* child) {
-    std::vector<IndividualOrganism*>::iterator iter = children.begin();
-    while (iter != children.end()) {
-        if (*iter == child) {
-            iter = children.erase(iter);
-        } else {
-            ++iter;
-        }
-    }
-}
-void IndividualOrganism::clearChildren(){
-    for (auto child : children){
-        child->setParent(NULL);
-    }
-}
+//void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
+//    parent = p_parent;
+//}
+//IndividualOrganism* IndividualOrganism::getParent() {
+//    return parent;
+//}
+//void IndividualOrganism::removeChild(IndividualOrganism* child) {
+//    std::vector<IndividualOrganism*>::iterator iter = children.begin();
+//    while (iter != children.end()) {
+//        if (*iter == child) {
+//            iter = children.erase(iter);
+//        } else {
+//            ++iter;
+//        }
+//    }
+//}
+//void IndividualOrganism::clearChildren(){
+//    for (auto child : children){
+//        child->setParent(NULL);
+//    }
+//}
 IndividualOrganism::~IndividualOrganism() {
 
-}
-unsigned IndividualOrganism::getNextRunYear() {
-    return year + species->getDispersalSpeed();
 }
 int IndividualOrganism::getDispersalMethod() {
     return species->getDispersalMethod();
@@ -74,9 +72,15 @@ unsigned IndividualOrganism::getDispersalAbility() {
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();
 }
-void IndividualOrganism::addChild(IndividualOrganism* child){
-    children.push_back(child);
+void IndividualOrganism::addParentId(unsigned year, unsigned group_id){
+    parentIds[year] = group_id;
 }
+boost::unordered::unordered_map<unsigned, unsigned> IndividualOrganism::getParentIds(){
+    return parentIds;
+}
+//void IndividualOrganism::addChild(IndividualOrganism* child){
+//    children.push_back(child);
+//}
 bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
