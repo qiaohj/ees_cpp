@@ -472,14 +472,6 @@ void Scenario::run() {
         char filepath[target.length() + 16];
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
         CommonFun::writeFile(stat_output, filepath);
-        if (year==294500){
-            //print actived_individualOrganisms information
-            LOG(INFO)<<"Begin OUTPUT Species information";
-            for (auto sp_it : actived_individualOrganisms){
-                LOG(INFO)<<sp_it.first->getIDWithParentID()<<" @ " <<sp_it.second.size();
-            }
-            LOG(INFO)<<"END OUTPUT Species information";
-        }
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
