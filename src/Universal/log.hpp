@@ -815,9 +815,9 @@ static const char* kDefaultLogFile = _ELPP_DEFAULT_LOG_FILE;
 #else
 #   if _ELPP_OS_UNIX
 #      if _ELPP_OS_ANDROID
-static const char* kDefaultLogFile = "/home/qiaohj/temp/logs/myeasylog.log";
+static const char* kDefaultLogFile = "/home/huijieqiao/temp/logs/myeasylog.log";
 #      else
-static const char* kDefaultLogFile = "/home/qiaohj/temp/logs/myeasylog.log";
+static const char* kDefaultLogFile = "/home/huijieqiao/temp/logs/myeasylog.log";
 #      endif  // _ELPP_OS_ANDROID
 #   elif _ELPP_OS_WINDOWS
 static const char* kDefaultLogFile = "logs\\myeasylog.log";

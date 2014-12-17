@@ -74,6 +74,15 @@ unsigned IndividualOrganism::getSpeciationYears(){
 }
 void IndividualOrganism::addParentId(unsigned year, unsigned group_id){
     parentIds[year] = group_id;
+    std::vector<unsigned> removed;
+    for (auto it : parentIds){
+    	if (species->getSpeciationYears()>(this->year - it.first)){
+    		removed.push_back(it.first);
+    	}
+    }
+    for (auto it : removed){
+    	parentIds.erase(it);
+    }
 }
 boost::unordered::unordered_map<unsigned, unsigned> IndividualOrganism::getParentIds(){
     return parentIds;
@@ -115,4 +124,13 @@ unsigned short IndividualOrganism::getY(){
 }
 void IndividualOrganism::setYear(unsigned p_year){
     year = p_year;
+}
+unsigned long IndividualOrganism::getMemoryUsage(){
+	unsigned long mem = 0;
+	mem += sizeof(unsigned short) * 4;
+	mem += sizeof(unsigned);
+	mem += sizeof(SpeciesObject*);
+	mem += sizeof(boost::unordered::unordered_map<unsigned, unsigned>);
+	mem += sizeof(unsigned) * 2 * parentIds.size();
+	return mem + 12;
 }

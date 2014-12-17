@@ -121,10 +121,12 @@ int main(int argc, const char* argv[]) {
     /*
      * Scenario Json Test
      * */
-//    printf("%lu\n", sizeof(IndividualOrganism));
-//    printf("%lu\n", sizeof(IndividualOrganism*));
-//    printf("%lu\n", sizeof(long unsigned));
-//    printf("%lu\n", sizeof(unsigned));
+    printf("%lu\n", sizeof(IndividualOrganism));
+    printf("%lu\n", sizeof(IndividualOrganism*));
+    printf("%lu\n", sizeof(long unsigned));
+    printf("%lu\n", sizeof(unsigned));
+    printf("%lu\n", sizeof(boost::unordered::unordered_map<unsigned, unsigned>));
+
     signal(SIGSEGV, handler);
     char path[] = "/home/huijieqiao/workspace/NicheBreadth/data/scenarios/scenario.json";
 	Json::Value root_Scenario = CommonFun::readJson(path);

@@ -49,6 +49,7 @@ public:
     unsigned getTempSpeciesId();
     void setSpecies(SpeciesObject* p_species);
     void removeParentYear(unsigned parent_year);
+    unsigned long getMemoryUsage();
 //    void addChild(IndividualOrganism* child);
 //    void clearChildren();
 //    void removeChild(IndividualOrganism* child);
