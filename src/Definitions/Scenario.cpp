@@ -149,7 +149,6 @@ void Scenario::run() {
         sprintf(line, "%u,%u,%u,%d", year, x, y, v);
         env_output.push_back(line);
 
-        LOG(INFO)<<"153 Memory usage:"<<CommonFun::getCurrentRSS();
         LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms->size();
         for (auto s_it : (*actived_individualOrganisms)) {
 
@@ -199,7 +198,6 @@ void Scenario::run() {
             new_individual_organisms.clear();
 //            LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
         }
-        LOG(INFO)<<"203 Memory usage:"<<CommonFun::getCurrentRSS();
 //        LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
         //LOG(INFO)<<"end to simulate cell by cell";
 
@@ -219,7 +217,6 @@ void Scenario::run() {
             erased_keys[s_it.first] = erased_key;
 //            LOG(INFO)<<"end to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
         }
-        LOG(INFO)<<"223 Memory usage:"<<CommonFun::getCurrentRSS();
         for (auto sp_it : erased_keys) {
             for (auto key : sp_it.second) {
                 for (std::vector<IndividualOrganism*>::iterator it = (*individual_organisms_in_current_year)[sp_it.first][key].begin();
@@ -232,7 +229,6 @@ void Scenario::run() {
             }
         }
         LOG(INFO)<<"end to remove unsuitable organisms.";
-        LOG(INFO)<<"236 Memory usage:"<<CommonFun::getCurrentRSS();
         //mark the group id for every organisms in this year, seperated by species id;
         LOG(INFO)<<"Begin to mark the group id, and detect the speciation.";
         for (auto sp_it : (*individual_organisms_in_current_year)) {
@@ -317,13 +313,11 @@ void Scenario::run() {
                 }
             }
         }
-        LOG(INFO)<<"321 Memory usage:"<<CommonFun::getCurrentRSS();
         LOG(INFO)<<"end to mark the group id, and detect the speciation.";
 
         LOG(INFO)<<"Begin to rebuild the organism structure in this year";
 
 
-        LOG(INFO)<<"327 Memory usage:"<<CommonFun::getCurrentRSS();
         for (auto sp_it : (*individual_organisms_in_current_year)) {
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
             //count all the species
@@ -359,7 +353,6 @@ void Scenario::run() {
                 (*new_individual_organisms_in_current_year)[sp_it.first] = sp_it.second;
             }
         }
-        LOG(INFO)<<"363 Memory usage:"<<CommonFun::getCurrentRSS();
         (*individual_organisms_in_current_year).clear();
         boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > >* blank_table_1;
         blank_table_1 = individual_organisms_in_current_year;
@@ -369,7 +362,6 @@ void Scenario::run() {
         LOG(INFO)<<"End to rebuild the organism structure in this year";
 
         LOG(INFO)<<"begin to generate group maps";
-        LOG(INFO)<<"372 Memory usage:"<<CommonFun::getCurrentRSS();
         boost::unordered_map<SpeciesObject*, SparseMap*> group_maps;
         for (auto sp_it : (*individual_organisms_in_current_year)) {
             if (group_maps.find(sp_it.first)==group_maps.end()) {
@@ -386,7 +378,6 @@ void Scenario::run() {
                 group_maps[sp_it.first] = NULL;
             }
         }
-        LOG(INFO)<<"389 Memory usage:"<<CommonFun::getCurrentRSS();
         for (auto it : group_maps) {
             if (it.second!=NULL) {
                 if ((tifLimit>=tif_number)||it.first->isNewSpecies()){
@@ -410,7 +401,6 @@ void Scenario::run() {
             }
             it.first->setNewSpecies(false);
         }
-        LOG(INFO)<<"413 Memory usage:"<<CommonFun::getCurrentRSS();
         //clear group_maps;
         std::vector<SpeciesObject*> erased_key;
         for (auto it : group_maps) {
@@ -424,7 +414,6 @@ void Scenario::run() {
         }
         group_maps.clear();
         erased_key.clear();
-        LOG(INFO)<<"427 Memory usage:"<<CommonFun::getCurrentRSS();
         for (auto sp_it : (*actived_individualOrganisms)) {
 			for (auto c_it : sp_it.second) {
 				for (std::vector<IndividualOrganism*>::iterator it =
@@ -437,7 +426,6 @@ void Scenario::run() {
 			sp_it.second.clear();
 		}
 
-        LOG(INFO)<<"439 Memory usage:"<<CommonFun::getCurrentRSS();
         actived_individualOrganisms->clear();
         blank_table_1 = actived_individualOrganisms;
         actived_individualOrganisms = individual_organisms_in_current_year;
@@ -466,7 +454,6 @@ void Scenario::run() {
         char filepath[target.length() + 16];
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
         CommonFun::writeFile(stat_output, filepath);
-        LOG(INFO)<<"462 Memory usage:"<<CommonFun::getCurrentRSS();
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
