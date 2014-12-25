@@ -8,15 +8,17 @@
 #include "IndividualOrganism.h"
 
 IndividualOrganism::IndividualOrganism(unsigned p_year,
-        SpeciesObject* p_species, boost::unordered::unordered_map<unsigned, unsigned> p_parent_ids,
-        unsigned short p_x, unsigned short p_y) {
+        SpeciesObject* p_species, IndividualOrganism* p_parent, unsigned short p_x, unsigned short p_y) {
     species = p_species;
     year = p_year;
-    parentIds = p_parent_ids;
+    parent = p_parent;
     x = p_x;
     y = p_y;
     groupId = 0;
     tempSpeciesID = 0;
+//    if (parent!=NULL){
+//        parent->addChild(this);
+//    }
 }
 void IndividualOrganism::setGroupId(unsigned short p_group_id){
     groupId = p_group_id;
@@ -33,15 +35,12 @@ unsigned IndividualOrganism::getTempSpeciesId(){
 void IndividualOrganism::setSpecies(SpeciesObject* p_species){
     species = p_species;
 }
-void IndividualOrganism::removeParentYear(unsigned parent_year){
-    parentIds.erase(parent_year);
+void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
+    parent = p_parent;
 }
-//void IndividualOrganism::setParent(IndividualOrganism* p_parent) {
-//    parent = p_parent;
-//}
-//IndividualOrganism* IndividualOrganism::getParent() {
-//    return parent;
-//}
+IndividualOrganism* IndividualOrganism::getParent() {
+    return parent;
+}
 //void IndividualOrganism::removeChild(IndividualOrganism* child) {
 //    std::vector<IndividualOrganism*>::iterator iter = children.begin();
 //    while (iter != children.end()) {
@@ -60,6 +59,9 @@ void IndividualOrganism::removeParentYear(unsigned parent_year){
 IndividualOrganism::~IndividualOrganism() {
 
 }
+unsigned IndividualOrganism::getNextRunYear() {
+    return year + species->getDispersalSpeed();
+}
 int IndividualOrganism::getDispersalMethod() {
     return species->getDispersalMethod();
 }
@@ -71,21 +73,6 @@ unsigned IndividualOrganism::getDispersalAbility() {
 }
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();
-}
-void IndividualOrganism::addParentId(unsigned year, unsigned group_id){
-    parentIds[year] = group_id;
-    std::vector<unsigned> removed;
-    for (auto it : parentIds){
-    	if (species->getSpeciationYears()>(this->year - it.first)){
-    		removed.push_back(it.first);
-    	}
-    }
-    for (auto it : removed){
-    	parentIds.erase(it);
-    }
-}
-boost::unordered::unordered_map<unsigned, unsigned> IndividualOrganism::getParentIds(){
-    return parentIds;
 }
 //void IndividualOrganism::addChild(IndividualOrganism* child){
 //    children.push_back(child);
@@ -130,7 +117,7 @@ unsigned long IndividualOrganism::getMemoryUsage(){
 	mem += sizeof(unsigned short) * 4;
 	mem += sizeof(unsigned);
 	mem += sizeof(SpeciesObject*);
-	mem += sizeof(boost::unordered::unordered_map<unsigned, unsigned>);
-	mem += sizeof(unsigned) * 2 * parentIds.size();
-	return mem + 12;
+	mem += sizeof(std::vector<IndividualOrganism*>);
+//	mem += sizeof(IndividualOrganism*) * children.size();
+	return mem;
 }
