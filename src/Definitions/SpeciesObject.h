@@ -36,7 +36,7 @@ private:
     //0: unknown, 1: extincted, 2: unextincted 3: parent_extincted
     unsigned clade_extinction_status;
 public:
-    SpeciesObject(Json::Value p_root);
+    SpeciesObject(const std::string json_path);
     SpeciesObject(unsigned p_id, SpeciesObject* p_parent, unsigned p_year);
     virtual ~SpeciesObject();
     unsigned getDispersalAbility();

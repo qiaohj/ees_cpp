@@ -8,11 +8,11 @@
 #include "RasterObject.h"
 
 
-RasterObject::RasterObject(char const* rasterName) :
-		rasterName(rasterName){
+RasterObject::RasterObject(std::string p_raster_name){
+	rasterName = p_raster_name;
 	GDALAllRegister();
-//	printf("%s\n", rasterName);
-	poDataset = (GDALDataset *) GDALOpen(rasterName, GA_ReadOnly);
+	LOG(INFO)<<"Read raster file from "<<rasterName;
+	poDataset = (GDALDataset *) GDALOpen(rasterName.c_str(), GA_ReadOnly);
 	poBand = poDataset->GetRasterBand(1);
 	xSize = poBand->GetXSize();
 	ySize = poBand->GetYSize();

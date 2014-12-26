@@ -9,20 +9,22 @@
 #include "EnvironmentalCurve.h"
 
 
-EnvironmentalCurve::EnvironmentalCurve(Json::Value p_root) {
-    glacial = new RasterObject(p_root.get("glacial_path", "").asCString());
-    interglacial = new RasterObject(p_root.get("interglacial_path", "").asCString());
+EnvironmentalCurve::EnvironmentalCurve(const std::string json_path) {
+	LOG(INFO)<<"Load environmental curve configure from "<<json_path;
+	Json::Value environment_json = CommonFun::readJson(json_path.c_str());
+    glacial = new RasterObject(environment_json.get("glacial_path", "").asString());
+    interglacial = new RasterObject(environment_json.get("interglacial_path", "").asString());
     noData = glacial->getNoData();
-    part_1_years = p_root.get("part_1_years", 10000).asInt();
-    part_2_years = p_root.get("part_2_years", 10000).asInt();
-    plateau_1_years = p_root.get("plateau_1_years", 10000).asInt();
-    plateau_2_years = p_root.get("plateau_2_years", 10000).asInt();
-    burn_in_curve = p_root.get("burn_in_curve", "1").asString();
-    part_1_curve = p_root.get("part_1_curve", "1").asString();
-    part_2_curve = p_root.get("part_2_curve", "1").asString();
-    plateau_1_curve = p_root.get("plateau_1_curve", "1").asString();
-    plateau_2_curve = p_root.get("plateau_2_curve", "1").asString();
-    burnInYears = p_root.get("burn_in_years", 50000).asInt();
+    part_1_years = environment_json.get("part_1_years", 10000).asInt();
+    part_2_years = environment_json.get("part_2_years", 10000).asInt();
+    plateau_1_years = environment_json.get("plateau_1_years", 10000).asInt();
+    plateau_2_years = environment_json.get("plateau_2_years", 10000).asInt();
+    burn_in_curve = environment_json.get("burn_in_curve", "1").asString();
+    part_1_curve = environment_json.get("part_1_curve", "1").asString();
+    part_2_curve = environment_json.get("part_2_curve", "1").asString();
+    plateau_1_curve = environment_json.get("plateau_1_curve", "1").asString();
+    plateau_2_curve = environment_json.get("plateau_2_curve", "1").asString();
+    burnInYears = environment_json.get("burn_in_years", 50000).asInt();
     cycleYears = part_1_years + part_2_years + plateau_1_years + plateau_2_years;
 }
 unsigned EnvironmentalCurve::getBurnInYears(){

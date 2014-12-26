@@ -43,16 +43,16 @@ _INITIALIZE_EASYLOGGINGPP
 //configure_base_folder, scenario_file, result_root, memory_limit(in M), tif_limit
 ///home/huijieqiao/workspace/NicheBreadth/data scenario.json /home/huijieqiao/temp 8000 1000
 int main(int argc, const char* argv[]) {
-
+	for (int i=0;i<argc;i++){
+		LOG(INFO)<<"run command "<<i<<" "<<argv[i];
+	}
     signal(SIGSEGV, handler);
 
     char path[strlen(argv[1]) + strlen(argv[2]) + 20];
-    sprintf(path, "%s/scenarios/%s", argv[1], argv[2]);
-
-	Json::Value root_Scenario = CommonFun::readJson(path);
+    sprintf(path, "%s/scenarios/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
 	unsigned tif_limit = atoi(argv[5]);
-	Scenario* scenario = new Scenario(root_Scenario, argv[1], argv[3], memory_limit, tif_limit);
+	Scenario* scenario = new Scenario(std::string(path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
 	scenario->run();
 	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;

@@ -15,7 +15,7 @@
 
 class RasterObject{
 private:
-    const char* rasterName;
+    std::string rasterName;
 	GDALDataset* poDataset;
 	GDALRasterBand* poBand;
 	unsigned xSize;
@@ -24,7 +24,7 @@ private:
 	float* valueArray;
 	double* adfGeoTransform;
 public:
-	RasterObject(char const* rasterName);
+	RasterObject(std::string p_raster_name);
 	~RasterObject();
 	std::string getRasterName();
 	GDALDataset* getGDALDataset();

@@ -7,16 +7,18 @@
 
 #include "Scenario.h"
 
-Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
+Scenario::Scenario(const std::string json_path, std::string scenario_id, std::string p_base_folder,
         std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit) {
+	LOG(INFO)<<"Read scenario configuration from "<<json_path;
+	Json::Value root_Scenario = CommonFun::readJson(json_path.c_str());
 	memLimit = p_mem_limit;
     tifLimit = p_tif_limit;
     baseFolder = p_base_folder;
-    target = p_target;
+    target = p_target + "/" + scenario_id;
     CommonFun::createFolder(target.c_str());
-    totalYears = p_root.get("total_years", 500000).asInt();
+    totalYears = root_Scenario.get("total_years", 500000).asInt();
     RasterObject* mask_raster = new RasterObject(
-            p_root.get("mask", "").asCString());
+    		root_Scenario.get("mask", "").asString());
     geoTrans = new double[6];
     memcpy(geoTrans, mask_raster->getGeoTransform(), 6 * sizeof(*geoTrans));
 
@@ -24,15 +26,13 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
     xSize = mask_raster->getXSize();
     ySize = mask_raster->getYSize();
     minSpeciesDispersalSpeed = totalYears;
-    Json::Value species_json_array = p_root["species"];
+    Json::Value species_json_array = root_Scenario["species"];
 
     for (unsigned index = 0; index < species_json_array.size(); ++index) {
         std::string species_json_path = baseFolder
                 + std::string("/niche_definations/")
                 + species_json_array[index].asString() + std::string(".json");
-        Json::Value species_json = CommonFun::readJson(
-                species_json_path.c_str());
-        SpeciesObject* species = new SpeciesObject(species_json);
+        SpeciesObject* species = new SpeciesObject(species_json_path.c_str());
         this->species.push_back(species);
         createSpeciesFolder(species);
         std::vector<GeoLocation*> seeds = species->getSeeds();
@@ -55,16 +55,15 @@ Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
                         species->getDispersalSpeed() : minSpeciesDispersalSpeed;
     }
 
-    Json::Value environment_json_array = p_root["environments"];
+    Json::Value environment_json_array = root_Scenario["environments"];
     environments.reserve(environment_json_array.size());
     for (unsigned index = 0; index < environment_json_array.size(); ++index) {
         std::string environment_json_path = baseFolder
                 + std::string("/environment_curves/")
                 + environment_json_array[index].asString()
                 + std::string(".json");
-        Json::Value environment_json = CommonFun::readJson(
-                environment_json_path.c_str());
-        EnvironmentalCurve* environment_item = new EnvironmentalCurve(environment_json);
+
+        EnvironmentalCurve* environment_item = new EnvironmentalCurve(environment_json_path);
         environments.push_back(environment_item);
         burnInYear = environment_item->getBurnInYears();
     }
@@ -508,11 +507,6 @@ void Scenario::run() {
 }
 void Scenario::generateSpeciationInfo(unsigned year) {
     std::vector<SpeciesObject*> roots;
-    for (auto sp_it : species) {
-        if (sp_it->getDisappearedYear() == 0) {
-            sp_it->setDisappearedYear(year);
-        }
-    }
     for (auto sp_it : species) {
         if (sp_it->getAppearedYear() == 0) {
             sp_it->markNode(year);

@@ -36,7 +36,7 @@ private:
     float noData;
 
 public:
-	EnvironmentalCurve(Json::Value p_root);
+	EnvironmentalCurve(const std::string json_path);
 	virtual ~EnvironmentalCurve();
     unsigned getBurnInYears();
     SparseMap* getValues(unsigned p_year);

@@ -57,7 +57,7 @@ private:
     std::string getSpeciesFolder(SpeciesObject* p_species);
     void generateSpeciationInfo(unsigned year);
 public:
-    Scenario(Json::Value p_root, std::string p_base_folder,
+    Scenario(const std::string json_path, std::string scenario_id, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit);
     virtual ~Scenario();
     void run();

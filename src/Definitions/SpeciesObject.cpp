@@ -7,14 +7,16 @@
 
 #include "SpeciesObject.h"
 
-SpeciesObject::SpeciesObject(Json::Value p_root) {
+SpeciesObject::SpeciesObject(const std::string json_path) {
+	LOG(INFO)<<"Load species configure from " <<json_path;
+	Json::Value species_json = CommonFun::readJson(json_path.c_str());
     newSpecies = true;
-    id = p_root.get("id", "").asInt();
-    dispersalAbility = p_root.get("dispersal_ability", 1).asInt();
-    dispersalSpeed = p_root.get("dispersal_speed", 1000).asInt();
-    dispersalMethod = p_root.get("dispersal_method", 1).asInt();
-    numberOfPath = p_root.get("number_of_path", -1).asInt();
-    speciationYears = p_root.get("speciation_years", 10000).asInt();
+    id = species_json.get("id", "").asInt();
+    dispersalAbility = species_json.get("dispersal_ability", 1).asInt();
+    dispersalSpeed = species_json.get("dispersal_speed", 1000).asInt();
+    dispersalMethod = species_json.get("dispersal_method", 1).asInt();
+    numberOfPath = species_json.get("number_of_path", -1).asInt();
+    speciationYears = species_json.get("speciation_years", 10000).asInt();
     appearedYear = 0;
     disappearedYear = 0;
     parent = NULL;
@@ -22,7 +24,7 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
     number_of_clade_extinction = 0;
     number_of_speciation = 0;
     number_of_species_extinction = 0;
-    Json::Value niche_breadth_array = p_root["niche_breadth"];
+    Json::Value niche_breadth_array = species_json["niche_breadth"];
     for (unsigned index = 0; index < niche_breadth_array.size(); ++index) {
         Json::Value niche_breadth_json = niche_breadth_array[index];
         NicheBreadth* niche_breadth = new NicheBreadth(
@@ -31,7 +33,7 @@ SpeciesObject::SpeciesObject(Json::Value p_root) {
         nicheBreadth.push_back(niche_breadth);
     }
 
-    Json::Value initial_seeds_array = p_root["initial_seeds"];
+    Json::Value initial_seeds_array = species_json["initial_seeds"];
     for (unsigned index = 0; index < initial_seeds_array.size(); ++index) {
         Json::Value initial_seeds_json = initial_seeds_array[index];
         GeoLocation* initial_seed = new GeoLocation(
@@ -141,7 +143,7 @@ void SpeciesObject::markNode(unsigned total_years) {
     if (children.size() == 0) {
         number_of_clade_extinction = 0;
         number_of_speciation = 0;
-        number_of_species_extinction = (disappearedYear == total_years) ? 0 : 1;
+        number_of_species_extinction = ((disappearedYear==0)||(disappearedYear == total_years)) ? 0 : 1;
     } else {
         for (auto child : children) {
             number_of_clade_extinction += child->getNumberOfCladeExtinction();
