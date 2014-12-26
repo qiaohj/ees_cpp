@@ -118,7 +118,7 @@ size_t CommonFun::getCurrentRSS() {
         return (size_t) 0L; /* Can't read? */
     }
     fclose(fp);
-    return (size_t) rss * (size_t) sysconf( _SC_PAGESIZE);
+    return (size_t) rss * (size_t) sysconf( _SC_PAGESIZE) / (1024 * 1024);
 
 }
 size_t CommonFun::writeMemoryUsage(unsigned line, bool is, size_t last){

@@ -8,7 +8,8 @@
 #include "Scenario.h"
 
 Scenario::Scenario(Json::Value p_root, std::string p_base_folder,
-        std::string p_target, unsigned p_tif_limit) {
+        std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit) {
+	memLimit = p_mem_limit;
     tifLimit = p_tif_limit;
     baseFolder = p_base_folder;
     target = p_target;
@@ -490,6 +491,10 @@ void Scenario::run() {
         sprintf(filepath, "%s/stat_curve.csv", target.c_str());
         CommonFun::writeFile(stat_output, filepath);
         CommonFun::writeFile(stat_output, filepath);
+        if (CommonFun::getCurrentRSS()>memLimit){
+        	LOG(INFO)<<"To the memory limit, exit!";
+        	exit(1);
+        }
     }
     char filepath[target.length() + 15];
     sprintf(filepath, "%s/env_curve.csv", target.c_str());
