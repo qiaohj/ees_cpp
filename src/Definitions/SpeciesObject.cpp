@@ -154,7 +154,7 @@ void SpeciesObject::markNode(unsigned total_years) {
         number_of_speciation++;
     }
 }
-std::vector<std::string> SpeciesObject::getHTMLTree() {
+std::vector<std::string> SpeciesObject::getHTMLTree(unsigned p_year) {
     std::vector<std::string> html_output;
     html_output.push_back(
             "<!DOCTYPE html><html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>");
@@ -169,7 +169,7 @@ std::vector<std::string> SpeciesObject::getHTMLTree() {
     html_output.push_back("<script>");
     html_output.push_back("function load() {");
     html_output.push_back(
-            "var newick = Newick.parse('" + getNewickTree(true, true) + "');");
+            "var newick = Newick.parse('" + getNewickTree(true, true, p_year) + "');");
     html_output.push_back("var newickNodes = [];");
     html_output.push_back("function buildNewickNodes(node, callback) {");
     html_output.push_back("newickNodes.push(node);");
@@ -207,14 +207,14 @@ std::vector<std::string> SpeciesObject::getHTMLTree() {
     html_output.push_back("</html>");
     return html_output;
 }
-std::string SpeciesObject::getNewickTree(bool isroot, bool iscolor) {
+std::string SpeciesObject::getNewickTree(bool isroot, bool iscolor, unsigned p_year) {
     std::string output = "";
     unsigned i = 0;
     if (children.size() > 0) {
         output += "(";
         for (auto child : children) {
             i++;
-            output += child->getNewickTree(false, iscolor);
+            output += child->getNewickTree(false, iscolor, p_year);
             if (i < children.size()) {
                 output += ",";
             }
@@ -234,32 +234,32 @@ std::string SpeciesObject::getNewickTree(bool isroot, bool iscolor) {
     if ((clade_extinction_status == 1) || (clade_extinction_status == 3)) {
         linecolor = "red";
     }
-
+    unsigned t_disappearedYear = (disappearedYear==0)?p_year:disappearedYear;
     int parent_year = (parent == NULL) ? 0 : parent->getDisappearedYear();
-    if (appearedYear == disappearedYear) {
+    if (appearedYear == t_disappearedYear) {
         if (iscolor) {
             char t_char[40];
             sprintf(t_char, "SP%u[%u]:%u@%s~%s", id, appearedYear,
-                    disappearedYear - parent_year, color.c_str(),
+                    t_disappearedYear - parent_year, color.c_str(),
                     linecolor.c_str());
             output += std::string(t_char);
         } else {
             char t_char[40];
             sprintf(t_char, "SP%u[%u]:%u", id, appearedYear,
-                    disappearedYear - parent_year);
+                    t_disappearedYear - parent_year);
             output += std::string(t_char);
         }
     } else {
         if (iscolor) {
             char t_char[40];
             sprintf(t_char, "SP%u[%u-%u]:%u@%s~%s", id, appearedYear,
-                    disappearedYear, disappearedYear - parent_year,
+                    t_disappearedYear, t_disappearedYear - parent_year,
                     color.c_str(), linecolor.c_str());
             output += std::string(t_char);
         } else {
             char t_char[40];
-            sprintf(t_char, "SP%u[%u-%u]:%u", id, appearedYear, disappearedYear,
-                    disappearedYear - parent_year);
+            sprintf(t_char, "SP%u[%u-%u]:%u", id, appearedYear, t_disappearedYear,
+                    t_disappearedYear - parent_year);
             output += std::string(t_char);
         }
     }

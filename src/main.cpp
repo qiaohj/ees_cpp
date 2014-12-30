@@ -25,6 +25,8 @@
 #include "Universal/log.hpp"
 #include "Universal/CommonFun.h"
 #include "Definitions/IndividualOrganism.h"
+
+
 void handler(int sig) {
   void *array[10];
   size_t size;
@@ -43,22 +45,23 @@ _INITIALIZE_EASYLOGGINGPP
 //configure_base_folder, scenario_file, result_root, memory_limit(in M), tif_limit
 ///home/huijieqiao/workspace/NicheBreadth/data scenario.json /home/huijieqiao/temp 8000 1000
 int main(int argc, const char* argv[]) {
-	for (int i=0;i<argc;i++){
-		LOG(INFO)<<"run command "<<i<<" "<<argv[i];
-	}
-    signal(SIGSEGV, handler);
-
     char path[strlen(argv[1]) + strlen(argv[2]) + 20];
     sprintf(path, "%s/scenarios/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
 	unsigned tif_limit = atoi(argv[5]);
 	Scenario* scenario = new Scenario(std::string(path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
+	el::Configurations c;
+	c.setGlobally(el::ConfigurationType::Filename, scenario->getTarget() + "/runtime.log");
+	el::Loggers::setDefaultConfigurations(c);
+	el::Loggers::getLogger("default");
+	el::Loggers::setDefaultConfigurations(c, true);
+
 	scenario->run();
 	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
 	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 
-    printf("done!");
+	LOG(INFO)<<"done!";
     return EXIT_SUCCESS;
 }
 

@@ -9,7 +9,6 @@
 
 Scenario::Scenario(const std::string json_path, std::string scenario_id, std::string p_base_folder,
         std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit) {
-	LOG(INFO)<<"Read scenario configuration from "<<json_path;
 	Json::Value root_Scenario = CommonFun::readJson(json_path.c_str());
 	memLimit = p_mem_limit;
     tifLimit = p_tif_limit;
@@ -517,9 +516,9 @@ void Scenario::generateSpeciationInfo(unsigned year) {
     for (auto sp_it : roots) {
         std::string folder = getSpeciesFolder(sp_it);
         std::string newick = folder + "/tree.new";
-        CommonFun::writeFile(sp_it->getNewickTree(true, false), newick.c_str());
+        CommonFun::writeFile(sp_it->getNewickTree(true, false, year), newick.c_str());
         std::string html = folder + "/Phylogram.html";
-        CommonFun::writeFile(sp_it->getHTMLTree(), html.c_str());
+        CommonFun::writeFile(sp_it->getHTMLTree(year), html.c_str());
         std::string stat = folder + "/stats/" + CommonFun::fixedLength(year, 7) + "_stat.csv";
 
         CommonFun::writeFile(sp_it->getSpeciationExtinction(true, year),
@@ -759,3 +758,6 @@ Scenario::~Scenario() {
     cleanSpecies();
 }
 
+std::string Scenario::getTarget(){
+	return target;
+}

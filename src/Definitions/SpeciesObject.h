@@ -53,7 +53,7 @@ public:
     unsigned getAppearedYear();
     std::vector<SpeciesObject*> getChildren();
     void addChild(SpeciesObject* child);
-    std::string getNewickTree(bool isroot, bool iscolor);
+    std::string getNewickTree(bool isroot, bool iscolor, unsigned p_year);
     void markNode(unsigned total_years);
     void setCladeExtinctionStatus(unsigned status);
     void markParentClade();
@@ -61,7 +61,7 @@ public:
     unsigned getNumberOfCladeExtinction();
     unsigned getNumberOfSpeciation();
     unsigned getNumberOfSpeciesExtinction();
-    std::vector<std::string> getHTMLTree();
+    std::vector<std::string> getHTMLTree(unsigned p_year);
     std::string getSpeciationExtinction(bool isroot, unsigned total_years);
     bool isNewSpecies();
     void setNewSpecies(bool p);

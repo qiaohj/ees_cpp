@@ -64,6 +64,7 @@ public:
     float* getEnvironmentValue(unsigned p_year, double p_longitude,
             double p_latitude);
     std::vector<SparseMap*> getEnvironmenMap(unsigned p_year);
+    std::string getTarget();
 };
 
 #endif /* DEFINITIONS_SCENARIO_H_ */
