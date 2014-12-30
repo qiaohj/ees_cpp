@@ -447,25 +447,21 @@ void Scenario::run() {
 				removed_year = (year - sp_it->getDispersalSpeed()) - speciation_year;
 			}
 			if (removed_year>=0) {
-				LOG(INFO)<<"Current year is "<<year<<". Remove organisms at year "<< removed_year<<".";
-				boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > temp_o = all_individualOrganisms[removed_year];
+//				LOG(INFO)<<"Current year is "<<year<<". Remove organisms at year "<< removed_year<<".";
+				boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > temp_o = all_individualOrganisms[removed_year][sp_it];
 				for (auto it1 : temp_o) {
-					for (auto it2 : it1.second) {
-						CommonFun::clearVector(&it2.second);
-					}
+					CommonFun::clearVector(&it1.second);
 				}
-				all_individualOrganisms.erase(removed_year);
+//				all_individualOrganisms.erase(removed_year);
 
-				LOG(INFO)<<"Set the parent to NULL for year "<<removed_year + sp_it->getDispersalSpeed();
-				temp_o = all_individualOrganisms[removed_year + sp_it->getDispersalSpeed()];
+//				LOG(INFO)<<"Set the parent to NULL for year "<<removed_year + sp_it->getDispersalSpeed();
+				temp_o = all_individualOrganisms[removed_year + sp_it->getDispersalSpeed()][sp_it];
 				for (auto it1 : temp_o) {
 					for (auto it2 : it1.second) {
-						for (auto it3 : it2.second) {
-							it3->setParent(NULL);
-						}
+						it2->setParent(NULL);
 					}
 				}
-				LOG(INFO)<<"Done!";
+//				LOG(INFO)<<"Done!";
 
 			}
 		}
