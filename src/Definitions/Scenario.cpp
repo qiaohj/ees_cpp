@@ -14,6 +14,7 @@ Scenario::Scenario(const std::string json_path, std::string scenario_id, std::st
     tifLimit = p_tif_limit;
     baseFolder = p_base_folder;
     target = p_target + "/" + scenario_id;
+    isFinished = boost::filesystem::exists(target);
     CommonFun::createFolder(target.c_str());
     totalYears = root_Scenario.get("total_years", 500000).asInt();
     RasterObject* mask_raster = new RasterObject(
@@ -83,6 +84,9 @@ std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
         CommonFun::createFolder(speciesFolder);
         return std::string(speciesFolder);
     }
+}
+bool Scenario::isFinish(){
+	return isFinished;
 }
 void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
     std::string speciesFolder = getSpeciesFolder(p_species);

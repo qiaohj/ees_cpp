@@ -23,6 +23,7 @@
 
 class Scenario {
 private:
+	bool isFinished;
     unsigned tifLimit;
     unsigned long memLimit;
     std::vector<EnvironmentalCurve*> environments;
@@ -61,6 +62,7 @@ public:
             std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit);
     virtual ~Scenario();
     void run();
+    bool isFinish();
     float* getEnvironmentValue(unsigned p_year, double p_longitude,
             double p_latitude);
     std::vector<SparseMap*> getEnvironmenMap(unsigned p_year);

@@ -50,6 +50,10 @@ int main(int argc, const char* argv[]) {
 	unsigned long memory_limit = atoi(argv[4]);
 	unsigned tif_limit = atoi(argv[5]);
 	Scenario* scenario = new Scenario(std::string(path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
+	if (scenario->isFinish()){
+		printf("Result folder is exist, skip this simulation!");
+		return EXIT_SUCCESS;
+	}
 	el::Configurations c;
 	c.setGlobally(el::ConfigurationType::Filename, scenario->getTarget() + "/runtime.log");
 	el::Loggers::setDefaultConfigurations(c);
