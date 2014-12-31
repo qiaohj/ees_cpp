@@ -51,7 +51,8 @@ int main(int argc, const char* argv[]) {
 	unsigned tif_limit = atoi(argv[5]);
 	Scenario* scenario = new Scenario(std::string(path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
 	if (scenario->isFinish()){
-		printf("Result folder is exist, skip this simulation!");
+		delete scenario;
+		printf("Result folder is exist, skip this simulation!\n");
 		return EXIT_SUCCESS;
 	}
 	el::Configurations c;
@@ -60,12 +61,17 @@ int main(int argc, const char* argv[]) {
 	el::Loggers::getLogger("default");
 	el::Loggers::setDefaultConfigurations(c, true);
 
-	scenario->run();
+	unsigned status = scenario->run();
 	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
 	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+	if (status==0){
+		LOG(INFO)<<"Well done!";
+	}
+	if (status==1){
+		LOG(INFO)<<"To the memory limit, exit!";
+	}
 
-	LOG(INFO)<<"done!";
     return EXIT_SUCCESS;
 }
 

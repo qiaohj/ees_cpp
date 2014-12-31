@@ -108,7 +108,7 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
 	CommonFun::createFolder(statsFolder);
 
 }
-void Scenario::run() {
+unsigned Scenario::run() {
 	std::vector<std::string> env_output;
 	unsigned x = 99999, y = 99999;
 	unsigned tif_number = 0;
@@ -495,8 +495,7 @@ void Scenario::run() {
 		CommonFun::writeFile(stat_output, filepath);
 		CommonFun::writeFile(stat_output, filepath);
 		if (CommonFun::getCurrentRSS()>memLimit) {
-			LOG(INFO)<<"To the memory limit, exit!";
-			exit(1);
+			return 1;
 		}
 	}
 	char filepath[target.length() + 15];
@@ -506,7 +505,7 @@ void Scenario::run() {
 
 	//generate the speciation information
 	//get root species object
-
+	return 0;
 }
 void Scenario::generateSpeciationInfo(unsigned year) {
 	std::vector<SpeciesObject*> roots;
@@ -760,9 +759,9 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 Scenario::~Scenario() {
 	delete[] geoTrans;
 	delete mask;
-	cleanEnvironments();
-	cleanActivedIndividualOrganisms();
-	cleanSpecies();
+//	cleanEnvironments();
+//	cleanActivedIndividualOrganisms();
+//	cleanSpecies();
 }
 
 std::string Scenario::getTarget() {
