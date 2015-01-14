@@ -62,9 +62,9 @@ int main(int argc, const char* argv[]) {
 	el::Loggers::setDefaultConfigurations(c, true);
 
 	unsigned status = scenario->run();
-	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+//	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
-	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+//	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	if (status==0){
 		LOG(INFO)<<"Well done!";
 	}

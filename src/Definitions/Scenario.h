@@ -56,7 +56,7 @@ private:
     void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     std::string getSpeciesFolder(SpeciesObject* p_species);
-    void generateSpeciationInfo(unsigned year);
+    void generateSpeciationInfo(unsigned year, bool is_tree);
 public:
     Scenario(const std::string json_path, std::string scenario_id, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit);
