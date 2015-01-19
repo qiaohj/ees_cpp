@@ -479,11 +479,15 @@ unsigned Scenario::run() {
 		stat_output.push_back(line);
 
 		if (CommonFun::getCurrentRSS()>memLimit) {
-			char filepath[target.length() + 16];
-			sprintf(filepath, "%s/stat_curve.csv", target.c_str());
-			CommonFun::writeFile(stat_output, filepath);
-			generateSpeciationInfo(year, true);
-			return 1;
+			if ((year>197000)&&(year<200000)){
+				LOG(INFO)<<"Try to give more memory";
+			}else{
+				char filepath[target.length() + 16];
+				sprintf(filepath, "%s/stat_curve.csv", target.c_str());
+				CommonFun::writeFile(stat_output, filepath);
+				generateSpeciationInfo(year, true);
+				return 1;
+			}
 		}
 	}
 	generateSpeciationInfo(totalYears, true);
