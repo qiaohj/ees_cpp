@@ -45,6 +45,7 @@ _INITIALIZE_EASYLOGGINGPP
 //configure_base_folder, scenario_file, result_root, memory_limit(in M), tif_limit
 ///home/huijieqiao/workspace/NicheBreadth/data scenario.json /home/huijieqiao/temp 8000 1000
 int main(int argc, const char* argv[]) {
+	//for old NB project
     char path[strlen(argv[1]) + strlen(argv[2]) + 20];
     sprintf(path, "%s/scenarios/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
