@@ -20,13 +20,15 @@ private:
     bool newSpecies;
     unsigned id;
     std::vector<NicheBreadth*> nicheBreadth;
-    unsigned dispersalAbility;
+    float* dispersalAbility[10];
     unsigned dispersalSpeed;
     unsigned speciationYears;
     int dispersalMethod;
     int numberOfPath;
     unsigned appearedYear;
     unsigned disappearedYear;
+    float speciesExtinctionThreshold;
+    float groupExtinctionThreshold;
     std::vector<GeoLocation*> seeds;
     SpeciesObject* parent;
     std::vector<SpeciesObject*> children;
@@ -39,8 +41,10 @@ public:
     SpeciesObject(const std::string json_path);
     SpeciesObject(unsigned p_id, SpeciesObject* p_parent, unsigned p_year);
     virtual ~SpeciesObject();
-    unsigned getDispersalAbility();
+    float* getDispersalAbility();
     unsigned getDispersalSpeed();
+    float getSpeciesExtinctionThreshold();
+    float getGroupExtinctionThreshold();
     int getDispersalMethod();
     std::vector<GeoLocation*> getSeeds();
     unsigned getID();

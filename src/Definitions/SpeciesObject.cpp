@@ -12,11 +12,17 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
 	Json::Value species_json = CommonFun::readJson(json_path.c_str());
     newSpecies = true;
     id = species_json.get("id", "").asInt();
-    dispersalAbility = species_json.get("dispersal_ability", 1).asInt();
-    dispersalSpeed = species_json.get("dispersal_speed", 1000).asInt();
-    dispersalMethod = species_json.get("dispersal_method", 1).asInt();
+    Json::Value dispersal_ability_array = species_json["dispersal_ability"];
+	for (unsigned index = 0; index < dispersal_ability_array.size(); ++index) {
+		dispersalAbility[index] = dispersal_ability_array[index].asFloat();
+	}
+    dispersalSpeed = species_json.get("dispersal_speed", 100).asInt();
+    dispersalMethod = species_json.get("dispersal_method", 2).asInt();
     numberOfPath = species_json.get("number_of_path", -1).asInt();
     speciationYears = species_json.get("speciation_years", 10000).asInt();
+
+    speciesExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asFloat();
+    groupExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asFloat();
     appearedYear = 0;
     disappearedYear = 0;
     parent = NULL;
@@ -37,8 +43,8 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     for (unsigned index = 0; index < initial_seeds_array.size(); ++index) {
         Json::Value initial_seeds_json = initial_seeds_array[index];
         GeoLocation* initial_seed = new GeoLocation(
-                initial_seeds_json[0].asDouble(),
-                initial_seeds_json[1].asDouble());
+                initial_seeds_json[0].asFloat(),
+                initial_seeds_json[1].asFloat());
         seeds.push_back(initial_seed);
     }
 
@@ -60,6 +66,8 @@ SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent,
     newSpecies = true;
     parent = p_parent;
     id = p_id;
+    speciesExtinctionThreshold = parent->getSpeciesExtinctionThreshold();
+    groupExtinctionThreshold = parent->getGroupExtinctionThreshold();
     dispersalAbility = parent->getDispersalAbility();
     dispersalSpeed = parent->getDispersalSpeed();
     dispersalMethod = parent->getDispersalMethod();
@@ -288,9 +296,22 @@ SpeciesObject::~SpeciesObject() {
     CommonFun::clearVector(&seeds);
 }
 
-unsigned SpeciesObject::getDispersalAbility() {
-    return dispersalAbility;
+float* SpeciesObject::getDispersalAbility() {
+	float* a = new float[10];
+	for (int i=0;i<10;i++){
+		a[i] = dispersalAbility[i];
+	}
+    return a;
 }
+
+float SpeciesObject::getSpeciesExtinctionThreshold(){
+	return speciesExtinctionThreshold;
+}
+
+float SpeciesObject::getGroupExtinctionThreshold(){
+	return groupExtinctionThreshold;
+}
+
 unsigned SpeciesObject::getDispersalSpeed() {
     return dispersalSpeed;
 }

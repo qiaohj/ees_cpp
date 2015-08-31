@@ -15,7 +15,7 @@
 #include "../Universal/CommonType.h"
 #include "../RasterIO/RasterController.h"
 #include "SparseMap.h"
-#include "EnvironmentalCurve.h"
+#include "EnvironmentalHadley.h"
 #include "SpeciesObject.h"
 #include "IndividualOrganism.h"
 #include "CoodLocation.h"
@@ -26,7 +26,7 @@ private:
 	bool isFinished;
     unsigned tifLimit;
     unsigned long memLimit;
-    std::vector<EnvironmentalCurve*> environments;
+    std::vector<EnvironmentalHadley*> environments;
     std::vector<SpeciesObject*> species;
     unsigned totalYears;
     unsigned minSpeciesDispersalSpeed;
@@ -58,7 +58,7 @@ private:
     std::string getSpeciesFolder(SpeciesObject* p_species);
     void generateSpeciationInfo(unsigned year, bool is_tree);
 public:
-    Scenario(const std::string json_path, std::string scenario_id, std::string p_base_folder,
+    Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
             std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit);
     virtual ~Scenario();
     unsigned run();

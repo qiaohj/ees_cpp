@@ -42,15 +42,13 @@ void handler(int sig) {
 
 _INITIALIZE_EASYLOGGINGPP
 
-//configure_base_folder, scenario_file, result_root, memory_limit(in M), tif_limit
-///home/huijieqiao/workspace/NicheBreadth/data scenario.json /home/huijieqiao/temp 8000 1000
+//configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), tif_limit
 int main(int argc, const char* argv[]) {
-	//for old NB project
-    char path[strlen(argv[1]) + strlen(argv[2]) + 20];
-    sprintf(path, "%s/scenarios/%s.json", argv[1], argv[2]);
+    char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
+    sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
 	unsigned tif_limit = atoi(argv[5]);
-	Scenario* scenario = new Scenario(std::string(path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
 	if (scenario->isFinish()){
 		delete scenario;
 		printf("Result folder is exist, skip this simulation!\n");

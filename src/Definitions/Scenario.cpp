@@ -7,17 +7,17 @@
 
 #include "Scenario.h"
 
-Scenario::Scenario(const std::string json_path, std::string scenario_id,
+Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, unsigned p_tif_limit,
 		unsigned long p_mem_limit) {
-	Json::Value root_Scenario = CommonFun::readJson(json_path.c_str());
+	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
 	tifLimit = p_tif_limit;
 	baseFolder = p_base_folder;
-	target = p_target + "/" + scenario_id;
+	target = p_target + "/" + p_scenario_id;
 	isFinished = boost::filesystem::exists(target);
 	CommonFun::createFolder(target.c_str());
-	totalYears = root_Scenario.get("total_years", 500000).asInt();
+	totalYears = root_Scenario.get("total_years", 130000).asInt();
 	RasterObject* mask_raster = new RasterObject(
 			root_Scenario.get("mask", "").asString());
 	geoTrans = new double[6];
@@ -31,7 +31,7 @@ Scenario::Scenario(const std::string json_path, std::string scenario_id,
 
 	for (unsigned index = 0; index < species_json_array.size(); ++index) {
 		std::string species_json_path = baseFolder
-				+ std::string("/niche_definations/")
+				+ std::string("/Species_Configurations/")
 				+ species_json_array[index].asString() + std::string(".json");
 		SpeciesObject* species = new SpeciesObject(species_json_path.c_str());
 		this->species.push_back(species);
@@ -59,16 +59,10 @@ Scenario::Scenario(const std::string json_path, std::string scenario_id,
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
-		std::string environment_json_path = baseFolder
-				+ std::string("/environment_curves/")
-				+ environment_json_array[index].asString()
-				+ std::string(".json");
-
-		EnvironmentalCurve* environment_item = new EnvironmentalCurve(
-				environment_json_path);
-		environments.push_back(environment_item);
-		burnInYear = environment_item->getBurnInYears();
+		std::string environment_folder_path = environment_json_array[index].asString();
+		environments.push_back(environment_folder_path);
 	}
+	burnInYear = root_Scenario.get("burn_in_year", 10000).asInt();
 	delete mask_raster;
 }
 std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {

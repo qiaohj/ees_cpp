@@ -10,13 +10,13 @@
 
 class GeoLocation {
 private:
-    double longitude;
-    double latitude;
+	float longitude;
+	float latitude;
 public:
-    GeoLocation(double p_longitude, double p_latitude);
+    GeoLocation(float p_longitude, float p_latitude);
     virtual ~GeoLocation();
-    double getLongitude();
-    double getLatitude();
+    float getLongitude();
+    float getLatitude();
 };
 
 #endif /* DEFINITIONS_GEOLOCATION_H_ */
