@@ -15,6 +15,8 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	tifLimit = p_tif_limit;
 	baseFolder = p_base_folder;
 	target = p_target + "/" + p_scenario_id;
+	LOG(INFO)<<"Save result to " <<target;
+
 	isFinished = boost::filesystem::exists(target);
 	CommonFun::createFolder(target.c_str());
 	totalYears = root_Scenario.get("total_years", 130000).asInt();
