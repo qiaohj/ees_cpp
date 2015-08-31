@@ -20,7 +20,8 @@ private:
     bool newSpecies;
     unsigned id;
     std::vector<NicheBreadth*> nicheBreadth;
-    float* dispersalAbility[10];
+    float* dispersalAbility;
+    unsigned short dispersalAbilityLength;
     unsigned dispersalSpeed;
     unsigned speciationYears;
     int dispersalMethod;
@@ -43,6 +44,7 @@ public:
     virtual ~SpeciesObject();
     float* getDispersalAbility();
     unsigned getDispersalSpeed();
+    unsigned short getDispersalAbilityLength();
     float getSpeciesExtinctionThreshold();
     float getGroupExtinctionThreshold();
     int getDispersalMethod();

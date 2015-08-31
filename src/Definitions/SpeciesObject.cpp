@@ -13,9 +13,12 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     newSpecies = true;
     id = species_json.get("id", "").asInt();
     Json::Value dispersal_ability_array = species_json["dispersal_ability"];
-	for (unsigned index = 0; index < dispersal_ability_array.size(); ++index) {
+    dispersalAbilityLength = dispersal_ability_array.size();
+    dispersalAbility = new float[10];
+	for (unsigned index = 0; index < dispersalAbilityLength; ++index) {
 		dispersalAbility[index] = dispersal_ability_array[index].asFloat();
 	}
+
     dispersalSpeed = species_json.get("dispersal_speed", 100).asInt();
     dispersalMethod = species_json.get("dispersal_method", 2).asInt();
     numberOfPath = species_json.get("number_of_path", -1).asInt();
@@ -295,13 +298,11 @@ SpeciesObject::~SpeciesObject() {
     CommonFun::clearVector(&nicheBreadth);
     CommonFun::clearVector(&seeds);
 }
-
+unsigned short SpeciesObject::getDispersalAbilityLength(){
+	return dispersalAbilityLength;
+}
 float* SpeciesObject::getDispersalAbility() {
-	float* a = new float[10];
-	for (int i=0;i<10;i++){
-		a[i] = dispersalAbility[i];
-	}
-    return a;
+    return dispersalAbility;
 }
 
 float SpeciesObject::getSpeciesExtinctionThreshold(){

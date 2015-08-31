@@ -18,6 +18,7 @@ private:
     unsigned short y;
     unsigned short groupId;
     unsigned short tempSpeciesID;
+    unsigned short dispersalAbility;
     SpeciesObject* species;
     unsigned year;
     IndividualOrganism* parent;
@@ -30,12 +31,14 @@ public:
     unsigned getNextRunYear();
     int getDispersalMethod();
     int getNumOfPath();
-    unsigned getDispersalAbility();
     unsigned getSpeciationYears();
+    unsigned short getDispersalAbility();
+    void setDispersalAbility(unsigned short p_dispersal_ability);
     bool isSuitable(std::vector<SparseMap*>* p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
     void setParent(IndividualOrganism* p_parent);
+    void setRandomDispersalAbility();
     IndividualOrganism* getParent();
     unsigned getYear();
     unsigned short getX();

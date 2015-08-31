@@ -16,9 +16,6 @@ IndividualOrganism::IndividualOrganism(unsigned p_year,
     y = p_y;
     groupId = 0;
     tempSpeciesID = 0;
-//    if (parent!=NULL){
-//        parent->addChild(this);
-//    }
 }
 void IndividualOrganism::setGroupId(unsigned short p_group_id){
     groupId = p_group_id;
@@ -68,8 +65,24 @@ int IndividualOrganism::getDispersalMethod() {
 int IndividualOrganism::getNumOfPath() {
     return species->getNumOfPath();
 }
-unsigned IndividualOrganism::getDispersalAbility() {
-    return species->getDispersalAbility();
+unsigned short IndividualOrganism::getDispersalAbility() {
+    return dispersalAbility;
+}
+void IndividualOrganism::setRandomDispersalAbility(){
+	srand(static_cast<unsigned>(time(0)));
+	float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+	unsigned short dispersal_ability = 0;
+	for (unsigned short i = 1; i <= species->getDispersalAbilityLength(); i++) {
+		if (r < species->getDispersalAbility()[i]) {
+			dispersal_ability = i;
+			break;
+		}
+	}
+	dispersalAbility = dispersal_ability;
+}
+
+void IndividualOrganism::setDispersalAbility(unsigned short p_dispersal_ability) {
+    dispersalAbility = p_dispersal_ability;
 }
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();

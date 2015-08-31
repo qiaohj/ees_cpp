@@ -58,11 +58,13 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
+	burnInYear = root_Scenario.get("burn_in_year", 10000).asInt();
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		std::string environment_folder_path = environment_json_array[index].asString();
-		environments.push_back(environment_folder_path);
+		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, burnInYear, 1200, 0, 1);
+		environments.push_back(layer);
 	}
-	burnInYear = root_Scenario.get("burn_in_year", 10000).asInt();
+
 	delete mask_raster;
 }
 std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
@@ -137,9 +139,11 @@ unsigned Scenario::run() {
 		char line[100];
 		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
 		for (auto sp_it : all_individualOrganisms[year - minSpeciesDispersalSpeed]) {
+
+			SpeciesObject* sp = sp_it.first;
 			for (auto c_it : sp_it.second) {
 				if (c_it.second.size()>0) {
-					actived_individualOrganisms[sp_it.first][c_it.first] = c_it.second.front();
+					actived_individualOrganisms[sp][c_it.first] = c_it.second.front();
 				}
 			}
 		}
@@ -160,8 +164,9 @@ unsigned Scenario::run() {
 						break;
 						//all the individual organisms can move
 						case 2:
-						next_cells = getDispersalMap_2(individualOrganism);
-						break;
+							individualOrganism->setRandomDispersalAbility();
+							next_cells = getDispersalMap_2(individualOrganism);
+							break;
 						default:
 						;
 					}
@@ -172,6 +177,7 @@ unsigned Scenario::run() {
 						new IndividualOrganism(year,
 								individualOrganism->getSpecies(),
 								individualOrganism, it->getX(), it->getY());
+						new_individualOrganism->setDispersalAbility(individualOrganism->getDispersalAbility());
 						new_individual_organisms.push_back(new_individualOrganism);
 					}
 					for (std::vector<CoodLocation*>::iterator it =
@@ -616,14 +622,14 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms) {
 	unsigned short x = p_unmarked_organism->getX();
 	unsigned short y = p_unmarked_organism->getY();
-
-	for (unsigned i_x = (x - p_unmarked_organism->getDispersalAbility());
-			i_x <= (x + p_unmarked_organism->getDispersalAbility()); ++i_x) {
+	unsigned short p_dispersal_ability = p_unmarked_organism->getDispersalAbility();
+	for (unsigned i_x = (x - p_dispersal_ability);
+			i_x <= (x + p_dispersal_ability); ++i_x) {
 		i_x = (((int) i_x) < 0) ? 0 : i_x;
 		if ((unsigned) i_x >= xSize)
 			break;
-		for (unsigned i_y = (y - p_unmarked_organism->getDispersalAbility());
-				i_y <= (y + p_unmarked_organism->getDispersalAbility());
+		for (unsigned i_y = (y - p_dispersal_ability);
+				i_y <= (y + p_dispersal_ability);
 				++i_y) {
 			i_y = (((int) i_y) < 0) ? 0 : i_y;
 
@@ -632,7 +638,7 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 //            LOG(INFO)<<"X="<<i_x<<", Y="<<i_y;
 			double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
 					(int) (x), (int) (y));
-			if (distance > p_unmarked_organism->getDispersalAbility()) {
+			if (distance > p_dispersal_ability) {
 //                LOG(INFO)<<"skip 1";
 				continue;
 			}
@@ -703,20 +709,20 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 		IndividualOrganism* individualOrganism) {
 	std::vector<CoodLocation*> new_cells;
 
-	//unfinished part
+	unsigned short p_dispersal_ability = individualOrganism->getDispersalAbility();
 
 	//get all the cells whose E-distances are not longer than dispersal ability.
 	//When number of path = 1, ignore the dispersal method parameter.
 	if (individualOrganism->getNumOfPath() == -1) {
 		unsigned x = individualOrganism->getX();
 		unsigned y = individualOrganism->getY();
-		for (unsigned i_x = (x - individualOrganism->getDispersalAbility());
-				i_x <= (x + individualOrganism->getDispersalAbility()); ++i_x) {
+		for (unsigned i_x = (x - p_dispersal_ability);
+				i_x <= (x + p_dispersal_ability); ++i_x) {
 			i_x = (((int) i_x) < 0) ? 0 : i_x;
 			if ((unsigned) i_x >= xSize)
 				break;
-			for (unsigned i_y = (y - individualOrganism->getDispersalAbility());
-					i_y <= (y + individualOrganism->getDispersalAbility());
+			for (unsigned i_y = (y - p_dispersal_ability);
+					i_y <= (y + p_dispersal_ability);
 					++i_y) {
 				i_y = (((int) i_y) < 0) ? 0 : i_y;
 				if ((unsigned) i_y >= ySize)
@@ -726,9 +732,9 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 						(int) i_y, (int) (x), (int) (y));
 //                printf("%u, %u vs %u, %u, Distance:%f\n", i_x, i_y, x, y,
 //                        distance);
-				if ((distance < individualOrganism->getDispersalAbility())
+				if ((distance < p_dispersal_ability)
 						|| (CommonFun::AlmostEqualRelative(distance,
-								(double) individualOrganism->getDispersalAbility()))) {
+								(double) p_dispersal_ability))) {
 					CoodLocation* v = new CoodLocation(i_x, i_y);
 					new_cells.push_back(v);
 				}
