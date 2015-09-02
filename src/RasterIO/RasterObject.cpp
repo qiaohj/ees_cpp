@@ -11,7 +11,7 @@
 RasterObject::RasterObject(std::string p_raster_name){
 	rasterName = p_raster_name;
 	GDALAllRegister();
-	LOG(INFO)<<"Read raster file from "<<rasterName;
+	//LOG(INFO)<<"Read raster file from "<<rasterName;
 	poDataset = (GDALDataset *) GDALOpen(rasterName.c_str(), GA_ReadOnly);
 	poBand = poDataset->GetRasterBand(1);
 	xSize = poBand->GetXSize();
@@ -26,6 +26,7 @@ RasterObject::RasterObject(std::string p_raster_name){
 RasterObject::~RasterObject(){
     delete[] adfGeoTransform;
     delete[] valueArray;
+    GDALClose((GDALDatasetH) poDataset);
 }
 std::string RasterObject::getRasterName(){
 	return rasterName;

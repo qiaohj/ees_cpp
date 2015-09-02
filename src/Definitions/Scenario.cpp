@@ -18,6 +18,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	LOG(INFO)<<"Save result to " <<target;
 
 	isFinished = boost::filesystem::exists(target);
+	isFinished = false;
 	CommonFun::createFolder(target.c_str());
 	totalYears = root_Scenario.get("total_years", 130000).asInt();
 	RasterObject* mask_raster = new RasterObject(
@@ -60,10 +61,10 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
-	burnInYear = root_Scenario.get("burn_in_year", 10000).asInt();
+	burnInYear = root_Scenario.get("burn_in_year", 1000).asInt();
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		std::string environment_folder_path = environment_json_array[index].asString();
-		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, burnInYear, 1200, 0, 1);
+		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
 
@@ -134,7 +135,8 @@ unsigned Scenario::run() {
 			minSpeciesDispersalSpeed) {
 		LOG(INFO)<<"Current year:"<<year<<" @ " << target <<" Memory usage:"<<CommonFun::getCurrentRSS();
 
-		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > individual_organisms_in_current_year;
+		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > >
+			individual_organisms_in_current_year;
 		std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
 
 		//save the env data

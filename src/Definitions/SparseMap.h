@@ -14,6 +14,7 @@
 #include <boost/numeric/ublas/io.hpp>
 #include "../RasterIO/RasterObject.h"
 #include "../Universal/const.h"
+#include "../Universal/CommonFun.h"
 
 typedef boost::numeric::ublas::compressed_matrix<int> mapvalue;
 
@@ -22,6 +23,7 @@ private:
     mapvalue* value;
     unsigned xSize;
     unsigned ySize;
+    std::string filename;
 public:
     SparseMap(unsigned p_x_size, unsigned p_y_size);
     SparseMap(mapvalue* p_value);
@@ -29,11 +31,13 @@ public:
     virtual ~SparseMap();
 
     int readByXY(unsigned p_x, unsigned p_y);
+    int readByLL(double* p_geoTrans, double p_longitude, double p_latitude);
     unsigned getXSize();
     unsigned getYSize();
     void setValue(unsigned p_x, unsigned p_y, int p_value);
     void getFirstValues(unsigned* x, unsigned* y, int* v);
     int* toArray();
+    std::string getFilename();
 };
 
 #endif /* SparseMap_H */

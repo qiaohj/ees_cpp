@@ -20,22 +20,34 @@ SparseMap::SparseMap(unsigned p_x_size, unsigned p_y_size) {
 SparseMap::SparseMap(RasterObject* p_raster, bool p_is_binary = false) {
     xSize = p_raster->getXSize();
     ySize = p_raster->getYSize();
+    filename = p_raster->getRasterName();
     value = new mapvalue(xSize, ySize, xSize * ySize);
     for (unsigned x = 0; x < xSize; ++x) {
         for (unsigned y = 0; y < ySize; ++y) {
             float v = p_raster->readByXY(x, y);
             if (!CommonFun::AlmostEqualRelative(v, p_raster->getNoData())) {
+            	if (!p_is_binary){
+            		//LOG(INFO)<<v<<":x="<<x<<":y="<<y;
+            	}
                 (*value)(x, y) = (p_is_binary) ? 1 : (int) v;
             }
 
         }
     }
 }
+std::string SparseMap::getFilename(){
+	return filename;
+}
 void SparseMap::setValue(unsigned p_x, unsigned p_y, int p_value) {
     (*value)(p_x, p_y) = p_value;
 }
 int SparseMap::readByXY(unsigned p_x, unsigned p_y) {
     return (*value)(p_x, p_y);
+}
+int SparseMap::readByLL(double* p_geoTrans, double p_longitude, double p_latitude){
+    unsigned x, y;
+	CommonFun::LL2XY(p_geoTrans, p_longitude, p_latitude, &x, &y);
+	return readByXY(x, y);
 }
 unsigned SparseMap::getXSize() {
     return xSize;

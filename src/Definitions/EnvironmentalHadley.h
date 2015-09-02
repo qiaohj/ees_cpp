@@ -21,13 +21,13 @@
 
 class EnvironmentalHadley {
 private:
-    boost::unordered_map<unsigned, RasterObject* > layers;
+    boost::unordered_map<unsigned, SparseMap*> layers;
     unsigned burnInYears;
     float noData;
-
+    double* geoTrans;
 public:
-	EnvironmentalHadley(const std::string p_basefolder, int p_burn_in_year,
-			int p_begin_year, int p_end_year, int p_step);
+	EnvironmentalHadley(const std::string p_basefolder, double* p_geoTrans, unsigned p_burn_in_year,
+			unsigned p_begin_year, unsigned p_end_year, unsigned p_step);
 	virtual ~EnvironmentalHadley();
     unsigned getBurnInYears();
     SparseMap* getValues(unsigned p_year);
