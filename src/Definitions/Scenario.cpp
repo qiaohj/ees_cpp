@@ -9,7 +9,8 @@
 
 Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, unsigned p_tif_limit,
-		unsigned long p_mem_limit) {
+		unsigned long p_mem_limit, bool p_with_detail) {
+	with_detail = p_with_detail;
 	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
 	tifLimit = p_tif_limit;
@@ -92,14 +93,18 @@ std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
 		char speciesFolder[target.length() + 6];
 		sprintf(speciesFolder, "%s/%s", target.c_str(),
 				CommonFun::fixedLength(p_species->getID(), 2).c_str());
-		CommonFun::createFolder(speciesFolder);
+		if (with_detail){
+			CommonFun::createFolder(speciesFolder);
+		}
 		return std::string(speciesFolder);
 	} else {
 		std::string parentFolder = getSpeciesFolder(p_species->getParent());
 		char speciesFolder[parentFolder.length() + 6];
 		sprintf(speciesFolder, "%s/%s", parentFolder.c_str(),
 				CommonFun::fixedLength(p_species->getID(), 2).c_str());
-		CommonFun::createFolder(speciesFolder);
+		if (with_detail){
+			CommonFun::createFolder(speciesFolder);
+		}
 		return std::string(speciesFolder);
 	}
 }
@@ -125,11 +130,14 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
 
 }
 unsigned Scenario::run() {
-	std::vector<std::string> env_output;
-	unsigned x = 99999, y = 99999;
+
 	unsigned tif_number = 0;
+
 	std::vector<std::string> stat_output;
-	for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
+
+	//std::vector<std::string> env_output;
+	//unsigned x = 99999, y = 99999;
+	/*for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
 			minSpeciesDispersalSpeed) {
 		std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
 		if (x == 99999) {
@@ -146,6 +154,7 @@ unsigned Scenario::run() {
 	sprintf(filepath2, "%s/env_curve.csv", target.c_str());
 	CommonFun::writeFile(env_output, filepath2);
 	env_output.clear();
+	*/
 //    return;
 //    bool is_write_memory_usage = false;
 	for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
@@ -170,6 +179,38 @@ unsigned Scenario::run() {
 		}
 //		LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size();
 		for (auto s_it : actived_individualOrganisms) {
+			//Generate a suitable layer for the species;
+			if (year==minSpeciesDispersalSpeed){
+				std::string speciesFolder = getSpeciesFolder(s_it.first);
+				std::vector<NicheBreadth*> nicheBreadth = s_it.first->getNicheBreadth();
+				char tiffName[speciesFolder.length() + 28];
+				sprintf(tiffName, "%s/suitable.tif", speciesFolder.c_str());
+				std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
+				int* array = current_environments[0]->toArray();
+				LOG(INFO)<<"Begin to generate the suitable area";
+				for (unsigned x=0; x<current_environments[0]->getXSize();x++){
+					for (unsigned y=0;y<current_environments[0]->getYSize();y++){
+					    for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
+					        int env_value = current_environments[i]->readByXY(x, y);
+
+					        if (env_value == NODATA) {
+								array[x + y * current_environments[0]->getXSize()] = NODATA;
+							}else{
+								if ((env_value > nicheBreadth[i]->getMax())
+										|| (env_value < nicheBreadth[i]->getMin())) {
+									array[x + y * current_environments[0]->getXSize()] = 0;
+								}else{
+									array[x + y * current_environments[0]->getXSize()] = 1;
+								}
+							}
+						}
+					}
+				}
+				RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
+						array, (double) NODATA, GDT_Int32);
+				LOG(INFO)<<"END to generate the suitable area";
+
+			}
 			//LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << s_it.second.size();
 			std::vector<IndividualOrganism*> new_individual_organisms;
 			for (auto o_it : s_it.second) {
@@ -355,7 +396,9 @@ unsigned Scenario::run() {
 			if (species_ids.size()>1) {
 				for (auto sp_id_it : species_ids) {
 					SpeciesObject* new_species = new SpeciesObject(sp_id_it.second, sp_it.first, year);
-					createSpeciesFolder(new_species);
+					if (with_detail){
+						createSpeciesFolder(new_species);
+					}
 					species.push_back(new_species);
 					for (auto c_it : sp_it.second) {
 						for (auto o_it : c_it.second) {
@@ -394,7 +437,7 @@ unsigned Scenario::run() {
 		for (auto it : group_maps) {
 			if (it.second!=NULL) {
 				if ((tifLimit>=tif_number)||it.first->isNewSpecies()) {
-					if (tif_number<=tifLimit * 10){
+					if ((tif_number<=tifLimit * 10)&&(with_detail)){
 						//save distribution
 						//LOG(INFO)<<"Save distribution no." << tif_number;
 						std::string speciesFolder = getSpeciesFolder(it.first);
@@ -500,15 +543,11 @@ unsigned Scenario::run() {
 		stat_output.push_back(line);
 
 		if (CommonFun::getCurrentRSS()>memLimit) {
-			if ((year>197000)&&(year<200000)){
-				LOG(INFO)<<"Try to give more memory";
-			}else{
-				char filepath[target.length() + 16];
-				sprintf(filepath, "%s/stat_curve.csv", target.c_str());
-				CommonFun::writeFile(stat_output, filepath);
-				generateSpeciationInfo(year, true);
-				return 1;
-			}
+			char filepath[target.length() + 16];
+			sprintf(filepath, "%s/stat_curve.csv", target.c_str());
+			CommonFun::writeFile(stat_output, filepath);
+			generateSpeciationInfo(year, true);
+			return 1;
 		}
 	}
 	generateSpeciationInfo(totalYears, true);

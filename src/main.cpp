@@ -43,13 +43,14 @@ void handler(int sig) {
 _INITIALIZE_EASYLOGGINGPP
 
 //configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), tif_limit
-///home/huijieqiao/NB_NEW/Environments scenario /home/huijieqiao/temp 4000 1000
+///home/huijieqiao/NB_NEW/Environments scenario /home/huijieqiao/temp 4000 1000 1
 int main(int argc, const char* argv[]) {
     char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
     sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
+	bool with_detail = atoi(argv[6]);
 	unsigned tif_limit = atoi(argv[5]);
-	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], tif_limit, memory_limit, with_detail);
 
 	if (scenario->isFinish()){
 		delete scenario;

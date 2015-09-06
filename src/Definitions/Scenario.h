@@ -21,6 +21,7 @@
 #include "CoodLocation.h"
 #include "../Universal/log.hpp"
 
+
 class Scenario {
 private:
 	bool isFinished;
@@ -57,9 +58,10 @@ private:
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     std::string getSpeciesFolder(SpeciesObject* p_species);
     void generateSpeciationInfo(unsigned year, bool is_tree);
+    bool with_detail;
 public:
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
-            std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit);
+            std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit, bool p_with_detail);
     virtual ~Scenario();
     unsigned run();
     bool isFinish();

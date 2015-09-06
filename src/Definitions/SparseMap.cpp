@@ -26,10 +26,12 @@ SparseMap::SparseMap(RasterObject* p_raster, bool p_is_binary = false) {
         for (unsigned y = 0; y < ySize; ++y) {
             float v = p_raster->readByXY(x, y);
             if (!CommonFun::AlmostEqualRelative(v, p_raster->getNoData())) {
-            	if (!p_is_binary){
-            		//LOG(INFO)<<v<<":x="<<x<<":y="<<y;
+            	if (CommonFun::AlmostEqualRelative(v, 0.0f)){
+            		v = MATRIX_ZERO;
             	}
                 (*value)(x, y) = (p_is_binary) ? 1 : (int) v;
+            }else{
+            	(*value)(x, y) = NODATA;
             }
 
         }
@@ -42,6 +44,10 @@ void SparseMap::setValue(unsigned p_x, unsigned p_y, int p_value) {
     (*value)(p_x, p_y) = p_value;
 }
 int SparseMap::readByXY(unsigned p_x, unsigned p_y) {
+	int v = (*value)(p_x, p_y);
+	if (v == MATRIX_ZERO){
+		v = 0;
+	}
     return (*value)(p_x, p_y);
 }
 int SparseMap::readByLL(double* p_geoTrans, double p_longitude, double p_latitude){
