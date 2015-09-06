@@ -67,6 +67,7 @@ public:
             double p_latitude);
     std::vector<SparseMap*> getEnvironmenMap(unsigned p_year);
     std::string getTarget();
+    //bool generateEnv();
 };
 
 #endif /* DEFINITIONS_SCENARIO_H_ */

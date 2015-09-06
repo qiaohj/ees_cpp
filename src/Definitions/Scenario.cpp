@@ -70,6 +70,23 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 	delete mask_raster;
 }
+/*
+bool Scenario::generateEnv(){
+
+	for (unsigned y=0;y<=500000;y+=500){
+		std::vector<SparseMap*> current_environments = getEnvironmenMap(y);
+		for (unsigned i = 0; i < current_environments.size(); ++i) {
+			std::string folder = "/home/huijieqiao/NBProject/NB_Configurations/EurAsia/env_list";
+			char tiffName[folder.length() + 28];
+			sprintf(tiffName, "%s/%d_%s.tif", folder.c_str(), i, CommonFun::fixedLength(y, 7).c_str());
+			RasterController::writeGeoTIFF(tiffName, current_environments[i]->getXSize(), current_environments[i]->getYSize(), geoTrans,
+					current_environments[i]->toArray(), (double) NODATA, GDT_Int32);
+		}
+	}
+
+	return true;
+}
+*/
 std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
 	if (p_species->getParent() == NULL) {
 		char speciesFolder[target.length() + 6];
@@ -123,7 +140,7 @@ unsigned Scenario::run() {
 		int v = current_environments[0]->readByXY(x, y);
 		sprintf(line, "%u,%u,%u,%d", year, x, y, v);
 		env_output.push_back(line);
-		CommonFun::clearVector(&current_environments);
+		//CommonFun::clearVector(&current_environments);
 	}
 	char filepath2[target.length() + 15];
 	sprintf(filepath2, "%s/env_curve.csv", target.c_str());
@@ -515,9 +532,9 @@ void Scenario::generateSpeciationInfo(unsigned year, bool is_tree) {
 			std::string html = folder + "/Phylogram.html";
 			CommonFun::writeFile(sp_it->getHTMLTree(year), html.c_str());
 		}
-		std::string stat = folder + "/stats/" + CommonFun::fixedLength(year, 7)
-				+ "_stat.csv";
-
+//		std::string stat = folder + "/stats/" + CommonFun::fixedLength(year, 7)
+//				+ "_stat.csv";
+		std::string stat = folder + "/stats/stat.csv";
 		CommonFun::writeFile(sp_it->getSpeciationExtinction(true, year),
 				stat.c_str());
 

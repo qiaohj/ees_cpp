@@ -98,8 +98,8 @@ void SpeciesObject::markParentClade() {
 std::string SpeciesObject::getSpeciationExtinction(bool isroot,
         unsigned total_years) {
     char t_char[100];
-    sprintf(t_char, "clade_extinction,species_extinction,speciation\n%u,%u,%u",
-            number_of_clade_extinction, number_of_species_extinction,
+    sprintf(t_char, "clade_extinction,species_extinction,speciation\n%u,%u,%u,%u",
+    		total_years, number_of_clade_extinction, number_of_species_extinction,
             number_of_speciation);
     return std::string(t_char);
 }

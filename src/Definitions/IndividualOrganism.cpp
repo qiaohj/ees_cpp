@@ -94,12 +94,13 @@ bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environme
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
         int env_value = (*p_current_environments)[i]->readByXY(x, y);
+        if (env_value == MATRIX_ZERO) {
+			env_value = 0;
+		}
         if (env_value==0){
             return false;
         }
-        if (env_value == MATRIX_ZERO) {
-            env_value = 0;
-        }
+
         if ((env_value > nicheBreadth[i]->getMax())
                 || (env_value < nicheBreadth[i]->getMin())) {
             return false;

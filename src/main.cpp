@@ -50,6 +50,7 @@ int main(int argc, const char* argv[]) {
 	unsigned long memory_limit = atoi(argv[4]);
 	unsigned tif_limit = atoi(argv[5]);
 	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], tif_limit, memory_limit);
+
 	if (scenario->isFinish()){
 		delete scenario;
 		printf("Result folder is exist, skip this simulation!\n");
