@@ -196,6 +196,7 @@ unsigned Scenario::run() {
 					        if (env_value == NODATA) {
 								array[x + y * current_environments[0]->getXSize()] = NODATA;
 							}else{
+								//LOG(INFO)<<env_value<<"; min:"<<nicheBreadth[i]->getMin()<<"; max:"<<nicheBreadth[i]->getMax();
 								if ((env_value > nicheBreadth[i]->getMax())
 										|| (env_value < nicheBreadth[i]->getMin())) {
 									array[x + y * current_environments[0]->getXSize()] = 0;
@@ -208,8 +209,9 @@ unsigned Scenario::run() {
 				}
 				RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
 						array, (double) NODATA, GDT_Int32);
-				LOG(INFO)<<"END to generate the suitable area";
 
+				LOG(INFO)<<"END to generate the suitable area";
+				exit(1);
 			}
 			//LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << s_it.second.size();
 			std::vector<IndividualOrganism*> new_individual_organisms;
