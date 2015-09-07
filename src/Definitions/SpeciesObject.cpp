@@ -8,6 +8,7 @@
 #include "SpeciesObject.h"
 
 SpeciesObject::SpeciesObject(const std::string json_path) {
+	currentSpeciesExtinctionTimeSteps = 0;
 	LOG(INFO)<<"Load species configure from " <<json_path;
 	Json::Value species_json = CommonFun::readJson(json_path.c_str());
     newSpecies = true;
@@ -24,8 +25,9 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     numberOfPath = species_json.get("number_of_path", -1).asInt();
     speciationYears = species_json.get("speciation_years", 10000).asInt();
 
-    speciesExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asFloat();
-    groupExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asFloat();
+    speciesExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asInt();
+    groupExtinctionThreshold = species_json.get("group_extinction_threshold", 1).asInt();
+    speciesExtinctionTimeSteps = species_json.get("species_extinction_time_steps", 1).asInt();
     appearedYear = 0;
     disappearedYear = 0;
     parent = NULL;
@@ -66,11 +68,15 @@ std::string SpeciesObject::getIDWithParentID(){
 }
 SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent,
         unsigned p_year) {
+	currentSpeciesExtinctionTimeSteps = 0;
+
+
     newSpecies = true;
     parent = p_parent;
     id = p_id;
     speciesExtinctionThreshold = parent->getSpeciesExtinctionThreshold();
     groupExtinctionThreshold = parent->getGroupExtinctionThreshold();
+    speciesExtinctionTimeSteps = p_parent->getSpeciesExtinctionTimeSteps();
     dispersalAbility = parent->getDispersalAbility();
     dispersalSpeed = parent->getDispersalSpeed();
     dispersalMethod = parent->getDispersalMethod();
@@ -305,13 +311,30 @@ float* SpeciesObject::getDispersalAbility() {
     return dispersalAbility;
 }
 
-float SpeciesObject::getSpeciesExtinctionThreshold(){
+unsigned SpeciesObject::getSpeciesExtinctionThreshold(){
 	return speciesExtinctionThreshold;
 }
 
-float SpeciesObject::getGroupExtinctionThreshold(){
+unsigned SpeciesObject::getGroupExtinctionThreshold(){
 	return groupExtinctionThreshold;
 }
+
+unsigned SpeciesObject::getSpeciesExtinctionTimeSteps(){
+	return speciesExtinctionTimeSteps;
+}
+
+unsigned SpeciesObject::getCurrentSpeciesExtinctionTimeSteps(){
+	return currentSpeciesExtinctionTimeSteps;
+}
+
+void SpeciesObject::setCurrentSpeciesExtinctionTimeSteps(unsigned p_currentSpeciesExtinctionTimeSteps){
+	currentSpeciesExtinctionTimeSteps = p_currentSpeciesExtinctionTimeSteps;
+}
+
+void SpeciesObject::addCurrentSpeciesExtinctionTimeSteps(){
+	currentSpeciesExtinctionTimeSteps++;
+}
+
 
 unsigned SpeciesObject::getDispersalSpeed() {
     return dispersalSpeed;

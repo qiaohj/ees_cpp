@@ -1,7 +1,7 @@
 library(raster)
 library(stringr)
 
-for (i in seq(10000, 120000, by=100)){
+for (i in seq(100, 120000, by=100)){
   print(i)
   r<-raster(paste("/home/huijieqiao/temp/scenario/01/groupsmap/", str_pad(i, 7, pad = "0"), ".tif", sep=""))
   plot(r)
@@ -42,5 +42,21 @@ plot(r)
 r<-raster("/home/huijieqiao/temp/scenario/01/10/groupsmap/0048200.tif")
 plot(r)
 
-r<-raster("/home/huijieqiao/temp/scenario/01/11/groupsmap/0048200.tif")
+r<-raster("/home/huijieqiao/temp/scenario/65/suitable.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/temp/scenario/01/groupsmap/0042000.tif")
+plot(r)
+
+
+r<-raster("/home/huijieqiao/temp/scenario/01/groupsmap/0044900.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/temp/scenario/01/01/groupsmap/0045400.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/temp/scenario/01/02/groupsmap/0045000.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/temp/scenario/01/03/groupsmap/0045000.tif")
 plot(r)

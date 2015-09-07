@@ -69,15 +69,16 @@ unsigned short IndividualOrganism::getDispersalAbility() {
     return dispersalAbility;
 }
 void IndividualOrganism::setRandomDispersalAbility(){
-	srand(static_cast<unsigned>(time(0)));
+
 	float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	unsigned short dispersal_ability = 0;
 	for (unsigned short i = 1; i <= species->getDispersalAbilityLength(); i++) {
-		if (r < species->getDispersalAbility()[i]) {
+		if (r < species->getDispersalAbility()[i-1]) {
 			dispersal_ability = i;
 			break;
 		}
 	}
+	//LOG(INFO)<<"Dispersal ability is " <<dispersal_ability << " calculated by "<<r;
 	dispersalAbility = dispersal_ability;
 }
 

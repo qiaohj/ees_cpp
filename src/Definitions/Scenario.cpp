@@ -21,7 +21,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	isFinished = boost::filesystem::exists(target);
 	isFinished = false;
 	CommonFun::createFolder(target.c_str());
-	totalYears = root_Scenario.get("total_years", 130000).asInt();
+	totalYears = root_Scenario.get("total_years", 125000).asInt();
 	RasterObject* mask_raster = new RasterObject(
 			root_Scenario.get("mask", "").asString());
 	geoTrans = new double[6];
@@ -39,7 +39,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 				+ species_json_array[index].asString() + std::string(".json");
 		SpeciesObject* species = new SpeciesObject(species_json_path.c_str());
 		this->species.push_back(species);
-		createSpeciesFolder(species);
+		createSpeciesFolder(species, true);
 		std::vector<GeoLocation*> seeds = species->getSeeds();
 		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > t_o;
 		for (unsigned i = 0; i < seeds.size(); ++i) {
@@ -62,7 +62,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
-	burnInYear = root_Scenario.get("burn_in_year", 1000).asInt();
+	burnInYear = root_Scenario.get("burn_in_year", 5000).asInt();
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		std::string environment_folder_path = environment_json_array[index].asString();
 		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
@@ -93,25 +93,21 @@ std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
 		char speciesFolder[target.length() + 6];
 		sprintf(speciesFolder, "%s/%s", target.c_str(),
 				CommonFun::fixedLength(p_species->getID(), 2).c_str());
-		if (with_detail){
-			CommonFun::createFolder(speciesFolder);
-		}
+		CommonFun::createFolder(speciesFolder);
 		return std::string(speciesFolder);
 	} else {
 		std::string parentFolder = getSpeciesFolder(p_species->getParent());
 		char speciesFolder[parentFolder.length() + 6];
 		sprintf(speciesFolder, "%s/%s", parentFolder.c_str(),
 				CommonFun::fixedLength(p_species->getID(), 2).c_str());
-		if (with_detail){
-			CommonFun::createFolder(speciesFolder);
-		}
+		CommonFun::createFolder(speciesFolder);
 		return std::string(speciesFolder);
 	}
 }
 bool Scenario::isFinish() {
 	return isFinished;
 }
-void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
+void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 	std::string speciesFolder = getSpeciesFolder(p_species);
 
 //    char dispersalFolder[speciesFolder.length() + 6 + 10];
@@ -121,12 +117,14 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species) {
 	char groupsmapFolder[speciesFolder.length() + 6 + 10];
 	sprintf(groupsmapFolder, "%s/groupsmap", speciesFolder.c_str());
 	CommonFun::createFolder(groupsmapFolder);
-	char groupslogFolder[speciesFolder.length() + 6 + 10];
-	sprintf(groupslogFolder, "%s/group_log", speciesFolder.c_str());
-	CommonFun::createFolder(groupslogFolder);
-	char statsFolder[speciesFolder.length() + 6 + 10];
-	sprintf(statsFolder, "%s/stats", speciesFolder.c_str());
-	CommonFun::createFolder(statsFolder);
+//	char groupslogFolder[speciesFolder.length() + 6 + 10];
+//	sprintf(groupslogFolder, "%s/group_log", speciesFolder.c_str());
+//	CommonFun::createFolder(groupslogFolder);
+	if (isRoot){
+		char statsFolder[speciesFolder.length() + 6 + 10];
+		sprintf(statsFolder, "%s/stats", speciesFolder.c_str());
+		CommonFun::createFolder(statsFolder);
+	}
 
 }
 unsigned Scenario::run() {
@@ -195,11 +193,13 @@ unsigned Scenario::run() {
 
 					        if (env_value == NODATA) {
 								array[x + y * current_environments[0]->getXSize()] = NODATA;
+								break;
 							}else{
 								//LOG(INFO)<<env_value<<"; min:"<<nicheBreadth[i]->getMin()<<"; max:"<<nicheBreadth[i]->getMax();
 								if ((env_value > nicheBreadth[i]->getMax())
 										|| (env_value < nicheBreadth[i]->getMin())) {
 									array[x + y * current_environments[0]->getXSize()] = 0;
+									break;
 								}else{
 									array[x + y * current_environments[0]->getXSize()] = 1;
 								}
@@ -211,7 +211,7 @@ unsigned Scenario::run() {
 						array, (double) NODATA, GDT_Int32);
 
 				LOG(INFO)<<"END to generate the suitable area";
-				exit(1);
+				//exit(1);
 			}
 			//LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << s_it.second.size();
 			std::vector<IndividualOrganism*> new_individual_organisms;
@@ -398,9 +398,7 @@ unsigned Scenario::run() {
 			if (species_ids.size()>1) {
 				for (auto sp_id_it : species_ids) {
 					SpeciesObject* new_species = new SpeciesObject(sp_id_it.second, sp_it.first, year);
-					if (with_detail){
-						createSpeciesFolder(new_species);
-					}
+					createSpeciesFolder(new_species, false);
 					species.push_back(new_species);
 					for (auto c_it : sp_it.second) {
 						for (auto o_it : c_it.second) {
@@ -422,24 +420,40 @@ unsigned Scenario::run() {
 //		LOG(INFO)<<"begin to generate group maps";
 		boost::unordered_map<SpeciesObject*, SparseMap*> group_maps;
 		for (auto sp_it : individual_organisms_in_current_year) {
-			if (group_maps.find(sp_it.first)==group_maps.end()) {
+			SpeciesObject* species = sp_it.first;
+			if (group_maps.find(species)==group_maps.end()) {
 				group_maps[sp_it.first] = new SparseMap(xSize, ySize);
 			}
-			if (sp_it.second.size()>0) {
+			//LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps();
+			if ((sp_it.second.size()>0)&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))) {
+				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()){
+					species->addCurrentSpeciesExtinctionTimeSteps();
+				}else{
+					species->setCurrentSpeciesExtinctionTimeSteps(0);
+				}
 				for (auto o_id : sp_it.second) {
 					if (o_id.second.size()>0) {
 						group_maps[sp_it.first]->setValue(o_id.second[0]->getX(), o_id.second[0]->getY(), o_id.second[0]->getGroupId());
 					}
 				}
 			} else {
+				if (species->getCurrentSpeciesExtinctionTimeSteps()>=species->getSpeciesExtinctionTimeSteps()){
+					std::vector<std::string> special_log;
+					char line[100];
+					sprintf(line, "New extinction detected %u", year);
+					special_log.push_back(line);
+					char filepath[target.length() + 50];
+					sprintf(filepath, "%s/special_log.txt", getSpeciesFolder(sp_it.first).c_str());
+					CommonFun::writeFile(special_log, filepath);
+				}
 				sp_it.first->setDisappearedYear(year);
 				group_maps[sp_it.first] = NULL;
 			}
 		}
 		for (auto it : group_maps) {
 			if (it.second!=NULL) {
-				if ((tifLimit>=tif_number)||it.first->isNewSpecies()) {
-					if ((tif_number<=tifLimit * 10)&&(with_detail)){
+				if (it.first->isNewSpecies()||with_detail){
+					if (tifLimit>=tif_number) {
 						//save distribution
 						//LOG(INFO)<<"Save distribution no." << tif_number;
 						std::string speciesFolder = getSpeciesFolder(it.first);
@@ -451,9 +465,9 @@ unsigned Scenario::run() {
 								array, (double) NODATA, GDT_Int32);
 						delete[] array;
 						tif_number++;
+					} else {
+						//LOG(INFO)<<"To the limitation, skip to save useless distribution map!";
 					}
-				} else {
-					//LOG(INFO)<<"To the limitation, skip to save useless distribution map!";
 				}
 			} else {
 
@@ -486,7 +500,7 @@ unsigned Scenario::run() {
 			unsigned speciation_year = sp_it->getSpeciationYears();
 			bool is_remove_previous_span = false;
 			bool is_remove_previous_speciation = false;
-			if (year<(burnInYear - speciation_year)) {
+			if ((int)year<((int)burnInYear - (int)speciation_year)) {
 				is_remove_previous_span = true;
 			}
 			if (year>burnInYear) {
@@ -500,7 +514,7 @@ unsigned Scenario::run() {
 				removed_year = (year - sp_it->getDispersalSpeed()) - speciation_year;
 			}
 			if (removed_year>=0) {
-//				LOG(INFO)<<"Current year is "<<year<<". Remove organisms at year "<< removed_year<<".";
+				//LOG(INFO)<<"Current year is "<<year<<". Remove organisms at year "<< removed_year<<".";
 				boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > temp_o = all_individualOrganisms[removed_year][sp_it];
 				for (auto it1 : temp_o) {
 					CommonFun::clearVector(&it1.second);
@@ -514,6 +528,7 @@ unsigned Scenario::run() {
 						it2->setParent(NULL);
 					}
 				}
+
 //				LOG(INFO)<<"Done!";
 
 			}

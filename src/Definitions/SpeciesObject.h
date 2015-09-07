@@ -28,8 +28,10 @@ private:
     int numberOfPath;
     unsigned appearedYear;
     unsigned disappearedYear;
-    float speciesExtinctionThreshold;
-    float groupExtinctionThreshold;
+    unsigned speciesExtinctionThreshold;
+    unsigned groupExtinctionThreshold;
+    unsigned speciesExtinctionTimeSteps;
+    unsigned currentSpeciesExtinctionTimeSteps;
     std::vector<GeoLocation*> seeds;
     SpeciesObject* parent;
     std::vector<SpeciesObject*> children;
@@ -45,8 +47,12 @@ public:
     float* getDispersalAbility();
     unsigned getDispersalSpeed();
     unsigned short getDispersalAbilityLength();
-    float getSpeciesExtinctionThreshold();
-    float getGroupExtinctionThreshold();
+    unsigned getSpeciesExtinctionThreshold();
+    unsigned getGroupExtinctionThreshold();
+    unsigned getSpeciesExtinctionTimeSteps();
+    unsigned getCurrentSpeciesExtinctionTimeSteps();
+    void addCurrentSpeciesExtinctionTimeSteps();
+    void setCurrentSpeciesExtinctionTimeSteps(unsigned p_currentSpeciesExtinctionTimeSteps);
     int getDispersalMethod();
     std::vector<GeoLocation*> getSeeds();
     unsigned getID();

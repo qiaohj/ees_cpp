@@ -40,7 +40,7 @@ private:
     void cleanActivedIndividualOrganisms();
     void cleanEnvironments();
     void cleanSpecies();
-    void createSpeciesFolder(SpeciesObject* p_species);
+    void createSpeciesFolder(SpeciesObject* p_species, bool isRoot);
     unsigned burnInYear;
     boost::unordered_map<unsigned, boost::unordered_map<SpeciesObject*,
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > > all_individualOrganisms;
