@@ -628,7 +628,6 @@ unsigned short Scenario::getTempSpeciesID(unsigned short group_id,
 void Scenario::markedSpeciesID(unsigned short group_id,
 		unsigned short temp_species_id,
 		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms) {
-	//here can improve the effencty a lot!
 	//LOG(INFO)<<"Size of organism 1 is "<<organisms->size();
 	for (auto c_it : (*organisms)) {
 		//LOG(INFO)<<"Size of organism 2 is "<<c_it.second.size();
