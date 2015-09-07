@@ -19,7 +19,11 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	LOG(INFO)<<"Save result to " <<target;
 
 	isFinished = boost::filesystem::exists(target);
-	isFinished = false;
+	//isFinished = false;
+	if (isFinished){
+		return;
+	}
+
 	CommonFun::createFolder(target.c_str());
 	totalYears = root_Scenario.get("total_years", 125000).asInt();
 	RasterObject* mask_raster = new RasterObject(
@@ -175,7 +179,7 @@ unsigned Scenario::run() {
 				}
 			}
 		}
-//		LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size();
+		//LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size();
 		for (auto s_it : actived_individualOrganisms) {
 			//Generate a suitable layer for the species;
 			if (year==minSpeciesDispersalSpeed){
@@ -261,17 +265,17 @@ unsigned Scenario::run() {
 				individual_organisms_in_current_year[s_it.first][index].push_back(it);
 			}
 			new_individual_organisms.clear();
-//            LOG(INFO)<<"end to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+            //LOG(INFO)<<"end to simulate organism by organism.";
 		}
 
-//        LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
+        //LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
 		//LOG(INFO)<<"end to simulate cell by cell";
 
 		//remove the unsuitable organisms
-//		LOG(INFO)<<"begin to remove the unsuitable organisms.";
+		//LOG(INFO)<<"begin to remove the unsuitable organisms.";
 		boost::unordered_map<SpeciesObject*, std::vector<unsigned>> erased_keys;
 		for (auto s_it : individual_organisms_in_current_year) {
-//            LOG(INFO)<<"start to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+            //LOG(INFO)<<"start to remove unsuitable organisms.";
 			std::vector<unsigned> erased_key;
 			for (auto it : s_it.second) {
 				if (it.second.size()>0) {
@@ -281,7 +285,7 @@ unsigned Scenario::run() {
 				}
 			}
 			erased_keys[s_it.first] = erased_key;
-//            LOG(INFO)<<"end to remove unsuitable organisms. Current species is "<< s_it.first << ". Count of organisms is " << (*s_it.second).size();
+            //LOG(INFO)<<"end to remove unsuitable organisms.";
 		}
 		for (auto sp_it : erased_keys) {
 			for (auto key : sp_it.second) {
@@ -295,25 +299,30 @@ unsigned Scenario::run() {
 				individual_organisms_in_current_year[sp_it.first].erase(key);
 			}
 		}
-//		LOG(INFO)<<"end to remove unsuitable organisms.";
+		//LOG(INFO)<<"end to remove unsuitable organisms.";
 
 		//mark the group id for every organisms in this year, seperated by species id;
-//		LOG(INFO)<<"Begin to mark the group id, and detect the speciation.";
+		//LOG(INFO)<<"Begin to mark the group id, and detect the speciation.";
 		for (auto sp_it : individual_organisms_in_current_year) {
 			//printf("Species ID:%u\n", sp_it.first->getID());
 			boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
 			SpeciesObject* species = sp_it.first;
 			unsigned short current_group_id = 1;
 			if (year>=(burnInYear + species->getSpeciationYears())) {
+				//LOG(INFO)<<"Begin to mark the organism.";
 				IndividualOrganism* unmarked_organism = getUnmarkedOrganism(&organisms);
 				while (unmarked_organism!=NULL) {
+					//LOG(INFO)<<"Unmarked organism is "<<unmarked_organism->getX() <<", "<<unmarked_organism->getY()
+					//		<<" dispersal ability is "<<unmarked_organism->getDispersalAbility()<<". current_group_id is "<<current_group_id;
 					markJointOrganism(current_group_id, unmarked_organism, &organisms);
 					current_group_id++;
 					unmarked_organism = getUnmarkedOrganism(&organisms);
 				}
+				//LOG(INFO)<<"End to mark the organism.";
 				//detect the speciation
 				unsigned short temp_species_id = 1;
 //				std::vector<std::string> group_output;
+				//LOG(INFO)<<"Begin to detect speciation.";
 				for (unsigned short group_id_1=1; group_id_1<current_group_id-1; group_id_1++) {
 					unsigned short temp_species_id_1 = getTempSpeciesID(group_id_1, &organisms);
 					for (unsigned short group_id_2=group_id_1+1; group_id_2<current_group_id; group_id_2++) {
@@ -361,6 +370,8 @@ unsigned Scenario::run() {
 						}
 					}
 				}
+				//LOG(INFO)<<"End to detect speciation.";
+
 //				if (group_output.size()>0) {
 //					char filepath[target.length() + 50];
 //					sprintf(filepath, "%s/group_log/%u_group.txt", getSpeciesFolder(sp_it.first).c_str(), year);
@@ -375,9 +386,9 @@ unsigned Scenario::run() {
 				}
 			}
 		}
-//		LOG(INFO)<<"end to mark the group id, and detect the speciation.";
+		//LOG(INFO)<<"end to mark the group id, and detect the speciation.";
 
-//		LOG(INFO)<<"Begin to rebuild the organism structure in this year";
+		//LOG(INFO)<<"Begin to rebuild the organism structure in this year";
 		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > new_individual_organisms_in_current_year;
 		for (auto sp_it : individual_organisms_in_current_year) {
 			boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
@@ -416,8 +427,8 @@ unsigned Scenario::run() {
 		}
 		individual_organisms_in_current_year = new_individual_organisms_in_current_year;
 
-//		LOG(INFO)<<"End to rebuild the organism structure in this year";
-//		LOG(INFO)<<"begin to generate group maps";
+		//LOG(INFO)<<"End to rebuild the organism structure in this year";
+		//LOG(INFO)<<"begin to generate group maps";
 		boost::unordered_map<SpeciesObject*, SparseMap*> group_maps;
 		for (auto sp_it : individual_organisms_in_current_year) {
 			SpeciesObject* species = sp_it.first;
@@ -492,7 +503,7 @@ unsigned Scenario::run() {
 
 		all_individualOrganisms[year] = individual_organisms_in_current_year;
 		//remove the useless organism
-//		LOG(INFO)<<"Remove the useless organisms. Before removing, Memory usage:"<<CommonFun::getCurrentRSS();
+		//LOG(INFO)<<"Remove the useless organisms. Before removing, Memory usage:"<<CommonFun::getCurrentRSS();
 		for (auto sp_it : species) {
 			if (year<sp_it->getDispersalSpeed()) {
 				continue;
@@ -533,12 +544,12 @@ unsigned Scenario::run() {
 
 			}
 		}
-//		LOG(INFO)<<"Remove the useless organisms. After  removing, Memory usage:"<<CommonFun::getCurrentRSS();
+		//LOG(INFO)<<"Remove the useless organisms. After  removing, Memory usage:"<<CommonFun::getCurrentRSS();
 
-//		LOG(INFO)<<"Generate speciation information.";
+		//LOG(INFO)<<"Generate speciation information.";
 		generateSpeciationInfo(year, false);
 		CommonFun::clearVector(&current_environments);
-//		LOG(INFO)<<"Save stat information.";
+		//LOG(INFO)<<"Save stat information.";
 		unsigned long o_size = 0;
 		unsigned long c_size = 0;
 		unsigned long mem_size = 0;
@@ -700,17 +711,17 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 	unsigned short x = p_unmarked_organism->getX();
 	unsigned short y = p_unmarked_organism->getY();
 	unsigned short p_dispersal_ability = p_unmarked_organism->getDispersalAbility();
-	for (unsigned i_x = (x - p_dispersal_ability);
+	for (int i_x = (x - p_dispersal_ability);
 			i_x <= (x + p_dispersal_ability); ++i_x) {
 		i_x = (((int) i_x) < 0) ? 0 : i_x;
-		if ((unsigned) i_x >= xSize)
+		if (i_x >= (int)xSize)
 			break;
-		for (unsigned i_y = (y - p_dispersal_ability);
+		for (int i_y = (y - p_dispersal_ability);
 				i_y <= (y + p_dispersal_ability);
 				++i_y) {
 			i_y = (((int) i_y) < 0) ? 0 : i_y;
 
-			if ((unsigned) i_y >= ySize)
+			if (i_y >= (int)ySize)
 				break;
 //            LOG(INFO)<<"X="<<i_x<<", Y="<<i_y;
 			double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
