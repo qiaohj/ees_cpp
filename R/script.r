@@ -39,13 +39,16 @@ plot(r)
 r<-raster("/home/huijieqiao/temp/scenario/01/09/groupsmap/0048200.tif")
 plot(r)
 
-r<-raster("/home/huijieqiao/temp/scenario/01/10/groupsmap/0048200.tif")
+r<-raster("/home/huijieqiao/temp/scenario/01/01/groupsmap/0024900.tif")
+plot(r)
+r<-raster("/home/huijieqiao/temp/scenario/01/groupsmap/0024800.tif")
 plot(r)
 
-r<-raster("/home/huijieqiao/temp/scenario/65/suitable.tif")
+
+r<-raster("/home/huijieqiao/temp/scenario/01/suitable.tif")
 plot(r)
 
-r<-raster("/home/huijieqiao/temp/scenario/01/groupsmap/0042000.tif")
+r<-raster("/home/huijieqiao/temp/scenario/01/02/groupsmap/0024900.tif")
 plot(r)
 
 
@@ -59,4 +62,13 @@ r<-raster("/home/huijieqiao/temp/scenario/01/02/groupsmap/0045000.tif")
 plot(r)
 
 r<-raster("/home/huijieqiao/temp/scenario/01/03/groupsmap/0045000.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/NB_NEW_Result/scenario.seed_587.dispersal_good.nb_large/87/suitable.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/NB_NEW_Result/scenario.seed_877.dispersal_poor.nb_large/77/suitable.tif")
+plot(r)
+
+r<-raster("/home/huijieqiao/NB_NEW_Result/scenario.seed_877.dispersal_poor.nb_large/77/groupsmap/0012000.tif")
 plot(r)

@@ -47,13 +47,13 @@ _INITIALIZE_EASYLOGGINGPP
 int main(int argc, const char* argv[]) {
 	srand(static_cast<unsigned>(time(0)));
     char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
-    sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
+    sprintf(scenario_json_path, "%s/Scenario_Configurations_0/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
 	bool with_detail = atoi(argv[6]);
-	unsigned tif_limit = atoi(argv[5]);
-	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], tif_limit, memory_limit, with_detail);
+	bool is_overwrite = atoi(argv[5]);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail);
 
-	if (scenario->isFinish()){
+	if (scenario->isTerminated()){
 		delete scenario;
 		printf("Result folder is exist, skip this simulation!\n");
 		return EXIT_SUCCESS;

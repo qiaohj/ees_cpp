@@ -52,7 +52,7 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
                 initial_seeds_json[1].asFloat());
         seeds.push_back(initial_seed);
     }
-
+    LOG(INFO)<<"finished";
 }
 std::string SpeciesObject::getIDWithParentID(){
     if (parent==NULL){

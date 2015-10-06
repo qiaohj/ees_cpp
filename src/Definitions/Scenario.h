@@ -25,7 +25,7 @@
 class Scenario {
 private:
 	bool isFinished;
-    unsigned tifLimit;
+	bool isOverwrite;
     unsigned long memLimit;
     std::vector<EnvironmentalHadley*> environments;
     std::vector<SpeciesObject*> species;
@@ -45,7 +45,7 @@ private:
     boost::unordered_map<unsigned, boost::unordered_map<SpeciesObject*,
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > > > all_individualOrganisms;
     std::vector<CoodLocation*> getDispersalMap_2(
-            IndividualOrganism* individualOrganism);
+            IndividualOrganism* individualOrganism, std::string species_folder, unsigned year);
     IndividualOrganism* getUnmarkedOrganism(
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     void markJointOrganism(unsigned short p_group_id,
@@ -61,14 +61,15 @@ private:
     bool with_detail;
 public:
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
-            std::string p_target, unsigned p_tif_limit, unsigned long p_mem_limit, bool p_with_detail);
+            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail);
     virtual ~Scenario();
     unsigned run();
-    bool isFinish();
+    bool isTerminated();
     float* getEnvironmentValue(unsigned p_year, double p_longitude,
             double p_latitude);
     std::vector<SparseMap*> getEnvironmenMap(unsigned p_year);
     std::string getTarget();
+    void saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps);
     //bool generateEnv();
 };
 

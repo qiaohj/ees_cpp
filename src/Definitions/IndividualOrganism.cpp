@@ -71,9 +71,9 @@ unsigned short IndividualOrganism::getDispersalAbility() {
 void IndividualOrganism::setRandomDispersalAbility(){
 
 	float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-	unsigned short dispersal_ability = 0;
+	unsigned short dispersal_ability = 1;
 	for (unsigned short i = 1; i <= species->getDispersalAbilityLength(); i++) {
-		if (r < species->getDispersalAbility()[i-1]) {
+		if (r <= species->getDispersalAbility()[i-1]) {
 			dispersal_ability = i;
 			break;
 		}
