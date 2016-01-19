@@ -47,7 +47,7 @@ _INITIALIZE_EASYLOGGINGPP
 int main(int argc, const char* argv[]) {
 	srand(static_cast<unsigned>(time(0)));
     char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
-    sprintf(scenario_json_path, "%s/Scenario_Configurations_0/%s.json", argv[1], argv[2]);
+    sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
 	unsigned long memory_limit = atoi(argv[4]);
 	bool with_detail = atoi(argv[6]);
 	bool is_overwrite = atoi(argv[5]);

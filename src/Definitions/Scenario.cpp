@@ -193,9 +193,7 @@ unsigned Scenario::run() {
 //    bool is_write_memory_usage = false;
 	for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
 			minSpeciesDispersalSpeed) {
-		LOG(INFO)<<"Current year:"<<year;
-		LOG(INFO)<<" @ " << target;
-		LOG(INFO)<<" Memory usage:"<<CommonFun::getCurrentRSS();
+		LOG(INFO)<<"Current year:"<<year << " @ " << target <<" Memory usage:"<<CommonFun::getCurrentRSS();
 
 		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > >
 			individual_organisms_in_current_year;
