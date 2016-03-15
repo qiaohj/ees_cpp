@@ -45,6 +45,10 @@ _INITIALIZE_EASYLOGGINGPP
 //configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), tif_limit
 ///home/huijieqiao/NB_NEW/Environments scenario /home/huijieqiao/temp 4000 1000 1
 int main(int argc, const char* argv[]) {
+	if (argc==1){
+		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
+		exit(1);
+	}
 	srand(static_cast<unsigned>(time(0)));
     char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
     sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
@@ -65,9 +69,9 @@ int main(int argc, const char* argv[]) {
 	el::Loggers::setDefaultConfigurations(c, true);
 
 	unsigned status = scenario->run();
-//	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+	LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	delete scenario;
-//	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+	LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
 	if (status==0){
 		LOG(INFO)<<"Well done!";
 	}

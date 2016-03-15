@@ -138,6 +138,10 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 
 }
 void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
+	LOG(INFO)<<species_group_maps.size();
+	if (species_group_maps.size()==0){
+		return;
+	}
 	std::vector<std::string> output;
 
 	for (auto sp_it : species_group_maps){
@@ -157,10 +161,12 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 			}
 		}
 	}
-	char filepath2[target.length() + 15];
-	sprintf(filepath2, "%s/Map_Folder/%d.csv", target.c_str(), year);
-	CommonFun::writeFile(output, filepath2);
-	output.clear();
+	if (output.size()>0){
+		char filepath2[target.length() + 15];
+		sprintf(filepath2, "%s/Map_Folder/%d.csv", target.c_str(), year);
+		CommonFun::writeFile(output, filepath2);
+		output.clear();
+	}
 }
 unsigned Scenario::run() {
 	boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps;
@@ -619,7 +625,7 @@ unsigned Scenario::run() {
 		sprintf(line, "%u,%lu,%lu,%lu,%lu,%lu,%lu", year, CommonFun::getCurrentRSS(), c_size, o_size, mem_size, species_size, all_individualOrganisms[year].size());
 		stat_output.push_back(line);
 
-		if ((CommonFun::getCurrentRSS()>memLimit)&&(year<110000)) {
+		if ((CommonFun::getCurrentRSS()>memLimit)&&(year<100000)) {
 			char filepath[target.length() + 16];
 			sprintf(filepath, "%s/stat_curve.csv", target.c_str());
 			CommonFun::writeFile(stat_output, filepath);
