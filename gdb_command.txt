@@ -1,3 +1,6 @@
 cd workspace/NicheBreadth/Default/
 gdb NicheBreadth
 set args /home/huijieqiao/NB_R4 scenario.seed_1.dispersal_good.nb_large /home/huijieqiao/NB_R4/Results 8000 1 1
+
+
+/media/huijieqiao/Data/NB/NB_2016/NicheBreadth2016_10k_5e scenario.seed_635.dispersal_good.nb_large /media/huijieqiao/Data/NB/NB_2016/NicheBreadth2016_10k_5e/Results_test 8000 0 0
