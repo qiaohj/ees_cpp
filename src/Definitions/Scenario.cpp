@@ -126,7 +126,7 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 
 	char groupsmapFolder[speciesFolder.length() + 6 + 10];
 	sprintf(groupsmapFolder, "%s/groupsmap", speciesFolder.c_str());
-	CommonFun::createFolder(groupsmapFolder);
+//	CommonFun::createFolder(groupsmapFolder);
 //	char groupslogFolder[speciesFolder.length() + 6 + 10];
 //	sprintf(groupslogFolder, "%s/group_log", speciesFolder.c_str());
 //	CommonFun::createFolder(groupslogFolder);
