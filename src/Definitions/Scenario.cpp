@@ -138,7 +138,6 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 
 }
 void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
-	LOG(INFO)<<species_group_maps.size();
 	if (species_group_maps.size()==0){
 		return;
 	}
@@ -337,6 +336,43 @@ unsigned Scenario::run() {
 				individual_organisms_in_current_year[sp_it.first].erase(key);
 			}
 		}
+		boost::unordered_map<SpeciesObject*, std::vector<unsigned>> erased_keys2;
+		//Remove the species which distribution is smaller than X for Y time steps
+		for (auto sp_it : individual_organisms_in_current_year) {
+			//LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps();
+			SpeciesObject* species = sp_it.first;
+			if ((sp_it.second.size()>0)&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))) {
+				//if ((sp_it.second.size()>0)) {
+				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()) {
+					species->addCurrentSpeciesExtinctionTimeSteps();
+				} else {
+					species->setCurrentSpeciesExtinctionTimeSteps(0);
+				}
+			} else {
+				std::vector<unsigned> erased_key;
+				for (auto it : sp_it.second) {
+					if (it.second.size()>0) {
+						erased_key.push_back(it.first);
+					}
+				}
+				erased_keys2[sp_it.first] = erased_key;
+			}
+		}
+		for (auto sp_it : erased_keys2) {
+			for (auto key : sp_it.second) {
+				for (std::vector<IndividualOrganism*>::iterator it = individual_organisms_in_current_year[sp_it.first][key].begin();
+						it != individual_organisms_in_current_year[sp_it.first][key].end(); ++it) {
+//                    (*it)->getParent()->removeChild(*it);
+					delete *it;
+				}
+				individual_organisms_in_current_year[sp_it.first][key].clear();
+				std::vector<IndividualOrganism*>().swap(individual_organisms_in_current_year[sp_it.first][key]);
+				individual_organisms_in_current_year[sp_it.first].erase(key);
+			}
+			sp_it.second.clear();
+			sp_it.first->setDisappearedYear(year);
+		}
+
 		//LOG(INFO)<<"end to remove unsuitable organisms.";
 
 		//mark the group id for every organisms in this year, seperated by species id;
@@ -486,37 +522,17 @@ unsigned Scenario::run() {
 			if (group_maps.find(species)==group_maps.end()) {
 				group_maps[sp_it.first] = new SparseMap(xSize, ySize);
 			}
-			//LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps();
-			if ((sp_it.second.size()>0)&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))) {
-			//if ((sp_it.second.size()>0)) {
-				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()){
-					species->addCurrentSpeciesExtinctionTimeSteps();
-				}else{
-					species->setCurrentSpeciesExtinctionTimeSteps(0);
-				}
-
-
+			if (sp_it.second.size()>0) {
 				for (auto o_id : sp_it.second) {
 					if (o_id.second.size()>0) {
 						group_maps[sp_it.first]->setValue(o_id.second[0]->getX(), o_id.second[0]->getY(), o_id.second[0]->getGroupId());
 					}
 				}
 			} else {
-//				if (species->getCurrentSpeciesExtinctionTimeSteps()>=species->getSpeciesExtinctionTimeSteps()){
-//
-//					std::vector<std::string> special_log;
-//					char line[100];
-//					sprintf(line, "New extinction detected %u", year);
-//					special_log.push_back(line);
-//					char filepath[target.length() + 50];
-//					sprintf(filepath, "%s/special_log.txt", getSpeciesFolder(sp_it.first).c_str());
-//					LOG(INFO)<<"1."<<getSpeciesFolder(sp_it.first);
-//					CommonFun::writeFile(special_log, filepath);
-//				}
-				sp_it.second.clear();
 				sp_it.first->setDisappearedYear(year);
 				group_maps[sp_it.first] = NULL;
 			}
+
 		}
 //		for (auto it : group_maps) {
 //			if (it.second!=NULL) {
