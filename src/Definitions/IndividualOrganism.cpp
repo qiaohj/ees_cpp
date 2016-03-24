@@ -80,6 +80,7 @@ void IndividualOrganism::setRandomDispersalAbility(){
 	}
 	//LOG(INFO)<<"Dispersal ability is " <<dispersal_ability << " calculated by "<<r;
 	dispersalAbility = dispersal_ability;
+	//dispersalAbility = 1;
 }
 
 void IndividualOrganism::setDispersalAbility(unsigned short p_dispersal_ability) {

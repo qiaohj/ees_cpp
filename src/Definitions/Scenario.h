@@ -52,7 +52,9 @@ private:
             IndividualOrganism* p_unmarked_organism,
             boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     unsigned getMinDividedYear(unsigned speciation_year, unsigned short group_id_1,
-            unsigned short group_id_2, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
+            unsigned short group_id_2, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms, unsigned current_year);
+    unsigned getMinDividedYear_minDistance(unsigned speciation_year, unsigned short group_id_1,
+            unsigned short group_id_2, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms, unsigned current_year);
     unsigned getDividedYear(IndividualOrganism* o_1, IndividualOrganism* o_2);
     void markedSpeciesID(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);
     unsigned short getTempSpeciesID(unsigned short group_id, boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms);

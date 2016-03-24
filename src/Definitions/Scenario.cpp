@@ -415,7 +415,7 @@ unsigned Scenario::run() {
 							continue;
 						}
 						//LOG(INFO)<<"get min_divided_year.";
-						unsigned min_divided_year = getMinDividedYear(sp_it.first->getSpeciationYears(), group_id_1, group_id_2, &organisms);
+						unsigned min_divided_year = getMinDividedYear(sp_it.first->getSpeciationYears(), group_id_1, group_id_2, &organisms, year);
 						//LOG(INFO)<<"get min_divided_year is "<<min_divided_year;
 
 						if (min_divided_year>=species->getSpeciationYears()) {
@@ -705,18 +705,17 @@ void Scenario::markedSpeciesID(unsigned short group_id,
 		}
 	}
 }
-unsigned Scenario::getMinDividedYear(unsigned speciation_year,
+unsigned Scenario::getMinDividedYear_minDistance(unsigned speciation_year,
 		unsigned short group_id_1, unsigned short group_id_2,
-		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms) {
+		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms,
+		unsigned current_year) {
 	unsigned nearest_divided_year = 0;
-	unsigned current_year = 0;
 	std::vector<unsigned> group_c_1;
 	std::vector<unsigned> group_c_2;
 	double min_distance = 9999999;
 	unsigned group_1_index = 0;
 	unsigned group_2_index = 0;
 	for (auto c_it : (*organisms)) {
-		current_year = c_it.second.front()->getYear();
 		if (c_it.second.front()->getGroupId() == group_id_1) {
 			group_c_1.push_back(c_it.first);
 		} else if (c_it.second.front()->getGroupId() == group_id_2) {
@@ -741,19 +740,48 @@ unsigned Scenario::getMinDividedYear(unsigned speciation_year,
 	std::vector<IndividualOrganism*> group_1 = (*organisms)[group_1_index];
 	std::vector<IndividualOrganism*> group_2 = (*organisms)[group_2_index];
 
-//    std::vector<IndividualOrganism*> group_1;
-//    std::vector<IndividualOrganism*> group_2;
-//    for (auto c_it : (*organisms)) {
-//        for (auto o_it : c_it.second) {
-//            current_year = o_it->getYear();
-//            if (o_it->getGroupId() == group_id_1) {
-//                group_1.push_back(o_it);
-//            } else if (o_it->getGroupId() == group_id_2) {
-//                group_2.push_back(o_it);
-//            }
-//        }
-//    }
-//
+	for (auto o_it_1 : group_1) {
+		for (auto o_it_2 : group_2) {
+			//if ((o_it_1->getGroupId()==group_id_1)&&(o_it_2->getGroupId()==group_id_2)){
+				unsigned divided_year = getDividedYear(o_it_1, o_it_2);
+				nearest_divided_year =
+						(divided_year > nearest_divided_year) ?
+								divided_year : nearest_divided_year;
+				if ((current_year - nearest_divided_year) < speciation_year) {
+					return current_year - nearest_divided_year;
+				}
+			//}
+		}
+		//printf("%u/%u\n", i++, group_1.size() * group_2.size());
+	}
+	return current_year - nearest_divided_year;
+}
+
+unsigned Scenario::getMinDividedYear(unsigned speciation_year,
+		unsigned short group_id_1, unsigned short group_id_2,
+		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms,
+		unsigned current_year) {
+	unsigned nearest_divided_year = 0;
+	std::vector<unsigned> group_c_1;
+	std::vector<unsigned> group_c_2;
+	unsigned group_1_index = 0;
+	unsigned group_2_index = 0;
+
+	//save all the organisms in that two groups
+	std::vector<IndividualOrganism*> group_1 = (*organisms)[group_1_index];
+	std::vector<IndividualOrganism*> group_2 = (*organisms)[group_2_index];
+
+	for (auto c_it : (*organisms)) {
+		for (auto o_it : c_it.second){
+			if (o_it->getGroupId() == group_id_1){
+				group_1.push_back(o_it);
+			}else if (o_it->getGroupId() == group_id_2){
+				group_2.push_back(o_it);
+			}
+		}
+	}
+
+
 	for (auto o_it_1 : group_1) {
 		for (auto o_it_2 : group_2) {
 			unsigned divided_year = getDividedYear(o_it_1, o_it_2);
