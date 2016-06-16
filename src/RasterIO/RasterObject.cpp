@@ -40,6 +40,9 @@ unsigned RasterObject::getXSize(){
 unsigned RasterObject::getYSize(){
 	return ySize;
 }
+const char* RasterObject::getGCPProjection(){
+	return poDataset->GetGCPProjection();
+}
 const char* RasterObject::getProjectionRef(){
 	return poDataset->GetProjectionRef();
 }

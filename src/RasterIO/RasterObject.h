@@ -35,6 +35,7 @@ public:
 	float getNoData();
 	float readByLL(double p_longitude, double p_latitude);
 	void printRasterInfo();
+	const char* getGCPProjection();
 	const char* getProjectionRef();
 };
 

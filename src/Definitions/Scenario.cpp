@@ -39,7 +39,9 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 			root_Scenario.get("mask", "").asString());
 	geoTrans = new double[6];
 	memcpy(geoTrans, mask_raster->getGeoTransform(), 6 * sizeof(*geoTrans));
-
+	prj = new char[strlen(mask_raster->getProjectionRef()) + 1];
+	strcpy(prj, mask_raster->getProjectionRef());
+	//LOG(INFO)<<"1:"<<prj;
 	mask = new SparseMap(mask_raster, true);
 	xSize = mask_raster->getXSize();
 	ySize = mask_raster->getYSize();
@@ -254,9 +256,10 @@ unsigned Scenario::run() {
 						}
 					}
 				}
-				RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
-						array, (double) NODATA, GDT_Int32);
 
+				//LOG(INFO)<<"2:"<<prj;
+				RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
+										array, (double) NODATA, GDT_Int32, prj);
 				//LOG(INFO)<<"END to generate the suitable area";
 				//exit(1);
 			}

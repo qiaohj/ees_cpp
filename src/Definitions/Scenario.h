@@ -41,6 +41,7 @@ private:
     std::string target;
     double* geoTrans;
     unsigned xSize, ySize;
+    char *prj;
     void cleanActivedIndividualOrganisms();
     void cleanEnvironments();
     void cleanSpecies();

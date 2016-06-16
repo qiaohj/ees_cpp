@@ -83,7 +83,8 @@ int main(int argc, const char* argv[]) {
 	LOG(INFO)<<"E distance:"<<CommonFun::EuclideanDistance(173, 98, 347, 98);
 	delete fromRaster;
 	delete toRaster;
-	exit(1);*/
+	exit(1);
+	*/
 	if (argc==1){
 		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
 		exit(1);
@@ -102,6 +103,7 @@ int main(int argc, const char* argv[]) {
 	oSourceSRS.importFromWkt(&from_T);
 	oTargetSRS.importFromWkt(&to_T);
 	OGRCoordinateTransformation *poCT = OGRCreateCoordinateTransformation( &oSourceSRS, &oTargetSRS );
+
 	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail, fromWkt, toWkt, resolution, poCT);
 
 	if (scenario->isTerminated()){
