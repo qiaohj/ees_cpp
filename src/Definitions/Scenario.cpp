@@ -9,7 +9,13 @@
 
 Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, bool p_overwrite,
-		unsigned long p_mem_limit, bool p_with_detail) {
+		unsigned long p_mem_limit, bool p_with_detail,
+		const char* p_fromWkt, const char* p_toWkt, int p_resolution,
+		OGRCoordinateTransformation *p_poCT) {
+	fromWkt = p_fromWkt;
+	toWkt = p_toWkt;
+	poCT = p_poCT;
+	resolution = p_resolution;
 	with_detail = p_with_detail;
 	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
@@ -282,7 +288,7 @@ unsigned Scenario::run() {
 						new IndividualOrganism(year,
 								individualOrganism->getSpecies(),
 								individualOrganism, it->getX(), it->getY());
-						new_individualOrganism->setDispersalAbility(individualOrganism->getDispersalAbility());
+						new_individualOrganism->setRandomDispersalAbility();
 						new_individual_organisms.push_back(new_individualOrganism);
 					}
 					for (std::vector<CoodLocation*>::iterator it =
@@ -341,14 +347,23 @@ unsigned Scenario::run() {
 		for (auto sp_it : individual_organisms_in_current_year) {
 			//LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps();
 			SpeciesObject* species = sp_it.first;
-			if ((sp_it.second.size()>0)&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))) {
+			if ((sp_it.second.size()>0)
+					&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))
+					&&(sp_it.second.size()>=(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage()))) {
 				//if ((sp_it.second.size()>0)) {
+				species->setMaxSpeciesDistribution((sp_it.second.size()>species->getMaxSpeciesDistribution())?sp_it.second.size():species->getMaxSpeciesDistribution());
 				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()) {
 					species->addCurrentSpeciesExtinctionTimeSteps();
 				} else {
 					species->setCurrentSpeciesExtinctionTimeSteps(0);
 				}
 			} else {
+				/*LOG(INFO)<<"Present "<<sp_it.second.size()<<" Max "<<species->getMaxSpeciesDistribution()<<" per " <<
+						(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage());
+				if ((sp_it.second.size()>0)
+					&&(sp_it.second.size()<(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage()))){
+					LOG(INFO)<<"Smaller than 80% detected";
+				}*/
 				std::vector<unsigned> erased_key;
 				for (auto it : sp_it.second) {
 					if (it.second.size()>0) {
@@ -728,7 +743,7 @@ unsigned Scenario::getMinDividedYear_minDistance(unsigned speciation_year,
 		for (auto o_it_2 : group_c_2) {
 			int x2 = (*organisms)[o_it_2].front()->getX();
 			int y2 = (*organisms)[o_it_2].front()->getY();
-			double distance = CommonFun::EuclideanDistance(x1, y1, x2, y2);
+			double distance = CommonFun::GreatCirleDistanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution);
 			if (min_distance > distance) {
 				min_distance = distance;
 				group_1_index = o_it_1;
@@ -815,6 +830,9 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 	unsigned short x = p_unmarked_organism->getX();
 	unsigned short y = p_unmarked_organism->getY();
 	unsigned short p_dispersal_ability = p_unmarked_organism->getDispersalAbility();
+	if (p_dispersal_ability==0){
+		p_dispersal_ability = 1;
+	}
 	for (int i_x = (x - p_dispersal_ability);
 			i_x <= (x + p_dispersal_ability); ++i_x) {
 		int next_x = i_x;
@@ -833,8 +851,10 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 			if (i_y >= (int)ySize)
 				break;
 //            LOG(INFO)<<"X="<<i_x<<", Y="<<i_y;
-			double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
-					(int) (x), (int) (y));
+			double distance = CommonFun::GreatCirleDistanceFast((int) i_x, (int) i_y,
+					(int) (x), (int) (y), poCT, geoTrans, resolution);
+			//double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
+			//		(int) (x), (int) (y));
 			if (distance > p_dispersal_ability) {
 //                LOG(INFO)<<"skip 1";
 				continue;
@@ -944,8 +964,10 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 				i_y = (((int) i_y) < 0) ? 0 : i_y;
 				if ((unsigned) i_y >= ySize)
 					break;
-				double distance = CommonFun::EuclideanDistance((int) i_x,
-						(int) i_y, (int) (x), (int) (y));
+				double distance = CommonFun::GreatCirleDistanceFast((int) i_x,
+								(int) i_y, (int) (x), (int) (y), poCT, geoTrans, resolution);
+				//double distance = CommonFun::EuclideanDistance((int) i_x,
+				//		(int) i_y, (int) (x), (int) (y));
 //                printf("%u, %u vs %u, %u, Distance:%f\n", i_x, i_y, x, y,
 //                        distance);
 				if ((distance < p_dispersal_ability)

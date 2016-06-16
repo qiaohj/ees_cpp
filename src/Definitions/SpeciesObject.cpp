@@ -15,9 +15,9 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     id = species_json.get("id", "").asInt();
     Json::Value dispersal_ability_array = species_json["dispersal_ability"];
     dispersalAbilityLength = dispersal_ability_array.size();
-    dispersalAbility = new float[10];
+    dispersalAbility = new double[10];
 	for (unsigned index = 0; index < dispersalAbilityLength; ++index) {
-		dispersalAbility[index] = dispersal_ability_array[index].asFloat();
+		dispersalAbility[index] = dispersal_ability_array[index].asDouble();
 	}
 
     dispersalSpeed = species_json.get("dispersal_speed", 100).asInt();
@@ -28,6 +28,8 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     speciesExtinctionThreshold = species_json.get("species_extinction_threshold", 1).asInt();
     groupExtinctionThreshold = species_json.get("group_extinction_threshold", 1).asInt();
     speciesExtinctionTimeSteps = species_json.get("species_extinction_time_steps", 1).asInt();
+    speciesExtinctionThreaholdPercentage = 1 - species_json.get("species_extinction_threahold_percentage", 1).asDouble();
+    maxSpeciesDistribution = 0;
     appearedYear = 0;
     disappearedYear = 0;
     parent = NULL;
@@ -77,6 +79,8 @@ SpeciesObject::SpeciesObject(unsigned p_id, SpeciesObject* p_parent,
     speciesExtinctionThreshold = parent->getSpeciesExtinctionThreshold();
     groupExtinctionThreshold = parent->getGroupExtinctionThreshold();
     speciesExtinctionTimeSteps = p_parent->getSpeciesExtinctionTimeSteps();
+    speciesExtinctionThreaholdPercentage = p_parent->getSpeciesExtinctionThreaholdPercentage();
+    maxSpeciesDistribution = 0;
     dispersalAbility = parent->getDispersalAbility();
     dispersalSpeed = parent->getDispersalSpeed();
     dispersalMethod = parent->getDispersalMethod();
@@ -307,7 +311,7 @@ SpeciesObject::~SpeciesObject() {
 unsigned short SpeciesObject::getDispersalAbilityLength(){
 	return dispersalAbilityLength;
 }
-float* SpeciesObject::getDispersalAbility() {
+double* SpeciesObject::getDispersalAbility() {
     return dispersalAbility;
 }
 
@@ -323,6 +327,15 @@ unsigned SpeciesObject::getSpeciesExtinctionTimeSteps(){
 	return speciesExtinctionTimeSteps;
 }
 
+double SpeciesObject::getSpeciesExtinctionThreaholdPercentage(){
+	return speciesExtinctionThreaholdPercentage;
+}
+void SpeciesObject::setMaxSpeciesDistribution(unsigned distribution){
+	maxSpeciesDistribution = distribution;
+}
+unsigned SpeciesObject::getMaxSpeciesDistribution(){
+	return maxSpeciesDistribution;
+}
 unsigned SpeciesObject::getCurrentSpeciesExtinctionTimeSteps(){
 	return currentSpeciesExtinctionTimeSteps;
 }

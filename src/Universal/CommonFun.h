@@ -8,6 +8,10 @@
 #ifndef CommonFun_H
 #define CommonFun_H
 
+#include <gdal.h>
+#include <gdal_priv.h>
+#include <ogr_srs_api.h>
+#include <ogr_spatialref.h>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,10 +30,19 @@
 #include "../JsonPaster/include/json/json.h"
 #include "const.h"
 #include "log.hpp"
+#include <cmath>
 
+#ifndef M_PI
+#define M_PI    3.1415926535897932384626433832795
+#endif
+
+#ifndef earth_radius_km
+#define earth_radius_km    6371.0
+#endif
 
 class CommonFun {
 public:
+	static void convert2LL(double* x, double* y, const char *fromWkt, const char *toWkt);
     static std::string readFile(const char* path);
     static std::string removeSuffix(const std::string& path,
             const std::string& extension);
@@ -41,10 +54,18 @@ public:
             const double latitude, unsigned* x, unsigned* y);
     static void XY2LL(const double* adfGeoTransform, const unsigned x,
             const unsigned y, double* longitude, double* latitude);
+    static double deg2rad(double deg);
+    static double haversine_distance(double latitude1, double longitude1, double latitude2,
+                              double longitude2);
+    static double vincenty_distance(double latitude1, double longitude1, double latitude2,
+                             double longitude2);
     static std::string fixedLength(int value, int digits);
     static size_t getPeakRSS();
     static size_t getCurrentRSS();
     static size_t writeMemoryUsage(unsigned line, bool is, size_t last);
+    static double GreatCirleDistance(int x1, int y1, int x2, int y2, const char* fromWkt, const char* toWkt, const double* geoTrans, int resolution);
+    static double GreatCirleDistanceFast(int x1, int y1, int x2, int y2,
+    		OGRCoordinateTransformation *poCT, const double* geoTrans, int resolution);
     template<typename T> static double EuclideanDistance(T x1, T y1, T x2,
             T y2);
     template<typename T> static bool AlmostEqualRelative(T a, T b);

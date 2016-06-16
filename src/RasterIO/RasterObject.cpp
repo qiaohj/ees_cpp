@@ -40,6 +40,9 @@ unsigned RasterObject::getXSize(){
 unsigned RasterObject::getYSize(){
 	return ySize;
 }
+const char* RasterObject::getProjectionRef(){
+	return poDataset->GetProjectionRef();
+}
 double* RasterObject::getGeoTransform(){
 	return adfGeoTransform;
 }

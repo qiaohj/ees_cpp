@@ -24,6 +24,10 @@
 
 class Scenario {
 private:
+	const char* fromWkt;
+	const char* toWkt;
+	OGRCoordinateTransformation *poCT;
+	int resolution;
 	bool isFinished;
 	bool isOverwrite;
     unsigned long memLimit;
@@ -63,7 +67,9 @@ private:
     bool with_detail;
 public:
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
-            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail);
+            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail,
+			const char* p_fromWkt, const char* p_toWkt,
+			int p_resolution, OGRCoordinateTransformation *p_poCT);
     virtual ~Scenario();
     unsigned run();
     bool isTerminated();

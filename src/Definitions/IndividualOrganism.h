@@ -33,7 +33,7 @@ public:
     int getNumOfPath();
     unsigned getSpeciationYears();
     unsigned short getDispersalAbility();
-    void setDispersalAbility(unsigned short p_dispersal_ability);
+    //void setDispersalAbility(unsigned short p_dispersal_ability);
     bool isSuitable(std::vector<SparseMap*>* p_current_environments);
     SpeciesObject* getSpecies();
     unsigned getSpeciesID();
