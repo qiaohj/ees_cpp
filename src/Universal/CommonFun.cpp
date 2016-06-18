@@ -6,7 +6,7 @@
  */
 
 #include "CommonFun.h"
-
+static const double DEG_TO_RAD = 0.017453292519943295769236907684886;
 void CommonFun::convert2LL(double* x, double* y, const char *fromWkt, const char *toWkt){
 	OGRSpatialReference oSourceSRS;
 	OGRSpatialReference oTargetSRS;
@@ -18,7 +18,7 @@ void CommonFun::convert2LL(double* x, double* y, const char *fromWkt, const char
 	poCT = OGRCreateCoordinateTransformation( &oSourceSRS, &oTargetSRS );
 	int result = poCT->Transform( 1, x, y );
 	if (result==0){
-		//LOG(INFO)<<"Failed to convert";
+		LOG(INFO)<<"Failed to convert";
 	}
 	//LOG(INFO)<<"To LL:"<<result<<" lon:"<<*x<<"; lat:"<<*y;
 	delete poCT;
@@ -26,22 +26,38 @@ void CommonFun::convert2LL(double* x, double* y, const char *fromWkt, const char
 
 
 double CommonFun::GreatCirleDistanceFast(int x1, int y1, int x2, int y2,
-		OGRCoordinateTransformation *poCT, const double* geoTrans, int resolution){
+		OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution){
 	double x1_km, x2_km, y1_km, y2_km;
 	XY2LL(geoTrans, x1, y1, &x1_km, &y1_km);
 	XY2LL(geoTrans, x2, y2, &x2_km, &y2_km);
-
-	poCT->Transform( 1, &x1_km, &y1_km);
-	poCT->Transform( 1, &x2_km, &y2_km);
-	return vincenty_distance(y1_km, x1_km, y2_km, x2_km)/resolution;
+	//LOG(INFO)<<"X1_KM="<<x1_km<<" Y1_KM=:"<<y1_km;
+	//LOG(INFO)<<"X2_KM="<<x2_km<<" Y2_KM=:"<<y2_km;
+	int r1 = poCT->Transform( 1, &x1_km, &y1_km);
+	int r2 = poCT->Transform( 1, &x2_km, &y2_km);
+	//LOG(INFO)<<"LONG1="<<x1_km<<" LAT1=:"<<y1_km;
+	//LOG(INFO)<<"LONG2="<<x2_km<<" LAT2=:"<<y2_km;
+	if ((r1==0)||(r2==0)){
+		return -1;
+	}
+	else{
+		LOG(INFO)<<"vincenty_distance="<<vincenty_distance(y1_km, x1_km, y2_km, x2_km)/resolution
+				<<" haversine_distance="<<haversine_distance(y1_km, x1_km, y2_km, x2_km)/resolution
+				<<" ArcInRadians="<<ArcInRadians(y1_km, x1_km, y2_km, x2_km)/resolution;
+		return haversine_distance(y1_km, x1_km, y2_km, x2_km)/resolution;
+	}
 
 }
+
 double CommonFun::GreatCirleDistance(int x1, int y1, int x2, int y2, const char* fromWkt, const char* toWkt, const double* geoTrans, int resolution){
 	double x1_km, x2_km, y1_km, y2_km;
 	XY2LL(geoTrans, x1, y1, &x1_km, &y1_km);
 	XY2LL(geoTrans, x2, y2, &x2_km, &y2_km);
+	//LOG(INFO)<<"X1_KM="<<x1_km<<" Y1_KM=:"<<y1_km;
+	//LOG(INFO)<<"X2_KM="<<x2_km<<" Y2_KM=:"<<y2_km;
 	convert2LL(&x1_km, &y1_km, fromWkt, toWkt);
 	convert2LL(&x2_km, &y2_km, fromWkt, toWkt);
+	//LOG(INFO)<<"LONG1="<<x1_km<<" LAT1=:"<<y1_km;
+	//LOG(INFO)<<"LONG2="<<x2_km<<" LAT2=:"<<y2_km;
 	return vincenty_distance(y1_km, x1_km, y2_km, x2_km)/resolution;
 
 }
@@ -58,8 +74,8 @@ double CommonFun::haversine_distance(double latitude1, double longitude1, double
     double lat2 = deg2rad(latitude2);
     double lon2 = deg2rad(longitude2);
 
-    double d_lat = abs(lat1 - lat2);
-    double d_lon = abs(lon1 - lon2);
+    double d_lat = lat1 - lat2;
+    double d_lon = lon1 - lon2;
 
     double a = pow(sin(d_lat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(d_lon / 2), 2);
 
@@ -68,17 +84,29 @@ double CommonFun::haversine_distance(double latitude1, double longitude1, double
 
     return earth_radius_km * d_sigma;
 }
-
+double CommonFun::ArcInRadians(double latitude1, double longitude1, double latitude2,
+        double longitude2) {
+	LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
+	double lat1 = deg2rad(latitude1);
+	double lon1 = deg2rad(longitude1);
+	double lat2 = deg2rad(latitude2);
+	double lon2 = deg2rad(longitude2);
+	double dlon = lon2 - lon1;
+	double dlat = lat2 - lat1;
+	double a = pow(sin(dlat/2), 2) + cos(lat1) * cos(lat2) * pow(sin(dlon/2),2 );
+	double c = 2 * atan2(sqrt(a), sqrt(1-a));
+	return earth_radius_km * c;
+}
 double CommonFun::vincenty_distance(double latitude1, double longitude1, double latitude2,
                          double longitude2)
 {
-	//LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
+	LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
     double lat1 = deg2rad(latitude1);
     double lon1 = deg2rad(longitude1);
     double lat2 = deg2rad(latitude2);
     double lon2 = deg2rad(longitude2);
 
-    double d_lon = abs(lon1 - lon2);
+    double d_lon = lon1 - lon2;
 
     // Numerator
     double a = pow(cos(lat2) * sin(d_lon), 2);

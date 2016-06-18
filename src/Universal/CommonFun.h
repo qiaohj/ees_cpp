@@ -55,8 +55,11 @@ public:
     static void XY2LL(const double* adfGeoTransform, const unsigned x,
             const unsigned y, double* longitude, double* latitude);
     static double deg2rad(double deg);
+
     static double haversine_distance(double latitude1, double longitude1, double latitude2,
                               double longitude2);
+    static double ArcInRadians(double latitude1, double longitude1, double latitude2,
+            double longitude2);
     static double vincenty_distance(double latitude1, double longitude1, double latitude2,
                              double longitude2);
     static std::string fixedLength(int value, int digits);
@@ -65,7 +68,7 @@ public:
     static size_t writeMemoryUsage(unsigned line, bool is, size_t last);
     static double GreatCirleDistance(int x1, int y1, int x2, int y2, const char* fromWkt, const char* toWkt, const double* geoTrans, int resolution);
     static double GreatCirleDistanceFast(int x1, int y1, int x2, int y2,
-    		OGRCoordinateTransformation *poCT, const double* geoTrans, int resolution);
+    		OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution);
     template<typename T> static double EuclideanDistance(T x1, T y1, T x2,
             T y2);
     template<typename T> static bool AlmostEqualRelative(T a, T b);

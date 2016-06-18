@@ -853,9 +853,10 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 
 			if (i_y >= (int)ySize)
 				break;
-//            LOG(INFO)<<"X="<<i_x<<", Y="<<i_y;
+
 			double distance = CommonFun::GreatCirleDistanceFast((int) i_x, (int) i_y,
 					(int) (x), (int) (y), poCT, geoTrans, resolution);
+			//LOG(INFO)<<"X="<<i_x<<", Y="<<i_y<<", x="<<x<<",y="<<y<<",distance="<<distance<<",disper_abi="<<p_dispersal_ability;
 			//double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
 			//		(int) (x), (int) (y));
 			if (distance > p_dispersal_ability) {
@@ -930,7 +931,7 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 	std::vector<CoodLocation*> new_cells;
 
 	unsigned short p_dispersal_ability = individualOrganism->getDispersalAbility();
-
+	//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability;
 	//get all the cells whose E-distances are not longer than dispersal ability.
 	//When number of path = 1, ignore the dispersal method parameter.
 	if (individualOrganism->getNumOfPath() == -1) {
@@ -967,17 +968,22 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 				i_y = (((int) i_y) < 0) ? 0 : i_y;
 				if ((unsigned) i_y >= ySize)
 					break;
+				//LOG(INFO)<<p_dispersal_ability;
 				double distance = CommonFun::GreatCirleDistanceFast((int) i_x,
 								(int) i_y, (int) (x), (int) (y), poCT, geoTrans, resolution);
+
 				//double distance = CommonFun::EuclideanDistance((int) i_x,
 				//		(int) i_y, (int) (x), (int) (y));
-//                printf("%u, %u vs %u, %u, Distance:%f\n", i_x, i_y, x, y,
-//                        distance);
+                //printf("%u, %u vs %u, %u, Distance:%f, Distance2: %f, disperial ability:%u\n", i_x, i_y, x, y,
+                //        distance, distance2, p_dispersal_ability);
 				if ((distance < p_dispersal_ability)
 						|| (CommonFun::AlmostEqualRelative(distance,
 								(double) p_dispersal_ability))) {
+					LOG(INFO)<<"TRUE";
 					CoodLocation* v = new CoodLocation(next_x, i_y);
 					new_cells.push_back(v);
+				}else{
+					LOG(INFO)<<"FALSE";
 				}
 			}
 		}
