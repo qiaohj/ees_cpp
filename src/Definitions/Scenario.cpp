@@ -656,7 +656,8 @@ unsigned Scenario::run() {
 //
 //		}
 
-		sprintf(line, "%u,%lu,%lu,%lu,%lu,%lu,%lu", year, CommonFun::getCurrentRSS(), c_size, o_size, mem_size, species_size, all_individualOrganisms[year].size());
+		sprintf(line, "%u,%lu,%lu,%lu,%lu,%lu,%lu", year, CommonFun::getCurrentRSS(),
+				c_size, o_size, mem_size, species_size, all_individualOrganisms[year].size());
 		stat_output.push_back(line);
 
 		if ((CommonFun::getCurrentRSS()>memLimit)&&(year<100000)) {
