@@ -28,6 +28,8 @@ void CommonFun::convert2LL(double* x, double* y, const char *fromWkt, const char
 double CommonFun::GreatCirleDistanceFast(int x1, int y1, int x2, int y2,
 		OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution){
 	double x1_km, x2_km, y1_km, y2_km;
+	//LOG(INFO)<<"X1="<<x1<<" Y1=:"<<y1;
+	//LOG(INFO)<<"X2="<<x2<<" Y2=:"<<y2;
 	XY2LL(geoTrans, x1, y1, &x1_km, &y1_km);
 	XY2LL(geoTrans, x2, y2, &x2_km, &y2_km);
 	//LOG(INFO)<<"X1_KM="<<x1_km<<" Y1_KM=:"<<y1_km;
@@ -40,9 +42,9 @@ double CommonFun::GreatCirleDistanceFast(int x1, int y1, int x2, int y2,
 		return -1;
 	}
 	else{
-		LOG(INFO)<<"vincenty_distance="<<vincenty_distance(y1_km, x1_km, y2_km, x2_km)/resolution
-				<<" haversine_distance="<<haversine_distance(y1_km, x1_km, y2_km, x2_km)/resolution
-				<<" ArcInRadians="<<ArcInRadians(y1_km, x1_km, y2_km, x2_km)/resolution;
+		//LOG(INFO)<<"vincenty_distance="<<vincenty_distance(y1_km, x1_km, y2_km, x2_km)/resolution
+		//		<<" haversine_distance="<<haversine_distance(y1_km, x1_km, y2_km, x2_km)/resolution
+		//		<<" ArcInRadians="<<ArcInRadians(y1_km, x1_km, y2_km, x2_km)/resolution;
 		return haversine_distance(y1_km, x1_km, y2_km, x2_km)/resolution;
 	}
 
@@ -86,7 +88,7 @@ double CommonFun::haversine_distance(double latitude1, double longitude1, double
 }
 double CommonFun::ArcInRadians(double latitude1, double longitude1, double latitude2,
         double longitude2) {
-	LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
+	//LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
 	double lat1 = deg2rad(latitude1);
 	double lon1 = deg2rad(longitude1);
 	double lat2 = deg2rad(latitude2);
@@ -100,7 +102,7 @@ double CommonFun::ArcInRadians(double latitude1, double longitude1, double latit
 double CommonFun::vincenty_distance(double latitude1, double longitude1, double latitude2,
                          double longitude2)
 {
-	LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
+	//LOG(INFO)<<"lat1: "<<latitude1<<" lon1: "<<longitude1<<" lat2: "<<latitude2<<" lon2: "<<longitude2;
     double lat1 = deg2rad(latitude1);
     double lon1 = deg2rad(longitude1);
     double lat2 = deg2rad(latitude2);

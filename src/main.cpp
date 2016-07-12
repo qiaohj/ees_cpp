@@ -80,7 +80,7 @@ int main(int argc, const char* argv[]) {
 	}
 */
 	//CommonFun::convert2LL(-9684.702923, 3423.101461, fromWkt, toWkt);
-	LOG(INFO)<<"X:";
+	/*LOG(INFO)<<"X:";
 	for (int x=0; x<348; x++){
 		LOG(INFO)<<"G distance:"<<CommonFun::GreatCirleDistanceFast(x, 90, x, 91, poCT, fromRaster->getGeoTransform(), resolution);
 	}
@@ -93,7 +93,7 @@ int main(int argc, const char* argv[]) {
 	delete fromRaster;
 	delete toRaster;
 	exit(1);
-
+	 */
 	if (argc==1){
 		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
 		exit(1);
@@ -107,8 +107,8 @@ int main(int argc, const char* argv[]) {
 	bool is_overwrite = atoi(argv[5]);
 
 
-
-	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail, fromWkt, toWkt, resolution, poCT);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail,
+			fromWkt, toWkt, resolution, poCT);
 
 	if (scenario->isTerminated()){
 		delete scenario;

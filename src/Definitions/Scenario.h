@@ -22,7 +22,7 @@
 #include "../Universal/log.hpp"
 
 
-class Scenario {
+class Scenario{
 private:
 	const char* fromWkt;
 	const char* toWkt;
@@ -33,6 +33,7 @@ private:
     unsigned long memLimit;
     std::vector<EnvironmentalHadley*> environments;
     std::vector<SpeciesObject*> species;
+    boost::unordered_map<unsigned, boost::unordered_map<unsigned, double>> distances;
     unsigned totalYears;
     unsigned minSpeciesDispersalSpeed;
     SparseMap* mask;
@@ -66,6 +67,10 @@ private:
     std::string getSpeciesFolder(SpeciesObject* p_species);
     void generateSpeciationInfo(unsigned year, bool is_tree);
     bool with_detail;
+    void getExtend(int p_dispersal_ability, int x, int y,
+    		boost::unordered_set<unsigned>* x_extent,
+    		boost::unordered_set<unsigned>* y_extent);
+    double distanceFast(int x1, int y1, int x2, int y2, OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution, double disperal_ability);
 public:
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
             std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail,

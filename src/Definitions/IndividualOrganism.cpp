@@ -71,10 +71,10 @@ unsigned short IndividualOrganism::getDispersalAbility() {
 void IndividualOrganism::setRandomDispersalAbility(){
 
 	double r = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
-	unsigned short dispersal_ability = 0;
+	unsigned short dispersal_ability = 1;
 	for (unsigned short i = 1; i <= species->getDispersalAbilityLength(); i++) {
 		if (r <= species->getDispersalAbility()[i-1]) {
-			dispersal_ability = i-1;
+			dispersal_ability = i - 1;
 			break;
 		}
 	}
@@ -83,9 +83,9 @@ void IndividualOrganism::setRandomDispersalAbility(){
 	//dispersalAbility = 1;
 }
 
-/*void IndividualOrganism::setDispersalAbility(unsigned short p_dispersal_ability) {
+void IndividualOrganism::setDispersalAbility(unsigned short p_dispersal_ability) {
     dispersalAbility = p_dispersal_ability;
-}*/
+}
 unsigned IndividualOrganism::getSpeciationYears(){
     return species->getSpeciationYears();
 }

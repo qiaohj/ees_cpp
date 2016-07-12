@@ -74,6 +74,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 				(species->getDispersalSpeed() < minSpeciesDispersalSpeed) ?
 						species->getDispersalSpeed() : minSpeciesDispersalSpeed;
 	}
+
 	LOG(INFO)<<"Load environments";
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
@@ -84,6 +85,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
+
 
 	delete mask_raster;
 	LOG(INFO)<<"Finished";
@@ -127,17 +129,8 @@ bool Scenario::isTerminated() {
 }
 void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 	std::string speciesFolder = getSpeciesFolder(p_species);
-
-//    char dispersalFolder[speciesFolder.length() + 6 + 10];
-//    sprintf(dispersalFolder, "%s/dispersal", speciesFolder.c_str());
-//    CommonFun::createFolder(dispersalFolder);
-
 	char groupsmapFolder[speciesFolder.length() + 6 + 10];
 	sprintf(groupsmapFolder, "%s/groupsmap", speciesFolder.c_str());
-//	CommonFun::createFolder(groupsmapFolder);
-//	char groupslogFolder[speciesFolder.length() + 6 + 10];
-//	sprintf(groupslogFolder, "%s/group_log", speciesFolder.c_str());
-//	CommonFun::createFolder(groupslogFolder);
 	if (isRoot){
 		char statsFolder[speciesFolder.length() + 6 + 10];
 		sprintf(statsFolder, "%s/stats", speciesFolder.c_str());
@@ -182,28 +175,6 @@ unsigned Scenario::run() {
 
 	std::vector<std::string> stat_output;
 
-	//std::vector<std::string> env_output;
-	//unsigned x = 99999, y = 99999;
-	/*for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
-			minSpeciesDispersalSpeed) {
-		std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
-		if (x == 99999) {
-			int value;
-			current_environments[0]->getFirstValues(&x, &y, &value);
-		}
-		char line[30];
-		int v = current_environments[0]->readByXY(x, y);
-		sprintf(line, "%u,%u,%u,%d", year, x, y, v);
-		env_output.push_back(line);
-		//CommonFun::clearVector(&current_environments);
-	}
-	char filepath2[target.length() + 15];
-	sprintf(filepath2, "%s/env_curve.csv", target.c_str());
-	CommonFun::writeFile(env_output, filepath2);
-	env_output.clear();
-	*/
-//    return;
-//    bool is_write_memory_usage = false;
 	for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
 			minSpeciesDispersalSpeed) {
 		LOG(INFO)<<"Current year:"<<year << " @ " << target <<" Memory usage:"<<CommonFun::getCurrentRSS();
@@ -279,6 +250,7 @@ unsigned Scenario::run() {
 						//all the individual organisms can move
 						case 2:
 							individualOrganism->setRandomDispersalAbility();
+							//LOG(INFO)<<"CALL getDispersalMap_2";
 							next_cells = getDispersalMap_2(individualOrganism, getSpeciesFolder(s_it.first), year);
 							break;
 						default:
@@ -353,7 +325,6 @@ unsigned Scenario::run() {
 			if ((sp_it.second.size()>0)
 					&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))
 					&&(sp_it.second.size()>=(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage()))) {
-				//if ((sp_it.second.size()>0)) {
 				species->setMaxSpeciesDistribution((sp_it.second.size()>species->getMaxSpeciesDistribution())?sp_it.second.size():species->getMaxSpeciesDistribution());
 				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()) {
 					species->addCurrentSpeciesExtinctionTimeSteps();
@@ -361,12 +332,6 @@ unsigned Scenario::run() {
 					species->setCurrentSpeciesExtinctionTimeSteps(0);
 				}
 			} else {
-				/*LOG(INFO)<<"Present "<<sp_it.second.size()<<" Max "<<species->getMaxSpeciesDistribution()<<" per " <<
-						(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage());
-				if ((sp_it.second.size()>0)
-					&&(sp_it.second.size()<(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage()))){
-					LOG(INFO)<<"Smaller than 80% detected";
-				}*/
 				std::vector<unsigned> erased_key;
 				for (auto it : sp_it.second) {
 					if (it.second.size()>0) {
@@ -389,6 +354,7 @@ unsigned Scenario::run() {
 			}
 			sp_it.second.clear();
 			sp_it.first->setDisappearedYear(year);
+			individual_organisms_in_current_year.erase(sp_it.first);
 		}
 
 		//LOG(INFO)<<"end to remove unsuitable organisms.";
@@ -477,12 +443,6 @@ unsigned Scenario::run() {
 				}
 				//LOG(INFO)<<"End to detect speciation.";
 
-//				if (group_output.size()>0) {
-//					char filepath[target.length() + 50];
-//					sprintf(filepath, "%s/group_log/%u_group.txt", getSpeciesFolder(sp_it.first).c_str(), year);
-//					CommonFun::writeFile(group_output, filepath);
-//					group_output.clear();
-//				}
 			} else {
 				for (auto y_it : sp_it.second) {
 					for (auto o_it : y_it.second) {
@@ -547,45 +507,13 @@ unsigned Scenario::run() {
 					}
 				}
 			} else {
-				sp_it.first->setDisappearedYear(year);
+				//sp_it.first->setDisappearedYear(year);
 				group_maps[sp_it.first] = NULL;
 			}
 
 		}
-//		for (auto it : group_maps) {
-//			if (it.second!=NULL) {
-//				if (it.first->isNewSpecies()||with_detail||(year==burnInYear)||(year==totalYears)){
-//					//save distribution
-//					std::string speciesFolder = getSpeciesFolder(it.first);
-//					char tiffName[speciesFolder.length() + 28];
-//					sprintf(tiffName, "%s/groupsmap/%s.tif", speciesFolder.c_str(),
-//							CommonFun::fixedLength(year, 7).c_str());
-//					int* array = it.second->toArray();
-//					RasterController::writeGeoTIFF(tiffName, xSize, ySize, geoTrans,
-//							array, (double) NODATA, GDT_Int32);
-//					delete[] array;
-//					tif_number++;
-//				}
-//
-//			} else {
-//				individual_organisms_in_current_year.erase(it.first);
-//			}
-//			it.first->setNewSpecies(false);
-//		}
+
 		saveGroupmap(year, group_maps);
-		//clear group_maps;
-//		std::vector<SpeciesObject*> erased_key;
-//		for (auto it : group_maps) {
-//			erased_key.push_back(it.first);
-//		}
-//		for (auto key : erased_key) {
-//			if (group_maps[key] != NULL) {
-//				delete group_maps[key];
-//			}
-//			group_maps.erase(key);
-//		}
-//		group_maps.clear();
-//		erased_key.clear();
 
 
 		all_individualOrganisms.insert(std::make_pair(year, individual_organisms_in_current_year));
@@ -642,19 +570,6 @@ unsigned Scenario::run() {
 		unsigned long c_size = 0;
 		unsigned long mem_size = 0;
 		unsigned long species_size = 0;
-//		for (auto year_it : all_individualOrganisms) {
-//			species_size += year_it.second.size();
-//			for (auto sp_it : year_it.second) {
-//				for (auto c_it : sp_it.second) {
-//					o_size += c_it.second.size();
-//					for (auto o_it : c_it.second) {
-//						mem_size += o_it->getMemoryUsage();
-//					}
-//				}
-//				c_size += sp_it.second.size();
-//			}
-//
-//		}
 
 		sprintf(line, "%u,%lu,%lu,%lu,%lu,%lu,%lu", year, CommonFun::getCurrentRSS(),
 				c_size, o_size, mem_size, species_size, all_individualOrganisms[year].size());
@@ -691,8 +606,7 @@ void Scenario::generateSpeciationInfo(unsigned year, bool is_tree) {
 			std::string html = folder + "/Phylogram.html";
 			CommonFun::writeFile(sp_it->getHTMLTree(year), html.c_str());
 		}
-//		std::string stat = folder + "/stats/" + CommonFun::fixedLength(year, 7)
-//				+ "_stat.csv";
+
 		std::string stat = folder + "/stats/stat.csv";
 		CommonFun::writeFile(sp_it->getSpeciationExtinction(true, year),
 				stat.c_str());
@@ -724,6 +638,35 @@ void Scenario::markedSpeciesID(unsigned short group_id,
 		}
 	}
 }
+double Scenario::distanceFast(int x1, int y1, int x2, int y2,
+		OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution, double disperal_ability){
+	double e_distance = CommonFun::EuclideanDistance(x1, y1, x2, y2);
+	if (CommonFun::AlmostEqualRelative(e_distance, 1.0)){
+		return e_distance;
+	}
+	int index_1 = x1 + y1 * xSize;
+	int index_2 = x2 + y2 * xSize;
+	//bool is_slow = false;
+	if (distances.find(index_1) == distances.end()){
+		double distance = CommonFun::GreatCirleDistanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution);
+		distances[index_1][index_2] = distance;
+		distances[index_2][index_1] = distance;
+
+		//is_slow = true;
+	}else if (distances[index_1].find(index_2) == distances[index_1].end()){
+		double distance = CommonFun::GreatCirleDistanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution);
+		distances[index_1][index_2] = distance;
+		distances[index_2][index_1] = distance;
+
+		//is_slow = true;
+	}
+	/*if (is_slow){
+		LOG(INFO)<<"Slow";
+	}else{
+		LOG(INFO)<<"Fast";
+	}*/
+	return distances[index_1][index_2];
+}
 unsigned Scenario::getMinDividedYear_minDistance(unsigned speciation_year,
 		unsigned short group_id_1, unsigned short group_id_2,
 		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms,
@@ -742,12 +685,15 @@ unsigned Scenario::getMinDividedYear_minDistance(unsigned speciation_year,
 		}
 	}
 	for (auto o_it_1 : group_c_1) {
-		int x1 = (*organisms)[o_it_1].front()->getX();
-		int y1 = (*organisms)[o_it_1].front()->getY();
+		IndividualOrganism *org1 = (*organisms)[o_it_1].front();
+		int x1 = org1->getX();
+		int y1 = org1->getY();
 		for (auto o_it_2 : group_c_2) {
-			int x2 = (*organisms)[o_it_2].front()->getX();
-			int y2 = (*organisms)[o_it_2].front()->getY();
-			double distance = CommonFun::GreatCirleDistanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution);
+			IndividualOrganism *org2 = (*organisms)[o_it_2].front();
+			int x2 = org2->getX();
+			int y2 = org2->getY();
+			int dispersal_ability = (org2->getDispersalAbility()>org1->getDispersalAbility())?org2->getDispersalAbility():org1->getDispersalAbility();
+			double distance = distanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution, dispersal_ability);
 			if (min_distance > distance) {
 				min_distance = distance;
 				group_1_index = o_it_1;
@@ -828,35 +774,106 @@ unsigned Scenario::getDividedYear(IndividualOrganism* o_1,
 		return getDividedYear(parent_1, parent_2);
 	}
 }
+void Scenario::getExtend(int p_dispersal_ability, int x, int y,
+		boost::unordered_set<unsigned>* x_extent,
+		boost::unordered_set<unsigned>* y_extent){
+	double distance = 0;
+	int i_x = x;
+	(*x_extent).insert(x);
+	int tried = 0;
+	while (distance <= p_dispersal_ability){
+		i_x -= 1;
+		if (i_x<0){
+			i_x = xSize + i_x;
+		}
+		tried++;
+		if (tried>180){
+			break;
+		}
+		if (mask->readByXY(i_x, y)==NODATA){
+			//LOG(INFO)<<"Skip "<< i_x;
+			continue;
+		}
+		distance = distanceFast((int) i_x, (int) y,
+									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+
+		//LOG(INFO)<<"1. X="<<x<<" i_x="<<i_x<<" distance:"<<distance;
+		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
+		//distance = distance - 1;
+
+		if (distance>p_dispersal_ability){
+			break;
+		}
+		//LOG(INFO)<<"PUT "<< i_x;
+		(*x_extent).insert(i_x);
+	}
+
+	distance = 0;
+	i_x = x;
+	tried = 0;
+	while (distance <= p_dispersal_ability){
+		i_x += 1;
+		if (i_x >= xSize){
+			i_x = xSize - i_x;
+		}
+		tried++;
+		if (tried>180){
+			break;
+		}
+		if (mask->readByXY(i_x, y)==NODATA){
+			continue;
+		}
+		distance = distanceFast((int) i_x, (int) y,
+									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+		//LOG(INFO)<<"2. X="<<x<<" i_x="<<i_x<<" distance:"<<distance;
+		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
+		if (distance>p_dispersal_ability){
+			break;
+		}
+
+		//LOG(INFO)<<"PUT "<< i_x;
+		(*x_extent).insert(i_x);
+	}
+
+
+	for (int i_y = y - p_dispersal_ability; i_y <= y + p_dispersal_ability; ++i_y) {
+		i_y = (i_y < 0) ? 0 : i_y;
+		if (i_y > ySize){
+			break;
+		}
+		distance = distanceFast((int) x, (int) i_y,
+									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+
+		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
+
+		if (distance > p_dispersal_ability) continue;
+
+		(*y_extent).insert(i_y);
+	}
+
+	//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability<<" x_extent:"<<(*x_extent).size()<<" y_extent:"<<(*y_extent).size();
+}
 void Scenario::markJointOrganism(unsigned short p_group_id,
 		IndividualOrganism* p_unmarked_organism,
-		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms) {
+		boost::unordered_map<unsigned,
+		std::vector<IndividualOrganism*> >* organisms) {
 	unsigned short x = p_unmarked_organism->getX();
 	unsigned short y = p_unmarked_organism->getY();
 	unsigned short p_dispersal_ability = p_unmarked_organism->getDispersalAbility();
 	if (p_dispersal_ability==0){
 		p_dispersal_ability = 1;
 	}
-	for (int i_x = (x - p_dispersal_ability);
-			i_x <= (x + p_dispersal_ability); ++i_x) {
+	boost::unordered_set<unsigned> x_extent;
+	boost::unordered_set<unsigned> y_extent;
+	getExtend(p_dispersal_ability, x, y, &x_extent, &y_extent);
+	for (auto i_x : x_extent) {
 		int next_x = i_x;
-		if (next_x < 0){
-			next_x = xSize + next_x;
-		}
-
-		if (next_x>=xSize){
-			next_x = next_x - xSize;
-		}
-		for (int i_y = (y - p_dispersal_ability);
-				i_y <= (y + p_dispersal_ability);
-				++i_y) {
-			i_y = (((int) i_y) < 0) ? 0 : i_y;
-
-			if (i_y >= (int)ySize)
-				break;
-
-			double distance = CommonFun::GreatCirleDistanceFast((int) i_x, (int) i_y,
-					(int) (x), (int) (y), poCT, geoTrans, resolution);
+		for (auto i_y : y_extent) {
+			double distance = distanceFast((int) i_x, (int) i_y,
+					(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+			if (CommonFun::AlmostEqualRelative(distance, -1.0)){
+				continue;
+			}
 			//LOG(INFO)<<"X="<<i_x<<", Y="<<i_y<<", x="<<x<<",y="<<y<<",distance="<<distance<<",disper_abi="<<p_dispersal_ability;
 			//double distance = CommonFun::EuclideanDistance((int) i_x, (int) i_y,
 			//		(int) (x), (int) (y));
@@ -935,56 +952,42 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 	//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability;
 	//get all the cells whose E-distances are not longer than dispersal ability.
 	//When number of path = 1, ignore the dispersal method parameter.
+	if (year<1000){
+		if (p_dispersal_ability==0){
+			p_dispersal_ability = 1;
+		}
+	}
 	if (individualOrganism->getNumOfPath() == -1) {
-		int x = (int)individualOrganism->getX();
-		int y = (int)individualOrganism->getY();
-		for (int i_x = (x - p_dispersal_ability);
-				i_x <= (x + p_dispersal_ability); ++i_x) {
+		int x = (int) individualOrganism->getX();
+		int y = (int) individualOrganism->getY();
 
-			int next_x = i_x;
-			if (next_x < 0){
-				next_x = xSize + next_x;
-//				std::vector<std::string> special_log;
-//				char line[100];
-//				sprintf(line, "round cross x detected %u", year);
-//				special_log.push_back(line);
-//				char filepath[target.length() + 50];
-//				sprintf(filepath, "%s/round_cross_log.txt", species_folder.c_str());
-//				CommonFun::writeFile(special_log, filepath);
-			}
+		boost::unordered_set<unsigned> x_extent;
+		boost::unordered_set<unsigned> y_extent;
+		getExtend(p_dispersal_ability, x, y, &x_extent, &y_extent);
+		//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability<<" x_extent:"<<x_extent.size()<<" y_extent:"<<y_extent.size();
+		for (auto i_x : x_extent) {
+				int next_x = i_x;
+				for (auto i_y : y_extent) {
 
-			if (next_x>=xSize){
-				next_x = next_x - xSize;
-//				std::vector<std::string> special_log;
-//				char line[100];
-//				sprintf(line, "round cross x detected %u", year);
-//				special_log.push_back(line);
-//				char filepath[target.length() + 50];
-//				sprintf(filepath, "%s/round_cross_log.txt", species_folder.c_str());
-//				CommonFun::writeFile(special_log, filepath);
-			}
-			for (int i_y = (y - p_dispersal_ability);
-					i_y <= (y + p_dispersal_ability);
-					++i_y) {
-				i_y = (((int) i_y) < 0) ? 0 : i_y;
-				if ((unsigned) i_y >= ySize)
-					break;
 				//LOG(INFO)<<p_dispersal_ability;
-				double distance = CommonFun::GreatCirleDistanceFast((int) i_x,
-								(int) i_y, (int) (x), (int) (y), poCT, geoTrans, resolution);
-
+				//LOG(INFO)<<"calculate the distance";
+				double distance = distanceFast((int) i_x,
+						(int) i_y, (int) (x), (int) (y), poCT, geoTrans,
+						resolution, p_dispersal_ability);
+				//LOG(INFO)<<"X="<<x<<" i_x="<<i_x<<" Y="<<y<<" i_y="<<i_y<<" disntance="<<distance<<" dispersal ability="<<p_dispersal_ability;
+				//LOG(INFO)<<"end to calculate the distance";
 				//double distance = CommonFun::EuclideanDistance((int) i_x,
 				//		(int) i_y, (int) (x), (int) (y));
-                //printf("%u, %u vs %u, %u, Distance:%f, Distance2: %f, disperial ability:%u\n", i_x, i_y, x, y,
-                //        distance, distance2, p_dispersal_ability);
-				if ((distance < p_dispersal_ability)
+				//printf("%u, %u vs %u, %u, Distance:%f, Distance2: %f, disperial ability:%u\n", i_x, i_y, x, y,
+				//        distance, distance2, p_dispersal_ability);
+				if ((distance <= p_dispersal_ability)
 						|| (CommonFun::AlmostEqualRelative(distance,
 								(double) p_dispersal_ability))) {
-					LOG(INFO)<<"TRUE";
+					//LOG(INFO)<<"TRUE";
 					CoodLocation* v = new CoodLocation(next_x, i_y);
 					new_cells.push_back(v);
-				}else{
-					LOG(INFO)<<"FALSE";
+				} else {
+					//LOG(INFO)<<"FALSE";
 				}
 			}
 		}
