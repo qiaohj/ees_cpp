@@ -95,6 +95,7 @@ unsigned IndividualOrganism::getSpeciationYears(){
 bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
+    	//LOG(INFO)<<"Environments:"<<i;
         int env_value = (*p_current_environments)[i]->readByXY(x, y);
         if ((env_value > nicheBreadth[i]->getMax())
                 || (env_value < nicheBreadth[i]->getMin())) {
