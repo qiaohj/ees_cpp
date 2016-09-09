@@ -203,6 +203,7 @@ unsigned Scenario::run() {
 				}
 			}
 		}
+		int organism_count = 0;
 		//LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size();
 		for (auto s_it : actived_individualOrganisms) {
 			//Generate a suitable layer for the species;
@@ -244,6 +245,7 @@ unsigned Scenario::run() {
 				//exit(1);
 			}
 			//LOG(INFO)<<"start to simulate organism by organism. Current species is "<< s_it.first << ". Count of organisms is " << s_it.second.size();
+
 			std::vector<IndividualOrganism*> new_individual_organisms;
 			for (auto o_it : s_it.second) {
 				IndividualOrganism* individualOrganism = o_it.second;
@@ -281,6 +283,7 @@ unsigned Scenario::run() {
 					}
 					next_cells.clear();
 					std::vector<CoodLocation*>().swap(next_cells);
+
 				} else {
 //					LOG(INFO) << "Didn't run, for current year is "<<year<< " and organism run year is " << individualOrganism->getNextRunYear();
 				}
@@ -291,22 +294,25 @@ unsigned Scenario::run() {
 				//species id, index
 				individual_organisms_in_current_year[s_it.first][index].push_back(it);
 			}
+			organism_count += new_individual_organisms.size();
 			new_individual_organisms.clear();
             //LOG(INFO)<<"end to simulate organism by organism.";
 		}
 
-        //LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << all_individualOrganisms.size();
+        //LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << organism_count;
 		//LOG(INFO)<<"end to simulate cell by cell";
 
 		//remove the unsuitable organisms
 		//LOG(INFO)<<"begin to remove the unsuitable organisms.";
 		boost::unordered_map<SpeciesObject*, std::vector<unsigned>> erased_keys;
+
 		for (auto s_it : individual_organisms_in_current_year) {
             //LOG(INFO)<<"start to remove unsuitable organisms.";
 			std::vector<unsigned> erased_key;
 			for (auto it : s_it.second) {
 				if (it.second.size()>0) {
 					if (!it.second.front()->isSuitable(&current_environments)) {
+						//LOG(INFO)<<"Remove it because of unsuitable";
 						erased_key.push_back(it.first);
 					}
 				}
@@ -320,26 +326,37 @@ unsigned Scenario::run() {
 						it != individual_organisms_in_current_year[sp_it.first][key].end(); ++it) {
 //                    (*it)->getParent()->removeChild(*it);
 					delete *it;
+					organism_count--;
 				}
 				individual_organisms_in_current_year[sp_it.first][key].clear();
 				std::vector<IndividualOrganism*>().swap(individual_organisms_in_current_year[sp_it.first][key]);
 				individual_organisms_in_current_year[sp_it.first].erase(key);
 			}
 		}
+		//LOG(INFO)<<"after remove unsuitable, Count of all organisms is " << organism_count;
+
+
 		boost::unordered_map<SpeciesObject*, std::vector<unsigned>> erased_keys2;
 		//Remove the species which distribution is smaller than X for Y time steps
 		for (auto sp_it : individual_organisms_in_current_year) {
-			//LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps();
 			SpeciesObject* species = sp_it.first;
+			/*LOG(INFO)<<"Group map size"<<sp_it.second.size()<<" CurrentSpeciesExtinctionTimeSteps"<<
+					species->getCurrentSpeciesExtinctionTimeSteps()<<"/"<<species->getSpeciesExtinctionTimeSteps()<<
+					" MaxSpeciesDistribution:"<<species->getMaxSpeciesDistribution()<<
+					" SpeciesExtinctionThreaholdPercentage:"<<species->getSpeciesExtinctionThreaholdPercentage();
+					*/
 			if ((sp_it.second.size()>0)
 					&&((species->getCurrentSpeciesExtinctionTimeSteps()<species->getSpeciesExtinctionTimeSteps()))
 					&&(sp_it.second.size()>=(species->getMaxSpeciesDistribution() * species->getSpeciesExtinctionThreaholdPercentage()))) {
+
 				species->setMaxSpeciesDistribution((sp_it.second.size()>species->getMaxSpeciesDistribution())?sp_it.second.size():species->getMaxSpeciesDistribution());
-				if (sp_it.second.size()<=species->getSpeciesExtinctionThreshold()) {
+				if ((sp_it.second.size()<=species->getSpeciesExtinctionThreshold())
+						&&(year>=1000)){
 					species->addCurrentSpeciesExtinctionTimeSteps();
 				} else {
 					species->setCurrentSpeciesExtinctionTimeSteps(0);
 				}
+				//LOG(INFO)<<"1";
 			} else {
 				std::vector<unsigned> erased_key;
 				for (auto it : sp_it.second) {
@@ -348,6 +365,7 @@ unsigned Scenario::run() {
 					}
 				}
 				erased_keys2[sp_it.first] = erased_key;
+				//LOG(INFO)<<"2";
 			}
 		}
 		for (auto sp_it : erased_keys2) {
@@ -971,11 +989,11 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 	//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability;
 	//get all the cells whose E-distances are not longer than dispersal ability.
 	//When number of path = 1, ignore the dispersal method parameter.
-	//if (year<1000){
+	if (year<1000){
 		if (p_dispersal_ability==0){
 			p_dispersal_ability = 1;
 		}
-	//}
+	}
 	if (individualOrganism->getNumOfPath() == -1) {
 		int x = (int) individualOrganism->getX();
 		int y = (int) individualOrganism->getY();

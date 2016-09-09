@@ -29,6 +29,7 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
     groupExtinctionThreshold = species_json.get("group_extinction_threshold", 1).asInt();
     speciesExtinctionTimeSteps = species_json.get("species_extinction_time_steps", 1).asInt();
     speciesExtinctionThreaholdPercentage = 1 - species_json.get("species_extinction_threahold_percentage", 1).asDouble();
+    //LOG(INFO)<<"speciesExtinctionThreaholdPercentage"<<speciesExtinctionThreaholdPercentage;
     maxSpeciesDistribution = 0;
     appearedYear = 0;
     disappearedYear = 0;
