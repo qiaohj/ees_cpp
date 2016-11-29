@@ -18,12 +18,12 @@ EnvironmentalHadley::EnvironmentalHadley(const std::string p_basefolder, double*
 			layer = p_basefolder + "/"
 					+  CommonFun::fixedLength(p_begin_year / 100, 4) + ".tif";
 		}
-		//LOG(INFO)<<"Initial environments information from "<<layer;
+
 		//RasterObject* r = new RasterObject(layer);
 		unsigned key = p_begin_year + p_burn_in_year - y;
 		RasterObject* r = new RasterObject(layer);
 		SparseMap* v = new SparseMap(r, false);
-
+		//LOG(INFO)<<"Initial environments information from "<<layer<<" to key "<<key;
 		layers[key] = v;
 		delete r;
 		if (y==0){
