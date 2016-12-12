@@ -111,7 +111,7 @@ int main(int argc, const char* argv[]) {
 			fromWkt, toWkt, resolution, poCT);
 
 	if (scenario->isTerminated()){
-		delete scenario;
+		//delete scenario;
 		printf("Result folder is exist, skip this simulation!\n");
 		return EXIT_SUCCESS;
 	}
@@ -131,8 +131,8 @@ int main(int argc, const char* argv[]) {
 	if (status==1){
 		LOG(INFO)<<"To the memory limit, exit!";
 	}
-	delete fromRaster;
-	delete toRaster;
+	//delete fromRaster;
+	//delete toRaster;
     return EXIT_SUCCESS;
 }
 

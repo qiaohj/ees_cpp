@@ -1006,19 +1006,19 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 				i_x <= (x + p_dispersal_ability); ++i_x) {
 			int next_x = i_x;
 			if (next_x < 0) {
-				break;
+				continue;
 			}
 
 			if (next_x >= xSize) {
-				break;
+				continue;
 			}
 			for (int i_y = (y - p_dispersal_ability);
 					i_y <= (y + p_dispersal_ability); ++i_y) {
 				if (i_y < 0)
-					break;
+					continue;
 
 				if (i_y >= (int) ySize)
-					break;
+					continue;
 
 				//LOG(INFO)<<p_dispersal_ability;
 				//LOG(INFO)<<"calculate the distance";
