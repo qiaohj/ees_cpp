@@ -57,8 +57,9 @@ int main(int argc, const char* argv[]) {
 	exit(1);
 	*/
 
-	RasterObject* fromRaster = new RasterObject(std::string("/home/huijieqiao/Setting_Simulation/Pliocene_fake/env/mask.tif"));
-	RasterObject* toRaster = new RasterObject(std::string("/home/huijieqiao/Setting_Simulation/Pliocene_fake/env/mask.tif"));
+	RasterObject* fromRaster = new RasterObject(std::string("/home/huijieqiao/NB_2016_R12/M1000/mask.tif"));
+	RasterObject* toRaster = new RasterObject(std::string("/home/huijieqiao/NB_2016_R12/M1000/mask.tif"));
+
 	const char* fromWkt = fromRaster->getProjectionRef();
 	const char* toWkt = toRaster->getProjectionRef();
 	OGRSpatialReference oSourceSRS;

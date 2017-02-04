@@ -393,7 +393,7 @@ unsigned Scenario::run() {
 			boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
 			SpeciesObject* species = sp_it.first;
 			unsigned short current_group_id = 1;
-			if (year>=(burnInYear + species->getSpeciationYears())) {
+			if (year>=(burnInYear)) {
 				//LOG(INFO)<<"Begin to mark the organism.";
 				IndividualOrganism* unmarked_organism = getUnmarkedOrganism(&organisms);
 				while (unmarked_organism!=NULL) {
