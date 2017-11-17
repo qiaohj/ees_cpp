@@ -182,7 +182,12 @@ void CommonFun::writeFile(const std::vector<std::string> s, const char* path) {
 void CommonFun::XY2LL(const double* adfGeoTransform, const unsigned x,
         const unsigned y, double* longitude, double* latitude) {
 	//LOG(INFO)<<"x:"<<x<<" y:"<<y;
-
+	//LOG(INFO)<<"0:"<<adfGeoTransform[0];
+	//LOG(INFO)<<"1:"<<adfGeoTransform[1];
+	//LOG(INFO)<<"2:"<<adfGeoTransform[2];
+	//LOG(INFO)<<"3:"<<adfGeoTransform[3];
+	//LOG(INFO)<<"4:"<<adfGeoTransform[4];
+	//LOG(INFO)<<"5:"<<adfGeoTransform[5];
     *longitude = adfGeoTransform[0] + adfGeoTransform[1] * (x + .5f)
             + adfGeoTransform[2] * (y + .5f);
     *latitude = adfGeoTransform[3] + adfGeoTransform[4] * (x + .5f)

@@ -154,7 +154,10 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 		return;
 	}
 	std::vector<std::string> output;
+	char line[50];
 
+	sprintf(line, "year,x,y,lon,lat,group,sp_id");
+	output.push_back(line);
 	for (auto sp_it : species_group_maps){
 		SpeciesObject* sp = sp_it.first;
 		SparseMap* map = sp_it.second;
@@ -164,8 +167,10 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 					int v = map->readByXY(x, y);
 					if (v>0){
 						std::string id = sp->getIDWithParentID();
-						char line[id.size() + 30];
-						sprintf(line, "%u,%u,%u,%d,%s", year, x, y, v,id.c_str());
+						char line[id.size() + 50];
+						double lon, lat;
+						CommonFun::XY2LL(geoTrans, x, y, &lon, &lat);
+						sprintf(line, "%u,%u,%u,%f,%f,%d,%s", year, x, y, lon, lat, v,id.c_str());
 						output.push_back(line);
 					}
 				}
@@ -393,7 +398,8 @@ unsigned Scenario::run() {
 			boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
 			SpeciesObject* species = sp_it.first;
 			unsigned short current_group_id = 1;
-			if (year>=(burnInYear)) {
+			//if (year>=(burnInYear)) {
+			if (year>=(burnInYear + species->getSpeciationYears())) {
 				//LOG(INFO)<<"Begin to mark the organism.";
 				IndividualOrganism* unmarked_organism = getUnmarkedOrganism(&organisms);
 				while (unmarked_organism!=NULL) {
@@ -989,11 +995,11 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 	//LOG(INFO)<<"p_dispersal_ability:"<<p_dispersal_ability;
 	//get all the cells whose E-distances are not longer than dispersal ability.
 	//When number of path = 1, ignore the dispersal method parameter.
-	if (year<1000){
-		if (p_dispersal_ability==0){
-			p_dispersal_ability = 1;
-		}
-	}
+	//if (year<1000){
+	//	if (p_dispersal_ability==0){
+	//		p_dispersal_ability = 1;
+	//	}
+	//}
 	if (individualOrganism->getNumOfPath() == -1) {
 		int x = (int) individualOrganism->getX();
 		int y = (int) individualOrganism->getY();

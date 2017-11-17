@@ -18,6 +18,7 @@ SparseMap::SparseMap(unsigned p_x_size, unsigned p_y_size) {
     value = new mapvalue(p_x_size, p_y_size, p_x_size * p_y_size);
 }
 SparseMap::SparseMap(RasterObject* p_raster, bool p_is_binary = false) {
+	raster = p_raster;
     xSize = p_raster->getXSize();
     ySize = p_raster->getYSize();
     filename = p_raster->getRasterName();
@@ -54,6 +55,14 @@ int SparseMap::readByLL(double* p_geoTrans, double p_longitude, double p_latitud
     unsigned x, y;
 	CommonFun::LL2XY(p_geoTrans, p_longitude, p_latitude, &x, &y);
 	return readByXY(x, y);
+}
+int SparseMap::readByLL(double p_longitude, double p_latitude){
+    unsigned x, y;
+	CommonFun::LL2XY(raster->getGeoTransform(), p_longitude, p_latitude, &x, &y);
+	return readByXY(x, y);
+}
+RasterObject* SparseMap::getRaster(){
+	return raster;
 }
 unsigned SparseMap::getXSize() {
     return xSize;

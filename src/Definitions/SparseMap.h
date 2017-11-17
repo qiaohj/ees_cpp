@@ -24,14 +24,16 @@ private:
     unsigned xSize;
     unsigned ySize;
     std::string filename;
+    RasterObject* raster;
 public:
     SparseMap(unsigned p_x_size, unsigned p_y_size);
     SparseMap(mapvalue* p_value);
     SparseMap(RasterObject* p_raster, bool p_is_binary);
     virtual ~SparseMap();
-
+    RasterObject* getRaster();
     int readByXY(unsigned p_x, unsigned p_y);
     int readByLL(double* p_geoTrans, double p_longitude, double p_latitude);
+    int readByLL(double p_longitude, double p_latitude);
     unsigned getXSize();
     unsigned getYSize();
     void setValue(unsigned p_x, unsigned p_y, int p_value);
