@@ -24,10 +24,7 @@
 
 class Scenario{
 private:
-	const char* fromWkt;
-	const char* toWkt;
-	OGRCoordinateTransformation *poCT;
-	int resolution;
+
 	bool isFinished;
 	bool isOverwrite;
     unsigned long memLimit;
@@ -70,12 +67,10 @@ private:
     void getExtend(int p_dispersal_ability, int x, int y,
     		boost::unordered_set<unsigned>* x_extent,
     		boost::unordered_set<unsigned>* y_extent);
-    double distanceFast(int x1, int y1, int x2, int y2, OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution, double disperal_ability);
+    double distanceFast(int x1, int y1, int x2, int y2);
 public:
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
-            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail,
-			const char* p_fromWkt, const char* p_toWkt,
-			int p_resolution, OGRCoordinateTransformation *p_poCT);
+            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail);
     virtual ~Scenario();
     unsigned run();
     bool isTerminated();

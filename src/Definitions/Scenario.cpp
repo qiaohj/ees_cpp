@@ -9,13 +9,8 @@
 
 Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, bool p_overwrite,
-		unsigned long p_mem_limit, bool p_with_detail,
-		const char* p_fromWkt, const char* p_toWkt, int p_resolution,
-		OGRCoordinateTransformation *p_poCT) {
-	fromWkt = p_fromWkt;
-	toWkt = p_toWkt;
-	poCT = p_poCT;
-	resolution = p_resolution;
+		unsigned long p_mem_limit, bool p_with_detail) {
+
 	with_detail = p_with_detail;
 	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
@@ -306,6 +301,29 @@ unsigned Scenario::run() {
 
         //LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << organism_count;
 		//LOG(INFO)<<"end to simulate cell by cell";
+
+		boost::unordered_map<SpeciesObject*, SparseMap*> group_maps_2;
+		for (auto sp_it : individual_organisms_in_current_year) {
+			SpeciesObject* species = sp_it.first;
+			if (group_maps_2.find(species)==group_maps_2.end()) {
+				group_maps_2[sp_it.first] = new SparseMap(xSize, ySize);
+			}
+			//LOG(INFO)<<"sp_it.second.size():"<<sp_it.second.size();
+			if (sp_it.second.size()>0) {
+				for (auto o_id : sp_it.second) {
+					//LOG(INFO)<<"o_id.second.size():"<<o_id.second.size();
+					if (o_id.second.size()>0) {
+						group_maps_2[sp_it.first]->setValue(o_id.second[0]->getX(), o_id.second[0]->getY(), 1);
+					}
+				}
+			} else {
+				//sp_it.first->setDisappearedYear(year);
+				group_maps_2[sp_it.first] = NULL;
+			}
+
+		}
+		//LOG(INFO)<<"group_maps_2.size():"<<group_maps_2.size();
+		saveGroupmap(year-1, group_maps_2);
 
 		//remove the unsuitable organisms
 		//LOG(INFO)<<"begin to remove the unsuitable organisms.";
@@ -671,8 +689,7 @@ void Scenario::markedSpeciesID(unsigned short group_id,
 		}
 	}
 }
-double Scenario::distanceFast(int x1, int y1, int x2, int y2,
-		OGRCoordinateTransformation *poCT, const double* geoTrans, double resolution, double disperal_ability){
+double Scenario::distanceFast(int x1, int y1, int x2, int y2){
 	return CommonFun::EuclideanDistance(x1, y1, x2, y2);
 	/*if (CommonFun::AlmostEqualRelative(e_distance, 1.0)){
 		return e_distance;
@@ -722,7 +739,7 @@ unsigned Scenario::getMinDividedYear_minDistance(unsigned speciation_year,
 			int x2 = org2->getX();
 			int y2 = org2->getY();
 			int dispersal_ability = (org2->getDispersalAbility()>org1->getDispersalAbility())?org2->getDispersalAbility():org1->getDispersalAbility();
-			double distance = distanceFast(x1, y1, x2, y2, poCT, geoTrans, resolution, dispersal_ability);
+			double distance = distanceFast(x1, y1, x2, y2);
 			if (min_distance > distance) {
 				min_distance = distance;
 				group_1_index = o_it_1;
@@ -824,7 +841,7 @@ void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 			continue;
 		}
 		distance = distanceFast((int) i_x, (int) y,
-									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+									(int) (x), (int) (y));
 
 		//LOG(INFO)<<"1. X="<<x<<" i_x="<<i_x<<" distance:"<<distance;
 		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
@@ -853,7 +870,7 @@ void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 			continue;
 		}
 		distance = distanceFast((int) i_x, (int) y,
-									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+									(int) (x), (int) (y));
 		//LOG(INFO)<<"2. X="<<x<<" i_x="<<i_x<<" distance:"<<distance;
 		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
 		if (distance>p_dispersal_ability){
@@ -871,7 +888,7 @@ void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 			break;
 		}
 		distance = distanceFast((int) x, (int) i_y,
-									(int) (x), (int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+									(int) (x), (int) (y));
 
 		if (CommonFun::AlmostEqualRelative(distance, -1.0)) continue;
 
@@ -913,7 +930,7 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 			if (i_y >= (int) ySize)
 				break;
 			double distance = distanceFast((int) i_x, (int) i_y, (int) (x),
-					(int) (y), poCT, geoTrans, resolution, p_dispersal_ability);
+					(int) (y));
 			if (CommonFun::AlmostEqualRelative(distance, -1.0)) {
 				continue;
 			}
@@ -1029,8 +1046,7 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 				//LOG(INFO)<<p_dispersal_ability;
 				//LOG(INFO)<<"calculate the distance";
 				double distance = distanceFast((int) i_x, (int) i_y, (int) (x),
-						(int) (y), poCT, geoTrans, resolution,
-						p_dispersal_ability);
+						(int) (y));
 				//LOG(INFO)<<"X="<<x<<" i_x="<<i_x<<" Y="<<y<<" i_y="<<i_y<<" disntance="<<distance<<" dispersal ability="<<p_dispersal_ability;
 				//LOG(INFO)<<"end to calculate the distance";
 				//double distance = CommonFun::EuclideanDistance((int) i_x,

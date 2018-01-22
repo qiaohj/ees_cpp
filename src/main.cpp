@@ -49,52 +49,6 @@ _INITIALIZE_EASYLOGGINGPP
 ///home/huijieqiao/NB_NEW/Environments scenario /home/huijieqiao/temp 4000 1000 1
 int main(int argc, const char* argv[]) {
 
-	double resolution = 100;
-	/*LOG(INFO)<<CommonFun::vincenty_distance(0,0, 90, 0)<<" "<<CommonFun::haversine_distance(0,0, 90, 0);
-	LOG(INFO)<<CommonFun::vincenty_distance(0,0, 180, 0)<<" "<<CommonFun::haversine_distance(0,0, 180, 0);
-	LOG(INFO)<<CommonFun::vincenty_distance(0,0, -180, 0)<<" "<<CommonFun::haversine_distance(0,0, -180, 0);
-	LOG(INFO)<<CommonFun::vincenty_distance(180,0, -180, 0)<<" "<<CommonFun::haversine_distance(180,0, -180, 0);
-	exit(1);
-	*/
-
-	RasterObject* fromRaster = new RasterObject(std::string("/home/huijieqiao/NB_2016_R12/M1000/mask.tif"));
-	RasterObject* toRaster = new RasterObject(std::string("/home/huijieqiao/NB_2016_R12/M1000/mask.tif"));
-
-	const char* fromWkt = fromRaster->getProjectionRef();
-	const char* toWkt = toRaster->getProjectionRef();
-	OGRSpatialReference oSourceSRS;
-	OGRSpatialReference oTargetSRS;
-	char * from_T = const_cast<char *>(fromWkt);
-	char * to_T = const_cast<char *>(toWkt);
-	oSourceSRS.importFromWkt(&from_T);
-	oTargetSRS.importFromWkt(&to_T);
-	OGRCoordinateTransformation *poCT = OGRCreateCoordinateTransformation( &oSourceSRS, &oTargetSRS );
-
-	/*double lon, lat;
-	for (int y=89; y<90;y++){
-		for (int x=0; x<fromRaster->getXSize();x++){
-			int v = fromRaster->readByXY(x, y);
-			if (v!=NODATA){
-				CommonFun::XY2LL(fromRaster->getGeoTransform(), x, y, &lon, &lat);
-			}
-		}
-	}
-*/
-	//CommonFun::convert2LL(-9684.702923, 3423.101461, fromWkt, toWkt);
-	/*LOG(INFO)<<"X:";
-	for (int x=0; x<348; x++){
-		LOG(INFO)<<"G distance:"<<CommonFun::GreatCirleDistanceFast(x, 90, x, 91, poCT, fromRaster->getGeoTransform(), resolution);
-	}
-	LOG(INFO)<<"Y:";
-	for (int y=0; y<179; y++){
-		LOG(INFO)<<"G distance:"<<CommonFun::GreatCirleDistanceFast(180, y, 181, y, poCT, fromRaster->getGeoTransform(), resolution);
-	}
-	//LOG(INFO)<<"E distance:"<<CommonFun::EuclideanDistance(110, 110, 111, 110);
-
-	delete fromRaster;
-	delete toRaster;
-	exit(1);
-	 */
 	if (argc==1){
 		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
 		exit(1);
@@ -108,8 +62,7 @@ int main(int argc, const char* argv[]) {
 	bool is_overwrite = atoi(argv[5]);
 
 
-	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail,
-			fromWkt, toWkt, resolution, poCT);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail);
 
 	if (scenario->isTerminated()){
 		//delete scenario;
