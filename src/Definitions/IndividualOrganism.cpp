@@ -95,14 +95,23 @@ unsigned IndividualOrganism::getSpeciationYears(){
 bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environments) {
     std::vector<NicheBreadth*> nicheBreadth = species->getNicheBreadth();
     for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
-    	//LOG(INFO)<<"Environments:"<<i;
+    	//LOG(INFO)<<"Environments:"<<i<<" Size:"<<(*p_current_environments).size()<<" Address:"<<(*p_current_environments)[i];
         int env_value = (*p_current_environments)[i]->readByXY(x, y);
+        //LOG(INFO)<<env_value<<"FALSE";
         if ((env_value > nicheBreadth[i]->getMax())
                 || (env_value < nicheBreadth[i]->getMin())) {
-        	//LOG(INFO)<<env_value<<"FALSE";
             return false;
         }
     }
+
+    //remove the areas covered by the ice sheet randomly based on the ice sheet values.
+    int icesheet = (*p_current_environments)[nicheBreadth.size()]->readByXY(x, y);
+    double r = static_cast<double>(rand()) * 1000 / static_cast<double>(RAND_MAX);
+    //LOG(INFO)<<"icesheet is "<<icesheet<<" and random value is "<<r;
+    if (icesheet>=r){
+    	return false;
+    }
+
     return true;
 }
 SpeciesObject* IndividualOrganism::getSpecies() {

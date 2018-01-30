@@ -36,8 +36,8 @@ unsigned EnvironmentalHadley::getBurnInYears() {
 	return burnInYears;
 }
 SparseMap* EnvironmentalHadley::getValues(unsigned p_year) {
-//	LOG(INFO)<<"get:"<<p_year;
-//	LOG(INFO)<<" from "<<layers[p_year]->getFilename();
+	//LOG(INFO)<<"get:"<<p_year;
+	//LOG(INFO)<<" from "<<layers[p_year]->getFilename();
 
 	return layers[p_year];
 }

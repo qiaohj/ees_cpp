@@ -88,7 +88,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		LOG(INFO)<<"Load environments of "<<index;
 		std::string environment_folder_path = environment_json_array[index].asString();
-		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 119900, 100);
+		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
 
@@ -96,23 +96,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	delete mask_raster;
 	LOG(INFO)<<"Finished";
 }
-/*
-bool Scenario::generateEnv(){
 
-	for (unsigned y=0;y<=500000;y+=500){
-		std::vector<SparseMap*> current_environments = getEnvironmenMap(y);
-		for (unsigned i = 0; i < current_environments.size(); ++i) {
-			std::string folder = "/home/huijieqiao/NBProject/NB_Configurations/EurAsia/env_list";
-			char tiffName[folder.length() + 28];
-			sprintf(tiffName, "%s/%d_%s.tif", folder.c_str(), i, CommonFun::fixedLength(y, 7).c_str());
-			RasterController::writeGeoTIFF(tiffName, current_environments[i]->getXSize(), current_environments[i]->getYSize(), geoTrans,
-					current_environments[i]->toArray(), (double) NODATA, GDT_Int32);
-		}
-	}
-
-	return true;
-}
-*/
 std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
 	if (p_species->getParent() == NULL) {
 		char speciesFolder[target.length() + 6];
@@ -301,29 +285,6 @@ unsigned Scenario::run() {
 
         //LOG(INFO)<<"end to simulate organism by species. Count of species is " << actived_individualOrganisms.size() << ". Count of all organisms is " << organism_count;
 		//LOG(INFO)<<"end to simulate cell by cell";
-
-		boost::unordered_map<SpeciesObject*, SparseMap*> group_maps_2;
-		for (auto sp_it : individual_organisms_in_current_year) {
-			SpeciesObject* species = sp_it.first;
-			if (group_maps_2.find(species)==group_maps_2.end()) {
-				group_maps_2[sp_it.first] = new SparseMap(xSize, ySize);
-			}
-			//LOG(INFO)<<"sp_it.second.size():"<<sp_it.second.size();
-			if (sp_it.second.size()>0) {
-				for (auto o_id : sp_it.second) {
-					//LOG(INFO)<<"o_id.second.size():"<<o_id.second.size();
-					if (o_id.second.size()>0) {
-						group_maps_2[sp_it.first]->setValue(o_id.second[0]->getX(), o_id.second[0]->getY(), 1);
-					}
-				}
-			} else {
-				//sp_it.first->setDisappearedYear(year);
-				group_maps_2[sp_it.first] = NULL;
-			}
-
-		}
-		//LOG(INFO)<<"group_maps_2.size():"<<group_maps_2.size();
-		saveGroupmap(year-1, group_maps_2);
 
 		//remove the unsuitable organisms
 		//LOG(INFO)<<"begin to remove the unsuitable organisms.";
@@ -974,6 +935,7 @@ IndividualOrganism* Scenario::getUnmarkedOrganism(
 }
 std::vector<SparseMap*> Scenario::getEnvironmenMap(unsigned p_year) {
 	std::vector<SparseMap*> result;
+	//LOG(INFO)<<"environments.size()"<<environments.size();
 	for (unsigned i = 0; i < environments.size(); ++i) {
 		result.push_back(environments[i]->getValues(p_year));
 	}
