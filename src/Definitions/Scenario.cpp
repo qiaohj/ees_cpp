@@ -377,9 +377,9 @@ unsigned Scenario::run() {
 			boost::unordered_map<unsigned, std::vector<IndividualOrganism*> > organisms = sp_it.second;
 			SpeciesObject* species = sp_it.first;
 			unsigned short current_group_id = 1;
-			//if (year>=(burnInYear)) {
-			if (year>=(burnInYear + species->getSpeciationYears())) {
-				//LOG(INFO)<<"Begin to mark the organism.";
+			if (year>=(burnInYear)) {
+			//if (year>=(burnInYear + species->getSpeciationYears())) {
+				LOG(INFO)<<"Begin to mark the organism.";
 				IndividualOrganism* unmarked_organism = getUnmarkedOrganism(&organisms);
 				while (unmarked_organism!=NULL) {
 					//LOG(INFO)<<"Unmarked organism is "<<unmarked_organism->getX() <<", "<<unmarked_organism->getY()
@@ -877,19 +877,19 @@ void Scenario::markJointOrganism(unsigned short p_group_id,
 			++i_x) {
 		int next_x = i_x;
 		if (next_x < 0) {
-			break;
+			continue;
 		}
 
 		if (next_x >= xSize) {
-			break;
+			continue;
 		}
 		for (int i_y = (y - p_dispersal_ability);
 				i_y <= (y + p_dispersal_ability); ++i_y) {
 			if (i_y < 0)
-				break;
+				continue;
 
 			if (i_y >= (int) ySize)
-				break;
+				continue;
 			double distance = distanceFast((int) i_x, (int) i_y, (int) (x),
 					(int) (y));
 			if (CommonFun::AlmostEqualRelative(distance, -1.0)) {

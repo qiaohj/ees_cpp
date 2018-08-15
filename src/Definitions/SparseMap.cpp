@@ -49,7 +49,7 @@ int SparseMap::readByXY(unsigned p_x, unsigned p_y) {
 	if (v == MATRIX_ZERO){
 		v = 0;
 	}
-    return (*value)(p_x, p_y);
+    return v;
 }
 int SparseMap::readByLL(double* p_geoTrans, double p_longitude, double p_latitude){
     unsigned x, y;

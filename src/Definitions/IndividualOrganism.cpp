@@ -105,13 +105,14 @@ bool IndividualOrganism::isSuitable(std::vector<SparseMap*>* p_current_environme
     }
 
     //remove the areas covered by the ice sheet randomly based on the ice sheet values.
-    int icesheet = (*p_current_environments)[nicheBreadth.size()]->readByXY(x, y);
-    double r = static_cast<double>(rand()) * 1000 / static_cast<double>(RAND_MAX);
-    //LOG(INFO)<<"icesheet is "<<icesheet<<" and random value is "<<r;
-    if (icesheet>=r){
-    	return false;
+    if (((*p_current_environments).size()-1)==nicheBreadth.size()){
+		int icesheet = (*p_current_environments)[nicheBreadth.size()]->readByXY(x, y);
+		double r = static_cast<double>(rand()) * 1000 / static_cast<double>(RAND_MAX);
+		//LOG(INFO)<<"icesheet is "<<icesheet<<" and random value is "<<r;
+		if (icesheet>=r){
+			return false;
+		}
     }
-
     return true;
 }
 SpeciesObject* IndividualOrganism::getSpecies() {
