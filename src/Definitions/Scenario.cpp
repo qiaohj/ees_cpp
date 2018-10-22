@@ -379,7 +379,7 @@ unsigned Scenario::run() {
 			unsigned short current_group_id = 1;
 			if (year>=(burnInYear)) {
 			//if (year>=(burnInYear + species->getSpeciationYears())) {
-				LOG(INFO)<<"Begin to mark the organism.";
+				//LOG(INFO)<<"Begin to mark the organism.";
 				IndividualOrganism* unmarked_organism = getUnmarkedOrganism(&organisms);
 				while (unmarked_organism!=NULL) {
 					//LOG(INFO)<<"Unmarked organism is "<<unmarked_organism->getX() <<", "<<unmarked_organism->getY()

@@ -23,7 +23,7 @@ EnvironmentalHadley::EnvironmentalHadley(const std::string p_basefolder, double*
 		unsigned key = p_begin_year + p_burn_in_year - y;
 		RasterObject* r = new RasterObject(layer);
 		SparseMap* v = new SparseMap(r, false);
-		LOG(INFO)<<"Initial environments information from "<<layer<<" to key "<<key;
+		//LOG(INFO)<<"Initial environments information from "<<layer<<" to key "<<key;
 		layers[key] = v;
 		delete r;
 		if (y==0){

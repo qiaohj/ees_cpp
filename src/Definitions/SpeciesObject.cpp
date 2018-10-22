@@ -369,6 +369,7 @@ std::vector<NicheBreadth*> SpeciesObject::getNicheBreadth() {
     return nicheBreadth;
 }
 unsigned SpeciesObject::getSpeciationYears() {
+	//return 99999999;
     return speciationYears;
 }
 SpeciesObject* SpeciesObject::getParent() {
