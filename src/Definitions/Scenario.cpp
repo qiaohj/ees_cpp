@@ -68,6 +68,13 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 		char line[100];
 		sprintf(line, "%s,%s", "long", "lat");
 		output.push_back(line);
+		/* -----------------
+		 * Create the individual organism(s) based on the seeds in the species' configuration.
+		 * All the individual organism(s) has(have) the same parameters inherited from the species and the different localities.
+		 * Now there is only on seed per species.
+		 * Don't use the function of the multiple species and multiple seeds per species now,
+		 * because it hasn't be tested strictly.
+		 *-------------------------*/
 		for (unsigned i = 0; i < seeds.size(); ++i) {
 			char line[100];
 			sprintf(line, "%f,%f", seeds[i]->getLongitude(), seeds[i]->getLatitude());
@@ -138,6 +145,10 @@ bool Scenario::isTerminated() {
 	}
 	return false;
 }
+
+/*-----------------
+ * Create all the necessary folders for a species
+ */
 void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 	std::string speciesFolder = getSpeciesFolder(p_species);
 	char groupsmapFolder[speciesFolder.length() + 6 + 10];
@@ -149,13 +160,17 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 	}
 
 }
+
+/*-------------------------
+ * Save the population information for a specific time step/
+ *-----------------------*/
 void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
 	if (species_group_maps.size()==0){
 		return;
 	}
 	std::vector<std::string> output;
 	char line[50];
-
+	// Note: The old version has only 5 columns without lon and lat columns.
 	sprintf(line, "year,x,y,lon,lat,group,sp_id");
 	output.push_back(line);
 	for (auto sp_it : species_group_maps){
@@ -184,6 +199,10 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 		output.clear();
 	}
 }
+
+/*---------------------------
+ * Run a simulation on a scenario with the species in the scenario.
+ *---------------------*/
 unsigned Scenario::run() {
 	boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps;
 	std::vector<std::string> stat_output;
@@ -196,8 +215,10 @@ unsigned Scenario::run() {
 			individual_organisms_in_current_year;
 		std::vector<SparseMap*> current_environments = getEnvironmenMap(year);
 
-		//save the env data
+
 		char line[100];
+
+		//Create the active individual organisms via cloning the individual organisms from the previous time step.
 		boost::unordered_map<SpeciesObject*, boost::unordered_map<unsigned, IndividualOrganism*> > actived_individualOrganisms;
 		for (auto sp_it : all_individualOrganisms[year - minSpeciesDispersalSpeed]) {
 
@@ -208,12 +229,14 @@ unsigned Scenario::run() {
 				}
 			}
 		}
+
 		int organism_count = 0;
+
+		//Handle the active individual organisms one by one.
 		//LOG(INFO)<<"start to simulate organism by species. Count of species is " << actived_individualOrganisms.size();
 		for (auto s_it : actived_individualOrganisms) {
-			//Generate a suitable layer for the species;
+			//If it is the beginning of the simulation, generate a suitable layer for the species;
 			if (year==minSpeciesDispersalSpeed){
-
 				std::string speciesFolder = getSpeciesFolder(s_it.first);
 				std::vector<NicheBreadth*> nicheBreadth = s_it.first->getNicheBreadth();
 				char tiffName[speciesFolder.length() + 28];
@@ -225,7 +248,6 @@ unsigned Scenario::run() {
 					for (unsigned y=0;y<current_environments[0]->getYSize();y++){
 					    for (unsigned i = 0; i < nicheBreadth.size(); ++i) {
 					        int env_value = current_environments[i]->readByXY(x, y);
-
 					        if (env_value == NODATA) {
 								array[x + y * current_environments[0]->getXSize()] = NODATA;
 								break;
