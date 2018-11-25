@@ -1,8 +1,8 @@
 /*
- * gdaltest.cpp
+ *  main.cpp
  *
  *  Created on: Oct 14, 2014
- *      Author: qiaohj
+ *      Author: Huijie Qiao
  */
 
 #include <gdal.h>
@@ -45,15 +45,30 @@ void handler(int sig) {
 
 _INITIALIZE_EASYLOGGINGPP
 
-//configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), tif_limit
-///home/huijieqiao/NB_NEW/Environments scenario /home/huijieqiao/temp 4000 1000 1
+/*-----------------------------------------
+ * Main entrance for the simulation application
+ * Parameters
+ * 1. configure's base folder, which the application can load the configuration for species and scenario.
+ * 2. scenario configuration. A JSON format configuration file to set up the parameter of the scenario
+ * 3. species configuration. A JSON format configuration file to set up the parameter of the species in the simulation.
+ * 4. result folder. A path to save the result
+ * 5. memory limit (in MB). A number to set up the maximum memory allocate to the application
+ * 6. is overwrite. An ZERO value means skip the simulation if the result folder exists and NONE-ZERO value means run the simulation no matter
+ * that the folder exists or not.
+ * 7. with detail. An ZERO value means output the details of the simulation or not.
+ *
+ *-----------------------------------------*/
 int main(int argc, const char* argv[]) {
-
+	// Check the validity of the input
+	// If the length of parameters are not satisfied with the required number, the application will skip this simulation and show out a warning.
 	if (argc==1){
 		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
 		exit(1);
 	}
+	// Set up the timer.
 	srand(static_cast<unsigned>(time(0)));
+
+	// Load the parameters
     char scenario_json_path[strlen(argv[1]) + strlen(argv[2]) + 30];
     sprintf(scenario_json_path, "%s/Scenario_Configurations/%s.json", argv[1], argv[2]);
 
@@ -61,7 +76,7 @@ int main(int argc, const char* argv[]) {
 	bool with_detail = atoi(argv[6]);
 	bool is_overwrite = atoi(argv[5]);
 
-
+	//initialize the main scenario
 	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail);
 
 	if (scenario->isTerminated()){
@@ -69,18 +84,19 @@ int main(int argc, const char* argv[]) {
 		printf("Result folder is exist, skip this simulation!\n");
 		return EXIT_SUCCESS;
 	}
+
+	//initialize the logger
 	el::Configurations c;
 	c.setGlobally(el::ConfigurationType::Filename, scenario->getTarget() + "/runtime.log");
 	el::Loggers::setDefaultConfigurations(c);
 	el::Loggers::getLogger("default");
 	el::Loggers::setDefaultConfigurations(c, true);
 
+	//run the simulation and get the runtime status
 	unsigned status = scenario->run();
-	//LOG(INFO)<<"Before remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
-	//delete scenario;
-	//LOG(INFO)<<"After  remove scenario, Memory usage:"<<CommonFun::getCurrentRSS();
+
 	if (status==0){
-		LOG(INFO)<<"Well done!";
+		LOG(INFO)<<"Done!";
 	}
 	if (status==1){
 		LOG(INFO)<<"To the memory limit, exit!";

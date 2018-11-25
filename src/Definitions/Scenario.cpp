@@ -2,7 +2,9 @@
  * Scenario.cpp
  *
  *  Created on: Oct 25, 2014
- *      Author: qiaohj
+ *      Author: Huijie Qiao
+ *
+ *  The main function to run the simulation
  */
 
 #include "Scenario.h"
@@ -11,23 +13,32 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 		std::string p_base_folder, std::string p_target, bool p_overwrite,
 		unsigned long p_mem_limit, bool p_with_detail) {
 
+	//initialize the required parameters for the simualtion
 	with_detail = p_with_detail;
 	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
 	baseFolder = p_base_folder;
 	target = p_target + "/" + p_scenario_id;
+
 	LOG(INFO)<<"Save result to " <<target;
 
 	isFinished = boost::filesystem::exists(target);
 	isOverwrite = p_overwrite;
-	//isFinished = false;
+
+	/*-------------------
+	 * If the target folder exists and the is_overwrite parameter is false, skip the simulation,
+	 * or overwrite the existing result with the new simulation.
+	 -------------------------*/
+
 	if ((isFinished)&&(!p_overwrite)){
 		return;
 	}
 
+	//Create the necessary folders.
 	CommonFun::createFolder(target.c_str());
 	CommonFun::createFolder((target + "/Map_Folder").c_str());
 
+	//Load the required parameters of the scenario from the JSON file.
 	totalYears = root_Scenario.get("total_years", 120000).asInt();
 
 	RasterObject* mask_raster = new RasterObject(
@@ -36,13 +47,13 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	memcpy(geoTrans, mask_raster->getGeoTransform(), 6 * sizeof(*geoTrans));
 	prj = new char[strlen(mask_raster->getProjectionRef()) + 1];
 	strcpy(prj, mask_raster->getProjectionRef());
-	//LOG(INFO)<<"1:"<<prj;
 	mask = new SparseMap(mask_raster, true);
 	xSize = mask_raster->getXSize();
 	ySize = mask_raster->getYSize();
 	minSpeciesDispersalSpeed = totalYears;
 	Json::Value species_json_array = root_Scenario["species"];
 
+	//Load the species parameters from the JSON file(s).
 	for (unsigned index = 0; index < species_json_array.size(); ++index) {
 		std::string species_json_path = baseFolder
 				+ std::string("/Species_Configurations/")
@@ -72,6 +83,14 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 		}
 		all_individualOrganisms[0][species] = t_o;
+		/*---------------------
+		 *
+		 * get the minimal dispersal speed from all the species in the simulation.
+		 * It is unused parameter now, because there is only one species per scenario.
+		 * It might be used later.
+		 *
+		 -----------------------*/
+
 		minSpeciesDispersalSpeed =
 				(species->getDispersalSpeed() < minSpeciesDispersalSpeed) ?
 						species->getDispersalSpeed() : minSpeciesDispersalSpeed;
@@ -81,6 +100,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 		output.clear();
 	}
 
+	//Load the environments layers for the simulation.
 	LOG(INFO)<<"Load environments";
 	Json::Value environment_json_array = root_Scenario["environments"];
 	environments.reserve(environment_json_array.size());
@@ -88,6 +108,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		LOG(INFO)<<"Load environments of "<<index;
 		std::string environment_folder_path = environment_json_array[index].asString();
+		//Todo: here is a hard code (120000, 0 and 100) to be solved.
 		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
