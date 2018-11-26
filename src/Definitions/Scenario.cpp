@@ -8,7 +8,16 @@
  */
 
 #include "Scenario.h"
-
+/**
+ *
+ * @param p_scenario_json_path
+ * @param p_scenario_id
+ * @param p_base_folder
+ * @param p_target
+ * @param p_overwrite
+ * @param p_mem_limit
+ * @param p_with_detail
+ */
 Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, bool p_overwrite,
 		unsigned long p_mem_limit, bool p_with_detail) {
@@ -124,7 +133,11 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	delete mask_raster;
 	LOG(INFO)<<"Finished";
 }
-
+/**
+ * get the folder of the given species
+ * @param p_species
+ * @return
+ */
 std::string Scenario::getSpeciesFolder(SpeciesObject* p_species) {
 	if (p_species->getParent() == NULL) {
 		char speciesFolder[target.length() + 6];
