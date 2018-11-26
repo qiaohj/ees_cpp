@@ -124,7 +124,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		LOG(INFO)<<"Load environments of "<<index;
 		std::string environment_folder_path = environment_json_array[index].asString();
-		//Todo: here is a hard code (120000, 0 and 100) to be solved.
+		/// @todo here is a hard code (120000, 0 and 100) to be solved.
 		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
