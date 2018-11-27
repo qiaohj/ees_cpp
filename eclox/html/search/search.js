@@ -7,10 +7,20 @@
 
 var indexSectionsWithContent =
 {
+  0: "cgimrst~",
+  1: "s",
+  2: "ms",
+  3: "cgirs~",
+  4: "t"
 };
 
 var indexSectionNames =
 {
+  0: "all",
+  1: "classes",
+  2: "files",
+  3: "functions",
+  4: "pages"
 };
 
 function convertToId(search)

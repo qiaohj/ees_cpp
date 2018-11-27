@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['functions_2ecpp',['functions.cpp',['../functions_8cpp.html',1,'']]],
-  ['functions_2eh',['functions.h',['../functions_8h.html',1,'']]]
+  ['geolocation_2ecpp',['GeoLocation.cpp',['../GeoLocation_8cpp.html',1,'']]],
+  ['geolocation_2eh',['GeoLocation.h',['../GeoLocation_8h.html',1,'']]]
 ];
