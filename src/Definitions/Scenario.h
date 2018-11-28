@@ -1,10 +1,10 @@
 /**
- * \file Scenario.h
+ * @file Scenario.h
  * @brief The Scenario class
- * \author Huijie Qiao
- * \version 1.0
- * \date 11/25/2018
- * \details
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
  * Copyright 2014-2019 Huijie Qiao
  * Distributed under GNU license
  * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
