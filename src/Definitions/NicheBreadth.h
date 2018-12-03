@@ -22,9 +22,27 @@ private:
     float min;
     float max;
 public:
+    /**
+	 * @brief Constructor of NicheBreadth class
+	 * @param min lower limit of the niche breadth
+	 * @param max upper limit of the niche breadth
+	 */
     NicheBreadth(float min, float max);
+    /**
+	 * @brief Destructor of NicheBreadth class
+	 *
+	 * release all the resources
+	 */
     virtual ~NicheBreadth();
+    /**
+     * @brief return the upper limit of the niche breadth
+     * @return
+     */
     float getMax();
+    /**
+	 * @brief return the lower limit of the niche breadth
+	 * @return
+	 */
     float getMin();
 };
 

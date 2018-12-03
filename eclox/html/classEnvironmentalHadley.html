@@ -105,6 +105,7 @@ $(document).ready(function(){initNavTree('classEnvironmentalHadley.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classEnvironmentalHadley-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">EnvironmentalHadley Class Reference</div>  </div>
@@ -137,6 +138,26 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memitem:aa78db5b4475e28d3a4c4c17cea57599a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalHadley.html#aa78db5b4475e28d3a4c4c17cea57599a">readByXY</a> (unsigned p_year, unsigned p_x, unsigned p_y)</td></tr>
 <tr class="memdesc:aa78db5b4475e28d3a4c4c17cea57599a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value based on the x, y of the matrix.  <a href="#aa78db5b4475e28d3a4c4c17cea57599a">More...</a><br/></td></tr>
 <tr class="separator:aa78db5b4475e28d3a4c4c17cea57599a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5d019250b2047ab21e35701871f17d8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d019250b2047ab21e35701871f17d8d"></a>
+boost::unordered_map&lt; unsigned, <br class="typebreak"/>
+<a class="el" href="classSparseMap.html">SparseMap</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalHadley.html#a5d019250b2047ab21e35701871f17d8d">layers</a></td></tr>
+<tr class="memdesc:a5d019250b2047ab21e35701871f17d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A hash map to save the environmental layers used in the simulation time step by time step. The keys are the time steps, and the values are the environmental layers on the time step. <br/></td></tr>
+<tr class="separator:a5d019250b2047ab21e35701871f17d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9266141843a7f020865e63eb63f8d08f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9266141843a7f020865e63eb63f8d08f"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalHadley.html#a9266141843a7f020865e63eb63f8d08f">burnInYears</a></td></tr>
+<tr class="memdesc:a9266141843a7f020865e63eb63f8d08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the burn-in year used in the simulation. <br/></td></tr>
+<tr class="separator:a9266141843a7f020865e63eb63f8d08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64fae4a5f6638a80b9684f0171b5d43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab64fae4a5f6638a80b9684f0171b5d43"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalHadley.html#ab64fae4a5f6638a80b9684f0171b5d43">noData</a></td></tr>
+<tr class="memdesc:ab64fae4a5f6638a80b9684f0171b5d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">the NODATA value in the environmental layers. <br/></td></tr>
+<tr class="separator:ab64fae4a5f6638a80b9684f0171b5d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c436000b9b28c701e3b779b3e303a12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c436000b9b28c701e3b779b3e303a12"></a>
+double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalHadley.html#a6c436000b9b28c701e3b779b3e303a12">geoTrans</a></td></tr>
+<tr class="memdesc:a6c436000b9b28c701e3b779b3e303a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">The GeoTransform matrix of the raster layers. <br/></td></tr>
+<tr class="separator:a6c436000b9b28c701e3b779b3e303a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to handle the environmental layers from the Hadley guys. </p>
@@ -197,7 +218,7 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">p_burn_in_year</td><td>Burn-in year of the simulation </td></tr>
     <tr><td class="paramname">p_begin_year</td><td>Start time step of the simulation </td></tr>
     <tr><td class="paramname">p_end_year</td><td>End time step of the simulation </td></tr>
-    <tr><td class="paramname">p_step</td><td>The step length of the simualtion </td></tr>
+    <tr><td class="paramname">p_step</td><td>The step length of the simulation </td></tr>
   </table>
   </dd>
 </dl>
@@ -252,7 +273,7 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classSparseMap.html" title="A class to handle the raster file. ">SparseMap</a> object of the environmental layer of the given time step. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> object of the environmental layer of the given time step. </dd></dl>
 
 </div>
 </div>
@@ -352,7 +373,7 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEnvironmentalHadley.html">EnvironmentalHadley</a></li>
-    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 17:40:55 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

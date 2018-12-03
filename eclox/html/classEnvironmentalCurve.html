@@ -124,6 +124,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67a5de80441826b682de1f3a44585783"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalCurve.html#a67a5de80441826b682de1f3a44585783">~EnvironmentalCurve</a> ()</td></tr>
 <tr class="memdesc:a67a5de80441826b682de1f3a44585783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classEnvironmentalCurve.html" title="used to create a virtual environmental variables based on the configuration. It was used in the Am...">EnvironmentalCurve</a> class.  <a href="#a67a5de80441826b682de1f3a44585783">More...</a><br/></td></tr>
 <tr class="separator:a67a5de80441826b682de1f3a44585783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb07d8c43cccfdfbd68816ac392ac15e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb07d8c43cccfdfbd68816ac392ac15e"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalCurve.html#acb07d8c43cccfdfbd68816ac392ac15e">getBurnInYears</a> ()</td></tr>
+<tr class="memdesc:acb07d8c43cccfdfbd68816ac392ac15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the burn-in year used in the simulation. <br/></td></tr>
+<tr class="separator:acb07d8c43cccfdfbd68816ac392ac15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b13038e6e8d214b38adce71fb4f17d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSparseMap.html">SparseMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalCurve.html#af4b13038e6e8d214b38adce71fb4f17d">getValues</a> (unsigned p_year)</td></tr>
+<tr class="memdesc:af4b13038e6e8d214b38adce71fb4f17d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the environmental layers by a given time step.  <a href="#af4b13038e6e8d214b38adce71fb4f17d">More...</a><br/></td></tr>
+<tr class="separator:af4b13038e6e8d214b38adce71fb4f17d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cf8b2b308803e11f965cae06251cfbb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalCurve.html#a0cf8b2b308803e11f965cae06251cfbb">readByLL</a> (float p_curve_value, unsigned p_year, double p_longitude, double p_latitude)</td></tr>
+<tr class="memdesc:a0cf8b2b308803e11f965cae06251cfbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value based on the longitude and latitude.  <a href="#a0cf8b2b308803e11f965cae06251cfbb">More...</a><br/></td></tr>
+<tr class="separator:a0cf8b2b308803e11f965cae06251cfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6c15431195c444c49cb30f7fea8fb6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnvironmentalCurve.html#a5e6c15431195c444c49cb30f7fea8fb6">readByXY</a> (float p_curve_value, unsigned p_year, unsigned p_x, unsigned p_y)</td></tr>
+<tr class="memdesc:a5e6c15431195c444c49cb30f7fea8fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value based on the x, y of the matrix.  <a href="#a5e6c15431195c444c49cb30f7fea8fb6">More...</a><br/></td></tr>
+<tr class="separator:a5e6c15431195c444c49cb30f7fea8fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>used to create a virtual environmental variables based on the configuration. It was used in the Am. Nat. paper. We keep it in the source code, just for the honor. </p>
@@ -178,6 +191,130 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af4b13038e6e8d214b38adce71fb4f17d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSparseMap.html">SparseMap</a> * EnvironmentalCurve::getValues </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the environmental layers by a given time step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td>time step </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0cf8b2b308803e11f965cae06251cfbb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float EnvironmentalCurve::readByLL </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p_curve_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the value based on the longitude and latitude. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td>time step </td></tr>
+    <tr><td class="paramname">p_longitude</td><td>longitude </td></tr>
+    <tr><td class="paramname">p_latitude</td><td>latitude </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value on the longitude and latitude </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5e6c15431195c444c49cb30f7fea8fb6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float EnvironmentalCurve::readByXY </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p_curve_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the value based on the x, y of the matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td>time step </td></tr>
+    <tr><td class="paramname">p_x</td><td>x </td></tr>
+    <tr><td class="paramname">p_y</td><td>y </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value on the longitude and latitude </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Definitions/<a class="el" href="EnvironmentalCurve_8h_source.html">EnvironmentalCurve.h</a></li>
 <li>src/Definitions/<a class="el" href="EnvironmentalCurve_8cpp.html">EnvironmentalCurve.cpp</a></li>
@@ -188,7 +325,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></li>
-    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 17:40:55 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

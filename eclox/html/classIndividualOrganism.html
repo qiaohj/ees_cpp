@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('classIndividualOrganism.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classIndividualOrganism-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">IndividualOrganism Class Reference</div>  </div>
@@ -114,9 +115,421 @@ $(document).ready(function(){initNavTree('classIndividualOrganism.html','');});
  <a href="classIndividualOrganism.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="IndividualOrganism_8h_source.html">IndividualOrganism.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af8976a073d9a9912034e5a069e79d9d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#af8976a073d9a9912034e5a069e79d9d5">IndividualOrganism</a> (unsigned p_year, <a class="el" href="classSpeciesObject.html">SpeciesObject</a> *p_species, <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *p_parent, unsigned short p_x, unsigned short p_y)</td></tr>
+<tr class="memdesc:af8976a073d9a9912034e5a069e79d9d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classIndividualOrganism.html" title="A class to handle the behavior of an individual in the simulation. ">IndividualOrganism</a> class.  <a href="#af8976a073d9a9912034e5a069e79d9d5">More...</a><br/></td></tr>
+<tr class="separator:af8976a073d9a9912034e5a069e79d9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6046c0c271e48981137223ab23fcb671"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a6046c0c271e48981137223ab23fcb671">~IndividualOrganism</a> ()</td></tr>
+<tr class="memdesc:a6046c0c271e48981137223ab23fcb671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classIndividualOrganism.html" title="A class to handle the behavior of an individual in the simulation. ">IndividualOrganism</a> class.  <a href="#a6046c0c271e48981137223ab23fcb671">More...</a><br/></td></tr>
+<tr class="separator:a6046c0c271e48981137223ab23fcb671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d6ce52486bb93218b5c827c8989af5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d6ce52486bb93218b5c827c8989af5d"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a5d6ce52486bb93218b5c827c8989af5d">getNextRunYear</a> ()</td></tr>
+<tr class="memdesc:a5d6ce52486bb93218b5c827c8989af5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the next dispersal time step of the individual based on the dispersal speed of the species. <br/></td></tr>
+<tr class="separator:a5d6ce52486bb93218b5c827c8989af5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20240b6ebc02f4d6852a3781defc5401"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a20240b6ebc02f4d6852a3781defc5401">getDispersalMethod</a> ()</td></tr>
+<tr class="memdesc:a20240b6ebc02f4d6852a3781defc5401"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dispersal method (X direction(s) or full directions) based on the dispersal method of the species. (full directions only now)  <a href="#a20240b6ebc02f4d6852a3781defc5401">More...</a><br/></td></tr>
+<tr class="separator:a20240b6ebc02f4d6852a3781defc5401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d952aed54d9dd9cb028231c90ab49a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#ae6d952aed54d9dd9cb028231c90ab49a">getNumOfPath</a> ()</td></tr>
+<tr class="memdesc:ae6d952aed54d9dd9cb028231c90ab49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of dispersal direction(s) based on the dispersal method of the species.  <a href="#ae6d952aed54d9dd9cb028231c90ab49a">More...</a><br/></td></tr>
+<tr class="separator:ae6d952aed54d9dd9cb028231c90ab49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05f92bfba6e6f352bc464ed2e60fa5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac05f92bfba6e6f352bc464ed2e60fa5d"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#ac05f92bfba6e6f352bc464ed2e60fa5d">getSpeciationYears</a> ()</td></tr>
+<tr class="memdesc:ac05f92bfba6e6f352bc464ed2e60fa5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the speciation years of the species <br/></td></tr>
+<tr class="separator:ac05f92bfba6e6f352bc464ed2e60fa5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387b2cfc59ce43f3d8bc45d51010325a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a387b2cfc59ce43f3d8bc45d51010325a"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a387b2cfc59ce43f3d8bc45d51010325a">getDispersalAbility</a> ()</td></tr>
+<tr class="memdesc:a387b2cfc59ce43f3d8bc45d51010325a"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dispersal ability of the individual based on the dispersal ability array of the species. <br/></td></tr>
+<tr class="separator:a387b2cfc59ce43f3d8bc45d51010325a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef698d2e418d0cfd5ca7782e23c6ff37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#aef698d2e418d0cfd5ca7782e23c6ff37">setDispersalAbility</a> (unsigned short p_dispersal_ability)</td></tr>
+<tr class="memdesc:aef698d2e418d0cfd5ca7782e23c6ff37"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the dispersal ability of the individual based on the dispersal ability array of the species.  <a href="#aef698d2e418d0cfd5ca7782e23c6ff37">More...</a><br/></td></tr>
+<tr class="separator:aef698d2e418d0cfd5ca7782e23c6ff37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca7db567da1b9e652455811fe57549c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#aca7db567da1b9e652455811fe57549c1">isSuitable</a> (std::vector&lt; <a class="el" href="classSparseMap.html">SparseMap</a> * &gt; *p_current_environments)</td></tr>
+<tr class="memdesc:aca7db567da1b9e652455811fe57549c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">detect the area where the individual is living is suitable or not, based on the environmental values of the pixel that the individual is in and the niche breadth of the species.  <a href="#aca7db567da1b9e652455811fe57549c1">More...</a><br/></td></tr>
+<tr class="separator:aca7db567da1b9e652455811fe57549c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7808119e9a1eba5af61260112069a453"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a7808119e9a1eba5af61260112069a453">getSpecies</a> ()</td></tr>
+<tr class="memdesc:a7808119e9a1eba5af61260112069a453"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the species object of the individual  <a href="#a7808119e9a1eba5af61260112069a453">More...</a><br/></td></tr>
+<tr class="separator:a7808119e9a1eba5af61260112069a453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa118d1995fab02146c815a3f37a12c90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa118d1995fab02146c815a3f37a12c90"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#aa118d1995fab02146c815a3f37a12c90">getSpeciesID</a> ()</td></tr>
+<tr class="memdesc:aa118d1995fab02146c815a3f37a12c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the species ID of the individual <br/></td></tr>
+<tr class="separator:aa118d1995fab02146c815a3f37a12c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78270e8aea17bdde3a1b0684da22c016"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a78270e8aea17bdde3a1b0684da22c016">setParent</a> (<a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *p_parent)</td></tr>
+<tr class="memdesc:a78270e8aea17bdde3a1b0684da22c016"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the parent species to the individual  <a href="#a78270e8aea17bdde3a1b0684da22c016">More...</a><br/></td></tr>
+<tr class="separator:a78270e8aea17bdde3a1b0684da22c016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac70a0c301363caea3e6c0d2e75e42fcf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac70a0c301363caea3e6c0d2e75e42fcf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#ac70a0c301363caea3e6c0d2e75e42fcf">setRandomDispersalAbility</a> ()</td></tr>
+<tr class="memdesc:ac70a0c301363caea3e6c0d2e75e42fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a dispersal ability based on the dispersal ability of the species. <br/></td></tr>
+<tr class="separator:ac70a0c301363caea3e6c0d2e75e42fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38c0240cf0403c546369088a439a2add"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a38c0240cf0403c546369088a439a2add">getParent</a> ()</td></tr>
+<tr class="memdesc:a38c0240cf0403c546369088a439a2add"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the parent of the individual  <a href="#a38c0240cf0403c546369088a439a2add">More...</a><br/></td></tr>
+<tr class="separator:a38c0240cf0403c546369088a439a2add"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b7f45cd79e2143ac8b59fb6234e26f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6b7f45cd79e2143ac8b59fb6234e26f"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#ac6b7f45cd79e2143ac8b59fb6234e26f">getYear</a> ()</td></tr>
+<tr class="memdesc:ac6b7f45cd79e2143ac8b59fb6234e26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the time step which the individual is living <br/></td></tr>
+<tr class="separator:ac6b7f45cd79e2143ac8b59fb6234e26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3769fb56e27bb4f3fca7f41bcdb209"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a3769fb56e27bb4f3fca7f41bcdb209"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a1a3769fb56e27bb4f3fca7f41bcdb209">getX</a> ()</td></tr>
+<tr class="memdesc:a1a3769fb56e27bb4f3fca7f41bcdb209"><td class="mdescLeft">&#160;</td><td class="mdescRight">return X index of the individual <br/></td></tr>
+<tr class="separator:a1a3769fb56e27bb4f3fca7f41bcdb209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26102a0f1132ae4ce9e2ac4cf9d78ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af26102a0f1132ae4ce9e2ac4cf9d78ec"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#af26102a0f1132ae4ce9e2ac4cf9d78ec">getY</a> ()</td></tr>
+<tr class="memdesc:af26102a0f1132ae4ce9e2ac4cf9d78ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">return Y index of the individual <br/></td></tr>
+<tr class="separator:af26102a0f1132ae4ce9e2ac4cf9d78ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab661bdc5440059e46bb1773d488c1c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#ab661bdc5440059e46bb1773d488c1c99">setYear</a> (unsigned p_year)</td></tr>
+<tr class="memdesc:ab661bdc5440059e46bb1773d488c1c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the time step which the individual is living.  <a href="#ab661bdc5440059e46bb1773d488c1c99">More...</a><br/></td></tr>
+<tr class="separator:ab661bdc5440059e46bb1773d488c1c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bfded40e98675f3de4bb6bb0766a912"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a9bfded40e98675f3de4bb6bb0766a912">setGroupId</a> (unsigned short p_group_id)</td></tr>
+<tr class="memdesc:a9bfded40e98675f3de4bb6bb0766a912"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the population ID of the individual  <a href="#a9bfded40e98675f3de4bb6bb0766a912">More...</a><br/></td></tr>
+<tr class="separator:a9bfded40e98675f3de4bb6bb0766a912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa768c250f03af80aa8b8cc3db9fe08ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa768c250f03af80aa8b8cc3db9fe08ef"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#aa768c250f03af80aa8b8cc3db9fe08ef">getGroupId</a> ()</td></tr>
+<tr class="memdesc:aa768c250f03af80aa8b8cc3db9fe08ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the population ID of the individual <br/></td></tr>
+<tr class="separator:aa768c250f03af80aa8b8cc3db9fe08ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab611f78b32d934d11caa7a1beaa05f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#aab611f78b32d934d11caa7a1beaa05f3">setTempSpeciesId</a> (unsigned short p_species_id)</td></tr>
+<tr class="memdesc:aab611f78b32d934d11caa7a1beaa05f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a temporary species ID to the individual  <a href="#aab611f78b32d934d11caa7a1beaa05f3">More...</a><br/></td></tr>
+<tr class="separator:aab611f78b32d934d11caa7a1beaa05f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddd23665910c4253e3d6d8821520ec1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ddd23665910c4253e3d6d8821520ec1"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a8ddd23665910c4253e3d6d8821520ec1">getTempSpeciesId</a> ()</td></tr>
+<tr class="memdesc:a8ddd23665910c4253e3d6d8821520ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the temporary species ID of the individual <br/></td></tr>
+<tr class="separator:a8ddd23665910c4253e3d6d8821520ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e245602d57670ba22e3cf978c83844"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#a54e245602d57670ba22e3cf978c83844">setSpecies</a> (<a class="el" href="classSpeciesObject.html">SpeciesObject</a> *p_species)</td></tr>
+<tr class="memdesc:a54e245602d57670ba22e3cf978c83844"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the species object to the individual  <a href="#a54e245602d57670ba22e3cf978c83844">More...</a><br/></td></tr>
+<tr class="separator:a54e245602d57670ba22e3cf978c83844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22487709dc57f679345e5a7929b101d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af22487709dc57f679345e5a7929b101d"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIndividualOrganism.html#af22487709dc57f679345e5a7929b101d">getMemoryUsage</a> ()</td></tr>
+<tr class="memdesc:af22487709dc57f679345e5a7929b101d"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the memory usage of the object (for debug). <br/></td></tr>
+<tr class="separator:af22487709dc57f679345e5a7929b101d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to handle the behavior of an individual in the simulation. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="af8976a073d9a9912034e5a069e79d9d5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IndividualOrganism::IndividualOrganism </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
+          <td class="paramname"><em>p_species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>p_parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classIndividualOrganism.html" title="A class to handle the behavior of an individual in the simulation. ">IndividualOrganism</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td>the time step of the individual </td></tr>
+    <tr><td class="paramname">p_species</td><td>the species ID of the individual </td></tr>
+    <tr><td class="paramname">p_parent</td><td>the parent species ID of the individual </td></tr>
+    <tr><td class="paramname">p_x</td><td>the X index of the individual's locality. </td></tr>
+    <tr><td class="paramname">p_y</td><td>the Y index of the individual's locality. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6046c0c271e48981137223ab23fcb671"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IndividualOrganism::~IndividualOrganism </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor of <a class="el" href="classIndividualOrganism.html" title="A class to handle the behavior of an individual in the simulation. ">IndividualOrganism</a> class. </p>
+<p>release all the resources </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a20240b6ebc02f4d6852a3781defc5401"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int IndividualOrganism::getDispersalMethod </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the dispersal method (X direction(s) or full directions) based on the dispersal method of the species. (full directions only now) </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae6d952aed54d9dd9cb028231c90ab49a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int IndividualOrganism::getNumOfPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the number of dispersal direction(s) based on the dispersal method of the species. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a38c0240cf0403c546369088a439a2add"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * IndividualOrganism::getParent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the parent of the individual </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7808119e9a1eba5af61260112069a453"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> * IndividualOrganism::getSpecies </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the species object of the individual </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aca7db567da1b9e652455811fe57549c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IndividualOrganism::isSuitable </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classSparseMap.html">SparseMap</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>p_current_environments</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>detect the area where the individual is living is suitable or not, based on the environmental values of the pixel that the individual is in and the niche breadth of the species. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_current_environments</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True: suitable False: unsuitable </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aef698d2e418d0cfd5ca7782e23c6ff37"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setDispersalAbility </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_dispersal_ability</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the dispersal ability of the individual based on the dispersal ability array of the species. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_dispersal_ability</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9bfded40e98675f3de4bb6bb0766a912"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setGroupId </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_group_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the population ID of the individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_group_id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a78270e8aea17bdde3a1b0684da22c016"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setParent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>p_parent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the parent species to the individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_parent</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a54e245602d57670ba22e3cf978c83844"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setSpecies </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
+          <td class="paramname"><em>p_species</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the species object to the individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_species</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aab611f78b32d934d11caa7a1beaa05f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setTempSpeciesId </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_species_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set a temporary species ID to the individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_species_id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab661bdc5440059e46bb1773d488c1c99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IndividualOrganism::setYear </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the time step which the individual is living. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Definitions/<a class="el" href="IndividualOrganism_8h_source.html">IndividualOrganism.h</a></li>
 <li>src/Definitions/<a class="el" href="IndividualOrganism_8cpp.html">IndividualOrganism.cpp</a></li>
 </ul>
@@ -126,7 +539,7 @@ $(document).ready(function(){initNavTree('classIndividualOrganism.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></li>
-    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 17:40:55 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

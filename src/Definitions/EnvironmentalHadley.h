@@ -29,9 +29,23 @@
  */
 class EnvironmentalHadley {
 private:
+	/**
+	 * @brief A hash map to save the environmental layers used in the simulation time step by time step. The keys are the time steps, and the values are the environmental layers on the time step.
+	 */
     boost::unordered_map<unsigned, SparseMap*> layers;
+    /**
+     * @brief the burn-in year used in the simulation.
+     */
     unsigned burnInYears;
+
+    /**
+     * @brief the NODATA value in the environmental layers.
+     */
     float noData;
+
+    /**
+	 * @brief The GeoTransform matrix of the raster layers
+	 */
     double* geoTrans;
 public:
 
@@ -42,7 +56,7 @@ public:
      * @param p_burn_in_year Burn-in year of the simulation
      * @param p_begin_year Start time step of the simulation
      * @param p_end_year End time step of the simulation
-     * @param p_step The step length of the simualtion
+     * @param p_step The step length of the simulation
      */
 	EnvironmentalHadley(const std::string p_basefolder, double* p_geoTrans, unsigned p_burn_in_year,
 			unsigned p_begin_year, unsigned p_end_year, unsigned p_step);

@@ -18,12 +18,37 @@
  */
 class GeoLocation {
 private:
+	/**
+	 * @brief Longitude
+	 */
 	float longitude;
+	/**
+	 * @brief Latitude
+	 */
 	float latitude;
 public:
+	/**
+	 * @brief Constructor of GeoLocation class
+	 * @param p_longitude Longitude
+	 * @param p_latitude Latitude
+	 */
     GeoLocation(float p_longitude, float p_latitude);
+    /**
+	 * @brief Destructor of GeoLocation class
+	 *
+	 * release all the resources
+	 */
     virtual ~GeoLocation();
+
+    /**
+     * @brief Return the longitude of the object
+     * @return
+     */
     float getLongitude();
+    /**
+	 * @brief Return the latitude of the object
+	 * @return
+	 */
     float getLatitude();
 };
 

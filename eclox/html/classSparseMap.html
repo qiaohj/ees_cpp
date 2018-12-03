@@ -104,19 +104,443 @@ $(document).ready(function(){initNavTree('classSparseMap.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classSparseMap-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SparseMap Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A class to handle the raster file.  
+<p>A class to handle the raster file's values as a matrix.  
  <a href="classSparseMap.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="SparseMap_8h_source.html">SparseMap.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a61835c28b63b77c22f567ba6042da455"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a61835c28b63b77c22f567ba6042da455">SparseMap</a> (unsigned p_x_size, unsigned p_y_size)</td></tr>
+<tr class="memdesc:a61835c28b63b77c22f567ba6042da455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.1 (Create a blank map matrix with the given X and Y sizes)  <a href="#a61835c28b63b77c22f567ba6042da455">More...</a><br/></td></tr>
+<tr class="separator:a61835c28b63b77c22f567ba6042da455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90a977ad564916e9b697d401518b3a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#aa90a977ad564916e9b697d401518b3a6">SparseMap</a> (mapvalue *p_value)</td></tr>
+<tr class="memdesc:aa90a977ad564916e9b697d401518b3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.2 (Create a map matrix based on a map matrix)  <a href="#aa90a977ad564916e9b697d401518b3a6">More...</a><br/></td></tr>
+<tr class="separator:aa90a977ad564916e9b697d401518b3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f913087ec1c8e8372fb119f6cf25dab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a8f913087ec1c8e8372fb119f6cf25dab">SparseMap</a> (<a class="el" href="classRasterObject.html">RasterObject</a> *p_raster, bool p_is_binary)</td></tr>
+<tr class="memdesc:a8f913087ec1c8e8372fb119f6cf25dab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.3 (Create a map matrix based on the raster object)  <a href="#a8f913087ec1c8e8372fb119f6cf25dab">More...</a><br/></td></tr>
+<tr class="separator:a8f913087ec1c8e8372fb119f6cf25dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2004e9f8435217388de7761997a1c046"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a2004e9f8435217388de7761997a1c046">~SparseMap</a> ()</td></tr>
+<tr class="memdesc:a2004e9f8435217388de7761997a1c046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class.  <a href="#a2004e9f8435217388de7761997a1c046">More...</a><br/></td></tr>
+<tr class="separator:a2004e9f8435217388de7761997a1c046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0489580e75623e46bc4583caed2cf3e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRasterObject.html">RasterObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a0489580e75623e46bc4583caed2cf3e3">getRaster</a> ()</td></tr>
+<tr class="memdesc:a0489580e75623e46bc4583caed2cf3e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the raster object used to create the object  <a href="#a0489580e75623e46bc4583caed2cf3e3">More...</a><br/></td></tr>
+<tr class="separator:a0489580e75623e46bc4583caed2cf3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112be1e6e14634de4b283567f532795f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a112be1e6e14634de4b283567f532795f">readByXY</a> (unsigned p_x, unsigned p_y)</td></tr>
+<tr class="memdesc:a112be1e6e14634de4b283567f532795f"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the map value based on the X and Y index of the matrix  <a href="#a112be1e6e14634de4b283567f532795f">More...</a><br/></td></tr>
+<tr class="separator:a112be1e6e14634de4b283567f532795f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7202716006f56434617847e0a2cae8ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a7202716006f56434617847e0a2cae8ef">readByLL</a> (double *p_geoTrans, double p_longitude, double p_latitude)</td></tr>
+<tr class="memdesc:a7202716006f56434617847e0a2cae8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the map value based on the longitude and latitude and a given geotransform matrix.  <a href="#a7202716006f56434617847e0a2cae8ef">More...</a><br/></td></tr>
+<tr class="separator:a7202716006f56434617847e0a2cae8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091b77520ca8dfa63689b033486c85ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a091b77520ca8dfa63689b033486c85ef">readByLL</a> (double p_longitude, double p_latitude)</td></tr>
+<tr class="memdesc:a091b77520ca8dfa63689b033486c85ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the map value based on the longitude and latitude  <a href="#a091b77520ca8dfa63689b033486c85ef">More...</a><br/></td></tr>
+<tr class="separator:a091b77520ca8dfa63689b033486c85ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ab79864db0107da62f289f6bbac1f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3ab79864db0107da62f289f6bbac1f1"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#ac3ab79864db0107da62f289f6bbac1f1">getXSize</a> ()</td></tr>
+<tr class="memdesc:ac3ab79864db0107da62f289f6bbac1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the X size of the map matrix <br/></td></tr>
+<tr class="separator:ac3ab79864db0107da62f289f6bbac1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42774afa381da4ff529ab387b0d53220"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42774afa381da4ff529ab387b0d53220"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a42774afa381da4ff529ab387b0d53220">getYSize</a> ()</td></tr>
+<tr class="memdesc:a42774afa381da4ff529ab387b0d53220"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the Y size of the map matrix <br/></td></tr>
+<tr class="separator:a42774afa381da4ff529ab387b0d53220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230692d896b1c0ba2fa3cfe1dcd8f8c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a230692d896b1c0ba2fa3cfe1dcd8f8c3">setValue</a> (unsigned p_x, unsigned p_y, int p_value)</td></tr>
+<tr class="memdesc:a230692d896b1c0ba2fa3cfe1dcd8f8c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a value to the map matrix based on the X, Y index  <a href="#a230692d896b1c0ba2fa3cfe1dcd8f8c3">More...</a><br/></td></tr>
+<tr class="separator:a230692d896b1c0ba2fa3cfe1dcd8f8c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa631b8ecd44fbb3fa323647483e4a58a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#aa631b8ecd44fbb3fa323647483e4a58a">getFirstValues</a> (unsigned *x, unsigned *y, int *v)</td></tr>
+<tr class="memdesc:aa631b8ecd44fbb3fa323647483e4a58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the First NON-NODATA value in the map matrix.  <a href="#aa631b8ecd44fbb3fa323647483e4a58a">More...</a><br/></td></tr>
+<tr class="separator:aa631b8ecd44fbb3fa323647483e4a58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267067e95bf75dd8a280b0e20a282c80"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#a267067e95bf75dd8a280b0e20a282c80">toArray</a> ()</td></tr>
+<tr class="memdesc:a267067e95bf75dd8a280b0e20a282c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert the map matrix to an array.  <a href="#a267067e95bf75dd8a280b0e20a282c80">More...</a><br/></td></tr>
+<tr class="separator:a267067e95bf75dd8a280b0e20a282c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba12f26bb4f52dd32987ac7fb38beb46"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSparseMap.html#aba12f26bb4f52dd32987ac7fb38beb46">getFilename</a> ()</td></tr>
+<tr class="memdesc:aba12f26bb4f52dd32987ac7fb38beb46"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the file name of the raster object.  <a href="#aba12f26bb4f52dd32987ac7fb38beb46">More...</a><br/></td></tr>
+<tr class="separator:aba12f26bb4f52dd32987ac7fb38beb46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class to handle the raster file. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+<div class="textblock"><p>A class to handle the raster file's values as a matrix. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a61835c28b63b77c22f567ba6042da455"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SparseMap::SparseMap </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_x_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_y_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.1 (Create a blank map matrix with the given X and Y sizes) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_x_size</td><td>X size of the map matrix </td></tr>
+    <tr><td class="paramname">max</td><td>p_y_size limit of the niche breadth </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa90a977ad564916e9b697d401518b3a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SparseMap::SparseMap </td>
+          <td>(</td>
+          <td class="paramtype">mapvalue *&#160;</td>
+          <td class="paramname"><em>p_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.2 (Create a map matrix based on a map matrix) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_value</td><td>a map matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8f913087ec1c8e8372fb119f6cf25dab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SparseMap::SparseMap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRasterObject.html">RasterObject</a> *&#160;</td>
+          <td class="paramname"><em>p_raster</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>p_is_binary</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class No.3 (Create a map matrix based on the raster object) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_raster</td><td>a raster object </td></tr>
+    <tr><td class="paramname">p_is_binary</td><td>If False, using the raw values to create the object, or binary the values of the raster file (Zero and Non-Zero). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2004e9f8435217388de7761997a1c046"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SparseMap::~SparseMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor of <a class="el" href="classSparseMap.html" title="A class to handle the raster file&#39;s values as a matrix. ">SparseMap</a> class. </p>
+<p>release all the resources </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aba12f26bb4f52dd32987ac7fb38beb46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SparseMap::getFilename </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the file name of the raster object. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa631b8ecd44fbb3fa323647483e4a58a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SparseMap::getFirstValues </td>
+          <td>(</td>
+          <td class="paramtype">unsigned *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the First NON-NODATA value in the map matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X index of the map matrix </td></tr>
+    <tr><td class="paramname">y</td><td>Y index of the map matrix </td></tr>
+    <tr><td class="paramname">v</td><td>returned value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0489580e75623e46bc4583caed2cf3e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRasterObject.html">RasterObject</a> * SparseMap::getRaster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the raster object used to create the object </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7202716006f56434617847e0a2cae8ef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SparseMap::readByLL </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>p_geoTrans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read the map value based on the longitude and latitude and a given geotransform matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_geoTrans</td><td>The GeoTransform matrix of the raster layers </td></tr>
+    <tr><td class="paramname">p_longitude</td><td>Longitude </td></tr>
+    <tr><td class="paramname">p_latitude</td><td>Latitude </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a091b77520ca8dfa63689b033486c85ef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SparseMap::readByLL </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read the map value based on the longitude and latitude </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_longitude</td><td>Longitude </td></tr>
+    <tr><td class="paramname">p_latitude</td><td>Latitude </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a112be1e6e14634de4b283567f532795f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SparseMap::readByXY </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read the map value based on the X and Y index of the matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_x</td><td>X index of the matrix </td></tr>
+    <tr><td class="paramname">p_y</td><td>Y index of the matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>return the map value on the X and Y index of the matrix </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a230692d896b1c0ba2fa3cfe1dcd8f8c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SparseMap::setValue </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>p_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set a value to the map matrix based on the X, Y index </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_x</td><td>X index of the map matrix </td></tr>
+    <tr><td class="paramname">p_y</td><td>Y index of the map matrix </td></tr>
+    <tr><td class="paramname">p_value</td><td>The value to set to the X, Y idnex. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a267067e95bf75dd8a280b0e20a282c80"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * SparseMap::toArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>convert the map matrix to an array. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Definitions/<a class="el" href="SparseMap_8h_source.html">SparseMap.h</a></li>
 <li>src/Definitions/<a class="el" href="SparseMap_8cpp.html">SparseMap.cpp</a></li>
 </ul>
@@ -126,7 +550,7 @@ $(document).ready(function(){initNavTree('classSparseMap.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSparseMap.html">SparseMap</a></li>
-    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 17:40:55 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

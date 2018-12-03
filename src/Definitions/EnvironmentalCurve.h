@@ -57,9 +57,31 @@ public:
 	 * release all the resources
 	 */
 	virtual ~EnvironmentalCurve();
+	/**
+	 * @brief Return the burn-in year used in the simulation.
+	 */
     unsigned getBurnInYears();
+    /**
+     * @brief Return the environmental layers by a given time step.
+     * @param p_year time step
+     * @return
+     */
     SparseMap* getValues(unsigned p_year);
+    /**
+	 * @brief Get the value based on the longitude and latitude
+	 * @param p_year time step
+	 * @param p_longitude longitude
+	 * @param p_latitude latitude
+	 * @return the value on the longitude and latitude
+	 */
 	float readByLL(float p_curve_value, unsigned p_year, double p_longitude, double p_latitude);
+	/**
+	 * @brief Get the value based on the x, y of the matrix
+	 * @param p_year time step
+	 * @param p_x x
+	 * @param p_y y
+	 * @return the value on the longitude and latitude
+	 */
 	float readByXY(float p_curve_value, unsigned p_year, unsigned p_x, unsigned p_y);
 	float getCurveValue(unsigned p_year);
 };

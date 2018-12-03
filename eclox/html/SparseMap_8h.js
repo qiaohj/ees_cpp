@@ -1,4 +1,4 @@
 var SparseMap_8h =
 [
-    [ "SparseMap", "classSparseMap.html", null ]
+    [ "SparseMap", "classSparseMap.html", "classSparseMap" ]
 ];

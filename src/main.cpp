@@ -1,7 +1,7 @@
 /**
- * \file main.cpp
- * \brief The main entrance of the simulation application
- * \details
+ * @file main.cpp
+ * @brief The main entrance of the simulation application
+ * @details
  * Copyright 2014-2019 Huijie Qiao
  * Distributed under GNU license
  * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -13,6 +13,7 @@
  * 5. memory limit (in MB). A number to set up the maximum memory allocate to the application
  * 6. is overwrite. An ZERO value means skip the simulation if the result folder exists and NONE-ZERO value means run the simulation no matter that the folder exists or not.
  * 7. with detail. An ZERO value means output the details of the simulation or not.
+ *
  */
 
 
