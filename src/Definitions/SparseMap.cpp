@@ -1,8 +1,14 @@
-/*
- * SparseMap.cpp
+/**
+ * @file SparseMap.cpp
+ * @brief Class SparseMap. A class to handle the raster file
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- *  Created on: Oct 16, 2014
- *      Author: qiaohj
  */
 
 #include "SparseMap.h"

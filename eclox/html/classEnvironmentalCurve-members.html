@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -66,12 +73,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classEnvironmentalCurve.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">EnvironmentalCurve Member List</div>  </div>
@@ -89,33 +110,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a30aa0543eef523e828661e5dd9ff42f5">burn_in_curve</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a7dc40db62bc425513682b2a6d5805155">burnInYears</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a55609b730a41a613de07fe68408503ab">cycleYears</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a331a45b68147ef4c28b8b0244f465109">EnvironmentalCurve</a>(const std::string json_path)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#acb07d8c43cccfdfbd68816ac392ac15e">getBurnInYears</a>()</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#aa2af72f77c93cacad85f85c1d27fb392">getCurveValue</a>(unsigned p_year)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#af4b13038e6e8d214b38adce71fb4f17d">getValues</a>(unsigned p_year)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#ab6531430a140d74ee9310cb6e063c8b9">glacial</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a951229ffc00864cce56937735eeb7868">interglacial</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#ad1e1550ddc3e147f384b23f334e7ca6a">noData</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#af97e6d8c20d62762b6a7bae5dc8a2f8b">part_1_curve</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a6639d11efc4bdaffa2a2ca55207d784f">part_1_years</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a3f356f4a886397d9f443fd68babf4156">part_2_curve</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a1ff650e99a6207a6d3b1281d04995684">part_2_years</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#abde95da663fe94ef4abead8b276f2d6b">plateau_1_curve</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#afe309ce0a02f1de9184d2caf6fd5933b">plateau_1_years</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a940437bdaa20027a687353a5f9333d24">plateau_2_curve</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#aae371124ac66f2f3eaa846a14339142f">plateau_2_years</a></td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a0cf8b2b308803e11f965cae06251cfbb">readByLL</a>(float p_curve_value, unsigned p_year, double p_longitude, double p_latitude)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a5e6c15431195c444c49cb30f7fea8fb6">readByXY</a>(float p_curve_value, unsigned p_year, unsigned p_x, unsigned p_y)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a67a5de80441826b682de1f3a44585783">~EnvironmentalCurve</a>()</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a331a45b68147ef4c28b8b0244f465109">EnvironmentalCurve</a>(const std::string json_path)</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classEnvironmentalCurve.html#a67a5de80441826b682de1f3a44585783">~EnvironmentalCurve</a>()</td><td class="entry"><a class="el" href="classEnvironmentalCurve.html">EnvironmentalCurve</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 26 2018 17:26:06 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

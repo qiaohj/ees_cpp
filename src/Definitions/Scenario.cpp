@@ -1,3 +1,15 @@
+/**
+ * @file Scenario.cpp
+ * @brief Class Scenario. A class to define the features of a virtual scenario in a simulation, and the virtual species in the scenario.
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ */
 
 
 #include "Scenario.h"
@@ -108,7 +120,7 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	for (unsigned index = 0; index < environment_json_array.size(); ++index) {
 		LOG(INFO)<<"Load environments of "<<index;
 		std::string environment_folder_path = environment_json_array[index].asString();
-		/// @todo here is a hard code (120000, 0 and 100) to be solved.
+		/// @todo Here is a hard code (120000, 0 and 100) to be solved.
 		EnvironmentalHadley* layer = new EnvironmentalHadley(environment_folder_path, geoTrans, burnInYear, 120000, 0, 100);
 		environments.push_back(layer);
 	}
@@ -675,7 +687,7 @@ unsigned short Scenario::getTempSpeciesID(unsigned short group_id,
 void Scenario::markedSpeciesID(unsigned short group_id,
 		unsigned short temp_species_id,
 		boost::unordered_map<unsigned, std::vector<IndividualOrganism*> >* organisms) {
-	//here can improve the effencty a lot!
+	/// @todo Here can improve the efficiency a lot! We need a new algorithm!
 	//LOG(INFO)<<"Size of organism 1 is "<<organisms->size();
 	for (auto c_it : (*organisms)) {
 		//LOG(INFO)<<"Size of organism 2 is "<<c_it.second.size();
@@ -687,6 +699,7 @@ void Scenario::markedSpeciesID(unsigned short group_id,
 	}
 }
 double Scenario::distanceFast(int x1, int y1, int x2, int y2){
+	/// @todo Now we are calculating the Euclidean distance. But the Great Cirle Distance is more reasonable. And to support the transferring from one side to another side of the map, we need to improve this function later.
 	return CommonFun::EuclideanDistance(x1, y1, x2, y2);
 	/*if (CommonFun::AlmostEqualRelative(e_distance, 1.0)){
 		return e_distance;
@@ -820,6 +833,7 @@ unsigned Scenario::getDividedYear(IndividualOrganism* o_1,
 void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 		boost::unordered_set<unsigned>* x_extent,
 		boost::unordered_set<unsigned>* y_extent){
+	/// @todo Now the simulation hasn't support an individual to move from one side of the map to another side directly. In fact, a species can do it because our earth is a shpere. Will support it in the future.
 	double distance = 0;
 	int i_x = x;
 	(*x_extent).insert(x);
@@ -830,6 +844,7 @@ void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 			i_x = xSize + i_x;
 		}
 		tried++;
+		/// @todo Here is a hard code, need to change 180 to the edge of the map later.
 		if (tried>180){
 			break;
 		}
@@ -860,6 +875,7 @@ void Scenario::getExtend(int p_dispersal_ability, int x, int y,
 			i_x = xSize - i_x;
 		}
 		tried++;
+		/// @todo Here is a hard code, need to change 180 to the edge of the map later.
 		if (tried>180){
 			break;
 		}

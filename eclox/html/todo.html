@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -59,12 +66,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('todo.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -73,22 +95,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Todo List </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
+<dt><a class="anchor" id="_todo000003"></a>Member <a class="el" href="classScenario.html#adb92aba51d116b676ea8a296c935f457">Scenario::distanceFast</a>  (int x1, int y1, int x2, int y2)</dt>
+<dd>Now we are calculating the Euclidean distance. But the Great Cirle Distance is more reasonable. And to support the transferring from one side to another side of the map, we need to improve this function later.  </dd>
+<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="classScenario.html#af15a467e564f21f5f7616f3d075e5f8b">Scenario::getExtend</a>  (int p_dispersal_ability, int x, int y, boost::unordered_set&lt; unsigned &gt; *x_extent, boost::unordered_set&lt; unsigned &gt; *y_extent)</dt>
+<dd><p class="startdd">Now the simulation hasn't support an individual to move from one side of the map to another side directly. In fact, a species can do it because our earth is a shpere. Will support it in the future. </p>
+<p>Here is a hard code, need to change 180 to the edge of the map later. </p>
+<p class="enddd">Here is a hard code, need to change 180 to the edge of the map later.  </p>
+</dd>
+<dt><a class="anchor" id="_todo000002"></a>Member <a class="el" href="classScenario.html#a64baf603131a689adc58ea2f65c6c2f9">Scenario::markedSpeciesID</a>  (unsigned short group_id, unsigned short temp_species_id, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms)</dt>
+<dd>Here can improve the efficiency a lot! We need a new algorithm!  </dd>
 <dt><a class="anchor" id="_todo000001"></a>Member <a class="el" href="classScenario.html#a36b713930964e15d44359569ac258853">Scenario::Scenario</a>  (const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder, std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail)</dt>
-<dd>here is a hard code (120000, 0 and 100) to be solved. </dd>
+<dd>Here is a hard code (120000, 0 and 100) to be solved. </dd>
 </dl>
 </div></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 28 2018 17:12:32 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

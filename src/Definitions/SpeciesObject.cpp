@@ -1,8 +1,14 @@
-/*
- * SpeciesObject.cpp
+/**
+ * @file SpeciesObject.cpp
+ * @brief Class SpeciesObject. A class to handle the attributes and behaviors of a virtual species
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- *  Created on: Oct 25, 2014
- *      Author: qiaohj
  */
 
 #include "SpeciesObject.h"

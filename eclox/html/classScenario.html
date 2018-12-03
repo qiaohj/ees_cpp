@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -66,12 +73,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classScenario.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,26 +102,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classScenario-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Scenario Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
+<p>to define the features of a virtual scenario in a simulation, and the virtual species in the scenario.  
+ <a href="classScenario.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Scenario_8h_source.html">Scenario.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a36b713930964e15d44359569ac258853"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a36b713930964e15d44359569ac258853">Scenario</a> (const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder, std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail)</td></tr>
-<tr class="memdesc:a36b713930964e15d44359569ac258853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classScenario.html">Scenario</a> class.  <a href="#a36b713930964e15d44359569ac258853">More...</a><br/></td></tr>
+<tr class="memdesc:a36b713930964e15d44359569ac258853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classScenario.html" title="to define the features of a virtual scenario in a simulation, and the virtual species in the scenario...">Scenario</a> class.  <a href="#a36b713930964e15d44359569ac258853">More...</a><br/></td></tr>
 <tr class="separator:a36b713930964e15d44359569ac258853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7e7548858cbc52614d46723c0333038"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#aa7e7548858cbc52614d46723c0333038">~Scenario</a> ()</td></tr>
-<tr class="memdesc:aa7e7548858cbc52614d46723c0333038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classScenario.html">Scenario</a> class.  <a href="#aa7e7548858cbc52614d46723c0333038">More...</a><br/></td></tr>
+<tr class="memdesc:aa7e7548858cbc52614d46723c0333038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classScenario.html" title="to define the features of a virtual scenario in a simulation, and the virtual species in the scenario...">Scenario</a> class.  <a href="#aa7e7548858cbc52614d46723c0333038">More...</a><br/></td></tr>
 <tr class="separator:aa7e7548858cbc52614d46723c0333038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a167ebc9a3884ab26e367418d85d85c6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a167ebc9a3884ab26e367418d85d85c6e"></a>
 unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a167ebc9a3884ab26e367418d85d85c6e">run</a> ()</td></tr>
@@ -108,27 +133,144 @@ unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memitem:af80f719ce3b3ced1677548f42518939f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#af80f719ce3b3ced1677548f42518939f">isTerminated</a> ()</td></tr>
 <tr class="memdesc:af80f719ce3b3ced1677548f42518939f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect whether the simulation is terminated.  <a href="#af80f719ce3b3ced1677548f42518939f">More...</a><br/></td></tr>
 <tr class="separator:af80f719ce3b3ced1677548f42518939f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c163ae58f1e4751694e727e90bc20a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; SparseMap * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a8c163ae58f1e4751694e727e90bc20a0">getEnvironmenMap</a> (unsigned p_year)</td></tr>
+<tr class="memitem:a8c163ae58f1e4751694e727e90bc20a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSparseMap.html">SparseMap</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a8c163ae58f1e4751694e727e90bc20a0">getEnvironmenMap</a> (unsigned p_year)</td></tr>
 <tr class="memdesc:a8c163ae58f1e4751694e727e90bc20a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the environmental layers based on the given time step.  <a href="#a8c163ae58f1e4751694e727e90bc20a0">More...</a><br/></td></tr>
 <tr class="separator:a8c163ae58f1e4751694e727e90bc20a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac00d45fa6bf6626ea9ac7eab39044e20"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ac00d45fa6bf6626ea9ac7eab39044e20">getTarget</a> ()</td></tr>
 <tr class="memdesc:ac00d45fa6bf6626ea9ac7eab39044e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the folder to save the result of the simulation.  <a href="#ac00d45fa6bf6626ea9ac7eab39044e20">More...</a><br/></td></tr>
 <tr class="separator:ac00d45fa6bf6626ea9ac7eab39044e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5db969515e618a4191946c2655e1709b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a5db969515e618a4191946c2655e1709b">saveGroupmap</a> (unsigned year, boost::unordered_map&lt; SpeciesObject *, SparseMap * &gt; species_group_maps)</td></tr>
+<tr class="memitem:a5db969515e618a4191946c2655e1709b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a5db969515e618a4191946c2655e1709b">saveGroupmap</a> (unsigned year, boost::unordered_map&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> *, <a class="el" href="classSparseMap.html">SparseMap</a> * &gt; species_group_maps)</td></tr>
 <tr class="memdesc:a5db969515e618a4191946c2655e1709b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the distribution map, the population, and the speciation information to the log file.  <a href="#a5db969515e618a4191946c2655e1709b">More...</a><br/></td></tr>
 <tr class="separator:a5db969515e618a4191946c2655e1709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:ad753db5a0597e562ddda679baedcdb07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ad753db5a0597e562ddda679baedcdb07">createSpeciesFolder</a> (SpeciesObject *p_species, bool isRoot)</td></tr>
+<tr class="memitem:a90b4fc8814927d28b7cfc53e483e90a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90b4fc8814927d28b7cfc53e483e90a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a90b4fc8814927d28b7cfc53e483e90a6">cleanActivedIndividualOrganisms</a> ()</td></tr>
+<tr class="memdesc:a90b4fc8814927d28b7cfc53e483e90a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all the individual objects and release the resources. <br/></td></tr>
+<tr class="separator:a90b4fc8814927d28b7cfc53e483e90a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e68bfa0e6ec247aedb99af5192cdb8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1e68bfa0e6ec247aedb99af5192cdb8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ab1e68bfa0e6ec247aedb99af5192cdb8">cleanEnvironments</a> ()</td></tr>
+<tr class="memdesc:ab1e68bfa0e6ec247aedb99af5192cdb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all the environmental variable objects and release the resources. <br/></td></tr>
+<tr class="separator:ab1e68bfa0e6ec247aedb99af5192cdb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d156100aa0d13c1a23287e28ebf977"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38d156100aa0d13c1a23287e28ebf977"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a38d156100aa0d13c1a23287e28ebf977">cleanSpecies</a> ()</td></tr>
+<tr class="memdesc:a38d156100aa0d13c1a23287e28ebf977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all the species object and release the resources. <br/></td></tr>
+<tr class="separator:a38d156100aa0d13c1a23287e28ebf977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad753db5a0597e562ddda679baedcdb07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ad753db5a0597e562ddda679baedcdb07">createSpeciesFolder</a> (<a class="el" href="classSpeciesObject.html">SpeciesObject</a> *p_species, bool isRoot)</td></tr>
 <tr class="memdesc:ad753db5a0597e562ddda679baedcdb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create all the necessary folders for a species.  <a href="#ad753db5a0597e562ddda679baedcdb07">More...</a><br/></td></tr>
 <tr class="separator:ad753db5a0597e562ddda679baedcdb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a237731425b427a2f252c0415b691905f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a237731425b427a2f252c0415b691905f">getSpeciesFolder</a> (SpeciesObject *p_species)</td></tr>
+<tr class="memitem:aefcf8f8700ac50da636392dfff921728"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classCoodLocation.html">CoodLocation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#aefcf8f8700ac50da636392dfff921728">getDispersalMap_2</a> (<a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *individualOrganism, std::string species_folder, unsigned year)</td></tr>
+<tr class="memdesc:aefcf8f8700ac50da636392dfff921728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the potential distribution of a given individual in the next time step.  <a href="#aefcf8f8700ac50da636392dfff921728">More...</a><br/></td></tr>
+<tr class="separator:aefcf8f8700ac50da636392dfff921728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c5c152909e465c9606ff29ce4658de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a11c5c152909e465c9606ff29ce4658de">getUnmarkedOrganism</a> (boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms)</td></tr>
+<tr class="memdesc:a11c5c152909e465c9606ff29ce4658de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the first individual object without a population ID from all the individuals.  <a href="#a11c5c152909e465c9606ff29ce4658de">More...</a><br/></td></tr>
+<tr class="separator:a11c5c152909e465c9606ff29ce4658de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a184575eb4ab905f0908a8c00bd1f7ac6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a184575eb4ab905f0908a8c00bd1f7ac6">markJointOrganism</a> (unsigned short p_group_id, <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *p_unmarked_organism, boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms)</td></tr>
+<tr class="memdesc:a184575eb4ab905f0908a8c00bd1f7ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a population ID to the individuals which connect with the given individual.  <a href="#a184575eb4ab905f0908a8c00bd1f7ac6">More...</a><br/></td></tr>
+<tr class="separator:a184575eb4ab905f0908a8c00bd1f7ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb950b32e74894d26344e71bfc39e20"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a3fb950b32e74894d26344e71bfc39e20">getMinDividedYear</a> (unsigned speciation_year, unsigned short group_id_1, unsigned short group_id_2, boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms, unsigned current_year)</td></tr>
+<tr class="memdesc:a3fb950b32e74894d26344e71bfc39e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the minimal separating time length of two populations.  <a href="#a3fb950b32e74894d26344e71bfc39e20">More...</a><br/></td></tr>
+<tr class="separator:a3fb950b32e74894d26344e71bfc39e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49905ef2874a92548c2976023accfed7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a49905ef2874a92548c2976023accfed7">getMinDividedYear_minDistance</a> (unsigned speciation_year, unsigned short group_id_1, unsigned short group_id_2, boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms, unsigned current_year)</td></tr>
+<tr class="memdesc:a49905ef2874a92548c2976023accfed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enhanced function of 'markJointOrganism'. The simulation would detect all the individuals in population 1 and 2, but the the individual-pair which distance smaller than a threshold. It is faster but will cause some bugs. Unused now.  <a href="#a49905ef2874a92548c2976023accfed7">More...</a><br/></td></tr>
+<tr class="separator:a49905ef2874a92548c2976023accfed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75873e69d52e6fb54d34e60c5b896566"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a75873e69d52e6fb54d34e60c5b896566">getDividedYear</a> (<a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *o_1, <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *o_2)</td></tr>
+<tr class="separator:a75873e69d52e6fb54d34e60c5b896566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64baf603131a689adc58ea2f65c6c2f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a64baf603131a689adc58ea2f65c6c2f9">markedSpeciesID</a> (unsigned short group_id, unsigned short temp_species_id, boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms)</td></tr>
+<tr class="memdesc:a64baf603131a689adc58ea2f65c6c2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Give a new species ID to all the individuals in a population when a speciation event happens.  <a href="#a64baf603131a689adc58ea2f65c6c2f9">More...</a><br/></td></tr>
+<tr class="separator:a64baf603131a689adc58ea2f65c6c2f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21027ce03aeb7116fd2f2ebb283d63a"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ab21027ce03aeb7116fd2f2ebb283d63a">getTempSpeciesID</a> (unsigned short group_id, boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *organisms)</td></tr>
+<tr class="memdesc:ab21027ce03aeb7116fd2f2ebb283d63a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a temporary species ID based on the parent species ID and population ID.  <a href="#ab21027ce03aeb7116fd2f2ebb283d63a">More...</a><br/></td></tr>
+<tr class="separator:ab21027ce03aeb7116fd2f2ebb283d63a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237731425b427a2f252c0415b691905f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a237731425b427a2f252c0415b691905f">getSpeciesFolder</a> (<a class="el" href="classSpeciesObject.html">SpeciesObject</a> *p_species)</td></tr>
 <tr class="memdesc:a237731425b427a2f252c0415b691905f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the folder of the given species.  <a href="#a237731425b427a2f252c0415b691905f">More...</a><br/></td></tr>
 <tr class="separator:a237731425b427a2f252c0415b691905f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb1481e1f0f69d34659933bf92337c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a4fb1481e1f0f69d34659933bf92337c4">generateSpeciationInfo</a> (unsigned year, bool is_tree)</td></tr>
+<tr class="memdesc:a4fb1481e1f0f69d34659933bf92337c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the speciation information of the simulation, including the speciation tree (in both NEXUS and HTML format), number of speciation and extinction, etc.  <a href="#a4fb1481e1f0f69d34659933bf92337c4">More...</a><br/></td></tr>
+<tr class="separator:a4fb1481e1f0f69d34659933bf92337c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af15a467e564f21f5f7616f3d075e5f8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#af15a467e564f21f5f7616f3d075e5f8b">getExtend</a> (int p_dispersal_ability, int x, int y, boost::unordered_set&lt; unsigned &gt; *x_extent, boost::unordered_set&lt; unsigned &gt; *y_extent)</td></tr>
+<tr class="memdesc:af15a467e564f21f5f7616f3d075e5f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the range of potential distributed pixels of an individual in the next time step based on the dispersal ability.  <a href="#af15a467e564f21f5f7616f3d075e5f8b">More...</a><br/></td></tr>
+<tr class="separator:af15a467e564f21f5f7616f3d075e5f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb92aba51d116b676ea8a296c935f457"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#adb92aba51d116b676ea8a296c935f457">distanceFast</a> (int x1, int y1, int x2, int y2)</td></tr>
+<tr class="memdesc:adb92aba51d116b676ea8a296c935f457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the Euclidean Distance of two points.  <a href="#adb92aba51d116b676ea8a296c935f457">More...</a><br/></td></tr>
+<tr class="separator:adb92aba51d116b676ea8a296c935f457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a082a14165bb707a6af86913d8c08c2a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a082a14165bb707a6af86913d8c08c2a9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a082a14165bb707a6af86913d8c08c2a9">isFinished</a></td></tr>
+<tr class="memdesc:a082a14165bb707a6af86913d8c08c2a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the simulation runs to the end, or be terminated before the end-time-step because of an exception (such as out of memory, full hard disk, or another exception) <br/></td></tr>
+<tr class="separator:a082a14165bb707a6af86913d8c08c2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67b725cd46ec74698af19a2ae6df942c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67b725cd46ec74698af19a2ae6df942c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a67b725cd46ec74698af19a2ae6df942c">isOverwrite</a></td></tr>
+<tr class="memdesc:a67b725cd46ec74698af19a2ae6df942c"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the target folder exists, overwrite it or skip it. <br/></td></tr>
+<tr class="separator:a67b725cd46ec74698af19a2ae6df942c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fb39d02f9a8df2c6614c88c1d02e2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1fb39d02f9a8df2c6614c88c1d02e2b"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ac1fb39d02f9a8df2c6614c88c1d02e2b">memLimit</a></td></tr>
+<tr class="memdesc:ac1fb39d02f9a8df2c6614c88c1d02e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum memory allocated to the application. <br/></td></tr>
+<tr class="separator:ac1fb39d02f9a8df2c6614c88c1d02e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e2463c7234eb64d8f450376278f315"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81e2463c7234eb64d8f450376278f315"></a>
+std::vector<br class="typebreak"/>
+&lt; <a class="el" href="classEnvironmentalHadley.html">EnvironmentalHadley</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a81e2463c7234eb64d8f450376278f315">environments</a></td></tr>
+<tr class="memdesc:a81e2463c7234eb64d8f450376278f315"><td class="mdescLeft">&#160;</td><td class="mdescRight">The environmental variables used in the simulation. <br/></td></tr>
+<tr class="separator:a81e2463c7234eb64d8f450376278f315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39a2a0d6a88917913176544a7b6f98d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39a2a0d6a88917913176544a7b6f98d6"></a>
+std::vector&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a39a2a0d6a88917913176544a7b6f98d6">species</a></td></tr>
+<tr class="memdesc:a39a2a0d6a88917913176544a7b6f98d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The virtual species in the simulation, including the initial species, and new species after the speciation events. <br/></td></tr>
+<tr class="separator:a39a2a0d6a88917913176544a7b6f98d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa3ed6f07d191c3da55c3af3e7690cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abaa3ed6f07d191c3da55c3af3e7690cb"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#abaa3ed6f07d191c3da55c3af3e7690cb">totalYears</a></td></tr>
+<tr class="memdesc:abaa3ed6f07d191c3da55c3af3e7690cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The last time step. <br/></td></tr>
+<tr class="separator:abaa3ed6f07d191c3da55c3af3e7690cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba578f353f153d18091b564dfe327e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ba578f353f153d18091b564dfe327e0"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a5ba578f353f153d18091b564dfe327e0">minSpeciesDispersalSpeed</a></td></tr>
+<tr class="memdesc:a5ba578f353f153d18091b564dfe327e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time span per time step. <br/></td></tr>
+<tr class="separator:a5ba578f353f153d18091b564dfe327e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7870993bb1b59e3b5ce4c083bc5f5626"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7870993bb1b59e3b5ce4c083bc5f5626"></a>
+<a class="el" href="classSparseMap.html">SparseMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a7870993bb1b59e3b5ce4c083bc5f5626">mask</a></td></tr>
+<tr class="memdesc:a7870993bb1b59e3b5ce4c083bc5f5626"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mask file of the simulation. <br/></td></tr>
+<tr class="separator:a7870993bb1b59e3b5ce4c083bc5f5626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d3032103096105db0f8465df4f8677"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59d3032103096105db0f8465df4f8677"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a59d3032103096105db0f8465df4f8677">baseFolder</a></td></tr>
+<tr class="memdesc:a59d3032103096105db0f8465df4f8677"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base folder of the simulation. <br/></td></tr>
+<tr class="separator:a59d3032103096105db0f8465df4f8677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f72e13ae2f16ec77b57a0ac256641f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f72e13ae2f16ec77b57a0ac256641f7"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a6f72e13ae2f16ec77b57a0ac256641f7">target</a></td></tr>
+<tr class="memdesc:a6f72e13ae2f16ec77b57a0ac256641f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target folder where the log files is saved. <br/></td></tr>
+<tr class="separator:a6f72e13ae2f16ec77b57a0ac256641f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad521b35c73e4f36cefe47589fea10932"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad521b35c73e4f36cefe47589fea10932"></a>
+double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ad521b35c73e4f36cefe47589fea10932">geoTrans</a></td></tr>
+<tr class="memdesc:ad521b35c73e4f36cefe47589fea10932"><td class="mdescLeft">&#160;</td><td class="mdescRight">The GeoTransform matrix of the raster layers, can be extract from the mask or any environmental layers. <br/></td></tr>
+<tr class="separator:ad521b35c73e4f36cefe47589fea10932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255a5e630b99fdce75ea720fd3c5d34b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a255a5e630b99fdce75ea720fd3c5d34b"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a255a5e630b99fdce75ea720fd3c5d34b">xSize</a></td></tr>
+<tr class="memdesc:a255a5e630b99fdce75ea720fd3c5d34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">X and Y size of the mask layer. <br/></td></tr>
+<tr class="separator:a255a5e630b99fdce75ea720fd3c5d34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ae8705f1ab90c86a8b6653d36d151b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4ae8705f1ab90c86a8b6653d36d151b"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#ac4ae8705f1ab90c86a8b6653d36d151b">prj</a></td></tr>
+<tr class="memdesc:ac4ae8705f1ab90c86a8b6653d36d151b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Projection string of the mask layer. <br/></td></tr>
+<tr class="separator:ac4ae8705f1ab90c86a8b6653d36d151b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521d62fe56a72b57f5d35a5e95656239"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a521d62fe56a72b57f5d35a5e95656239"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a521d62fe56a72b57f5d35a5e95656239">burnInYear</a></td></tr>
+<tr class="memdesc:a521d62fe56a72b57f5d35a5e95656239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Burn-in year of the simulation. <br/></td></tr>
+<tr class="separator:a521d62fe56a72b57f5d35a5e95656239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedcf8037b1c46becd28fa3a7c155b632"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aedcf8037b1c46becd28fa3a7c155b632"></a>
+boost::unordered_map&lt; unsigned, <br class="typebreak"/>
+boost::unordered_map<br class="typebreak"/>
+&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> <br class="typebreak"/>
+*, boost::unordered_map<br class="typebreak"/>
+&lt; unsigned, std::vector<br class="typebreak"/>
+&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#aedcf8037b1c46becd28fa3a7c155b632">all_individualOrganisms</a></td></tr>
+<tr class="memdesc:aedcf8037b1c46becd28fa3a7c155b632"><td class="mdescLeft">&#160;</td><td class="mdescRight">A hash map to save all the living individual objects in the simulation. <br/></td></tr>
+<tr class="separator:aedcf8037b1c46becd28fa3a7c155b632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59e9c3887486b9509c0d50103ffe7ce8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59e9c3887486b9509c0d50103ffe7ce8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScenario.html#a59e9c3887486b9509c0d50103ffe7ce8">with_detail</a></td></tr>
+<tr class="memdesc:a59e9c3887486b9509c0d50103ffe7ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether outputing the details of the simulation, for debug only. <br/></td></tr>
+<tr class="separator:a59e9c3887486b9509c0d50103ffe7ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classScenario.html">Scenario</a> class is to define the features of a virtual scenario in a simulation, and the virtual species in the scenario. </p>
+<div class="textblock"><p>to define the features of a virtual scenario in a simulation, and the virtual species in the scenario. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a36b713930964e15d44359569ac258853"></a>
 <div class="memitem">
@@ -184,7 +326,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor of <a class="el" href="classScenario.html">Scenario</a> class. </p>
+<p>Constructor of <a class="el" href="classScenario.html" title="to define the features of a virtual scenario in a simulation, and the virtual species in the scenario...">Scenario</a> class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p_scenario_json_path</td><td>A path points to the configuration file (in JSON format) which defines the features of the scenario. </td></tr>
@@ -197,7 +339,7 @@ Private Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>here is a hard code (120000, 0 and 100) to be solved. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Here is a hard code (120000, 0 and 100) to be solved. </dd></dl>
 
 </div>
 </div>
@@ -222,7 +364,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Destructor of <a class="el" href="classScenario.html">Scenario</a> class. </p>
+<p>Destructor of <a class="el" href="classScenario.html" title="to define the features of a virtual scenario in a simulation, and the virtual species in the scenario...">Scenario</a> class. </p>
 <p>release all the resources </p>
 
 </div>
@@ -238,7 +380,7 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Scenario::createSpeciesFolder </td>
           <td>(</td>
-          <td class="paramtype">SpeciesObject *&#160;</td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
           <td class="paramname"><em>p_species</em>, </td>
         </tr>
         <tr>
@@ -271,12 +413,207 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="adb92aba51d116b676ea8a296c935f457"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Scenario::distanceFast </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the Euclidean Distance of two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x1</td><td></td></tr>
+    <tr><td class="paramname">y1</td><td></td></tr>
+    <tr><td class="paramname">x2</td><td></td></tr>
+    <tr><td class="paramname">y2</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Now we are calculating the Euclidean distance. But the Great Cirle Distance is more reasonable. And to support the transferring from one side to another side of the map, we need to improve this function later. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4fb1481e1f0f69d34659933bf92337c4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scenario::generateSpeciationInfo </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_tree</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate the speciation information of the simulation, including the speciation tree (in both NEXUS and HTML format), number of speciation and extinction, etc. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">year</td><td>time step </td></tr>
+    <tr><td class="paramname">is_tree</td><td>Whether generating the speciation tree. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aefcf8f8700ac50da636392dfff921728"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classCoodLocation.html">CoodLocation</a> * &gt; Scenario::getDispersalMap_2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>individualOrganism</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>species_folder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the potential distribution of a given individual in the next time step. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">individualOrganism</td><td>The given individual object </td></tr>
+    <tr><td class="paramname">species_folder</td><td>The folder to save the log file </td></tr>
+    <tr><td class="paramname">year</td><td>Time step </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return the potential distribution in pixel. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a75873e69d52e6fb54d34e60c5b896566"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Scenario::getDividedYear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>o_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>o_2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the separating time length of two individuals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">o_1</td><td>individual 1 </td></tr>
+    <tr><td class="paramname">o_2</td><td>individual 2 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a8c163ae58f1e4751694e727e90bc20a0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; SparseMap * &gt; Scenario::getEnvironmenMap </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classSparseMap.html">SparseMap</a> * &gt; Scenario::getEnvironmenMap </td>
           <td>(</td>
           <td class="paramtype">unsigned&#160;</td>
           <td class="paramname"><em>p_year</em></td><td>)</td>
@@ -296,6 +633,201 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af15a467e564f21f5f7616f3d075e5f8b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scenario::getExtend </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>p_dispersal_ability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_set&lt; unsigned &gt; *&#160;</td>
+          <td class="paramname"><em>x_extent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_set&lt; unsigned &gt; *&#160;</td>
+          <td class="paramname"><em>y_extent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the range of potential distributed pixels of an individual in the next time step based on the dispersal ability. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_dispersal_ability</td><td>Dispersal ability </td></tr>
+    <tr><td class="paramname">x</td><td>The x of the individual </td></tr>
+    <tr><td class="paramname">y</td><td>The y of the individual </td></tr>
+    <tr><td class="paramname">x_extent</td><td>The x(s) that the individual can dispersal in the next time step. </td></tr>
+    <tr><td class="paramname">y_extent</td><td>The y(s) that the individual can dispersal in the next time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Now the simulation hasn't support an individual to move from one side of the map to another side directly. In fact, a species can do it because our earth is a shpere. Will support it in the future. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Here is a hard code, need to change 180 to the edge of the map later. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Here is a hard code, need to change 180 to the edge of the map later. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3fb950b32e74894d26344e71bfc39e20"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Scenario::getMinDividedYear </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>speciation_year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>current_year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the minimal separating time length of two populations. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speciation_year</td><td>Speciation year </td></tr>
+    <tr><td class="paramname">group_id_1</td><td>Population 1 </td></tr>
+    <tr><td class="paramname">group_id_2</td><td>Population 2 </td></tr>
+    <tr><td class="paramname">organisms</td><td>All the individuals </td></tr>
+    <tr><td class="paramname">current_year</td><td>Current time step. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a49905ef2874a92548c2976023accfed7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Scenario::getMinDividedYear_minDistance </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>speciation_year</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>current_year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An enhanced function of 'markJointOrganism'. The simulation would detect all the individuals in population 1 and 2, but the the individual-pair which distance smaller than a threshold. It is faster but will cause some bugs. Unused now. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speciation_year</td><td></td></tr>
+    <tr><td class="paramname">group_id_1</td><td></td></tr>
+    <tr><td class="paramname">group_id_2</td><td></td></tr>
+    <tr><td class="paramname">organisms</td><td></td></tr>
+    <tr><td class="paramname">current_year</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a237731425b427a2f252c0415b691905f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -306,7 +838,7 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::string Scenario::getSpeciesFolder </td>
           <td>(</td>
-          <td class="paramtype">SpeciesObject *&#160;</td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
           <td class="paramname"><em>p_species</em></td><td>)</td>
           <td></td>
         </tr>
@@ -347,6 +879,82 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab21027ce03aeb7116fd2f2ebb283d63a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short Scenario::getTempSpeciesID </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a temporary species ID based on the parent species ID and population ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group_id</td><td>The population ID </td></tr>
+    <tr><td class="paramname">organisms</td><td>All the individuals </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a11c5c152909e465c9606ff29ce4658de"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * Scenario::getUnmarkedOrganism </td>
+          <td>(</td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the first individual object without a population ID from all the individuals. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">organisms</td><td>All the individuals </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The first individual object </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="af80f719ce3b3ced1677548f42518939f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -365,6 +973,107 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a64baf603131a689adc58ea2f65c6c2f9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scenario::markedSpeciesID </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>group_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>temp_species_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Give a new species ID to all the individuals in a population when a speciation event happens. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group_id</td><td>The population ID </td></tr>
+    <tr><td class="paramname">temp_species_id</td><td>species ID </td></tr>
+    <tr><td class="paramname">organisms</td><td>All the individuals </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Here can improve the efficiency a lot! We need a new algorithm! </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a184575eb4ab905f0908a8c00bd1f7ac6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scenario::markJointOrganism </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>p_group_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> *&#160;</td>
+          <td class="paramname"><em>p_unmarked_organism</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::unordered_map&lt; unsigned, std::vector&lt; <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a> * &gt; &gt; *&#160;</td>
+          <td class="paramname"><em>organisms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocate a population ID to the individuals which connect with the given individual. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_group_id</td><td>A group ID to be allocated. </td></tr>
+    <tr><td class="paramname">p_unmarked_organism</td><td>The given individual object </td></tr>
+    <tr><td class="paramname">organisms</td><td>All the individuals </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a5db969515e618a4191946c2655e1709b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +1087,7 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">boost::unordered_map&lt; SpeciesObject *, SparseMap * &gt;&#160;</td>
+          <td class="paramtype">boost::unordered_map&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> *, <a class="el" href="classSparseMap.html">SparseMap</a> * &gt;&#160;</td>
           <td class="paramname"><em>species_group_maps</em>&#160;</td>
         </tr>
         <tr>
@@ -402,14 +1111,18 @@ Private Member Functions</h2></td></tr>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Definitions/<a class="el" href="Scenario_8h_source.html">Scenario.h</a></li>
-<li>src/Definitions/Scenario.cpp</li>
+<li>src/Definitions/<a class="el" href="Scenario_8cpp.html">Scenario.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 28 2018 17:12:32 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classScenario.html">Scenario</a></li>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

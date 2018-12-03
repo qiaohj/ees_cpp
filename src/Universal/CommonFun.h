@@ -1,8 +1,14 @@
-/*
- * CommonFun.h
+/**
+ * @file CommonFun.h
+ * @brief Class CommonFun. A class to implement the public functions common used in the application.
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- *  Created on: Oct 15, 2014
- *      Author: qiaohj
  */
 
 #ifndef CommonFun_H
@@ -40,6 +46,9 @@
 #define earth_radius_km    6371.0
 #endif
 
+/**
+ * @brief A class to implement the public functions common used in the application.
+ */
 class CommonFun {
 public:
 	static void convert2LL(double* x, double* y, const char *fromWkt, const char *toWkt);

@@ -1,8 +1,14 @@
-/*
- * IndividualOrganism.h
+/**
+ * @file IndividualOrganism.h
+ * @brief Class IndividualOrganism. A class to handle the behavior of an individual in the simulation.
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- *  Created on: Oct 24, 2014
- *      Author: qiaohj
  */
 
 #ifndef DEFINITIONS_INDIVIDUALORGANISM_H_
@@ -11,7 +17,9 @@
 #include "SpeciesObject.h"
 #include "SparseMap.h"
 #include "../Universal/log.hpp"
-
+/**
+ * @brief A class to handle the behavior of an individual in the simulation.
+ */
 class IndividualOrganism {
 private:
     unsigned short x;

@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -66,12 +73,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classScenario.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Scenario Member List</div>  </div>
@@ -89,21 +110,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="classScenario.html">Scenario</a>, including all inherited members.</p>
 <table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#aedcf8037b1c46becd28fa3a7c155b632">all_individualOrganisms</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a59d3032103096105db0f8465df4f8677">baseFolder</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a521d62fe56a72b57f5d35a5e95656239">burnInYear</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a90b4fc8814927d28b7cfc53e483e90a6">cleanActivedIndividualOrganisms</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#ab1e68bfa0e6ec247aedb99af5192cdb8">cleanEnvironments</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a38d156100aa0d13c1a23287e28ebf977">cleanSpecies</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classScenario.html#ad753db5a0597e562ddda679baedcdb07">createSpeciesFolder</a>(SpeciesObject *p_species, bool isRoot)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#adb92aba51d116b676ea8a296c935f457">distanceFast</a>(int x1, int y1, int x2, int y2)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a81e2463c7234eb64d8f450376278f315">environments</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a4fb1481e1f0f69d34659933bf92337c4">generateSpeciationInfo</a>(unsigned year, bool is_tree)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#ad521b35c73e4f36cefe47589fea10932">geoTrans</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#aefcf8f8700ac50da636392dfff921728">getDispersalMap_2</a>(IndividualOrganism *individualOrganism, std::string species_folder, unsigned year)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a75873e69d52e6fb54d34e60c5b896566">getDividedYear</a>(IndividualOrganism *o_1, IndividualOrganism *o_2)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classScenario.html#a8c163ae58f1e4751694e727e90bc20a0">getEnvironmenMap</a>(unsigned p_year)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a237731425b427a2f252c0415b691905f">getSpeciesFolder</a>(SpeciesObject *p_species)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classScenario.html#ac00d45fa6bf6626ea9ac7eab39044e20">getTarget</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#af80f719ce3b3ced1677548f42518939f">isTerminated</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classScenario.html#a167ebc9a3884ab26e367418d85d85c6e">run</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a5db969515e618a4191946c2655e1709b">saveGroupmap</a>(unsigned year, boost::unordered_map&lt; SpeciesObject *, SparseMap * &gt; species_group_maps)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classScenario.html#a36b713930964e15d44359569ac258853">Scenario</a>(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder, std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#af15a467e564f21f5f7616f3d075e5f8b">getExtend</a>(int p_dispersal_ability, int x, int y, boost::unordered_set&lt; unsigned &gt; *x_extent, boost::unordered_set&lt; unsigned &gt; *y_extent)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a3fb950b32e74894d26344e71bfc39e20">getMinDividedYear</a>(unsigned speciation_year, unsigned short group_id_1, unsigned short group_id_2, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms, unsigned current_year)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a49905ef2874a92548c2976023accfed7">getMinDividedYear_minDistance</a>(unsigned speciation_year, unsigned short group_id_1, unsigned short group_id_2, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms, unsigned current_year)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a237731425b427a2f252c0415b691905f">getSpeciesFolder</a>(SpeciesObject *p_species)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#ac00d45fa6bf6626ea9ac7eab39044e20">getTarget</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#ab21027ce03aeb7116fd2f2ebb283d63a">getTempSpeciesID</a>(unsigned short group_id, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a11c5c152909e465c9606ff29ce4658de">getUnmarkedOrganism</a>(boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a082a14165bb707a6af86913d8c08c2a9">isFinished</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a67b725cd46ec74698af19a2ae6df942c">isOverwrite</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#af80f719ce3b3ced1677548f42518939f">isTerminated</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a64baf603131a689adc58ea2f65c6c2f9">markedSpeciesID</a>(unsigned short group_id, unsigned short temp_species_id, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a184575eb4ab905f0908a8c00bd1f7ac6">markJointOrganism</a>(unsigned short p_group_id, IndividualOrganism *p_unmarked_organism, boost::unordered_map&lt; unsigned, std::vector&lt; IndividualOrganism * &gt; &gt; *organisms)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a7870993bb1b59e3b5ce4c083bc5f5626">mask</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#ac1fb39d02f9a8df2c6614c88c1d02e2b">memLimit</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a5ba578f353f153d18091b564dfe327e0">minSpeciesDispersalSpeed</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#ac4ae8705f1ab90c86a8b6653d36d151b">prj</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a167ebc9a3884ab26e367418d85d85c6e">run</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a5db969515e618a4191946c2655e1709b">saveGroupmap</a>(unsigned year, boost::unordered_map&lt; SpeciesObject *, SparseMap * &gt; species_group_maps)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a36b713930964e15d44359569ac258853">Scenario</a>(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder, std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail)</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a39a2a0d6a88917913176544a7b6f98d6">species</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a6f72e13ae2f16ec77b57a0ac256641f7">target</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#abaa3ed6f07d191c3da55c3af3e7690cb">totalYears</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classScenario.html#a59e9c3887486b9509c0d50103ffe7ce8">with_detail</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classScenario.html#a255a5e630b99fdce75ea720fd3c5d34b">xSize</a></td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classScenario.html#aa7e7548858cbc52614d46723c0333038">~Scenario</a>()</td><td class="entry"><a class="el" href="classScenario.html">Scenario</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 28 2018 17:12:32 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

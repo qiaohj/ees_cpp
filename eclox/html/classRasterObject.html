@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -66,12 +73,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classRasterObject.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,458 +102,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classRasterObject-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RasterObject Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
+<p>A class for a raster file, including its attributes and behaviors.  
+ <a href="classRasterObject.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="RasterObject_8h_source.html">RasterObject.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a1fa1c52e93b0469e4b73d805285cbfb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a1fa1c52e93b0469e4b73d805285cbfb0">RasterObject</a> (std::string p_raster_name)</td></tr>
-<tr class="separator:a1fa1c52e93b0469e4b73d805285cbfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa486b6a0fce6cd12cdd6e1826a0d1bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#aaa486b6a0fce6cd12cdd6e1826a0d1bb">~RasterObject</a> ()</td></tr>
-<tr class="separator:aaa486b6a0fce6cd12cdd6e1826a0d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae418d8767565e7514cb092c5551b76ec"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ae418d8767565e7514cb092c5551b76ec">getRasterName</a> ()</td></tr>
-<tr class="separator:ae418d8767565e7514cb092c5551b76ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a546e7b60763941a141f35f29c3d4c34b"><td class="memItemLeft" align="right" valign="top">GDALDataset *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a546e7b60763941a141f35f29c3d4c34b">getGDALDataset</a> ()</td></tr>
-<tr class="separator:a546e7b60763941a141f35f29c3d4c34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb9a6e349b91b5fb402e9934625ca97c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#adb9a6e349b91b5fb402e9934625ca97c">getXSize</a> ()</td></tr>
-<tr class="separator:adb9a6e349b91b5fb402e9934625ca97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb45effc06edb75873933b6958d21035"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#adb45effc06edb75873933b6958d21035">getYSize</a> ()</td></tr>
-<tr class="separator:adb45effc06edb75873933b6958d21035"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab13d977148afc9e829406544bfc3f64c"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ab13d977148afc9e829406544bfc3f64c">getGeoTransform</a> ()</td></tr>
-<tr class="separator:ab13d977148afc9e829406544bfc3f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27efc2c16fe84d24d296d02ddd55d440"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a27efc2c16fe84d24d296d02ddd55d440">readByXY</a> (unsigned p_x, unsigned p_y)</td></tr>
-<tr class="separator:a27efc2c16fe84d24d296d02ddd55d440"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55d42dd720db5f9c0ca1e54c41faf4f1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a55d42dd720db5f9c0ca1e54c41faf4f1">getNoData</a> ()</td></tr>
-<tr class="separator:a55d42dd720db5f9c0ca1e54c41faf4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29a2aaa72845cb6b620a42040ec06164"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a29a2aaa72845cb6b620a42040ec06164">readByLL</a> (double p_longitude, double p_latitude)</td></tr>
-<tr class="separator:a29a2aaa72845cb6b620a42040ec06164"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b8da7564d3ab594c6e5b253365d155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a19b8da7564d3ab594c6e5b253365d155">printRasterInfo</a> ()</td></tr>
-<tr class="separator:a19b8da7564d3ab594c6e5b253365d155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72d5d9b6f189a32b11836da3703407d2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a72d5d9b6f189a32b11836da3703407d2">getGCPProjection</a> ()</td></tr>
-<tr class="separator:a72d5d9b6f189a32b11836da3703407d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ff987629d9f0803f0556762780e52b3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a7ff987629d9f0803f0556762780e52b3">getProjectionRef</a> ()</td></tr>
-<tr class="separator:a7ff987629d9f0803f0556762780e52b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a7575dbe97dd743d4a41907b7cc628343"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a7575dbe97dd743d4a41907b7cc628343">rasterName</a></td></tr>
-<tr class="separator:a7575dbe97dd743d4a41907b7cc628343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c45265ac4252e4aeff278d9e8c24c0d"><td class="memItemLeft" align="right" valign="top">GDALDataset *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a1c45265ac4252e4aeff278d9e8c24c0d">poDataset</a></td></tr>
-<tr class="separator:a1c45265ac4252e4aeff278d9e8c24c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d308a41a1398705993b192022607f1b"><td class="memItemLeft" align="right" valign="top">GDALRasterBand *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a2d308a41a1398705993b192022607f1b">poBand</a></td></tr>
-<tr class="separator:a2d308a41a1398705993b192022607f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1b2f8c0c6b62979a2ca3001e7e5f964"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ad1b2f8c0c6b62979a2ca3001e7e5f964">xSize</a></td></tr>
-<tr class="separator:ad1b2f8c0c6b62979a2ca3001e7e5f964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a7cad05b04f6bbc30e0f7f00fe10d48"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a6a7cad05b04f6bbc30e0f7f00fe10d48">ySize</a></td></tr>
-<tr class="separator:a6a7cad05b04f6bbc30e0f7f00fe10d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20c8bbc85127b82f772d68d6898b06ef"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a20c8bbc85127b82f772d68d6898b06ef">noData</a></td></tr>
-<tr class="separator:a20c8bbc85127b82f772d68d6898b06ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1438db969dda51892f7a139d3cc3ece"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ad1438db969dda51892f7a139d3cc3ece">valueArray</a></td></tr>
-<tr class="separator:ad1438db969dda51892f7a139d3cc3ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8e2643e878bd1e760668bab19ed2bff"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ab8e2643e878bd1e760668bab19ed2bff">adfGeoTransform</a></td></tr>
-<tr class="separator:ab8e2643e878bd1e760668bab19ed2bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1fa1c52e93b0469e4b73d805285cbfb0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RasterObject::RasterObject </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>p_raster_name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaa486b6a0fce6cd12cdd6e1826a0d1bb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">RasterObject::~RasterObject </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a72d5d9b6f189a32b11836da3703407d2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * RasterObject::getGCPProjection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a546e7b60763941a141f35f29c3d4c34b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">GDALDataset * RasterObject::getGDALDataset </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab13d977148afc9e829406544bfc3f64c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double * RasterObject::getGeoTransform </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a55d42dd720db5f9c0ca1e54c41faf4f1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RasterObject::getNoData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7ff987629d9f0803f0556762780e52b3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * RasterObject::getProjectionRef </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae418d8767565e7514cb092c5551b76ec"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string RasterObject::getRasterName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adb9a6e349b91b5fb402e9934625ca97c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned RasterObject::getXSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adb45effc06edb75873933b6958d21035"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned RasterObject::getYSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a19b8da7564d3ab594c6e5b253365d155"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void RasterObject::printRasterInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a29a2aaa72845cb6b620a42040ec06164"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RasterObject::readByLL </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>p_longitude</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>p_latitude</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a27efc2c16fe84d24d296d02ddd55d440"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RasterObject::readByXY </td>
-          <td>(</td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>p_x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>p_y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ab8e2643e878bd1e760668bab19ed2bff"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double* RasterObject::adfGeoTransform</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a20c8bbc85127b82f772d68d6898b06ef"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float RasterObject::noData</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2d308a41a1398705993b192022607f1b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GDALRasterBand* RasterObject::poBand</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a1c45265ac4252e4aeff278d9e8c24c0d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GDALDataset* RasterObject::poDataset</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7575dbe97dd743d4a41907b7cc628343"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string RasterObject::rasterName</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad1438db969dda51892f7a139d3cc3ece"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float* RasterObject::valueArray</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad1b2f8c0c6b62979a2ca3001e7e5f964"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned RasterObject::xSize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6a7cad05b04f6bbc30e0f7f00fe10d48"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned RasterObject::ySize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for a raster file, including its attributes and behaviors. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/RasterIO/<a class="el" href="RasterObject_8h_source.html">RasterObject.h</a></li>
 <li>src/RasterIO/<a class="el" href="RasterObject_8cpp.html">RasterObject.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 26 2018 17:26:06 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classRasterObject.html">RasterObject</a></li>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

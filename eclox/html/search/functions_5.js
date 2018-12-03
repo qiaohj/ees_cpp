@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_7escenario',['~Scenario',['../classScenario.html#aa7e7548858cbc52614d46723c0333038',1,'Scenario']]]
+  ['markedspeciesid',['markedSpeciesID',['../classScenario.html#a64baf603131a689adc58ea2f65c6c2f9',1,'Scenario']]],
+  ['markjointorganism',['markJointOrganism',['../classScenario.html#a184575eb4ab905f0908a8c00bd1f7ac6',1,'Scenario']]]
 ];

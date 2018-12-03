@@ -1,9 +1,16 @@
-/*
- * EnvironmentalCurve.h
+/**
+ * @file EnvironmentalCurve.h
+ * @brief Class EnvironmentalCurve. It is used to create a virtual environmental variables based on the configuration. It was used in the Am. Nat. paper. We keep it in the source code, just for the honor.
+ * @author Huijie Qiao
+ * @version 1.0
+ * @date 11/25/2018
+ * @details
+ * Copyright 2014-2019 Huijie Qiao
+ * Distributed under GNU license
+ * See file LICENSE for detail or copy at https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- *  Created on: Oct 14, 2014
- *      Author: qiaohj
  */
+
 
 #ifndef EnvironmentalCurve_H
 #define EnvironmentalCurve_H
@@ -17,7 +24,9 @@
 #include "../Definitions/SparseMap.h"
 #include "../Universal/CommonFun.h"
 #include "../Universal/const.h"
-
+/**
+ * @brief used to create a virtual environmental variables based on the configuration. It was used in the Am. Nat. paper. We keep it in the source code, just for the honor.
+ */
 class EnvironmentalCurve {
 private:
     RasterObject* glacial;
@@ -36,7 +45,17 @@ private:
     float noData;
 
 public:
+    /**
+	 * @brief Constructor of EnvironmentalCurve class
+	 * @param json_path configuration file
+	 */
 	EnvironmentalCurve(const std::string json_path);
+
+	/**
+	 * @brief Destructor of EnvironmentalCurve class
+	 *
+	 * release all the resources
+	 */
 	virtual ~EnvironmentalCurve();
     unsigned getBurnInYears();
     SparseMap* getValues(unsigned p_year);

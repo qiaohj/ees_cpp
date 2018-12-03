@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -66,12 +73,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classIndividualOrganism.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -80,7 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">IndividualOrganism Member List</div>  </div>
@@ -89,44 +110,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="classIndividualOrganism.html">IndividualOrganism</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a8063a603b9d51d035242313f5bc3a438">dispersalAbility</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a387b2cfc59ce43f3d8bc45d51010325a">getDispersalAbility</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a20240b6ebc02f4d6852a3781defc5401">getDispersalMethod</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#aa768c250f03af80aa8b8cc3db9fe08ef">getGroupId</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#af22487709dc57f679345e5a7929b101d">getMemoryUsage</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a5d6ce52486bb93218b5c827c8989af5d">getNextRunYear</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#ae6d952aed54d9dd9cb028231c90ab49a">getNumOfPath</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a38c0240cf0403c546369088a439a2add">getParent</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#ac05f92bfba6e6f352bc464ed2e60fa5d">getSpeciationYears</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a7808119e9a1eba5af61260112069a453">getSpecies</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#aa118d1995fab02146c815a3f37a12c90">getSpeciesID</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a8ddd23665910c4253e3d6d8821520ec1">getTempSpeciesId</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a1a3769fb56e27bb4f3fca7f41bcdb209">getX</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#af26102a0f1132ae4ce9e2ac4cf9d78ec">getY</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#ac6b7f45cd79e2143ac8b59fb6234e26f">getYear</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#ae4219e52fff6ace7734dae24787867b7">groupId</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#af8976a073d9a9912034e5a069e79d9d5">IndividualOrganism</a>(unsigned p_year, SpeciesObject *p_species, IndividualOrganism *p_parent, unsigned short p_x, unsigned short p_y)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#aca7db567da1b9e652455811fe57549c1">isSuitable</a>(std::vector&lt; SparseMap * &gt; *p_current_environments)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a19478b8638b0ec0b6fed322a17a3cbb0">parent</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#aef698d2e418d0cfd5ca7782e23c6ff37">setDispersalAbility</a>(unsigned short p_dispersal_ability)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a9bfded40e98675f3de4bb6bb0766a912">setGroupId</a>(unsigned short p_group_id)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a78270e8aea17bdde3a1b0684da22c016">setParent</a>(IndividualOrganism *p_parent)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#ac70a0c301363caea3e6c0d2e75e42fcf">setRandomDispersalAbility</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a54e245602d57670ba22e3cf978c83844">setSpecies</a>(SpeciesObject *p_species)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#aab611f78b32d934d11caa7a1beaa05f3">setTempSpeciesId</a>(unsigned short p_species_id)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#ab661bdc5440059e46bb1773d488c1c99">setYear</a>(unsigned p_year)</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a0472a9ec2eec0b6ad2d90e756ec42cb0">species</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a289538278430cbe789d1180ddf8adac6">tempSpeciesID</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#ad54d14e9053ed9532c27d61452e867a5">x</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#aa51993a759aee074566723ac7390ce11">y</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIndividualOrganism.html#a728784885555841b4e528bf39c70600f">year</a></td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIndividualOrganism.html#a6046c0c271e48981137223ab23fcb671">~IndividualOrganism</a>()</td><td class="entry"><a class="el" href="classIndividualOrganism.html">IndividualOrganism</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 26 2018 17:26:06 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Nov 30 2018 18:05:02 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>
