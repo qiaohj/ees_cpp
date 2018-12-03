@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classRasterController.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,6 +104,8 @@ $(document).ready(function(){initNavTree('classRasterController.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classRasterController-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RasterController Class Reference</div>  </div>
@@ -114,9 +116,214 @@ $(document).ready(function(){initNavTree('classRasterController.html','');});
  <a href="classRasterController.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="RasterController_8h_source.html">RasterController.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a28c71f0345c26446835bd51271cb2a0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28c71f0345c26446835bd51271cb2a0e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterController.html#a28c71f0345c26446835bd51271cb2a0e">RasterController</a> ()</td></tr>
+<tr class="memdesc:a28c71f0345c26446835bd51271cb2a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classRasterController.html" title="A class to handle the raster files. ">RasterController</a>. <br/></td></tr>
+<tr class="separator:a28c71f0345c26446835bd51271cb2a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91eec62cc5a619cd5b2e4f9eed43b5d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91eec62cc5a619cd5b2e4f9eed43b5d3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterController.html#a91eec62cc5a619cd5b2e4f9eed43b5d3">~RasterController</a> ()</td></tr>
+<tr class="memdesc:a91eec62cc5a619cd5b2e4f9eed43b5d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classRasterController.html" title="A class to handle the raster files. ">RasterController</a> release all the resources. <br/></td></tr>
+<tr class="separator:a91eec62cc5a619cd5b2e4f9eed43b5d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a403ab71c161497be1792808d373710aa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a403ab71c161497be1792808d373710aa"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRasterController.html#a403ab71c161497be1792808d373710aa">writeGeoTIFF</a> (char *p_filename, unsigned p_xsize, unsigned p_ysize, double *p_geo_trans, T p_array, double p_nodata, GDALDataType p_datatype, const char *p_prj)</td></tr>
+<tr class="memdesc:a403ab71c161497be1792808d373710aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">write an array to a raster file in GTiff format  <a href="#a403ab71c161497be1792808d373710aa">More...</a><br/></td></tr>
+<tr class="separator:a403ab71c161497be1792808d373710aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a513a71521957a81bc02a5d7d0c0031b4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a513a71521957a81bc02a5d7d0c0031b4"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">writeRaster</a> (char *p_driver_name, char *p_filename, unsigned xsize, unsigned ysize, double *p_geo_trans, T p_array, double p_nodata, GDALDataType p_datatype, const char *p_prj)</td></tr>
+<tr class="memdesc:a513a71521957a81bc02a5d7d0c0031b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">write an array to a raster file in GTiff format  <a href="#a513a71521957a81bc02a5d7d0c0031b4">More...</a><br/></td></tr>
+<tr class="separator:a513a71521957a81bc02a5d7d0c0031b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to handle the raster files. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a403ab71c161497be1792808d373710aa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RasterController::writeGeoTIFF </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>p_filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_xsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_ysize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>p_geo_trans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>p_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_nodata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GDALDataType&#160;</td>
+          <td class="paramname"><em>p_datatype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>p_prj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>write an array to a raster file in GTiff format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_filename</td><td>the file name to save </td></tr>
+    <tr><td class="paramname">p_xsize</td><td>X size of the map </td></tr>
+    <tr><td class="paramname">p_ysize</td><td>Y size of the map </td></tr>
+    <tr><td class="paramname">p_geo_trans</td><td>The GeoTransform matrix of the raster layers </td></tr>
+    <tr><td class="paramname">p_array</td><td>Data array </td></tr>
+    <tr><td class="paramname">p_nodata</td><td>NODATa value </td></tr>
+    <tr><td class="paramname">p_datatype</td><td>Data type </td></tr>
+    <tr><td class="paramname">p_prj</td><td>projection string in proj4 format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a513a71521957a81bc02a5d7d0c0031b4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RasterController::writeRaster </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>p_driver_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>p_filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>xsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>ysize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>p_geo_trans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>p_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_nodata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GDALDataType&#160;</td>
+          <td class="paramname"><em>p_datatype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>p_prj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>write an array to a raster file in GTiff format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_driver_name</td><td>Driver name to save the raster file </td></tr>
+    <tr><td class="paramname">p_filename</td><td>the file name to save </td></tr>
+    <tr><td class="paramname">p_xsize</td><td>X size of the map </td></tr>
+    <tr><td class="paramname">p_ysize</td><td>Y size of the map </td></tr>
+    <tr><td class="paramname">p_geo_trans</td><td>The GeoTransform matrix of the raster layers </td></tr>
+    <tr><td class="paramname">p_array</td><td>Data array </td></tr>
+    <tr><td class="paramname">p_nodata</td><td>NODATa value </td></tr>
+    <tr><td class="paramname">p_datatype</td><td>Data type </td></tr>
+    <tr><td class="paramname">p_prj</td><td>projection string in proj4 format. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/RasterIO/<a class="el" href="RasterController_8h_source.html">RasterController.h</a></li>
 <li>src/RasterIO/<a class="el" href="RasterController_8cpp.html">RasterController.cpp</a></li>
 </ul>
@@ -126,7 +333,7 @@ $(document).ready(function(){initNavTree('classRasterController.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRasterController.html">RasterController</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

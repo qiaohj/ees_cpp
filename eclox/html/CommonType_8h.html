@@ -69,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -91,7 +92,7 @@ $(document).ready(function(){initNavTree('CommonType_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,6 +102,8 @@ $(document).ready(function(){initNavTree('CommonType_8h.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">CommonType.h File Reference</div>  </div>
 </div><!--header-->
@@ -112,6 +115,21 @@ $(document).ready(function(){initNavTree('CommonType_8h.html','');});
 <code>#include &quot;<a class="el" href="SparseMap_8h_source.html">../Definitions/SparseMap.h</a>&quot;</code><br/>
 </div>
 <p><a href="CommonType_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:acfab348329bc192a843bc249b382d9b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acfab348329bc192a843bc249b382d9b8"></a>
+typedef boost::unordered_map<br class="typebreak"/>
+&lt; unsigned, std::vector<br class="typebreak"/>
+&lt; <a class="el" href="classSparseMap.html">SparseMap</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CommonType_8h.html#acfab348329bc192a843bc249b382d9b8">hashmap_multiply</a></td></tr>
+<tr class="memdesc:acfab348329bc192a843bc249b382d9b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">a hash map to save the environmental variables per time step. <br/></td></tr>
+<tr class="separator:acfab348329bc192a843bc249b382d9b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc7cfdfc1503dbed8806648287034ad8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc7cfdfc1503dbed8806648287034ad8"></a>
+typedef boost::unordered_map<br class="typebreak"/>
+&lt; unsigned, <a class="el" href="classSparseMap.html">SparseMap</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CommonType_8h.html#adc7cfdfc1503dbed8806648287034ad8">hashmap_single</a></td></tr>
+<tr class="memdesc:adc7cfdfc1503dbed8806648287034ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">a hash map to save distribution map per time step. <br/></td></tr>
+<tr class="separator:adc7cfdfc1503dbed8806648287034ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Head CommonType. A head file to implement the data typies common used in the application. </p>
 <dl class="section author"><dt>Author</dt><dd>Huijie Qiao </dd></dl>
@@ -124,7 +142,7 @@ $(document).ready(function(){initNavTree('CommonType_8h.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_58569ffe0ee0985f876166e1b41ce51a.html">Universal</a></li><li class="navelem"><a class="el" href="CommonType_8h.html">CommonType.h</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

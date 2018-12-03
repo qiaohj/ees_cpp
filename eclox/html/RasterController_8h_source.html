@@ -69,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -91,7 +92,7 @@ $(document).ready(function(){initNavTree('RasterController_8h_source.html','');}
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -116,54 +117,57 @@ $(document).ready(function(){initNavTree('RasterController_8h_source.html','');}
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classRasterController.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRasterController.html">RasterController</a> {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classRasterController.html">RasterController</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ~<a class="code" href="classRasterController.html">RasterController</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> writeGeoTIFF(<span class="keywordtype">char</span>* p_filename,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> writeRaster(<span class="keywordtype">char</span>* p_driver_name, <span class="keywordtype">char</span>* p_filename,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                    <span class="keywordtype">unsigned</span> xsize, <span class="keywordtype">unsigned</span> ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                    <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> RasterController::writeGeoTIFF(<span class="keywordtype">char</span>* p_filename,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj){</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">char</span> dirver[] = <span class="stringliteral">&quot;GTiff&quot;</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    writeRaster(dirver, p_filename, p_xsize, p_ysize, p_geo_trans, p_array, p_nodata, p_datatype, p_prj);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> RasterController::writeRaster(<span class="keywordtype">char</span>* p_driver_name, <span class="keywordtype">char</span>* p_filename,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    GDALAllRegister();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    GDALDriver* driver = GetGDALDriverManager()-&gt;GetDriverByName(p_driver_name);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">char</span> **papszOptions = NULL;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    GDALDataset* dataset = driver-&gt;Create(p_filename, (<span class="keywordtype">int</span>) p_xsize, (<span class="keywordtype">int</span>) p_ysize, 1,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            p_datatype, papszOptions);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    dataset-&gt;SetGeoTransform(p_geo_trans);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    dataset-&gt;SetProjection(p_prj);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    GDALRasterBand* band = dataset-&gt;GetRasterBand(1);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    band-&gt;SetNoDataValue(p_nodata);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    band-&gt;RasterIO(GF_Write, 0, 0, p_xsize, p_ysize, p_array, p_xsize, p_ysize, p_datatype,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            0, 0);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    dataset-&gt;FlushCache();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    GDALClose( (GDALDatasetH) dataset );;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RASTERIO_RASTERCONTROLLER_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classRasterController.html#a28c71f0345c26446835bd51271cb2a0e">RasterController</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classRasterController.html#a91eec62cc5a619cd5b2e4f9eed43b5d3">~RasterController</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classRasterController.html#a403ab71c161497be1792808d373710aa">writeGeoTIFF</a>(<span class="keywordtype">char</span>* p_filename,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">writeRaster</a>(<span class="keywordtype">char</span>* p_driver_name, <span class="keywordtype">char</span>* p_filename,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keywordtype">unsigned</span> xsize, <span class="keywordtype">unsigned</span> ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classRasterController.html#a403ab71c161497be1792808d373710aa">   66</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classRasterController.html#a403ab71c161497be1792808d373710aa">RasterController::writeGeoTIFF</a>(<span class="keywordtype">char</span>* p_filename,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">char</span> dirver[] = <span class="stringliteral">&quot;GTiff&quot;</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">writeRaster</a>(dirver, p_filename, p_xsize, p_ysize, p_geo_trans, p_array, p_nodata, p_datatype, p_prj);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">   73</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">RasterController::writeRaster</a>(<span class="keywordtype">char</span>* p_driver_name, <span class="keywordtype">char</span>* p_filename,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">unsigned</span> p_xsize, <span class="keywordtype">unsigned</span> p_ysize, <span class="keywordtype">double</span>* p_geo_trans, T p_array,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">double</span> p_nodata, GDALDataType p_datatype, <span class="keyword">const</span> <span class="keywordtype">char</span>* p_prj) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    GDALAllRegister();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    GDALDriver* driver = GetGDALDriverManager()-&gt;GetDriverByName(p_driver_name);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">char</span> **papszOptions = NULL;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    GDALDataset* dataset = driver-&gt;Create(p_filename, (<span class="keywordtype">int</span>) p_xsize, (<span class="keywordtype">int</span>) p_ysize, 1,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            p_datatype, papszOptions);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    dataset-&gt;SetGeoTransform(p_geo_trans);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    dataset-&gt;SetProjection(p_prj);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    GDALRasterBand* band = dataset-&gt;GetRasterBand(1);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    band-&gt;SetNoDataValue(p_nodata);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    band-&gt;RasterIO(GF_Write, 0, 0, p_xsize, p_ysize, p_array, p_xsize, p_ysize, p_datatype,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            0, 0);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    dataset-&gt;FlushCache();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    GDALClose( (GDALDatasetH) dataset );;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RASTERIO_RASTERCONTROLLER_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classRasterController_html"><div class="ttname"><a href="classRasterController.html">RasterController</a></div><div class="ttdoc">A class to handle the raster files. </div><div class="ttdef"><b>Definition:</b> RasterController.h:24</div></div>
+<div class="ttc" id="classRasterController_html_a91eec62cc5a619cd5b2e4f9eed43b5d3"><div class="ttname"><a href="classRasterController.html#a91eec62cc5a619cd5b2e4f9eed43b5d3">RasterController::~RasterController</a></div><div class="ttdeci">~RasterController()</div><div class="ttdoc">Destructor of RasterController release all the resources. </div><div class="ttdef"><b>Definition:</b> RasterController.cpp:22</div></div>
+<div class="ttc" id="classRasterController_html_a403ab71c161497be1792808d373710aa"><div class="ttname"><a href="classRasterController.html#a403ab71c161497be1792808d373710aa">RasterController::writeGeoTIFF</a></div><div class="ttdeci">static void writeGeoTIFF(char *p_filename, unsigned p_xsize, unsigned p_ysize, double *p_geo_trans, T p_array, double p_nodata, GDALDataType p_datatype, const char *p_prj)</div><div class="ttdoc">write an array to a raster file in GTiff format </div><div class="ttdef"><b>Definition:</b> RasterController.h:66</div></div>
+<div class="ttc" id="classRasterController_html_a513a71521957a81bc02a5d7d0c0031b4"><div class="ttname"><a href="classRasterController.html#a513a71521957a81bc02a5d7d0c0031b4">RasterController::writeRaster</a></div><div class="ttdeci">static void writeRaster(char *p_driver_name, char *p_filename, unsigned xsize, unsigned ysize, double *p_geo_trans, T p_array, double p_nodata, GDALDataType p_datatype, const char *p_prj)</div><div class="ttdoc">write an array to a raster file in GTiff format </div><div class="ttdef"><b>Definition:</b> RasterController.h:73</div></div>
+<div class="ttc" id="classRasterController_html_a28c71f0345c26446835bd51271cb2a0e"><div class="ttname"><a href="classRasterController.html#a28c71f0345c26446835bd51271cb2a0e">RasterController::RasterController</a></div><div class="ttdeci">RasterController()</div><div class="ttdoc">Constructor of RasterController. </div><div class="ttdef"><b>Definition:</b> RasterController.cpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_13c66df002df1eb90a86e56915c24b6f.html">RasterIO</a></li><li class="navelem"><a class="el" href="RasterController_8h.html">RasterController.h</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

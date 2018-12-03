@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['cleanactivedindividualorganisms',['cleanActivedIndividualOrganisms',['../classScenario.html#a90b4fc8814927d28b7cfc53e483e90a6',1,'Scenario']]],
-  ['cleanenvironments',['cleanEnvironments',['../classScenario.html#ab1e68bfa0e6ec247aedb99af5192cdb8',1,'Scenario']]],
-  ['cleanspecies',['cleanSpecies',['../classScenario.html#a38d156100aa0d13c1a23287e28ebf977',1,'Scenario']]],
-  ['coodlocation',['CoodLocation',['../classCoodLocation.html#a33ee13353abc08e81b1ce0acead83874',1,'CoodLocation']]],
-  ['createspeciesfolder',['createSpeciesFolder',['../classScenario.html#ad753db5a0597e562ddda679baedcdb07',1,'Scenario']]]
+  ['addchild',['addChild',['../classSpeciesObject.html#a396df17c8a348de5fdf9ba7505deb425',1,'SpeciesObject']]],
+  ['addcurrentspeciesextinctiontimesteps',['addCurrentSpeciesExtinctionTimeSteps',['../classSpeciesObject.html#a6527664f9d432fe8542b26a596951cac',1,'SpeciesObject']]],
+  ['almostequalrelative',['AlmostEqualRelative',['../classCommonFun.html#a2b85631117a18d5979034ebf10b84e68',1,'CommonFun']]],
+  ['arcinradians',['ArcInRadians',['../classCommonFun.html#a5f586e582db4fbd10d062cc9eed878af',1,'CommonFun']]]
 ];

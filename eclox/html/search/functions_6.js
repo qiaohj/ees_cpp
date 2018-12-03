@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nichebreadth',['NicheBreadth',['../classNicheBreadth.html#a4d45622d1c4b1c9cc1993ca69603fef5',1,'NicheBreadth']]]
+  ['haversine_5fdistance',['haversine_distance',['../classCommonFun.html#a81d597995617e05bb5ec7bd6f8ca66c0',1,'CommonFun']]]
 ];

@@ -7,9 +7,9 @@ var annotated =
     [ "GeoLocation", "classGeoLocation.html", "classGeoLocation" ],
     [ "IndividualOrganism", "classIndividualOrganism.html", "classIndividualOrganism" ],
     [ "NicheBreadth", "classNicheBreadth.html", "classNicheBreadth" ],
-    [ "RasterController", "classRasterController.html", null ],
-    [ "RasterObject", "classRasterObject.html", null ],
+    [ "RasterController", "classRasterController.html", "classRasterController" ],
+    [ "RasterObject", "classRasterObject.html", "classRasterObject" ],
     [ "Scenario", "classScenario.html", "classScenario" ],
     [ "SparseMap", "classSparseMap.html", "classSparseMap" ],
-    [ "SpeciesObject", "classSpeciesObject.html", null ]
+    [ "SpeciesObject", "classSpeciesObject.html", "classSpeciesObject" ]
 ];

@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -68,19 +75,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow3" class="tabs2">
     <ul class="tablist">
       <li class="current"><a href="globals.html"><span>All</span></a></li>
-      <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
       <li><a href="globals_type.html"><span>Typedefs</span></a></li>
-      <li><a href="globals_defs.html"><span>Macros</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('globals.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,30 +109,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="contents">
-<div class="textblock">Here is a list of all file members with links to the files they belong to:</div><ul>
+<div class="textblock">Here is a list of all documented file members with links to the documentation:</div><ul>
 <li>DEBUG
 : <a class="el" href="const_8h.html#a9c4ab189c2f018bc7ccc8ba4f6e04b9d">const.h</a>
-</li>
-<li>earth_radius_km
-: <a class="el" href="CommonFun_8h.html#a39df72cfffddc03a37eb5ba636559632">CommonFun.h</a>
-</li>
-<li>handler()
-: <a class="el" href="main_8cpp.html#a3c2348f39cf58c5c0f48742b32b15d83">main.cpp</a>
 </li>
 <li>hashmap_multiply
 : <a class="el" href="CommonType_8h.html#acfab348329bc192a843bc249b382d9b8">CommonType.h</a>
 </li>
 <li>hashmap_single
 : <a class="el" href="CommonType_8h.html#adc7cfdfc1503dbed8806648287034ad8">CommonType.h</a>
-</li>
-<li>M_PI
-: <a class="el" href="CommonFun_8h.html#ae71449b1cc6e6250b91f539153a7a0d3">CommonFun.h</a>
-</li>
-<li>main()
-: <a class="el" href="main_8cpp.html#ac6b9a1709c5bdd74254c77eba0f64c87">main.cpp</a>
-</li>
-<li>mapvalue
-: <a class="el" href="SparseMap_8h.html#aa9084c1efa074dd97130b35f6d1038da">SparseMap.h</a>
 </li>
 <li>MATRIX_ZERO
 : <a class="el" href="const_8h.html#abf1edb94da6cfb5f0ce592e3ac9616e4">const.h</a>
@@ -123,11 +127,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 26 2018 17:26:06 for Virtual earth simulation by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.6
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
+  </ul>
+</div>
 </body>
 </html>

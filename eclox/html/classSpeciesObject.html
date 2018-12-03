@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classSpeciesObject.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,6 +104,8 @@ $(document).ready(function(){initNavTree('classSpeciesObject.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classSpeciesObject-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SpeciesObject Class Reference</div>  </div>
@@ -114,9 +116,829 @@ $(document).ready(function(){initNavTree('classSpeciesObject.html','');});
  <a href="classSpeciesObject.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="SpeciesObject_8h_source.html">SpeciesObject.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aafbf62e940c95ece8ca57fd854e91805"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#aafbf62e940c95ece8ca57fd854e91805">SpeciesObject</a> (const std::string json_path)</td></tr>
+<tr class="memdesc:aafbf62e940c95ece8ca57fd854e91805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class No.1 (Create a species object based on the configuration in JSON format)  <a href="#aafbf62e940c95ece8ca57fd854e91805">More...</a><br/></td></tr>
+<tr class="separator:aafbf62e940c95ece8ca57fd854e91805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68aa3467453164d214836f8d98aefbb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a68aa3467453164d214836f8d98aefbb4">SpeciesObject</a> (unsigned p_id, <a class="el" href="classSpeciesObject.html">SpeciesObject</a> *p_parent, unsigned p_year)</td></tr>
+<tr class="memdesc:a68aa3467453164d214836f8d98aefbb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class No.2 (Create a species object based on the parent species)  <a href="#a68aa3467453164d214836f8d98aefbb4">More...</a><br/></td></tr>
+<tr class="separator:a68aa3467453164d214836f8d98aefbb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3397bf99ee8a28ceaeea053a6a1a06f2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a3397bf99ee8a28ceaeea053a6a1a06f2">~SpeciesObject</a> ()</td></tr>
+<tr class="memdesc:a3397bf99ee8a28ceaeea053a6a1a06f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class.  <a href="#a3397bf99ee8a28ceaeea053a6a1a06f2">More...</a><br/></td></tr>
+<tr class="separator:a3397bf99ee8a28ceaeea053a6a1a06f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0079eaef636a6a3de873d7a62739446"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ad0079eaef636a6a3de873d7a62739446">getDispersalAbility</a> ()</td></tr>
+<tr class="memdesc:ad0079eaef636a6a3de873d7a62739446"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dispersal ability array  <a href="#ad0079eaef636a6a3de873d7a62739446">More...</a><br/></td></tr>
+<tr class="separator:ad0079eaef636a6a3de873d7a62739446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac202c43fb69a8ae9a8ef7e4d1e0dff1f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ac202c43fb69a8ae9a8ef7e4d1e0dff1f">getDispersalSpeed</a> ()</td></tr>
+<tr class="memdesc:ac202c43fb69a8ae9a8ef7e4d1e0dff1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dispersal speed  <a href="#ac202c43fb69a8ae9a8ef7e4d1e0dff1f">More...</a><br/></td></tr>
+<tr class="separator:ac202c43fb69a8ae9a8ef7e4d1e0dff1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a480a715c21f18ed8e6852f10ec8f3977"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a480a715c21f18ed8e6852f10ec8f3977">getDispersalAbilityLength</a> ()</td></tr>
+<tr class="memdesc:a480a715c21f18ed8e6852f10ec8f3977"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the length of the dispersal ability array  <a href="#a480a715c21f18ed8e6852f10ec8f3977">More...</a><br/></td></tr>
+<tr class="separator:a480a715c21f18ed8e6852f10ec8f3977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1494fb37acfa65cf5a66ce135ba5b35"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#aa1494fb37acfa65cf5a66ce135ba5b35">getSpeciesExtinctionThreshold</a> ()</td></tr>
+<tr class="memdesc:aa1494fb37acfa65cf5a66ce135ba5b35"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the species extinction threshold. If the area of the distribution (number of the pixels occupied by the species) is smaller than the threshold for some time steps (defined with SpeciesExtinctionTimeSteps), the species will go extinct.  <a href="#aa1494fb37acfa65cf5a66ce135ba5b35">More...</a><br/></td></tr>
+<tr class="separator:aa1494fb37acfa65cf5a66ce135ba5b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc21b3e7ed97c34066c10d4225035a8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a2fc21b3e7ed97c34066c10d4225035a8">getGroupExtinctionThreshold</a> ()</td></tr>
+<tr class="memdesc:a2fc21b3e7ed97c34066c10d4225035a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the population extinction threshold. If the area of the distribution (number of the pixels occupied by a population) is smaller than the threshold, the population will go extinct.  <a href="#a2fc21b3e7ed97c34066c10d4225035a8">More...</a><br/></td></tr>
+<tr class="separator:a2fc21b3e7ed97c34066c10d4225035a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96c190df9c4164319c9abfe7e2007a2"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#af96c190df9c4164319c9abfe7e2007a2">getSpeciesExtinctionTimeSteps</a> ()</td></tr>
+<tr class="memdesc:af96c190df9c4164319c9abfe7e2007a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum time steps for a species to go extinct when its distribution is smaller than a threshold defined with SpeciesExtinctionThreshold or SpeciesExtinctionThreaholdPercentage.  <a href="#af96c190df9c4164319c9abfe7e2007a2">More...</a><br/></td></tr>
+<tr class="separator:af96c190df9c4164319c9abfe7e2007a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca6da401237d42d38af4dd1561577d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abca6da401237d42d38af4dd1561577d5"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#abca6da401237d42d38af4dd1561577d5">getCurrentSpeciesExtinctionTimeSteps</a> ()</td></tr>
+<tr class="memdesc:abca6da401237d42d38af4dd1561577d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the length of time (number of time steps or duration) of a species which its distribution is smaller than the threshold defined with SpeciesExtinctionThreshold or SpeciesExtinctionThreaholdPercentage <br/></td></tr>
+<tr class="separator:abca6da401237d42d38af4dd1561577d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d57583210c2038f37ec9f50d1927759"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d57583210c2038f37ec9f50d1927759"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a0d57583210c2038f37ec9f50d1927759">getMaxSpeciesDistribution</a> ()</td></tr>
+<tr class="memdesc:a0d57583210c2038f37ec9f50d1927759"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the maximum distribution (number of the pixels) of the species during the past simulation. This parameter is used to calculate the ratio of the current distribution with the maximum distribution. If the ratio is smaller than a threshold (SpeciesExtinctionThreaholdPercentage), it will be counted as an extinction. <br/></td></tr>
+<tr class="separator:a0d57583210c2038f37ec9f50d1927759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4810f58a82def29a6ab6203e99f1ff96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a4810f58a82def29a6ab6203e99f1ff96">setMaxSpeciesDistribution</a> (unsigned distribution)</td></tr>
+<tr class="memdesc:a4810f58a82def29a6ab6203e99f1ff96"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the maximum distribution (number of the pixels) of the species  <a href="#a4810f58a82def29a6ab6203e99f1ff96">More...</a><br/></td></tr>
+<tr class="separator:a4810f58a82def29a6ab6203e99f1ff96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af318bb1ed7373d51dc86df9ca8574370"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#af318bb1ed7373d51dc86df9ca8574370">getSpeciesExtinctionThreaholdPercentage</a> ()</td></tr>
+<tr class="memdesc:af318bb1ed7373d51dc86df9ca8574370"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the 'ratio' extinction threshold. The ratio if the current distribution/maximum distribution.  <a href="#af318bb1ed7373d51dc86df9ca8574370">More...</a><br/></td></tr>
+<tr class="separator:af318bb1ed7373d51dc86df9ca8574370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6527664f9d432fe8542b26a596951cac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6527664f9d432fe8542b26a596951cac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a6527664f9d432fe8542b26a596951cac">addCurrentSpeciesExtinctionTimeSteps</a> ()</td></tr>
+<tr class="memdesc:a6527664f9d432fe8542b26a596951cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">A counter to save the current extinction time steps. If the distribution of the species touches the threshold of extinction, invoke this function to add the counter. <br/></td></tr>
+<tr class="separator:a6527664f9d432fe8542b26a596951cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dca7f59c706869d53bbc9bca58cbeea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a8dca7f59c706869d53bbc9bca58cbeea">setCurrentSpeciesExtinctionTimeSteps</a> (unsigned p_currentSpeciesExtinctionTimeSteps)</td></tr>
+<tr class="memdesc:a8dca7f59c706869d53bbc9bca58cbeea"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the counter of the current extinction time steps.  <a href="#a8dca7f59c706869d53bbc9bca58cbeea">More...</a><br/></td></tr>
+<tr class="separator:a8dca7f59c706869d53bbc9bca58cbeea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac066c1e108bec325974c17f42d72090f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ac066c1e108bec325974c17f42d72090f">getDispersalMethod</a> ()</td></tr>
+<tr class="memdesc:ac066c1e108bec325974c17f42d72090f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dispersal method. 1: move to X directions. X is defined with NumOfPath. 2: move to all the potential directions.  <a href="#ac066c1e108bec325974c17f42d72090f">More...</a><br/></td></tr>
+<tr class="separator:ac066c1e108bec325974c17f42d72090f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7231c96b2325566a9db826f4e5e92ac5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classGeoLocation.html">GeoLocation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a7231c96b2325566a9db826f4e5e92ac5">getSeeds</a> ()</td></tr>
+<tr class="memdesc:a7231c96b2325566a9db826f4e5e92ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the seed of the species.  <a href="#a7231c96b2325566a9db826f4e5e92ac5">More...</a><br/></td></tr>
+<tr class="separator:a7231c96b2325566a9db826f4e5e92ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384518720cd3aac654dd4e6ac28f0b17"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a384518720cd3aac654dd4e6ac28f0b17">getID</a> ()</td></tr>
+<tr class="memdesc:a384518720cd3aac654dd4e6ac28f0b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the species ID  <a href="#a384518720cd3aac654dd4e6ac28f0b17">More...</a><br/></td></tr>
+<tr class="separator:a384518720cd3aac654dd4e6ac28f0b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7925cfc7fdd996e71d4cb19bb865acaa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a7925cfc7fdd996e71d4cb19bb865acaa">getNumOfPath</a> ()</td></tr>
+<tr class="memdesc:a7925cfc7fdd996e71d4cb19bb865acaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the potential directions for an individual to move.  <a href="#a7925cfc7fdd996e71d4cb19bb865acaa">More...</a><br/></td></tr>
+<tr class="separator:a7925cfc7fdd996e71d4cb19bb865acaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0c6d18228d3f293c535e8e05369a80c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classNicheBreadth.html">NicheBreadth</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ac0c6d18228d3f293c535e8e05369a80c">getNicheBreadth</a> ()</td></tr>
+<tr class="memdesc:ac0c6d18228d3f293c535e8e05369a80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the niche breadths of the species  <a href="#ac0c6d18228d3f293c535e8e05369a80c">More...</a><br/></td></tr>
+<tr class="separator:ac0c6d18228d3f293c535e8e05369a80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af18d42e9c6a752bdfbdb97f7d87d6f90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af18d42e9c6a752bdfbdb97f7d87d6f90"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#af18d42e9c6a752bdfbdb97f7d87d6f90">getSpeciationYears</a> ()</td></tr>
+<tr class="memdesc:af18d42e9c6a752bdfbdb97f7d87d6f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the speciation year <br/></td></tr>
+<tr class="separator:af18d42e9c6a752bdfbdb97f7d87d6f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a694b2dc5d6e26ee23adaf51e7e09922e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a694b2dc5d6e26ee23adaf51e7e09922e">getParent</a> ()</td></tr>
+<tr class="memdesc:a694b2dc5d6e26ee23adaf51e7e09922e"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the parent species of current species  <a href="#a694b2dc5d6e26ee23adaf51e7e09922e">More...</a><br/></td></tr>
+<tr class="separator:a694b2dc5d6e26ee23adaf51e7e09922e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c9026ddf404456f4eee4916c309642"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a74c9026ddf404456f4eee4916c309642">setDisappearedYear</a> (unsigned p_disappeared_year)</td></tr>
+<tr class="memdesc:a74c9026ddf404456f4eee4916c309642"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the time step when the species goes extinct.  <a href="#a74c9026ddf404456f4eee4916c309642">More...</a><br/></td></tr>
+<tr class="separator:a74c9026ddf404456f4eee4916c309642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5242a11500b731d69be2102220cfc7ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5242a11500b731d69be2102220cfc7ec"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a5242a11500b731d69be2102220cfc7ec">getDisappearedYear</a> ()</td></tr>
+<tr class="memdesc:a5242a11500b731d69be2102220cfc7ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the time step when the species goes extinct. <br/></td></tr>
+<tr class="separator:a5242a11500b731d69be2102220cfc7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cae839fa1d4c26bd53847c363a95013"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cae839fa1d4c26bd53847c363a95013"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a7cae839fa1d4c26bd53847c363a95013">getAppearedYear</a> ()</td></tr>
+<tr class="memdesc:a7cae839fa1d4c26bd53847c363a95013"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the time step that the species appears. <br/></td></tr>
+<tr class="separator:a7cae839fa1d4c26bd53847c363a95013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90bb0b316b14472b6228b67d4249caf2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a90bb0b316b14472b6228b67d4249caf2">getChildren</a> ()</td></tr>
+<tr class="memdesc:a90bb0b316b14472b6228b67d4249caf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">get all the children species  <a href="#a90bb0b316b14472b6228b67d4249caf2">More...</a><br/></td></tr>
+<tr class="separator:a90bb0b316b14472b6228b67d4249caf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396df17c8a348de5fdf9ba7505deb425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a396df17c8a348de5fdf9ba7505deb425">addChild</a> (<a class="el" href="classSpeciesObject.html">SpeciesObject</a> *child)</td></tr>
+<tr class="memdesc:a396df17c8a348de5fdf9ba7505deb425"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a child species.  <a href="#a396df17c8a348de5fdf9ba7505deb425">More...</a><br/></td></tr>
+<tr class="separator:a396df17c8a348de5fdf9ba7505deb425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a412c035e201181e707e55013690e6548"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a412c035e201181e707e55013690e6548">getNewickTree</a> (bool isroot, bool iscolor, unsigned p_year)</td></tr>
+<tr class="memdesc:a412c035e201181e707e55013690e6548"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the tree of the species with its children species  <a href="#a412c035e201181e707e55013690e6548">More...</a><br/></td></tr>
+<tr class="separator:a412c035e201181e707e55013690e6548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11f564fc39c5f7e6dd0351a886d01c4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a11f564fc39c5f7e6dd0351a886d01c4d">markNode</a> (unsigned total_years)</td></tr>
+<tr class="memdesc:a11f564fc39c5f7e6dd0351a886d01c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">count the number of speciation/species extinction/clade extinction in this species and its children.  <a href="#a11f564fc39c5f7e6dd0351a886d01c4d">More...</a><br/></td></tr>
+<tr class="separator:a11f564fc39c5f7e6dd0351a886d01c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506ced175b74c854b074292ff5ec6d93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a506ced175b74c854b074292ff5ec6d93">setCladeExtinctionStatus</a> (unsigned status)</td></tr>
+<tr class="memdesc:a506ced175b74c854b074292ff5ec6d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the clade extinction status of this species. 0: not extinct 1: extinct  <a href="#a506ced175b74c854b074292ff5ec6d93">More...</a><br/></td></tr>
+<tr class="separator:a506ced175b74c854b074292ff5ec6d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8905f73cc2683b8e02979c172d1096"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d8905f73cc2683b8e02979c172d1096"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a1d8905f73cc2683b8e02979c172d1096">markParentClade</a> ()</td></tr>
+<tr class="memdesc:a1d8905f73cc2683b8e02979c172d1096"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the parent clade status. 0: unknown, 1: extincted, 2: unextincted 3: parent_extincted <br/></td></tr>
+<tr class="separator:a1d8905f73cc2683b8e02979c172d1096"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b5b36b0b64398160bda574cbf39593"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ae4b5b36b0b64398160bda574cbf39593">isAllLeafExtinction</a> (unsigned total_years)</td></tr>
+<tr class="memdesc:ae4b5b36b0b64398160bda574cbf39593"><td class="mdescLeft">&#160;</td><td class="mdescRight">detect all the extinct status of all the children of this species.  <a href="#ae4b5b36b0b64398160bda574cbf39593">More...</a><br/></td></tr>
+<tr class="separator:ae4b5b36b0b64398160bda574cbf39593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5779c36bff56448da0f642f3c1e6384"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5779c36bff56448da0f642f3c1e6384"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ae5779c36bff56448da0f642f3c1e6384">getNumberOfCladeExtinction</a> ()</td></tr>
+<tr class="memdesc:ae5779c36bff56448da0f642f3c1e6384"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of clade extinction <br/></td></tr>
+<tr class="separator:ae5779c36bff56448da0f642f3c1e6384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada091041e0751cf1fa0560f98e9082a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada091041e0751cf1fa0560f98e9082a3"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ada091041e0751cf1fa0560f98e9082a3">getNumberOfSpeciation</a> ()</td></tr>
+<tr class="memdesc:ada091041e0751cf1fa0560f98e9082a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of speciation <br/></td></tr>
+<tr class="separator:ada091041e0751cf1fa0560f98e9082a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639fee489aa8330b879165cf35dc5c90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a639fee489aa8330b879165cf35dc5c90"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a639fee489aa8330b879165cf35dc5c90">getNumberOfSpeciesExtinction</a> ()</td></tr>
+<tr class="memdesc:a639fee489aa8330b879165cf35dc5c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of species extinction <br/></td></tr>
+<tr class="separator:a639fee489aa8330b879165cf35dc5c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1a874369dfd767a29c617aec5901b3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#ace1a874369dfd767a29c617aec5901b3">getHTMLTree</a> (unsigned p_year)</td></tr>
+<tr class="memdesc:ace1a874369dfd767a29c617aec5901b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the tree of the species with its children species in HTML format  <a href="#ace1a874369dfd767a29c617aec5901b3">More...</a><br/></td></tr>
+<tr class="separator:ace1a874369dfd767a29c617aec5901b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47815fc44a36decb761f59018e4f6ec6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a47815fc44a36decb761f59018e4f6ec6">getSpeciationExtinction</a> (bool isroot, unsigned total_years)</td></tr>
+<tr class="memdesc:a47815fc44a36decb761f59018e4f6ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the string with CSV format which saves the number of speciation/clade extinction/species extinction.  <a href="#a47815fc44a36decb761f59018e4f6ec6">More...</a><br/></td></tr>
+<tr class="separator:a47815fc44a36decb761f59018e4f6ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb4209be4270b4e89e30b6fd55e0f9dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#acb4209be4270b4e89e30b6fd55e0f9dd">isNewSpecies</a> ()</td></tr>
+<tr class="memdesc:acb4209be4270b4e89e30b6fd55e0f9dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">is a new species or the raw species from the configuration (JSON format)  <a href="#acb4209be4270b4e89e30b6fd55e0f9dd">More...</a><br/></td></tr>
+<tr class="separator:acb4209be4270b4e89e30b6fd55e0f9dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbeac48f54588e502ac392f576455573"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#abbeac48f54588e502ac392f576455573">setNewSpecies</a> (bool p)</td></tr>
+<tr class="memdesc:abbeac48f54588e502ac392f576455573"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the species status.  <a href="#abbeac48f54588e502ac392f576455573">More...</a><br/></td></tr>
+<tr class="separator:abbeac48f54588e502ac392f576455573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a57749866bfd1c1a556fec092c13649"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a3a57749866bfd1c1a556fec092c13649">getIDWithParentID</a> ()</td></tr>
+<tr class="memdesc:a3a57749866bfd1c1a556fec092c13649"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the species ID with its parent ID  <a href="#a3a57749866bfd1c1a556fec092c13649">More...</a><br/></td></tr>
+<tr class="separator:a3a57749866bfd1c1a556fec092c13649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a19c520566d856e3790c7a69f55447159"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19c520566d856e3790c7a69f55447159"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpeciesObject.html#a19c520566d856e3790c7a69f55447159">clade_extinction_status</a></td></tr>
+<tr class="memdesc:a19c520566d856e3790c7a69f55447159"><td class="mdescLeft">&#160;</td><td class="mdescRight">0: unknown, 1: extincted, 2: unextincted 3: parent_extincted <br/></td></tr>
+<tr class="separator:a19c520566d856e3790c7a69f55447159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to handle the attributes and behaviors of a virtual species. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aafbf62e940c95ece8ca57fd854e91805"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpeciesObject::SpeciesObject </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>json_path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class No.1 (Create a species object based on the configuration in JSON format) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json_path</td><td>the path to configuration file in JSON format </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a68aa3467453164d214836f8d98aefbb4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpeciesObject::SpeciesObject </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
+          <td class="paramname"><em>p_parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class No.2 (Create a species object based on the parent species) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_id</td><td>species ID </td></tr>
+    <tr><td class="paramname">p_parent</td><td>the parent species object </td></tr>
+    <tr><td class="paramname">p_year</td><td>time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3397bf99ee8a28ceaeea053a6a1a06f2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpeciesObject::~SpeciesObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor of <a class="el" href="classSpeciesObject.html" title="A class to handle the attributes and behaviors of a virtual species. ">SpeciesObject</a> class. </p>
+<p>release all the resources </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a396df17c8a348de5fdf9ba7505deb425"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::addChild </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> *&#160;</td>
+          <td class="paramname"><em>child</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>add a child species. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">child</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a90bb0b316b14472b6228b67d4249caf2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classSpeciesObject.html">SpeciesObject</a> * &gt; SpeciesObject::getChildren </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get all the children species </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad0079eaef636a6a3de873d7a62739446"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double * SpeciesObject::getDispersalAbility </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the dispersal ability array </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a480a715c21f18ed8e6852f10ec8f3977"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short SpeciesObject::getDispersalAbilityLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the length of the dispersal ability array </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac066c1e108bec325974c17f42d72090f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SpeciesObject::getDispersalMethod </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the dispersal method. 1: move to X directions. X is defined with NumOfPath. 2: move to all the potential directions. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac202c43fb69a8ae9a8ef7e4d1e0dff1f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpeciesObject::getDispersalSpeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the dispersal speed </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2fc21b3e7ed97c34066c10d4225035a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpeciesObject::getGroupExtinctionThreshold </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the population extinction threshold. If the area of the distribution (number of the pixels occupied by a population) is smaller than the threshold, the population will go extinct. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ace1a874369dfd767a29c617aec5901b3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; SpeciesObject::getHTMLTree </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the tree of the species with its children species in HTML format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_year</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a384518720cd3aac654dd4e6ac28f0b17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpeciesObject::getID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the species ID </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a57749866bfd1c1a556fec092c13649"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SpeciesObject::getIDWithParentID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the species ID with its parent ID </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a412c035e201181e707e55013690e6548"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SpeciesObject::getNewickTree </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isroot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>iscolor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the tree of the species with its children species </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isroot</td><td>whether this species is a root species (the first species in the simulation) </td></tr>
+    <tr><td class="paramname">iscolor</td><td>generating a colorful tree or not. </td></tr>
+    <tr><td class="paramname">p_year</td><td>the first time step to generate the tree </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>return a speciation tree in NEXUS format. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac0c6d18228d3f293c535e8e05369a80c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classNicheBreadth.html">NicheBreadth</a> * &gt; SpeciesObject::getNicheBreadth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the niche breadths of the species </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7925cfc7fdd996e71d4cb19bb865acaa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SpeciesObject::getNumOfPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the potential directions for an individual to move. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a694b2dc5d6e26ee23adaf51e7e09922e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSpeciesObject.html">SpeciesObject</a> * SpeciesObject::getParent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the parent species of current species </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7231c96b2325566a9db826f4e5e92ac5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classGeoLocation.html">GeoLocation</a> * &gt; SpeciesObject::getSeeds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the seed of the species. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a47815fc44a36decb761f59018e4f6ec6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SpeciesObject::getSpeciationExtinction </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isroot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>total_years</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the string with CSV format which saves the number of speciation/clade extinction/species extinction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isroot</td><td></td></tr>
+    <tr><td class="paramname">total_years</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af318bb1ed7373d51dc86df9ca8574370"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double SpeciesObject::getSpeciesExtinctionThreaholdPercentage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the 'ratio' extinction threshold. The ratio if the current distribution/maximum distribution. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa1494fb37acfa65cf5a66ce135ba5b35"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpeciesObject::getSpeciesExtinctionThreshold </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the species extinction threshold. If the area of the distribution (number of the pixels occupied by the species) is smaller than the threshold for some time steps (defined with SpeciesExtinctionTimeSteps), the species will go extinct. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af96c190df9c4164319c9abfe7e2007a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned SpeciesObject::getSpeciesExtinctionTimeSteps </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The maximum time steps for a species to go extinct when its distribution is smaller than a threshold defined with SpeciesExtinctionThreshold or SpeciesExtinctionThreaholdPercentage. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae4b5b36b0b64398160bda574cbf39593"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SpeciesObject::isAllLeafExtinction </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>total_years</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>detect all the extinct status of all the children of this species. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">total_years</td><td>if the last appear year of the species is total_years, it means the species doesn't go extinct, or it goes extinct. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acb4209be4270b4e89e30b6fd55e0f9dd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SpeciesObject::isNewSpecies </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>is a new species or the raw species from the configuration (JSON format) </p>
+<dl class="section return"><dt>Returns</dt><dd>TRUE or FALSE </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a11f564fc39c5f7e6dd0351a886d01c4d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::markNode </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>total_years</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>count the number of speciation/species extinction/clade extinction in this species and its children. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">total_years</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a506ced175b74c854b074292ff5ec6d93"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::setCladeExtinctionStatus </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the clade extinction status of this species. 0: not extinct 1: extinct </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>0: unknown, 1: extincted, 2: unextincted 3: parent_extincted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8dca7f59c706869d53bbc9bca58cbeea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::setCurrentSpeciesExtinctionTimeSteps </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_currentSpeciesExtinctionTimeSteps</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the counter of the current extinction time steps. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_currentSpeciesExtinctionTimeSteps</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a74c9026ddf404456f4eee4916c309642"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::setDisappearedYear </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_disappeared_year</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the time step when the species goes extinct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_disappeared_year</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4810f58a82def29a6ab6203e99f1ff96"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::setMaxSpeciesDistribution </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>distribution</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the maximum distribution (number of the pixels) of the species </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distribution</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abbeac48f54588e502ac392f576455573"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpeciesObject::setNewSpecies </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the species status. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>TRUE or FALSE </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/Definitions/<a class="el" href="SpeciesObject_8h_source.html">SpeciesObject.h</a></li>
 <li>src/Definitions/<a class="el" href="SpeciesObject_8cpp.html">SpeciesObject.cpp</a></li>
 </ul>
@@ -126,7 +948,7 @@ $(document).ready(function(){initNavTree('classSpeciesObject.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSpeciesObject.html">SpeciesObject</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

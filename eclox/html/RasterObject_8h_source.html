@@ -69,6 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -91,7 +92,7 @@ $(document).ready(function(){initNavTree('RasterObject_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -125,30 +126,43 @@ $(document).ready(function(){initNavTree('RasterObject_8h_source.html','');});
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">float</span>* valueArray;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">double</span>* adfGeoTransform;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classRasterObject.html">RasterObject</a>(std::string p_raster_name);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ~<a class="code" href="classRasterObject.html">RasterObject</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::string getRasterName();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    GDALDataset* getGDALDataset();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">unsigned</span> getXSize();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">unsigned</span> getYSize();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">double</span>* getGeoTransform();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">float</span> readByXY(<span class="keywordtype">unsigned</span> p_x, <span class="keywordtype">unsigned</span> p_y);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">float</span> getNoData();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">float</span> readByLL(<span class="keywordtype">double</span> p_longitude, <span class="keywordtype">double</span> p_latitude);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> printRasterInfo();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* getGCPProjection();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* getProjectionRef();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RasterObject_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classRasterObject.html#a1fa1c52e93b0469e4b73d805285cbfb0">RasterObject</a>(std::string p_raster_name);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classRasterObject.html#aaa486b6a0fce6cd12cdd6e1826a0d1bb">~RasterObject</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::string <a class="code" href="classRasterObject.html#ae418d8767565e7514cb092c5551b76ec">getRasterName</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    GDALDataset* <a class="code" href="classRasterObject.html#a546e7b60763941a141f35f29c3d4c34b">getGDALDataset</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classRasterObject.html#adb9a6e349b91b5fb402e9934625ca97c">getXSize</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classRasterObject.html#adb45effc06edb75873933b6958d21035">getYSize</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span>* <a class="code" href="classRasterObject.html#ab13d977148afc9e829406544bfc3f64c">getGeoTransform</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classRasterObject.html#a27efc2c16fe84d24d296d02ddd55d440">readByXY</a>(<span class="keywordtype">unsigned</span> p_x, <span class="keywordtype">unsigned</span> p_y);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classRasterObject.html#a55d42dd720db5f9c0ca1e54c41faf4f1">getNoData</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classRasterObject.html#a29a2aaa72845cb6b620a42040ec06164">readByLL</a>(<span class="keywordtype">double</span> p_longitude, <span class="keywordtype">double</span> p_latitude);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRasterObject.html#a19b8da7564d3ab594c6e5b253365d155">printRasterInfo</a>();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classRasterObject.html#a72d5d9b6f189a32b11836da3703407d2">getGCPProjection</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classRasterObject.html#a7ff987629d9f0803f0556762780e52b3">getProjectionRef</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* RasterObject_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classRasterObject_html_a19b8da7564d3ab594c6e5b253365d155"><div class="ttname"><a href="classRasterObject.html#a19b8da7564d3ab594c6e5b253365d155">RasterObject::printRasterInfo</a></div><div class="ttdeci">void printRasterInfo()</div><div class="ttdoc">output the information of the raster file (for debug) </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:72</div></div>
+<div class="ttc" id="classRasterObject_html_ae418d8767565e7514cb092c5551b76ec"><div class="ttname"><a href="classRasterObject.html#ae418d8767565e7514cb092c5551b76ec">RasterObject::getRasterName</a></div><div class="ttdeci">std::string getRasterName()</div><div class="ttdoc">return the file name of the raster file </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:37</div></div>
+<div class="ttc" id="classRasterObject_html_aaa486b6a0fce6cd12cdd6e1826a0d1bb"><div class="ttname"><a href="classRasterObject.html#aaa486b6a0fce6cd12cdd6e1826a0d1bb">RasterObject::~RasterObject</a></div><div class="ttdeci">~RasterObject()</div><div class="ttdoc">Destructor of RasterObject release all the resources. </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:32</div></div>
+<div class="ttc" id="classRasterObject_html_a1fa1c52e93b0469e4b73d805285cbfb0"><div class="ttname"><a href="classRasterObject.html#a1fa1c52e93b0469e4b73d805285cbfb0">RasterObject::RasterObject</a></div><div class="ttdeci">RasterObject(std::string p_raster_name)</div><div class="ttdoc">Constructor of RasterObject. </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:17</div></div>
+<div class="ttc" id="classRasterObject_html_a72d5d9b6f189a32b11836da3703407d2"><div class="ttname"><a href="classRasterObject.html#a72d5d9b6f189a32b11836da3703407d2">RasterObject::getGCPProjection</a></div><div class="ttdeci">const char * getGCPProjection()</div><div class="ttdoc">return the projection string in proj4 format </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:49</div></div>
+<div class="ttc" id="classRasterObject_html_a29a2aaa72845cb6b620a42040ec06164"><div class="ttname"><a href="classRasterObject.html#a29a2aaa72845cb6b620a42040ec06164">RasterObject::readByLL</a></div><div class="ttdeci">float readByLL(double p_longitude, double p_latitude)</div><div class="ttdoc">read a value from the raster file via longitude and latitude in the map matrix </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:67</div></div>
+<div class="ttc" id="classRasterObject_html_ab13d977148afc9e829406544bfc3f64c"><div class="ttname"><a href="classRasterObject.html#ab13d977148afc9e829406544bfc3f64c">RasterObject::getGeoTransform</a></div><div class="ttdeci">double * getGeoTransform()</div><div class="ttdoc">return the GeoTransform matrix of the raster layers </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:55</div></div>
+<div class="ttc" id="classRasterObject_html_a546e7b60763941a141f35f29c3d4c34b"><div class="ttname"><a href="classRasterObject.html#a546e7b60763941a141f35f29c3d4c34b">RasterObject::getGDALDataset</a></div><div class="ttdeci">GDALDataset * getGDALDataset()</div><div class="ttdoc">return the dataset of the raster file </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:40</div></div>
+<div class="ttc" id="classRasterObject_html_a27efc2c16fe84d24d296d02ddd55d440"><div class="ttname"><a href="classRasterObject.html#a27efc2c16fe84d24d296d02ddd55d440">RasterObject::readByXY</a></div><div class="ttdeci">float readByXY(unsigned p_x, unsigned p_y)</div><div class="ttdoc">read a value from the raster file via X and Y index in the map matrix </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:61</div></div>
+<div class="ttc" id="classRasterObject_html_adb9a6e349b91b5fb402e9934625ca97c"><div class="ttname"><a href="classRasterObject.html#adb9a6e349b91b5fb402e9934625ca97c">RasterObject::getXSize</a></div><div class="ttdeci">unsigned getXSize()</div><div class="ttdoc">return the X size of the map matrix </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:43</div></div>
+<div class="ttc" id="classRasterObject_html_adb45effc06edb75873933b6958d21035"><div class="ttname"><a href="classRasterObject.html#adb45effc06edb75873933b6958d21035">RasterObject::getYSize</a></div><div class="ttdeci">unsigned getYSize()</div><div class="ttdoc">return the Y size of the map matrix </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:46</div></div>
+<div class="ttc" id="classRasterObject_html_a7ff987629d9f0803f0556762780e52b3"><div class="ttname"><a href="classRasterObject.html#a7ff987629d9f0803f0556762780e52b3">RasterObject::getProjectionRef</a></div><div class="ttdeci">const char * getProjectionRef()</div><div class="ttdoc">return the ProjectionRef string in proj4 format </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:52</div></div>
 <div class="ttc" id="classRasterObject_html"><div class="ttname"><a href="classRasterObject.html">RasterObject</a></div><div class="ttdoc">A class for a raster file, including its attributes and behaviors. </div><div class="ttdef"><b>Definition:</b> RasterObject.h:25</div></div>
+<div class="ttc" id="classRasterObject_html_a55d42dd720db5f9c0ca1e54c41faf4f1"><div class="ttname"><a href="classRasterObject.html#a55d42dd720db5f9c0ca1e54c41faf4f1">RasterObject::getNoData</a></div><div class="ttdeci">float getNoData()</div><div class="ttdoc">return NODATA value of the raster file </div><div class="ttdef"><b>Definition:</b> RasterObject.cpp:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_13c66df002df1eb90a86e56915c24b6f.html">RasterIO</a></li><li class="navelem"><a class="el" href="RasterObject_8h.html">RasterObject.h</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

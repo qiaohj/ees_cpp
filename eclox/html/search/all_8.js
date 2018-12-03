@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['markedspeciesid',['markedSpeciesID',['../classScenario.html#a64baf603131a689adc58ea2f65c6c2f9',1,'Scenario']]],
-  ['markjointorganism',['markJointOrganism',['../classScenario.html#a184575eb4ab905f0908a8c00bd1f7ac6',1,'Scenario']]],
-  ['mask',['mask',['../classScenario.html#a7870993bb1b59e3b5ce4c083bc5f5626',1,'Scenario']]],
-  ['memlimit',['memLimit',['../classScenario.html#ac1fb39d02f9a8df2c6614c88c1d02e2b',1,'Scenario']]],
-  ['minspeciesdispersalspeed',['minSpeciesDispersalSpeed',['../classScenario.html#a5ba578f353f153d18091b564dfe327e0',1,'Scenario']]]
+  ['individualorganism',['IndividualOrganism',['../classIndividualOrganism.html',1,'IndividualOrganism'],['../classIndividualOrganism.html#af8976a073d9a9912034e5a069e79d9d5',1,'IndividualOrganism::IndividualOrganism()']]],
+  ['individualorganism_2ecpp',['IndividualOrganism.cpp',['../IndividualOrganism_8cpp.html',1,'']]],
+  ['individualorganism_2eh',['IndividualOrganism.h',['../IndividualOrganism_8h.html',1,'']]],
+  ['isallleafextinction',['isAllLeafExtinction',['../classSpeciesObject.html#ae4b5b36b0b64398160bda574cbf39593',1,'SpeciesObject']]],
+  ['isfinished',['isFinished',['../classScenario.html#a082a14165bb707a6af86913d8c08c2a9',1,'Scenario']]],
+  ['isnewspecies',['isNewSpecies',['../classSpeciesObject.html#acb4209be4270b4e89e30b6fd55e0f9dd',1,'SpeciesObject']]],
+  ['isoverwrite',['isOverwrite',['../classScenario.html#a67b725cd46ec74698af19a2ae6df942c',1,'Scenario']]],
+  ['issuitable',['isSuitable',['../classIndividualOrganism.html#aca7db567da1b9e652455811fe57549c1',1,'IndividualOrganism']]],
+  ['isterminated',['isTerminated',['../classScenario.html#af80f719ce3b3ced1677548f42518939f',1,'Scenario']]]
 ];

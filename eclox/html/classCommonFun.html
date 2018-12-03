@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classCommonFun.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,14 +118,484 @@ $(document).ready(function(){initNavTree('classCommonFun.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a6d356bb478b0010ac6641216d995c43d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a6d356bb478b0010ac6641216d995c43d">convert2LL</a> (double *x, double *y, const char *fromWkt, const char *toWkt)</td></tr>
+<tr class="memdesc:a6d356bb478b0010ac6641216d995c43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the X, Y index to longitude and latitude.  <a href="#a6d356bb478b0010ac6641216d995c43d">More...</a><br/></td></tr>
+<tr class="separator:a6d356bb478b0010ac6641216d995c43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7fa650bdafd605f5de46aa24e5c9e55"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#ad7fa650bdafd605f5de46aa24e5c9e55">readFile</a> (const char *path)</td></tr>
+<tr class="memdesc:ad7fa650bdafd605f5de46aa24e5c9e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the text file to a string  <a href="#ad7fa650bdafd605f5de46aa24e5c9e55">More...</a><br/></td></tr>
+<tr class="separator:ad7fa650bdafd605f5de46aa24e5c9e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3775d19dc57c0eef0a4cbd55957614d"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#aa3775d19dc57c0eef0a4cbd55957614d">removeSuffix</a> (const std::string &amp;path, const std::string &amp;extension)</td></tr>
+<tr class="memdesc:aa3775d19dc57c0eef0a4cbd55957614d"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove the the given extension from a file name  <a href="#aa3775d19dc57c0eef0a4cbd55957614d">More...</a><br/></td></tr>
+<tr class="separator:aa3775d19dc57c0eef0a4cbd55957614d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bd740f945b5714f85a2ca4d5b60af9b"><td class="memItemLeft" align="right" valign="top">static Json::Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a1bd740f945b5714f85a2ca4d5b60af9b">readJson</a> (const char *path)</td></tr>
+<tr class="memdesc:a1bd740f945b5714f85a2ca4d5b60af9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the JSON file to a Json object (to load the configuration of a scenario or a species from their configuration file)  <a href="#a1bd740f945b5714f85a2ca4d5b60af9b">More...</a><br/></td></tr>
+<tr class="separator:a1bd740f945b5714f85a2ca4d5b60af9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ba6f5148667ef38f76710052f599554"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a2ba6f5148667ef38f76710052f599554">writeFile</a> (const std::string s, const char *path)</td></tr>
+<tr class="memdesc:a2ba6f5148667ef38f76710052f599554"><td class="mdescLeft">&#160;</td><td class="mdescRight">output a string to a text file  <a href="#a2ba6f5148667ef38f76710052f599554">More...</a><br/></td></tr>
+<tr class="separator:a2ba6f5148667ef38f76710052f599554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f549b9ccf98e4b759726a9d1318922c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a4f549b9ccf98e4b759726a9d1318922c">createFolder</a> (const char *path)</td></tr>
+<tr class="memdesc:a4f549b9ccf98e4b759726a9d1318922c"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a folder  <a href="#a4f549b9ccf98e4b759726a9d1318922c">More...</a><br/></td></tr>
+<tr class="separator:a4f549b9ccf98e4b759726a9d1318922c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848397f588a3ae746ab6d1f798f02ebc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a848397f588a3ae746ab6d1f798f02ebc">writeFile</a> (const std::vector&lt; std::string &gt; s, const char *path)</td></tr>
+<tr class="memdesc:a848397f588a3ae746ab6d1f798f02ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">output a string array to a text file  <a href="#a848397f588a3ae746ab6d1f798f02ebc">More...</a><br/></td></tr>
+<tr class="separator:a848397f588a3ae746ab6d1f798f02ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace87d0cdfb62e521c3a4f529aee7c105"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#ace87d0cdfb62e521c3a4f529aee7c105">LL2XY</a> (const double *adfGeoTransform, const double longitude, const double latitude, unsigned *x, unsigned *y)</td></tr>
+<tr class="memdesc:ace87d0cdfb62e521c3a4f529aee7c105"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert longitude and latitude to X, Y index  <a href="#ace87d0cdfb62e521c3a4f529aee7c105">More...</a><br/></td></tr>
+<tr class="separator:ace87d0cdfb62e521c3a4f529aee7c105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa38088684340cdb86696daba270c34e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#aaa38088684340cdb86696daba270c34e">XY2LL</a> (const double *adfGeoTransform, const unsigned x, const unsigned y, double *longitude, double *latitude)</td></tr>
+<tr class="memdesc:aaa38088684340cdb86696daba270c34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert X, Y index to longitude and latitude  <a href="#aaa38088684340cdb86696daba270c34e">More...</a><br/></td></tr>
+<tr class="separator:aaa38088684340cdb86696daba270c34e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae10fb63d50ca5f2fd1a0b5fa266fa55a"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#ae10fb63d50ca5f2fd1a0b5fa266fa55a">deg2rad</a> (double deg)</td></tr>
+<tr class="memdesc:ae10fb63d50ca5f2fd1a0b5fa266fa55a"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert the number in degrees to the radiant equivalent  <a href="#ae10fb63d50ca5f2fd1a0b5fa266fa55a">More...</a><br/></td></tr>
+<tr class="separator:ae10fb63d50ca5f2fd1a0b5fa266fa55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d597995617e05bb5ec7bd6f8ca66c0"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a81d597995617e05bb5ec7bd6f8ca66c0">haversine_distance</a> (double latitude1, double longitude1, double latitude2, double longitude2)</td></tr>
+<tr class="memdesc:a81d597995617e05bb5ec7bd6f8ca66c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the great-circle distance between two points.  <a href="#a81d597995617e05bb5ec7bd6f8ca66c0">More...</a><br/></td></tr>
+<tr class="separator:a81d597995617e05bb5ec7bd6f8ca66c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f586e582db4fbd10d062cc9eed878af"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a5f586e582db4fbd10d062cc9eed878af">ArcInRadians</a> (double latitude1, double longitude1, double latitude2, double longitude2)</td></tr>
+<tr class="memdesc:a5f586e582db4fbd10d062cc9eed878af"><td class="mdescLeft">&#160;</td><td class="mdescRight">another method to calculate the great-circle distance between two points.  <a href="#a5f586e582db4fbd10d062cc9eed878af">More...</a><br/></td></tr>
+<tr class="separator:a5f586e582db4fbd10d062cc9eed878af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac345d082d9ccead7fc349c8a03db46e1"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#ac345d082d9ccead7fc349c8a03db46e1">vincenty_distance</a> (double latitude1, double longitude1, double latitude2, double longitude2)</td></tr>
+<tr class="memdesc:ac345d082d9ccead7fc349c8a03db46e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">the 3rd method to calculate the great-circle distance between two points.  <a href="#ac345d082d9ccead7fc349c8a03db46e1">More...</a><br/></td></tr>
+<tr class="separator:ac345d082d9ccead7fc349c8a03db46e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52fec3be58abdb9dd7071923db56895f"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a52fec3be58abdb9dd7071923db56895f">fixedLength</a> (int value, int digits)</td></tr>
+<tr class="memdesc:a52fec3be58abdb9dd7071923db56895f"><td class="mdescLeft">&#160;</td><td class="mdescRight">add leading ZERO to a number and convert the number to a string with fixed length  <a href="#a52fec3be58abdb9dd7071923db56895f">More...</a><br/></td></tr>
+<tr class="separator:a52fec3be58abdb9dd7071923db56895f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab441c4ae953e61fef7dfa3eb7716dbd"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#aab441c4ae953e61fef7dfa3eb7716dbd">getPeakRSS</a> ()</td></tr>
+<tr class="memdesc:aab441c4ae953e61fef7dfa3eb7716dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the peak (maximum so far) resident set size (physical * memory use) measured in bytes, or zero if the value cannot be determined on this OS.  <a href="#aab441c4ae953e61fef7dfa3eb7716dbd">More...</a><br/></td></tr>
 <tr class="separator:aab441c4ae953e61fef7dfa3eb7716dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb6aed17af039a8066b1edc13a7255b8"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#abb6aed17af039a8066b1edc13a7255b8">getCurrentRSS</a> ()</td></tr>
 <tr class="separator:abb6aed17af039a8066b1edc13a7255b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a6ce78ddf68db42b4321026537b4fa8"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a4a6ce78ddf68db42b4321026537b4fa8">writeMemoryUsage</a> (unsigned line, bool is, size_t last)</td></tr>
+<tr class="memdesc:a4a6ce78ddf68db42b4321026537b4fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the current memory usage for the application  <a href="#a4a6ce78ddf68db42b4321026537b4fa8">More...</a><br/></td></tr>
+<tr class="separator:a4a6ce78ddf68db42b4321026537b4fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08179c00dbd459e7f807a5cccd90fb9"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#ab08179c00dbd459e7f807a5cccd90fb9">GreatCirleDistance</a> (int x1, int y1, int x2, int y2, const char *fromWkt, const char *toWkt, const double *geoTrans, int resolution)</td></tr>
+<tr class="memdesc:ab08179c00dbd459e7f807a5cccd90fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">we have so many functions to calculate the great circle distance, but we used none of them so far.  <a href="#ab08179c00dbd459e7f807a5cccd90fb9">More...</a><br/></td></tr>
+<tr class="separator:ab08179c00dbd459e7f807a5cccd90fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb41e4da0e4b359b8a2666ba347be618"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommonFun.html#afb41e4da0e4b359b8a2666ba347be618">GreatCirleDistanceFast</a> (int x1, int y1, int x2, int y2, OGRCoordinateTransformation *poCT, const double *geoTrans, double resolution)</td></tr>
+<tr class="memdesc:afb41e4da0e4b359b8a2666ba347be618"><td class="mdescLeft">&#160;</td><td class="mdescRight">we have so many functions to calculate the great circle distance, but we used none of them so far.  <a href="#afb41e4da0e4b359b8a2666ba347be618">More...</a><br/></td></tr>
+<tr class="separator:afb41e4da0e4b359b8a2666ba347be618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c7f5cd9db4d3cdc0971606774cf8c9d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0c7f5cd9db4d3cdc0971606774cf8c9d"><td class="memTemplItemLeft" align="right" valign="top">static double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a0c7f5cd9db4d3cdc0971606774cf8c9d">EuclideanDistance</a> (T x1, T y1, T x2, T y2)</td></tr>
+<tr class="memdesc:a0c7f5cd9db4d3cdc0971606774cf8c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the Euclidean distance between to points.  <a href="#a0c7f5cd9db4d3cdc0971606774cf8c9d">More...</a><br/></td></tr>
+<tr class="separator:a0c7f5cd9db4d3cdc0971606774cf8c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b85631117a18d5979034ebf10b84e68"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a2b85631117a18d5979034ebf10b84e68"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a2b85631117a18d5979034ebf10b84e68">AlmostEqualRelative</a> (T a, T b)</td></tr>
+<tr class="memdesc:a2b85631117a18d5979034ebf10b84e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">in C++, we can't compare the equivalence of two float/double variables. this function is used to detect the equivalence of two float/double variables under a given precision.  <a href="#a2b85631117a18d5979034ebf10b84e68">More...</a><br/></td></tr>
+<tr class="separator:a2b85631117a18d5979034ebf10b84e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a99240594a84e3855c10083d45598d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a22a99240594a84e3855c10083d45598d"><td class="memTemplItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a22a99240594a84e3855c10083d45598d">to_str</a> (const T &amp;t)</td></tr>
+<tr class="memdesc:a22a99240594a84e3855c10083d45598d"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert any type to a string  <a href="#a22a99240594a84e3855c10083d45598d">More...</a><br/></td></tr>
+<tr class="separator:a22a99240594a84e3855c10083d45598d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5553d98949642ea678e7efee337ecb65"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5553d98949642ea678e7efee337ecb65"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a5553d98949642ea678e7efee337ecb65">clearVector</a> (T *v)</td></tr>
+<tr class="memdesc:a5553d98949642ea678e7efee337ecb65"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear a vector and release the memory  <a href="#a5553d98949642ea678e7efee337ecb65">More...</a><br/></td></tr>
+<tr class="separator:a5553d98949642ea678e7efee337ecb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c5bb039bd85af9250b42e8f31cf898a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3c5bb039bd85af9250b42e8f31cf898a"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classCommonFun.html#a3c5bb039bd85af9250b42e8f31cf898a">clearUnordered_map</a> (T *v)</td></tr>
+<tr class="memdesc:a3c5bb039bd85af9250b42e8f31cf898a"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear a hash map and release the memory  <a href="#a3c5bb039bd85af9250b42e8f31cf898a">More...</a><br/></td></tr>
+<tr class="separator:a3c5bb039bd85af9250b42e8f31cf898a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to implement the public functions common used in the application. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2b85631117a18d5979034ebf10b84e68"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CommonFun::AlmostEqualRelative </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>in C++, we can't compare the equivalence of two float/double variables. this function is used to detect the equivalence of two float/double variables under a given precision. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td></td></tr>
+    <tr><td class="paramname">b</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5f586e582db4fbd10d062cc9eed878af"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::ArcInRadians </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>another method to calculate the great-circle distance between two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">latitude1</td><td>latitude for point No.1 </td></tr>
+    <tr><td class="paramname">longitude1</td><td>longitude for point No.1 </td></tr>
+    <tr><td class="paramname">latitude2</td><td>latitude for point No.2 </td></tr>
+    <tr><td class="paramname">longitude2</td><td>longitude for point No.2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the great-circle distance between two points. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3c5bb039bd85af9250b42e8f31cf898a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::clearUnordered_map </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clear a hash map and release the memory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5553d98949642ea678e7efee337ecb65"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::clearVector </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clear a vector and release the memory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6d356bb478b0010ac6641216d995c43d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::convert2LL </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fromWkt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>toWkt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the X, Y index to longitude and latitude. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X index </td></tr>
+    <tr><td class="paramname">y</td><td>Y index </td></tr>
+    <tr><td class="paramname">fromWkt</td><td>the source projection </td></tr>
+    <tr><td class="paramname">toWkt</td><td>the target projection </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4f549b9ccf98e4b759726a9d1318922c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::createFolder </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>create a folder </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>the folder's path </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae10fb63d50ca5f2fd1a0b5fa266fa55a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::deg2rad </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>deg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert the number in degrees to the radiant equivalent </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deg</td><td>the number in degrees </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0c7f5cd9db4d3cdc0971606774cf8c9d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::EuclideanDistance </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>y2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>calculate the Euclidean distance between to points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x1</td><td></td></tr>
+    <tr><td class="paramname">y1</td><td></td></tr>
+    <tr><td class="paramname">x2</td><td></td></tr>
+    <tr><td class="paramname">y2</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a52fec3be58abdb9dd7071923db56895f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CommonFun::fixedLength </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>digits</em> = <code>3</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>add leading ZERO to a number and convert the number to a string with fixed length </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>the number to convert </td></tr>
+    <tr><td class="paramname">digits</td><td>the length of the string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="abb6aed17af039a8066b1edc13a7255b8"></a>
 <div class="memitem">
 <div class="memproto">
@@ -146,6 +616,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>return the current used memory </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 <p>Returns the current resident set size (physical memory use) measured in bytes, or zero if the value cannot be determined on this OS. </p>
 
 </div>
@@ -170,7 +642,701 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>returns the peak (maximum so far) resident set size (physical * memory use) measured in bytes, or zero if the value cannot be determined on this OS. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 <p>Returns the peak (maximum so far) resident set size (physical memory use) measured in bytes, or zero if the value cannot be determined on this OS. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab08179c00dbd459e7f807a5cccd90fb9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::GreatCirleDistance </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fromWkt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>toWkt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>geoTrans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>resolution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>we have so many functions to calculate the great circle distance, but we used none of them so far. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x1</td><td></td></tr>
+    <tr><td class="paramname">y1</td><td></td></tr>
+    <tr><td class="paramname">x2</td><td></td></tr>
+    <tr><td class="paramname">y2</td><td></td></tr>
+    <tr><td class="paramname">fromWkt</td><td></td></tr>
+    <tr><td class="paramname">toWkt</td><td></td></tr>
+    <tr><td class="paramname">geoTrans</td><td></td></tr>
+    <tr><td class="paramname">resolution</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afb41e4da0e4b359b8a2666ba347be618"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::GreatCirleDistanceFast </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OGRCoordinateTransformation *&#160;</td>
+          <td class="paramname"><em>poCT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>geoTrans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>resolution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>we have so many functions to calculate the great circle distance, but we used none of them so far. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x1</td><td></td></tr>
+    <tr><td class="paramname">y1</td><td></td></tr>
+    <tr><td class="paramname">x2</td><td></td></tr>
+    <tr><td class="paramname">y2</td><td></td></tr>
+    <tr><td class="paramname">poCT</td><td></td></tr>
+    <tr><td class="paramname">geoTrans</td><td></td></tr>
+    <tr><td class="paramname">resolution</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a81d597995617e05bb5ec7bd6f8ca66c0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::haversine_distance </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>calculate the great-circle distance between two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">latitude1</td><td>latitude for point No.1 </td></tr>
+    <tr><td class="paramname">longitude1</td><td>longitude for point No.1 </td></tr>
+    <tr><td class="paramname">latitude2</td><td>latitude for point No.2 </td></tr>
+    <tr><td class="paramname">longitude2</td><td>longitude for point No.2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the great-circle distance between two points. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ace87d0cdfb62e521c3a4f529aee7c105"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::LL2XY </td>
+          <td>(</td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>adfGeoTransform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>latitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert longitude and latitude to X, Y index </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adfGeoTransform</td><td>The GeoTransform matrix of the raster layers </td></tr>
+    <tr><td class="paramname">longitude</td><td>longitude </td></tr>
+    <tr><td class="paramname">latitude</td><td>latitude </td></tr>
+    <tr><td class="paramname">x</td><td>X index </td></tr>
+    <tr><td class="paramname">y</td><td>Y index </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad7fa650bdafd605f5de46aa24e5c9e55"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CommonFun::readFile </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>read the text file to a string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>the path to the text file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1bd740f945b5714f85a2ca4d5b60af9b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Json::Value CommonFun::readJson </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>read the JSON file to a Json object (to load the configuration of a scenario or a species from their configuration file) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>the path to the JSON file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a Json object </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa3775d19dc57c0eef0a4cbd55957614d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CommonFun::removeSuffix </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>extension</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>remove the the given extension from a file name </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td></td></tr>
+    <tr><td class="paramname">extension</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a22a99240594a84e3855c10083d45598d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CommonFun::to_str </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert any type to a string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac345d082d9ccead7fc349c8a03db46e1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CommonFun::vincenty_distance </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the 3rd method to calculate the great-circle distance between two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">latitude1</td><td>latitude for point No.1 </td></tr>
+    <tr><td class="paramname">longitude1</td><td>longitude for point No.1 </td></tr>
+    <tr><td class="paramname">latitude2</td><td>latitude for point No.2 </td></tr>
+    <tr><td class="paramname">longitude2</td><td>longitude for point No.2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the great-circle distance between two points. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2ba6f5148667ef38f76710052f599554"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::writeFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>output a string to a text file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the string to save </td></tr>
+    <tr><td class="paramname">path</td><td>the path to the text file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a848397f588a3ae746ab6d1f798f02ebc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::writeFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>output a string array to a text file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the string array to save </td></tr>
+    <tr><td class="paramname">path</td><td>the path to the text file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4a6ce78ddf68db42b4321026537b4fa8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CommonFun::writeMemoryUsage </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>output the current memory usage for the application </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td></td></tr>
+    <tr><td class="paramname">is</td><td></td></tr>
+    <tr><td class="paramname">last</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaa38088684340cdb86696daba270c34e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommonFun::XY2LL </td>
+          <td>(</td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>adfGeoTransform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>convert X, Y index to longitude and latitude </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adfGeoTransform</td><td>The GeoTransform matrix of the raster layers </td></tr>
+    <tr><td class="paramname">x</td><td>X index </td></tr>
+    <tr><td class="paramname">y</td><td>Y index </td></tr>
+    <tr><td class="paramname">longitude</td><td>longitude </td></tr>
+    <tr><td class="paramname">latitude</td><td>latitude </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -184,7 +1350,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCommonFun.html">CommonFun</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

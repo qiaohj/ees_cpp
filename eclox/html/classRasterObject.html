@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classRasterObject.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('classRasterObject.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classRasterObject-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RasterObject Class Reference</div>  </div>
@@ -114,9 +115,262 @@ $(document).ready(function(){initNavTree('classRasterObject.html','');});
  <a href="classRasterObject.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="RasterObject_8h_source.html">RasterObject.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1fa1c52e93b0469e4b73d805285cbfb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a1fa1c52e93b0469e4b73d805285cbfb0">RasterObject</a> (std::string p_raster_name)</td></tr>
+<tr class="memdesc:a1fa1c52e93b0469e4b73d805285cbfb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classRasterObject.html" title="A class for a raster file, including its attributes and behaviors. ">RasterObject</a>.  <a href="#a1fa1c52e93b0469e4b73d805285cbfb0">More...</a><br/></td></tr>
+<tr class="separator:a1fa1c52e93b0469e4b73d805285cbfb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa486b6a0fce6cd12cdd6e1826a0d1bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa486b6a0fce6cd12cdd6e1826a0d1bb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#aaa486b6a0fce6cd12cdd6e1826a0d1bb">~RasterObject</a> ()</td></tr>
+<tr class="memdesc:aaa486b6a0fce6cd12cdd6e1826a0d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classRasterObject.html" title="A class for a raster file, including its attributes and behaviors. ">RasterObject</a> release all the resources. <br/></td></tr>
+<tr class="separator:aaa486b6a0fce6cd12cdd6e1826a0d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae418d8767565e7514cb092c5551b76ec"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ae418d8767565e7514cb092c5551b76ec">getRasterName</a> ()</td></tr>
+<tr class="memdesc:ae418d8767565e7514cb092c5551b76ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the file name of the raster file  <a href="#ae418d8767565e7514cb092c5551b76ec">More...</a><br/></td></tr>
+<tr class="separator:ae418d8767565e7514cb092c5551b76ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546e7b60763941a141f35f29c3d4c34b"><td class="memItemLeft" align="right" valign="top">GDALDataset *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a546e7b60763941a141f35f29c3d4c34b">getGDALDataset</a> ()</td></tr>
+<tr class="memdesc:a546e7b60763941a141f35f29c3d4c34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the dataset of the raster file  <a href="#a546e7b60763941a141f35f29c3d4c34b">More...</a><br/></td></tr>
+<tr class="separator:a546e7b60763941a141f35f29c3d4c34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9a6e349b91b5fb402e9934625ca97c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb9a6e349b91b5fb402e9934625ca97c"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#adb9a6e349b91b5fb402e9934625ca97c">getXSize</a> ()</td></tr>
+<tr class="memdesc:adb9a6e349b91b5fb402e9934625ca97c"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the X size of the map matrix <br/></td></tr>
+<tr class="separator:adb9a6e349b91b5fb402e9934625ca97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb45effc06edb75873933b6958d21035"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb45effc06edb75873933b6958d21035"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#adb45effc06edb75873933b6958d21035">getYSize</a> ()</td></tr>
+<tr class="memdesc:adb45effc06edb75873933b6958d21035"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the Y size of the map matrix <br/></td></tr>
+<tr class="separator:adb45effc06edb75873933b6958d21035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13d977148afc9e829406544bfc3f64c"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#ab13d977148afc9e829406544bfc3f64c">getGeoTransform</a> ()</td></tr>
+<tr class="memdesc:ab13d977148afc9e829406544bfc3f64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the GeoTransform matrix of the raster layers  <a href="#ab13d977148afc9e829406544bfc3f64c">More...</a><br/></td></tr>
+<tr class="separator:ab13d977148afc9e829406544bfc3f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27efc2c16fe84d24d296d02ddd55d440"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a27efc2c16fe84d24d296d02ddd55d440">readByXY</a> (unsigned p_x, unsigned p_y)</td></tr>
+<tr class="memdesc:a27efc2c16fe84d24d296d02ddd55d440"><td class="mdescLeft">&#160;</td><td class="mdescRight">read a value from the raster file via X and Y index in the map matrix  <a href="#a27efc2c16fe84d24d296d02ddd55d440">More...</a><br/></td></tr>
+<tr class="separator:a27efc2c16fe84d24d296d02ddd55d440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d42dd720db5f9c0ca1e54c41faf4f1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a55d42dd720db5f9c0ca1e54c41faf4f1">getNoData</a> ()</td></tr>
+<tr class="memdesc:a55d42dd720db5f9c0ca1e54c41faf4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return NODATA value of the raster file  <a href="#a55d42dd720db5f9c0ca1e54c41faf4f1">More...</a><br/></td></tr>
+<tr class="separator:a55d42dd720db5f9c0ca1e54c41faf4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a2aaa72845cb6b620a42040ec06164"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a29a2aaa72845cb6b620a42040ec06164">readByLL</a> (double p_longitude, double p_latitude)</td></tr>
+<tr class="memdesc:a29a2aaa72845cb6b620a42040ec06164"><td class="mdescLeft">&#160;</td><td class="mdescRight">read a value from the raster file via longitude and latitude in the map matrix  <a href="#a29a2aaa72845cb6b620a42040ec06164">More...</a><br/></td></tr>
+<tr class="separator:a29a2aaa72845cb6b620a42040ec06164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b8da7564d3ab594c6e5b253365d155"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19b8da7564d3ab594c6e5b253365d155"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a19b8da7564d3ab594c6e5b253365d155">printRasterInfo</a> ()</td></tr>
+<tr class="memdesc:a19b8da7564d3ab594c6e5b253365d155"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the information of the raster file (for debug) <br/></td></tr>
+<tr class="separator:a19b8da7564d3ab594c6e5b253365d155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d5d9b6f189a32b11836da3703407d2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a72d5d9b6f189a32b11836da3703407d2">getGCPProjection</a> ()</td></tr>
+<tr class="memdesc:a72d5d9b6f189a32b11836da3703407d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the projection string in proj4 format  <a href="#a72d5d9b6f189a32b11836da3703407d2">More...</a><br/></td></tr>
+<tr class="separator:a72d5d9b6f189a32b11836da3703407d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff987629d9f0803f0556762780e52b3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRasterObject.html#a7ff987629d9f0803f0556762780e52b3">getProjectionRef</a> ()</td></tr>
+<tr class="memdesc:a7ff987629d9f0803f0556762780e52b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the ProjectionRef string in proj4 format  <a href="#a7ff987629d9f0803f0556762780e52b3">More...</a><br/></td></tr>
+<tr class="separator:a7ff987629d9f0803f0556762780e52b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class for a raster file, including its attributes and behaviors. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1fa1c52e93b0469e4b73d805285cbfb0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RasterObject::RasterObject </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>p_raster_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="classRasterObject.html" title="A class for a raster file, including its attributes and behaviors. ">RasterObject</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_raster_name</td><td>the file name of the raster file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a72d5d9b6f189a32b11836da3703407d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * RasterObject::getGCPProjection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the projection string in proj4 format </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a546e7b60763941a141f35f29c3d4c34b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GDALDataset * RasterObject::getGDALDataset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the dataset of the raster file </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab13d977148afc9e829406544bfc3f64c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double * RasterObject::getGeoTransform </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the GeoTransform matrix of the raster layers </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a55d42dd720db5f9c0ca1e54c41faf4f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RasterObject::getNoData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return NODATA value of the raster file </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7ff987629d9f0803f0556762780e52b3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * RasterObject::getProjectionRef </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the ProjectionRef string in proj4 format </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae418d8767565e7514cb092c5551b76ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string RasterObject::getRasterName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the file name of the raster file </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a29a2aaa72845cb6b620a42040ec06164"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RasterObject::readByLL </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p_latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read a value from the raster file via longitude and latitude in the map matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_longitude</td><td>Longitude </td></tr>
+    <tr><td class="paramname">p_latitude</td><td>Latitude </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a27efc2c16fe84d24d296d02ddd55d440"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RasterObject::readByXY </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>p_y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>read a value from the raster file via X and Y index in the map matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_x</td><td>X index </td></tr>
+    <tr><td class="paramname">p_y</td><td>Y index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/RasterIO/<a class="el" href="RasterObject_8h_source.html">RasterObject.h</a></li>
 <li>src/RasterIO/<a class="el" href="RasterObject_8cpp.html">RasterObject.cpp</a></li>
 </ul>
@@ -126,7 +380,7 @@ $(document).ready(function(){initNavTree('classRasterObject.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRasterObject.html">RasterObject</a></li>
-    <li class="footer">Generated on Mon Dec 3 2018 17:54:32 for Virtual earth simulation by
+    <li class="footer">Generated on Mon Dec 3 2018 22:42:11 for Virtual earth simulation by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

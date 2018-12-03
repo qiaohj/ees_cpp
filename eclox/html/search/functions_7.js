@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['readbyll',['readByLL',['../classEnvironmentalCurve.html#a0cf8b2b308803e11f965cae06251cfbb',1,'EnvironmentalCurve::readByLL()'],['../classEnvironmentalHadley.html#ae24ad280951c0e0dafcc87b2400ccf3c',1,'EnvironmentalHadley::readByLL()'],['../classSparseMap.html#a7202716006f56434617847e0a2cae8ef',1,'SparseMap::readByLL(double *p_geoTrans, double p_longitude, double p_latitude)'],['../classSparseMap.html#a091b77520ca8dfa63689b033486c85ef',1,'SparseMap::readByLL(double p_longitude, double p_latitude)']]],
-  ['readbyxy',['readByXY',['../classEnvironmentalCurve.html#a5e6c15431195c444c49cb30f7fea8fb6',1,'EnvironmentalCurve::readByXY()'],['../classEnvironmentalHadley.html#aa78db5b4475e28d3a4c4c17cea57599a',1,'EnvironmentalHadley::readByXY()'],['../classSparseMap.html#a112be1e6e14634de4b283567f532795f',1,'SparseMap::readByXY()']]],
-  ['run',['run',['../classScenario.html#a167ebc9a3884ab26e367418d85d85c6e',1,'Scenario']]]
+  ['individualorganism',['IndividualOrganism',['../classIndividualOrganism.html#af8976a073d9a9912034e5a069e79d9d5',1,'IndividualOrganism']]],
+  ['isallleafextinction',['isAllLeafExtinction',['../classSpeciesObject.html#ae4b5b36b0b64398160bda574cbf39593',1,'SpeciesObject']]],
+  ['isnewspecies',['isNewSpecies',['../classSpeciesObject.html#acb4209be4270b4e89e30b6fd55e0f9dd',1,'SpeciesObject']]],
+  ['issuitable',['isSuitable',['../classIndividualOrganism.html#aca7db567da1b9e652455811fe57549c1',1,'IndividualOrganism']]],
+  ['isterminated',['isTerminated',['../classScenario.html#af80f719ce3b3ced1677548f42518939f',1,'Scenario']]]
 ];
