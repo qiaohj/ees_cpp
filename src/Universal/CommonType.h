@@ -17,8 +17,13 @@
 #include <boost/unordered_map.hpp>
 
 #include "../Definitions/SparseMap.h"
-
+/**
+ * @brief a hash map to save the environmental variables per time step.
+ */
 typedef boost::unordered_map<unsigned, std::vector<SparseMap*> > hashmap_multiply;
+/**
+ * @brief a hash map to save distribution map per time step.
+ */
 typedef boost::unordered_map<unsigned, SparseMap*> hashmap_single;
 
 #endif /* CommonFun_H */

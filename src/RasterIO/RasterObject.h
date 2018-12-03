@@ -33,18 +33,71 @@ private:
 	float* valueArray;
 	double* adfGeoTransform;
 public:
+	/**
+	 * @brief Constructor of RasterObject
+	 * @param p_raster_name the file name of the raster file.
+	 */
 	RasterObject(std::string p_raster_name);
+	/**
+	 * @brief Destructor of RasterObject
+	 * release all the resources
+	 */
 	~RasterObject();
+	/**
+	 * @brief return the file name of the raster file
+	 * @return
+	 */
 	std::string getRasterName();
+	/**
+	 * @brief return the dataset of the raster file
+	 * @return
+	 */
 	GDALDataset* getGDALDataset();
+	/**
+	 * @brief return the X size of the map matrix
+	 */
 	unsigned getXSize();
+	/**
+	 * @brief return the Y size of the map matrix
+	 */
 	unsigned getYSize();
+	/**
+	 * @brief return the GeoTransform matrix of the raster layers
+	 * @return
+	 */
 	double* getGeoTransform();
+	/**
+	 * @brief read a value from the raster file via X and Y index in the map matrix
+	 * @param p_x X index
+	 * @param p_y Y index
+	 * @return
+	 */
 	float readByXY(unsigned p_x, unsigned p_y);
+	/**
+	 * @brief return NODATA value of the raster file
+	 * @return
+	 */
 	float getNoData();
+	/**
+	 * @brief read a value from the raster file via longitude and latitude in the map matrix
+	 * @param p_longitude Longitude
+	 * @param p_latitude Latitude
+	 * @return
+	 */
 	float readByLL(double p_longitude, double p_latitude);
+	/**
+	 * @brief output the information of the raster file (for debug)
+	 */
 	void printRasterInfo();
+	/**
+	 * @brief return the projection string in proj4 format
+	 * @return
+	 */
 	const char* getGCPProjection();
+	/**
+	 * @brief return the ProjectionRef string in proj4 format
+	 * @return
+	 */
 	const char* getProjectionRef();
 };
 

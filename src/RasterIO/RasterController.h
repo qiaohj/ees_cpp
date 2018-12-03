@@ -24,12 +24,41 @@
 class RasterController {
 private:
 public:
+	/**
+	 * @brief Constructor of RasterController
+	 */
     RasterController();
+	/**
+	 * @brief Destructor of RasterController
+	 * release all the resources
+	 */
     ~RasterController();
+    /**
+     * @brief write an array to a raster file in GTiff format
+     * @param p_filename the file name to save
+     * @param p_xsize X size of the map
+     * @param p_ysize Y size of the map
+     * @param p_geo_trans The GeoTransform matrix of the raster layers
+     * @param p_array Data array
+     * @param p_nodata NODATa value
+     * @param p_datatype Data type
+     * @param p_prj projection string in proj4 format.
+     */
     template<typename T> static void writeGeoTIFF(char* p_filename,
             unsigned p_xsize, unsigned p_ysize, double* p_geo_trans, T p_array,
             double p_nodata, GDALDataType p_datatype, const char* p_prj);
-
+    /**
+	 * @brief write an array to a raster file in GTiff format
+	 * @param p_driver_name Driver name to save the raster file
+	 * @param p_filename the file name to save
+	 * @param p_xsize X size of the map
+	 * @param p_ysize Y size of the map
+	 * @param p_geo_trans The GeoTransform matrix of the raster layers
+	 * @param p_array Data array
+	 * @param p_nodata NODATa value
+	 * @param p_datatype Data type
+	 * @param p_prj projection string in proj4 format.
+	 */
     template<typename T> static void writeRaster(char* p_driver_name, char* p_filename,
                     unsigned xsize, unsigned ysize, double* p_geo_trans, T p_array,
                     double p_nodata, GDALDataType p_datatype, const char* p_prj);
