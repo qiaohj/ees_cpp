@@ -1,7 +1,6 @@
 var NAVTREE =
 [
-  [ "Virtual earth simulation", "index.html", [
-    [ "EcoEvo Simulator: EES", "index.html", null ],
+  [ "EcoEvo Simulator: EES", "index.html", [
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
