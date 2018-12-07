@@ -1,7 +1,7 @@
 /**
-  @mainpage Virtual earth simulation
-  Give our project a brief introduction.
+  @mainpage EcoEvo Simulator: EES
+  The EcoEvo Simulator (EES) is a cellular automaton algorithm that can be used to simulate patterns of distribution, speciation, and extinction for virtual species in response to dynamic climate on various spatial and temporal scales. The framework builds on a model first introduced by Qiao et al (2016) in the American Naturalist. 
   
-  <br>All the source codes are shared via a <a href='https://en.wikipedia.org/wiki/Apache_Subversion' target='_blank'>subversion repository</a>. 
-  Every one can download and play with the simulation via svn://mmweb.animal.net.cn/nb_icesheet/trunk 
+  <br>The source code is shared via a <a href='https://en.wikipedia.org/wiki/Apache_Subversion' target='_blank'>subversion repository</a>. 
+  Anyone can download and play with the simulation via svn://mmweb.animal.net.cn/nb_icesheet/trunk
 */

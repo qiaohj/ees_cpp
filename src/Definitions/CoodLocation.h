@@ -1,6 +1,6 @@
 /**
  * @file CoodLocation.h
- * @brief Class CoodLocation, which is a pixel on the map, and the minimal unit of the simulation.
+ * @brief Class CoodLocation A pixel on the map, and the minimal unit of the simulation
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018
@@ -14,7 +14,7 @@
 #ifndef DEFINITIONS_COODLOCATION_H_
 #define DEFINITIONS_COODLOCATION_H_
 /**
- * @brief A pixel on the map, and the minimal unit of the simulation.
+ * @brief A pixel on the map, and the minimal unit of the simulation
  */
 class CoodLocation {
 private:

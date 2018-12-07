@@ -1,6 +1,6 @@
 /**
  * @file CommonFun.cpp
- * @brief Class CommonFun. A class to implement the public functions common used in the application.
+ * @brief Class CommonFun. A class to implement the public functions commonly used in the application
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018
