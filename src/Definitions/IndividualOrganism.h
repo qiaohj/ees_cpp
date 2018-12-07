@@ -1,6 +1,6 @@
 /**
  * @file IndividualOrganism.h
- * @brief Class IndividualOrganism. A class to handle the behavior of an individual in the simulation.
+ * @brief Class IndividualOrganism. A class to handle the behavior of an individual in the simulation
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018
@@ -18,7 +18,7 @@
 #include "SparseMap.h"
 #include "../Universal/log.hpp"
 /**
- * @brief A class to handle the behavior of an individual in the simulation.
+ * @brief A class to handle the behavior of an individual in the simulation
  */
 class IndividualOrganism {
 private:

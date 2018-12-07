@@ -1,6 +1,6 @@
 /**
  * @file EnvironmentalHadley.cpp
- * @brief Class EnvironmentalHadley. A class to handle the environmental layers from the Hadley guys.
+ * @brief Class EnvironmentalHadley. A class to handle the environmental layers
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018

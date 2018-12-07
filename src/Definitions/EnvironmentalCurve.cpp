@@ -1,6 +1,6 @@
 /**
  * @file EnvironmentalCurve.cpp
- * @brief Class EnvironmentalCurve. It is used to create a virtual environmental variables based on the configuration. It was used in the Am. Nat. paper. We keep it in the source code, just for the honor.
+ * @brief Class EnvironmentalCurve. Used to generate a virtual environmental variable based on the configuration. This class was used in the Qiao et al. 2016. Am. Nat. paper. We keep it in the source code to honor it.
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018

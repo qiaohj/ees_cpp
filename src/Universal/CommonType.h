@@ -1,6 +1,6 @@
 /**
  * @file CommonType.h
- * @brief Head CommonType. A head file to implement the data typies common used in the application.
+ * @brief Head CommonType. A head file to implement the data types commonly used in the application
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018

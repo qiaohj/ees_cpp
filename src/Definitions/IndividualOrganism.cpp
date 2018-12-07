@@ -1,6 +1,6 @@
 /**
  * @file IndividualOrganism.cpp
- * @brief Class IndividualOrganism. A class to handle the behavior of an individual in the simulation.
+ * @brief Class IndividualOrganism. A class to handle the behavior of an individual in the simulation
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018

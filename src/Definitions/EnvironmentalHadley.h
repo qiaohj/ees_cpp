@@ -1,6 +1,6 @@
 /**
  * @file EnvironmentalHadley.h
- * @brief Class EnvironmentalHadley. A class to handle the environmental layers from the Hadley guys.
+ * @brief Class EnvironmentalHadley. A class to handle the environmental layers
  * @author Huijie Qiao
  * @version 1.0
  * @date 11/25/2018
@@ -25,7 +25,7 @@
 #include "../Universal/CommonFun.h"
 #include "../Universal/const.h"
 /**
- * @brief A class to handle the environmental layers from the Hadley guys.
+ * @brief A class to handle the environmental layers
  */
 class EnvironmentalHadley {
 private:
