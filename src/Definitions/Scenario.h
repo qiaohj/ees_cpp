@@ -1,4 +1,4 @@
-/**  asdfsadfds
+/**
  * @file Scenario.h
  * @brief Class Scenario. A class to define the features of a virtual scenario in a simulation, and the virtual species in the scenario.
  * @author Huijie Qiao
@@ -50,7 +50,7 @@ private:
 
     /// @brief The last time step
     unsigned totalYears;
-asfasdf
+
     /// @brief The time span per time step
     unsigned minSpeciesDispersalSpeed;
 
