@@ -185,6 +185,25 @@ void CommonFun::writeFile(const std::vector<std::string> s, const char* path) {
     std::string joined = boost::algorithm::join(s, "\n");
     writeFile(joined, path);
 }
+void CommonFun::executeSQL(const std::vector<std::string> s, sqlite3 *db){
+	std::string joined = boost::algorithm::join(s, " ");
+	CommonFun::executeSQL(joined, db);
+}
+void CommonFun::executeSQL(std::string s, sqlite3 *db){
+	int rc;
+	char *zErr;
+	char* data;
+	rc = sqlite3_exec(db, s.c_str(), callback, data, &zErr);
+
+	if(rc != SQLITE_OK){
+		if (zErr != NULL){
+			LOG(INFO)<<"SQL error: "<< zErr;
+			sqlite3_free(zErr);
+		}
+	}else{
+		//LOG(INFO)<<"success insert ";
+	}
+}
 void CommonFun::XY2LL(const double* adfGeoTransform, const unsigned x,
         const unsigned y, double* longitude, double* latitude) {
 	//LOG(INFO)<<"x:"<<x<<" y:"<<y;
@@ -212,6 +231,12 @@ void CommonFun::createFolder(const char* path) {
         boost::filesystem::create_directory(path);
     }
 }
+void CommonFun::deleteFile(const char* path) {
+    if (boost::filesystem::exists(path)) {
+        boost::filesystem::remove(path);
+    }
+}
+
 
 std::string CommonFun::fixedLength(int value, int digits = 3) {
     unsigned int uvalue = value;

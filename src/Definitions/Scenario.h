@@ -18,6 +18,7 @@
 #include <string>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
+#include <sqlite3.h>
 #include "../Universal/CommonFun.h"
 #include "../JsonPaster/include/json/json.h"
 #include "../Universal/CommonType.h"
@@ -34,12 +35,16 @@
  */
 class Scenario{
 private:
+	/// @brief a sqlite db connection to save the results.
+	sqlite3 *db;
 	/// @brief Whether the simulation runs to the end, or be terminated before the end-time-step because of an exception (such as out of memory, full hard disk, or another exception)
 	bool isFinished;
 	/// @brief If the target folder exists, overwrite it or skip it.
 	bool isOverwrite;
 	/// @brief The maximum memory allocated to the application
     unsigned long memLimit;
+    /// @brief If save the results to a sqlite database. Suggested to set it to true
+    bool isSQLite;
     /// @brief The environmental variables used in the simulation.
     std::vector<EnvironmentalHadley*> environments;
     /// @brief The virtual species in the simulation, including the initial species, and new species after the speciation events.
@@ -209,6 +214,12 @@ private:
      * @return
      */
     double distanceFast(int x1, int y1, int x2, int y2);
+
+    /**
+     * @brief create a db used to save the logs
+     * @param path
+     */
+    void createDB(const char* path);
 public:
     /**
      * @brief Constructor of Scenario class
@@ -220,9 +231,10 @@ public:
 	 * @param p_overwrite Overwrite the folder or not if the folder is existed.
 	 * @param p_mem_limit The maximum memory allocated to the application.
 	 * @param p_with_detail Output the details of the simulation (all occupy a huge hard disk space) or not. Only for debug.
+	 * @param p_isSQLite save the results to a sqlite database.
      */
     Scenario(const std::string p_scenario_json_path, std::string p_scenario_id, std::string p_base_folder,
-            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail);
+            std::string p_target, bool p_overwrite, unsigned long p_mem_limit, bool p_with_detail, bool p_isSQLite);
 
     /**
      * @brief Destructor of Scenario class
@@ -260,6 +272,10 @@ public:
      * @param species_group_maps The population information to save
      */
     void saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps);
+
+    void saveGroupmap_file(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps);
+
+    void saveGroupmap_db(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps);
     //bool generateEnv();
 };
 

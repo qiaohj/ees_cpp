@@ -16,9 +16,10 @@
 
 Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenario_id,
 		std::string p_base_folder, std::string p_target, bool p_overwrite,
-		unsigned long p_mem_limit, bool p_with_detail) {
+		unsigned long p_mem_limit, bool p_with_detail, bool p_isSQLite) {
 
 	//initialize the required parameters for the simualtion
+	isSQLite = p_isSQLite;
 	with_detail = p_with_detail;
 	Json::Value root_Scenario = CommonFun::readJson(p_scenario_json_path.c_str());
 	memLimit = p_mem_limit;
@@ -41,11 +42,14 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 
 	//Create the necessary folders.
 	CommonFun::createFolder(target.c_str());
-	CommonFun::createFolder((target + "/Map_Folder").c_str());
-
+	if (isSQLite){
+		CommonFun::deleteFile((target + "/log.db").c_str());
+		createDB((target + "/log.db").c_str());
+	}else{
+		CommonFun::createFolder((target + "/Map_Folder").c_str());
+	}
 	//Load the required parameters of the scenario from the JSON file.
 	totalYears = root_Scenario.get("total_years", 120000).asInt();
-
 	RasterObject* mask_raster = new RasterObject(
 			root_Scenario.get("mask", "").asString());
 	geoTrans = new double[6];
@@ -57,7 +61,6 @@ Scenario::Scenario(const std::string p_scenario_json_path, std::string p_scenari
 	ySize = mask_raster->getYSize();
 	minSpeciesDispersalSpeed = totalYears;
 	Json::Value species_json_array = root_Scenario["species"];
-
 	//Load the species parameters from the JSON file(s).
 	for (unsigned index = 0; index < species_json_array.size(); ++index) {
 		std::string species_json_path = baseFolder
@@ -167,9 +170,10 @@ void Scenario::createSpeciesFolder(SpeciesObject* p_species, bool isRoot) {
 }
 
 /*-------------------------
- * Save the population information for a specific time step/
+ * Save the population information for a specific time step to a single file
  *-----------------------*/
-void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
+void Scenario::saveGroupmap_file(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
+	//LOG(INFO)<<"Save result to file";
 	if (species_group_maps.size()==0){
 		return;
 	}
@@ -205,6 +209,86 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 	}
 }
 
+/*-------------------------
+ * Save the population information for a specific time step to a db
+ *-----------------------*/
+void Scenario::saveGroupmap_db(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
+	//LOG(INFO)<<"Save result to db";
+	if (species_group_maps.size()==0){
+		return;
+	}
+	std::vector<std::string> output;
+	char line[100];
+	// Note: The old version has only 5 columns without lon and lat columns.
+	sprintf(line, "insert into map (YEAR, X, Y, LON, LAT, group_id, sp_id ) values ");
+	output.push_back(line);
+	int i = 0;
+	for (auto sp_it : species_group_maps){
+		SpeciesObject* sp = sp_it.first;
+		SparseMap* map = sp_it.second;
+		if (map){
+			for (unsigned x = 0; x<map->getXSize();x++){
+				for (unsigned y=0;y<map->getYSize();y++){
+					int v = map->readByXY(x, y);
+					if (v>0){
+						std::string id = sp->getIDWithParentID();
+						char line[id.size() + 100];
+						double lon, lat;
+						CommonFun::XY2LL(geoTrans, x, y, &lon, &lat);
+						if (i==0){
+							sprintf(line, " (%u,%u,%u,%f,%f,%d,%s) ", year, x, y, lon, lat, v, id.c_str());
+						}else{
+							sprintf(line, " ,(%u,%u,%u,%f,%f,%d,%s) ", year, x, y, lon, lat, v, id.c_str());
+						}
+						i = 1;
+						output.push_back(line);
+					}
+				}
+			}
+		}
+	}
+	output.push_back(";");
+	if (output.size()>0){
+		CommonFun::executeSQL(output, db);
+		output.clear();
+	}
+}
+void Scenario::createDB(const char* path) {
+
+	int rc;
+	rc = sqlite3_open(path, &db);
+	if (rc) {
+		LOG(INFO)<<"Can't open database: "<<sqlite3_errmsg(db);
+		exit(0);
+	} else {
+		LOG(INFO)<<"Opened database successfully";
+	}
+	char *zErrMsg = 0;
+	//Create a table to save the log // year,x,y,lon,lat,group,sp_id
+	char *sql = "CREATE TABLE map("  \
+	         "YEAR		INT				NOT NULL," \
+	         "X			INT				NOT NULL," \
+			 "Y			INT				NOT NULL," \
+	         "LON		REAL			NOT NULL," \
+			 "LAT		REAL			NOT NULL," \
+			 "group_id	INT				NOT NULL," \
+	         "sp_id		CHAR(50)				);";
+	CommonFun::executeSQL(sql, db);
+
+}
+/*-------------------------
+ * Save the population information for a specific time step
+ *-----------------------*/
+void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps){
+	if (species_group_maps.size()==0){
+		return;
+	}
+	if (isSQLite){
+		saveGroupmap_db(year, species_group_maps);
+	}else{
+		saveGroupmap_file(year, species_group_maps);
+	}
+}
 /*---------------------------
  * Run a simulation on a scenario with the species in the scenario.
  *---------------------*/
@@ -1085,6 +1169,8 @@ std::vector<CoodLocation*> Scenario::getDispersalMap_2(
 Scenario::~Scenario() {
 	delete[] geoTrans;
 	delete mask;
+	CommonFun::executeSQL("CREATE INDEX idx_year ON map (year)", db);
+	sqlite3_close(db);
 //	cleanEnvironments();
 //	cleanActivedIndividualOrganisms();
 //	cleanSpecies();

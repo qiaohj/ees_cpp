@@ -75,7 +75,7 @@ int main(int argc, const char* argv[]) {
 	// Check the validity of the input
 	// If the length of parameters are not satisfied with the required number, the application will skip this simulation and show out a warning.
 	if (argc==1){
-		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused)\n");
+		printf("configure_base_folder, scenario_json, specied_id, result_root, memory_limit(in M), is_overwrite, with_detail (unused), isSQLite\n");
 		exit(1);
 	}
 	// Set up the timer.
@@ -88,9 +88,9 @@ int main(int argc, const char* argv[]) {
 	unsigned long memory_limit = atoi(argv[4]);
 	bool with_detail = atoi(argv[6]);
 	bool is_overwrite = atoi(argv[5]);
-
+	bool is_sqlite =  atoi(argv[7]);
 	//initialize the main scenario
-	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail);
+	Scenario* scenario = new Scenario(std::string(scenario_json_path), argv[2], argv[1], argv[3], is_overwrite, memory_limit, with_detail, is_sqlite);
 
 	if (scenario->isTerminated()){
 		//delete scenario;

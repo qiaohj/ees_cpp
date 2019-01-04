@@ -28,6 +28,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <sys/resource.h>
+#include <sqlite3.h>
 
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem.hpp>
@@ -49,6 +50,15 @@
 /**
  * @brief A class to implement the public functions common used in the application.
  */
+static int callback(void *NotUsed, int argc, char **argv, char **azColName){
+   int i;
+   for(i=0; i<argc; i++){
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
+}
+
 class CommonFun {
 public:
 	/**
@@ -90,12 +100,29 @@ public:
      * @param path the folder's path
      */
     static void createFolder(const char* path);
+	/**
+	 * @brief remove the give file.
+	 * @param path
+	 */
+	static void deleteFile(const char* path);
     /**
      * @brief output a string array to a text file
      * @param s the string array to save
      * @param path the path to the text file
      */
     static void writeFile(const std::vector<std::string> s, const char* path);
+    /**
+	 * @brief execute a sql command
+	 * @param s the string array contains the SQL commend
+	 * @param db the database to execute the command
+	 */
+	static void executeSQL(const std::vector<std::string> s, sqlite3 *db);
+	/**
+	 * @brief execute a sql command
+	 * @param s the string contains the SQL commend
+	 * @param db the database to execute the command
+	 */
+	static void executeSQL(std::string s, sqlite3 *db);
     /**
      * @brief convert longitude and latitude to X, Y index
      * @param adfGeoTransform The GeoTransform matrix of the raster layers

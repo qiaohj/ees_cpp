@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lgdal -lboost_thread -lboost_filesystem -lboost_system
+LIBS := -lgdal -lsqlite3 -lboost_thread -lboost_filesystem -lboost_system
 
