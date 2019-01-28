@@ -65,12 +65,12 @@ SpeciesObject::SpeciesObject(const std::string json_path) {
 }
 std::string SpeciesObject::getIDWithParentID(){
     if (parent==NULL){
-        char t_char[5];
+        char t_char[10];
         sprintf(t_char, "%u", id);
         return std::string(t_char);
     }else{
         std::string parent_id = parent->getIDWithParentID();
-        char t_char[parent_id.length() + 5];
+        char t_char[parent_id.length() + 10];
         sprintf(t_char, "%s-%u", parent_id.c_str(), id);
         return std::string(t_char);
     }

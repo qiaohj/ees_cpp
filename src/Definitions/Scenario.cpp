@@ -178,7 +178,7 @@ void Scenario::saveGroupmap_file(unsigned year, boost::unordered_map<SpeciesObje
 		return;
 	}
 	std::vector<std::string> output;
-	char line[50];
+	char line[100];
 	// Note: The old version has only 5 columns without lon and lat columns.
 	sprintf(line, "year,x,y,lon,lat,group,sp_id");
 	output.push_back(line);
@@ -191,7 +191,7 @@ void Scenario::saveGroupmap_file(unsigned year, boost::unordered_map<SpeciesObje
 					int v = map->readByXY(x, y);
 					if (v>0){
 						std::string id = sp->getIDWithParentID();
-						char line[id.size() + 50];
+						char line[id.size() + 100];
 						double lon, lat;
 						CommonFun::XY2LL(geoTrans, x, y, &lon, &lat);
 						sprintf(line, "%u,%u,%u,%f,%f,%d,%s", year, x, y, lon, lat, v,id.c_str());
@@ -295,7 +295,9 @@ void Scenario::saveGroupmap(unsigned year, boost::unordered_map<SpeciesObject*, 
 unsigned Scenario::run() {
 	boost::unordered_map<SpeciesObject*, SparseMap*> species_group_maps;
 	std::vector<std::string> stat_output;
-
+	if (isSQLite){
+		CommonFun::executeSQL("BEGIN TRANSACTION", db);
+	}
 	for (unsigned year = minSpeciesDispersalSpeed; year <= totalYears; year +=
 			minSpeciesDispersalSpeed) {
 		LOG(INFO)<<"Current year:"<<year << " @ " << target <<" Memory usage:"<<CommonFun::getCurrentRSS();
@@ -728,7 +730,9 @@ unsigned Scenario::run() {
 			return 1;
 		}
 	}
-
+	if (isSQLite){
+		CommonFun::executeSQL("END TRANSACTION", db);
+	}
 	generateSpeciationInfo(totalYears, true);
 	return 0;
 }

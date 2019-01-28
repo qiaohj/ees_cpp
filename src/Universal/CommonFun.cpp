@@ -193,8 +193,7 @@ void CommonFun::executeSQL(std::string s, sqlite3 *db){
 	int rc;
 	char *zErr;
 	char* data;
-	rc = sqlite3_exec(db, s.c_str(), callback, data, &zErr);
-
+	rc = sqlite3_exec(db, s.c_str(), NULL, NULL, &zErr);
 	if(rc != SQLITE_OK){
 		if (zErr != NULL){
 			LOG(INFO)<<"SQL error: "<< zErr;
