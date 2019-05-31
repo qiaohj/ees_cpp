@@ -25,7 +25,6 @@ EnvironmentalHadley::EnvironmentalHadley(const std::string p_basefolder, double*
 					+  CommonFun::fixedLength(p_begin_year / 100, 4) + ".tif";
 		}
 
-		//RasterObject* r = new RasterObject(layer);
 		unsigned key = p_begin_year + p_burn_in_year - y;
 		RasterObject* r = new RasterObject(layer);
 		SparseMap* v = new SparseMap(r, false);

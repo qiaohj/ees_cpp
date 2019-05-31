@@ -1,0 +1,15 @@
+{
+    "glacial_path" : "/home/huijieqiao/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_21k_global_bio1.tif",
+    "interglacial_path" : "/home/huijieqiao/workspace/NicheBreadth/data/environment_layers/bio_var_CCSM_6k_global_bio1.tif",
+    "burn_in_years" : 50000,
+    "part_1_years" : 11250,
+    "plateau_1_years": 1250,
+    "part_2_years" : 11250,
+    "plateau_2_years": 1250,
+    "burn_in_curve" : "1",
+    "part_1_curve" : "1",
+    "plateau_1_curve" : "1",
+    "part_2_curve" : "1",
+    "plateau_2_curve" : "1"
+}
+

@@ -1,0 +1,10 @@
+{
+    "id" : 572,
+    "niche_breadth" : [[-18207.547, 16792.453], [0, 4966829.987]],
+    "dispersal_ability" : 5,
+    "dispersal_speed" : 500,
+    "dispersal_method" : 2,
+    "number_of_path" : -1,
+    "speciation_years" : 10000,
+    "initial_seeds" : [[109.042, 46.5456]]
+}
